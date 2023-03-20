@@ -1,0 +1,226 @@
+{
+  "asyncapi": "2.0.0",
+  "info": {
+    "title": "Example using ProtoBuff data types",
+    "version": "1.0.0"
+  },
+  "channels": {
+    "mychannel": {
+      "publish": {
+        "message": {
+          "payload": {
+            "title": "Line",
+            "type": "object",
+            "properties": {
+              "start": {
+                "title": "Point",
+                "type": "object",
+                "properties": {
+                  "x": {
+                    "type": "integer",
+                    "minimum": -2147483648,
+                    "maximum": 2147483647,
+                    "x-primitive": "int32",
+                    "x-parser-schema-id": "<anonymous-schema-3>"
+                  },
+                  "y": {
+                    "type": "integer",
+                    "minimum": -2147483648,
+                    "maximum": 2147483647,
+                    "x-primitive": "int32",
+                    "x-parser-schema-id": "<anonymous-schema-3>"
+                  },
+                  "label": {
+                    "type": "string",
+                    "x-primitive": "string",
+                    "x-parser-schema-id": "<anonymous-schema-4>"
+                  }
+                },
+                "required": [
+                  "x",
+                  "y"
+                ],
+                "repeated": [],
+                "optional": [],
+                "tags": {
+                  "x": 1,
+                  "y": 2,
+                  "label": 3
+                },
+                "x-parser-schema-id": "<anonymous-schema-2>"
+              },
+              "end": {
+                "title": "Point",
+                "type": "object",
+                "properties": {
+                  "x": {
+                    "type": "integer",
+                    "minimum": -2147483648,
+                    "maximum": 2147483647,
+                    "x-primitive": "int32",
+                    "x-parser-schema-id": "<anonymous-schema-3>"
+                  },
+                  "y": {
+                    "type": "integer",
+                    "minimum": -2147483648,
+                    "maximum": 2147483647,
+                    "x-primitive": "int32",
+                    "x-parser-schema-id": "<anonymous-schema-3>"
+                  },
+                  "label": {
+                    "type": "string",
+                    "x-primitive": "string",
+                    "x-parser-schema-id": "<anonymous-schema-4>"
+                  }
+                },
+                "required": [
+                  "x",
+                  "y"
+                ],
+                "repeated": [],
+                "optional": [],
+                "tags": {
+                  "x": 1,
+                  "y": 2,
+                  "label": 3
+                },
+                "x-parser-schema-id": "<anonymous-schema-3>"
+              },
+              "label": {
+                "type": "string",
+                "x-primitive": "string",
+                "x-parser-schema-id": "<anonymous-schema-4>"
+              }
+            },
+            "required": [
+              "start",
+              "end"
+            ],
+            "repeated": [],
+            "optional": [],
+            "tags": {
+              "start": 1,
+              "end": 2,
+              "label": 3
+            },
+            "x-parser-schema-id": "<anonymous-schema-1>"
+          },
+          "x-parser-original-schema-format": "application/vnd.google.protobuf;version=3",
+          "x-parser-original-payload": "syntax = \"proto3\";\n\nmessage Point {\n  required int32 x = 1;\n  required int32 y = 2;\n  optional string label = 3;\n}\n\nmessage Line {\n  required Point start = 1;\n  required Point end = 2;\n  optional string label = 3;\n}\n",
+          "schemaFormat": "application/vnd.aai.asyncapi;version=2.0.0",
+          "x-parser-message-parsed": true,
+          "x-parser-message-name": "testMessage"
+        }
+      }
+    }
+  },
+  "components": {
+    "messages": {
+      "testMessage": {
+        "payload": {
+          "title": "Line",
+          "type": "object",
+          "properties": {
+            "start": {
+              "title": "Point",
+              "type": "object",
+              "properties": {
+                "x": {
+                  "type": "integer",
+                  "minimum": -2147483648,
+                  "maximum": 2147483647,
+                  "x-primitive": "int32",
+                  "x-parser-schema-id": "<anonymous-schema-3>"
+                },
+                "y": {
+                  "type": "integer",
+                  "minimum": -2147483648,
+                  "maximum": 2147483647,
+                  "x-primitive": "int32",
+                  "x-parser-schema-id": "<anonymous-schema-3>"
+                },
+                "label": {
+                  "type": "string",
+                  "x-primitive": "string",
+                  "x-parser-schema-id": "<anonymous-schema-4>"
+                }
+              },
+              "required": [
+                "x",
+                "y"
+              ],
+              "repeated": [],
+              "optional": [],
+              "tags": {
+                "x": 1,
+                "y": 2,
+                "label": 3
+              },
+              "x-parser-schema-id": "<anonymous-schema-2>"
+            },
+            "end": {
+              "title": "Point",
+              "type": "object",
+              "properties": {
+                "x": {
+                  "type": "integer",
+                  "minimum": -2147483648,
+                  "maximum": 2147483647,
+                  "x-primitive": "int32",
+                  "x-parser-schema-id": "<anonymous-schema-3>"
+                },
+                "y": {
+                  "type": "integer",
+                  "minimum": -2147483648,
+                  "maximum": 2147483647,
+                  "x-primitive": "int32",
+                  "x-parser-schema-id": "<anonymous-schema-3>"
+                },
+                "label": {
+                  "type": "string",
+                  "x-primitive": "string",
+                  "x-parser-schema-id": "<anonymous-schema-4>"
+                }
+              },
+              "required": [
+                "x",
+                "y"
+              ],
+              "repeated": [],
+              "optional": [],
+              "tags": {
+                "x": 1,
+                "y": 2,
+                "label": 3
+              },
+              "x-parser-schema-id": "<anonymous-schema-3>"
+            },
+            "label": {
+              "type": "string",
+              "x-primitive": "string",
+              "x-parser-schema-id": "<anonymous-schema-4>"
+            }
+          },
+          "required": [
+            "start",
+            "end"
+          ],
+          "repeated": [],
+          "optional": [],
+          "tags": {
+            "start": 1,
+            "end": 2,
+            "label": 3
+          },
+          "x-parser-schema-id": "<anonymous-schema-1>"
+        },
+        "x-parser-original-schema-format": "application/vnd.google.protobuf;version=3",
+        "x-parser-original-payload": "syntax = \"proto3\";\n\nmessage Point {\n  required int32 x = 1;\n  required int32 y = 2;\n  optional string label = 3;\n}\n\nmessage Line {\n  required Point start = 1;\n  required Point end = 2;\n  optional string label = 3;\n}\n",
+        "schemaFormat": "application/vnd.aai.asyncapi;version=2.0.0",
+        "x-parser-message-parsed": true,
+        "x-parser-message-name": "testMessage"
+      }
+    }
+  },
+  "x-parser-spec-parsed": true
+}
