@@ -40,8 +40,6 @@
                   "x",
                   "y"
                 ],
-                "repeated": [],
-                "optional": [],
                 "tags": {
                   "x": 1,
                   "y": 2,
@@ -77,8 +75,6 @@
                   "x",
                   "y"
                 ],
-                "repeated": [],
-                "optional": [],
                 "tags": {
                   "x": 1,
                   "y": 2,
@@ -96,8 +92,6 @@
               "start",
               "end"
             ],
-            "repeated": [],
-            "optional": [],
             "tags": {
               "start": 1,
               "end": 2,
@@ -149,8 +143,6 @@
                 "x",
                 "y"
               ],
-              "repeated": [],
-              "optional": [],
               "tags": {
                 "x": 1,
                 "y": 2,
@@ -186,8 +178,6 @@
                 "x",
                 "y"
               ],
-              "repeated": [],
-              "optional": [],
               "tags": {
                 "x": 1,
                 "y": 2,
@@ -205,8 +195,6 @@
             "start",
             "end"
           ],
-          "repeated": [],
-          "optional": [],
           "tags": {
             "start": 1,
             "end": 2,

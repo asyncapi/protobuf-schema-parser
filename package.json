@@ -7,7 +7,7 @@
     "scripts": {
       "test": "mocha --recursive",
       "release": "semantic-release",
-      "lint": "eslint --max-warnings 0 --config .eslintrc .",
+      "lint": "eslint --max-warnings 0 --config .eslintrc --fix .",
       "generate:assets": "echo 'No additional assets need to be generated at the moment'",
       "bump:version": "npm --no-git-tag-version --allow-same-version version $VERSION"
     },
@@ -32,7 +32,6 @@
     },
     "homepage": "https://github.com/asyncapi/proto-schema-parser#readme",
     "dependencies": {
-      "js-yaml": "^3.14.1",
       "protocol-buffers-schema": "^3.6.0"
     },
     "devDependencies": {

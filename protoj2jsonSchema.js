@@ -1,6 +1,7 @@
 // base on https://raw.githubusercontent.com/vipszx/protobuf-jsonschema/master/index.js
 
-const primitive = require('./types');
+const primitive = require('./primitive-types');
+const googleTypes = require('./google-types');
 
 function Compiler(schema, options) {
   this.messages = {};
@@ -9,11 +10,42 @@ function Compiler(schema, options) {
   this.schema = this.convert(schema);
 }
 
+const protoBuffImports = [
+  'google/protobuf/duration.proto',
+  'google/protobuf/empty.proto',
+  'google/protobuf/timestamp.proto',
+  'google/protobuf/wrappers.proto',
+
+  // https://github.com/googleapis/googleapis/tree/master/google/type
+  'google/type/calendar_period.proto',
+  'google/type/color.proto',
+  'google/type/date.proto',
+  'google/type/datetime.proto',
+  'google/type/dayofweek.proto',
+  'google/type/decimal.proto',
+  'google/type/expr.proto',
+  'google/type/fraction.proto',
+  'google/type/interval.proto',
+  'google/type/latlng.proto',
+  'google/type/localized_text.proto',
+  'google/type/money.proto',
+  'google/type/month.proto',
+  'google/type/phone_number.proto',
+  'google/type/postal_address.proto',
+  'google/type/quaternion.proto',
+  'google/type/timeofday.proto',
+];
+
 Compiler.prototype.convert = function (schema) {
   this.visit(schema, schema.package || '');
 
-  if (schema.imports && schema.imports.length > 0) {
-    throw new Error('Protobuff imports are not supported');
+  for (const i of schema.imports) {
+    if (protoBuffImports.indexOf(i) !== -1) {
+      // Well known types, can be handled.
+      continue;
+    }
+
+    throw new Error(`Protobuff imports are not supported: ${i}`);
   }
 
   return schema;
@@ -91,6 +123,10 @@ Compiler.prototype.compile = function () {
 Compiler.prototype.resolve = function (type, from, base, key) {
   if (primitive[type]) {
     return primitive[type];
+  }  
+  
+  if (googleTypes[type]) {
+    return googleTypes[type];
   }
 
   const lookup = from.split('.');
@@ -175,8 +211,6 @@ Compiler.prototype.compileMessage = function (message, root) {
     type: 'object',
     properties: {},
     required: [],
-    repeated: [],
-    optional: [],
     tags: {},
   };
 
@@ -205,14 +239,6 @@ Compiler.prototype.compileMessage = function (message, root) {
 
     if (field.required) {
       res.required.push(field.name);
-    }
-
-    if (field.repeated) {
-      res.repeated.push(field.name);
-    }
-
-    if (field.optional) {
-      res.optional.push(field.name);
     }
 
     if (field.tag) {

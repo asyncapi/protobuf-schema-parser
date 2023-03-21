@@ -38,4 +38,12 @@ describe('parse()', function () {
       stripAsyncApiTags(fs.readFileSync(path.resolve(__dirname, './comments.proto.result.json'), 'utf8'))
     );
   });
+
+  it('should parse realworld train_run proto data types', async function () {
+    const result = await parser.parse(fs.readFileSync(path.resolve(__dirname, './realworld.train_run.yaml'), 'utf8'), { path: __filename });
+
+    await expect(stripAsyncApiTags(JSON.stringify(result.json(), null, 2))).to.equal(
+      stripAsyncApiTags(fs.readFileSync(path.resolve(__dirname, './realworld.train_run.proto.result.json'), 'utf8'))
+    );
+  });
 });

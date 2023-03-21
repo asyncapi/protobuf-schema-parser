@@ -1,0 +1,157 @@
+asyncapi: 2.0.0
+info:
+  title: Example using ProtoBuff data types
+  version: '1.0.0'
+channels:
+  mychannel:
+    publish:
+      message:
+        $ref: '#/components/messages/testMessage'
+
+components:
+  messages:
+    testMessage:
+      schemaFormat: 'application/vnd.google.protobuf;version=3'
+      payload: |
+        syntax = "proto3";
+
+        import "google/protobuf/timestamp.proto";
+        import "google/protobuf/wrappers.proto";
+        import "google/protobuf/duration.proto";
+        import "google/type/datetime.proto";
+        import "google/type/date.proto";
+
+        package xx.xx.xx.sample;
+
+        option java_multiple_files = true;
+        option java_package = "xx.xx.xx.sample";
+        option java_outer_classname = "TrainRunContainerProtobuf";
+
+        message TrainRunContainerMsg {
+            TrainRunMsg train_run = 1;
+            repeated TimetableEventMsg timetable_events = 2;
+        }
+
+        message TrainRunMsg {
+            //ObjectId
+            int32 id = 1;
+            string trasse_id = 2;
+            google.type.Date betriebstag = 3;
+            string zugnummer = 4;
+            string infrastruktur_netz = 5;
+            PeriodMsg object_period = 6;
+            google.protobuf.Duration dr = 7;
+        }
+
+        message PeriodMsg {
+            google.protobuf.Timestamp von = 1;
+            google.protobuf.Timestamp bis = 2;
+        }
+
+        message TimetableEventMsg {
+            //ObjectId
+            int32 id = 1;
+
+            google.type.DateTime scheduled_time = 3;
+            google.type.DateTime production_time = 4;
+
+            oneof event_link {
+                StopMsg stop = 11;
+                MovementMsg movement = 12;
+            }
+            TrainRunSegmentMsg train_run_segment = 13;
+
+            //Integer
+            google.protobuf.Int32Value connection_decision_time = 20;
+            AheadOfScheduleStrategyEnum ahead_of_schedule_strategy = 21;
+        }
+
+        enum AheadOfScheduleStrategyEnum {
+            AOSS_UNSPECIFIED = 0;
+            AOSS_ALLOWED = 1;
+            AOSS_PROHIBITED = 2;
+            AOSS_OBSERVE_EARLIEST_TIMES = 4;
+            AOSS_ONLY_WHEN_ROUTE_IS_SET = 5;
+        }
+
+        message StopMsg {
+            //ObjectId
+            google.protobuf.Int32Value event_id_from = 1;
+            //ObjectId
+            google.protobuf.UInt32Value event_id_to = 2;
+            //ObjectId
+            google.protobuf.UInt64Value event_link_properties_id = 3;
+
+            int32 min_duration = 10;
+            repeated string purposes = 11;
+        }
+
+        message MovementMsg {
+            //ObjectId
+            int32 event_id_from = 1;
+            //ObjectId
+            int32 event_id_to = 2;
+            //ObjectId
+            google.protobuf.Int32Value event_link_properties_id = 3;
+
+            int32 min_duration = 10;
+            bool is_min_duration_calculated = 11;
+            bool is_stop_over = 12;
+
+            FahrstrategieEnum fahrstrategie = 13;
+        }
+
+        enum FahrstrategieEnum {
+            FS_UNSPECIFIED = 0;
+            FS_SCHNELL = 1;
+            FS_HALTEN = 2;
+            FS_NORMAL = 3;
+            FS_FAHRZEIT_VERTEILEN = 4;
+        }
+
+        message TrainRunSegmentMsg {
+            //ObjectId
+            int32 event_id_from = 1;
+            //ObjectId
+            int32 event_id_to = 2;
+
+            //ObjectId
+            google.protobuf.Int32Value abschnitts_formation_id = 3;
+            string train_category = 4;
+
+            TrainSeriesTypeEnum train_series = 5;
+        }
+
+        enum TrainSeriesTypeEnum{
+            TST_UNSPECIFIED = 0;
+            TST_R = 1;
+            TST_A = 2;
+            TST_D = 3;
+            TST_N = 4;
+        }
+
+        message CompositionMsg {
+            //ObjectId
+            google.protobuf.Int32Value composition_id = 1;
+            //ObjectId
+            google.protobuf.Int32Value train_run_id = 2;
+            int32 reihenfolge = 3;
+
+            string umsystem = 4;
+
+            //Integer
+            google.protobuf.Int32Value alast_anzahlwagen_chlor = 27;
+
+            AbschnittsFormationsDatenZlrEnum formationsdaten_zlr = 28;
+            //Integer
+            google.protobuf.Int32Value anzahl_loks = 29;
+        }
+
+        enum AbschnittsFormationsDatenZlrEnum {
+            AFDZ_UNSPECIFIED = 0;
+            AFDZ_KEINE_TRAKTION = 1;
+            AFDZ_ANHAENGELAST_FEHLT = 2;
+            AFDZ_MANUELL_ERGAENZT = 3;
+            AFDZ_OK = 4;
+        }
+
