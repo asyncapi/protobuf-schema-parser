@@ -1,8 +1,16 @@
 # ProtoBuff Data Types Schema Parser
 
 A schema parser for Protocol Buffers data types.
+For ProtoBuff 2 and 3 schemas.  
 
-> **This package is browser-compatible.**
+There is no explicit distinction between ProtoBuff 2 and 3. You dont have to expect any errors if your `schemaFormat` is `application/vnd.google.protobuf;version=2` defined, but your schema is proto3. 
+
+Support for AsyncApi schema versions: 2
+
+Compatible with: [@asyncapi/parser](https://www.npmjs.com/package/@asyncapi/parser) 1.x (tested with: 1.18.1)
+
+This package is browser-compatible.
+
 
 ## Installation
 
@@ -44,3 +52,12 @@ parser.registerSchemaParser(protoParser)
 
 await parser.parse(asyncapiWithProto)
 ```
+
+Place your protoBuff schema as string in `payload` to get it parsed.
+
+Refferences are NOT supported:
+- no support for `$ref`
+- no support for [`import`](https://protobuf.dev/programming-guides/proto3/#importing-definitions), except the default google types:
+  - google/protobuf/*
+  - google/type/*
+  
