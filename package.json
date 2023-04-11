@@ -11,7 +11,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/asyncapi/proto-schema-parser.git"
+        "url": "git+https://github.com/asyncapi/protobuf-schema-parser.git"
     },
     "keywords": [
         "asyncapi",
@@ -26,9 +26,9 @@
     },
     "license": "Apache-2.0",
     "bugs": {
-        "url": "https://github.com/asyncapi/proto-schema-parser/issues"
+        "url": "https://github.com/asyncapi/protobuf-schema-parser/issues"
     },
-    "homepage": "https://github.com/asyncapi/proto-schema-parser#readme",
+    "homepage": "https://github.com/asyncapi/protobuf-schema-parser#readme",
     "dependencies": {
         "protocol-buffers-schema": "^3.6.0"
     },
