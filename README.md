@@ -15,14 +15,14 @@ This package is browser-compatible.
 ## Installation
 
 ```
-npm install @asyncapi/proto-schema-parser
+npm install @asyncapi/protobuf-schema-parser
 ```
 
 ## Usage
 
 ```js
 const parser = require('asyncapi-parser')
-const protoParser = require('@asyncapi/proto-schema-parser')
+const protoParser = require('@asyncapi/protobuf-schema-parser')
 
 const asyncapiWithProto = `
 asyncapi: 2.0.0
