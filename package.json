@@ -1,73 +1,71 @@
-
 {
-    "name": "@asyncapi/proto-schema-parser",
-    "version": "2.0.1",
-    "description": "An AsyncAPI schema parser for Protocol Buffers data types.",
-    "main": "index.js",
-    "scripts": {
-      "test": "mocha --recursive",
-      "release": "semantic-release",
-      "lint": "eslint --max-warnings 0 --config .eslintrc --fix .",
-      "generate:assets": "echo 'No additional assets need to be generated at the moment'",
-      "bump:version": "npm --no-git-tag-version --allow-same-version version $VERSION"
-    },
-    "repository": {
-      "type": "git",
-      "url": "git+https://github.com/asyncapi/proto-schema-parser.git"
-    },
-    "keywords": [
-      "asyncapi",
-      "protbuff",
-      "datatype",
-      "schema",
-      "parser"
+  "name": "@asyncapi/proto-schema-parser",
+  "version": "0.0.1",
+  "description": "An AsyncAPI schema parser for Protocol Buffers data types.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --recursive",
+    "release": "semantic-release",
+    "lint": "eslint --max-warnings 0 --config .eslintrc --fix .",
+    "generate:assets": "echo 'No additional assets need to be generated at the moment'",
+    "bump:version": "npm --no-git-tag-version --allow-same-version version $VERSION"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/asyncapi/proto-schema-parser.git"
+  },
+  "keywords": [
+    "asyncapi",
+    "protbuff",
+    "datatype",
+    "schema",
+    "parser"
+  ],
+  "author": "Greenrover",
+  "publishConfig": {
+    "access": "public"
+  },
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/asyncapi/proto-schema-parser/issues"
+  },
+  "homepage": "https://github.com/asyncapi/proto-schema-parser#readme",
+  "dependencies": {
+    "protocol-buffers-schema": "^3.6.0"
+  },
+  "devDependencies": {
+    "@asyncapi/parser": "^1.18.1",
+    "@semantic-release/commit-analyzer": "^9.0.2",
+    "@semantic-release/github": "^8.0.7",
+    "@semantic-release/npm": "^9.0.2",
+    "@semantic-release/release-notes-generator": "^10.0.3",
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "conventional-changelog-conventionalcommits": "^4.2.3",
+    "eslint": "^8.36.0",
+    "eslint-plugin-mocha": "^10.1.0",
+    "eslint-plugin-sonarjs": "^0.18.0",
+    "mocha": "^10.1.0"
+  },
+  "release": {
+    "branches": [
+      "master"
     ],
-    "author": "Greenrover",
-    "publishConfig": {
-      "access": "public"
-    },
-    "license": "Apache-2.0",
-    "bugs": {
-      "url": "https://github.com/asyncapi/proto-schema-parser/issues"
-    },
-    "homepage": "https://github.com/asyncapi/proto-schema-parser#readme",
-    "dependencies": {
-      "protocol-buffers-schema": "^3.6.0"
-    },
-    "devDependencies": {
-      "@asyncapi/parser": "^1.18.1",
-      "@semantic-release/commit-analyzer": "^9.0.2",
-      "@semantic-release/github": "^8.0.7",
-      "@semantic-release/npm": "^9.0.2",
-      "@semantic-release/release-notes-generator": "^10.0.3",
-      "chai": "^4.2.0",
-      "chai-as-promised": "^7.1.1",
-      "conventional-changelog-conventionalcommits": "^4.2.3",
-      "eslint": "^8.36.0",
-      "eslint-plugin-mocha": "^10.1.0",
-      "eslint-plugin-sonarjs": "^0.18.0",
-      "mocha": "^10.1.0"
-    },
-    "release": {
-      "branches": [
-        "master"
+    "plugins": [
+      [
+        "@semantic-release/commit-analyzer",
+        {
+          "preset": "conventionalcommits"
+        }
       ],
-      "plugins": [
-        [
-          "@semantic-release/commit-analyzer",
-          {
-            "preset": "conventionalcommits"
-          }
-        ],
-        [
-          "@semantic-release/release-notes-generator",
-          {
-            "preset": "conventionalcommits"
-          }
-        ],
-        "@semantic-release/npm",
-        "@semantic-release/github"
-      ]
-    }
+      [
+        "@semantic-release/release-notes-generator",
+        {
+          "preset": "conventionalcommits"
+        }
+      ],
+      "@semantic-release/npm",
+      "@semantic-release/github"
+    ]
   }
-  
+}
