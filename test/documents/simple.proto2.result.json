@@ -8,6 +8,7 @@
     "mychannel": {
       "publish": {
         "message": {
+          "schemaFormat": "application/vnd.google.protobuf;version=2",
           "payload": {
             "title": "Line",
             "type": "object",
@@ -21,19 +22,19 @@
                     "minimum": -2147483648,
                     "maximum": 2147483647,
                     "x-primitive": "int32",
-                    "x-parser-schema-id": "<anonymous-schema-3>"
+
                   },
                   "y": {
                     "type": "integer",
                     "minimum": -2147483648,
                     "maximum": 2147483647,
                     "x-primitive": "int32",
-                    "x-parser-schema-id": "<anonymous-schema-3>"
+
                   },
                   "label": {
                     "type": "string",
                     "x-primitive": "string",
-                    "x-parser-schema-id": "<anonymous-schema-4>"
+
                   }
                 },
                 "required": [
@@ -45,7 +46,7 @@
                   "y": 2,
                   "label": 3
                 },
-                "x-parser-schema-id": "<anonymous-schema-2>"
+
               },
               "end": {
                 "title": "Point",
@@ -56,19 +57,19 @@
                     "minimum": -2147483648,
                     "maximum": 2147483647,
                     "x-primitive": "int32",
-                    "x-parser-schema-id": "<anonymous-schema-3>"
+
                   },
                   "y": {
                     "type": "integer",
                     "minimum": -2147483648,
                     "maximum": 2147483647,
                     "x-primitive": "int32",
-                    "x-parser-schema-id": "<anonymous-schema-3>"
+
                   },
                   "label": {
                     "type": "string",
                     "x-primitive": "string",
-                    "x-parser-schema-id": "<anonymous-schema-4>"
+
                   }
                 },
                 "required": [
@@ -80,12 +81,12 @@
                   "y": 2,
                   "label": 3
                 },
-                "x-parser-schema-id": "<anonymous-schema-5>"
+
               },
               "label": {
                 "type": "string",
                 "x-primitive": "string",
-                "x-parser-schema-id": "<anonymous-schema-4>"
+
               }
             },
             "required": [
@@ -97,13 +98,10 @@
               "end": 2,
               "label": 3
             },
-            "x-parser-schema-id": "<anonymous-schema-1>"
+
           },
-          "x-parser-original-schema-format": "application/vnd.google.protobuf;version=2",
-          "x-parser-original-payload": "syntax = \"proto2\";\n\nmessage Point {\n  required int32 x = 1;\n  required int32 y = 2;\n  optional string label = 3;\n}\n\nmessage Line {\n  required Point start = 1;\n  required Point end = 2;\n  optional string label = 3;\n}\n",
-          "schemaFormat": "application/vnd.aai.asyncapi;version=2.0.0",
-          "x-parser-message-parsed": true,
-          "x-parser-message-name": "testMessage"
+
+
         }
       }
     }
@@ -111,6 +109,7 @@
   "components": {
     "messages": {
       "testMessage": {
+        "schemaFormat": "application/vnd.google.protobuf;version=2",
         "payload": {
           "title": "Line",
           "type": "object",
@@ -124,19 +123,19 @@
                   "minimum": -2147483648,
                   "maximum": 2147483647,
                   "x-primitive": "int32",
-                  "x-parser-schema-id": "<anonymous-schema-3>"
+
                 },
                 "y": {
                   "type": "integer",
                   "minimum": -2147483648,
                   "maximum": 2147483647,
                   "x-primitive": "int32",
-                  "x-parser-schema-id": "<anonymous-schema-3>"
+
                 },
                 "label": {
                   "type": "string",
                   "x-primitive": "string",
-                  "x-parser-schema-id": "<anonymous-schema-4>"
+
                 }
               },
               "required": [
@@ -148,7 +147,7 @@
                 "y": 2,
                 "label": 3
               },
-              "x-parser-schema-id": "<anonymous-schema-2>"
+
             },
             "end": {
               "title": "Point",
@@ -159,19 +158,19 @@
                   "minimum": -2147483648,
                   "maximum": 2147483647,
                   "x-primitive": "int32",
-                  "x-parser-schema-id": "<anonymous-schema-3>"
+
                 },
                 "y": {
                   "type": "integer",
                   "minimum": -2147483648,
                   "maximum": 2147483647,
                   "x-primitive": "int32",
-                  "x-parser-schema-id": "<anonymous-schema-3>"
+
                 },
                 "label": {
                   "type": "string",
                   "x-primitive": "string",
-                  "x-parser-schema-id": "<anonymous-schema-4>"
+
                 }
               },
               "required": [
@@ -183,12 +182,12 @@
                 "y": 2,
                 "label": 3
               },
-              "x-parser-schema-id": "<anonymous-schema-5>"
+
             },
             "label": {
               "type": "string",
               "x-primitive": "string",
-              "x-parser-schema-id": "<anonymous-schema-4>"
+
             }
           },
           "required": [
@@ -200,15 +199,13 @@
             "end": 2,
             "label": 3
           },
-          "x-parser-schema-id": "<anonymous-schema-1>"
+
         },
-        "x-parser-original-schema-format": "application/vnd.google.protobuf;version=2",
-        "x-parser-original-payload": "syntax = \"proto2\";\n\nmessage Point {\n  required int32 x = 1;\n  required int32 y = 2;\n  optional string label = 3;\n}\n\nmessage Line {\n  required Point start = 1;\n  required Point end = 2;\n  optional string label = 3;\n}\n",
-        "schemaFormat": "application/vnd.aai.asyncapi;version=2.0.0",
-        "x-parser-message-parsed": true,
-        "x-parser-message-name": "testMessage"
+
+
       }
     }
   },
-  "x-parser-spec-parsed": true
+
+
 }

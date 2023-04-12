@@ -30,6 +30,7 @@ components:
         message TrainRunContainerMsg {
             TrainRunMsg train_run = 1;
             repeated TimetableEventMsg timetable_events = 2;
+            CompositionMsg composition = 3;
         }
 
         message TrainRunMsg {
@@ -41,6 +42,7 @@ components:
             string infrastruktur_netz = 5;
             PeriodMsg object_period = 6;
             google.protobuf.Duration dr = 7;
+            CompositionMsg composition = 8;
         }
 
         message PeriodMsg {
