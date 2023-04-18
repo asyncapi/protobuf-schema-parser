@@ -33,7 +33,7 @@
         "protocol-buffers-schema": "^3.6.0"
     },
     "devDependencies": {
-        "@asyncapi/parser": "^1.18.1",
+        "@asyncapi/parser": "^2.0.0-next-major.17",
         "chai": "^4.2.0",
         "chai-as-promised": "^7.1.1",
         "eslint": "^8.36.0",
