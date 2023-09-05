@@ -1,33 +1,16 @@
-# This action is centrally managed in https://github.com/asyncapi/.github/
-# Don't make changes to this file in this repo as they will be overwritten with changes made to the same file in above mentioned repo
-
-# It does magic only if there is package.json file in the root of the project
-name: Release - if Node project
+name: Release 
 
 on:
   push:
-    branches:
-      - master
-      # below lines are not enough to have release supported for these branches
-      # make sure configuration of `semantic-release` package mentions these branches
-      - next-spec
-      - next-major
-      - next-major-spec
-      - beta
-      - alpha
+    branches: [ master ]
+    tags:        
+      - v*
+  pull_request:
+    branches: [ master ]
 
 jobs:
 
   test-nodejs:
-    # We just check the message of first commit as there is always just one commit because we squash into one before merging
-    # "commits" contains array of objects where one of the properties is commit "message"
-    # Release workflow will be skipped if release conventional commits are not used
-    if: |
-      startsWith( github.repository, 'asyncapi/' ) && 
-      (startsWith( github.event.commits[0].message , 'fix:' ) ||
-      startsWith( github.event.commits[0].message, 'fix!:' ) ||
-      startsWith( github.event.commits[0].message, 'feat:' ) ||
-      startsWith( github.event.commits[0].message, 'feat!:' ))
     name: Test NodeJS release on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
@@ -40,26 +23,18 @@ jobs:
           git config --global core.eol lf
       - name: Checkout repository
         uses: actions/checkout@v3
-      - name: Check if Node.js project and has package.json
-        id: packagejson
-        run: test -e ./package.json && echo "exists=true" >> $GITHUB_OUTPUT || echo "exists=false" >> $GITHUB_OUTPUT
-        shell: bash
-      - if: steps.packagejson.outputs.exists == 'true'
-        name: Check package-lock version
+      - name: Check package-lock version
         uses: asyncapi/.github/.github/actions/get-node-version-from-package-lock@master
         id: lockversion
-      - if: steps.packagejson.outputs.exists == 'true'
-        name: Setup Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: "${{ steps.lockversion.outputs.version }}"
           cache: 'npm'
           cache-dependency-path: '**/package-lock.json'
-      - if: steps.packagejson.outputs.exists == 'true'
-        name: Install dependencies
+      - name: Install dependencies
         run: npm install
-      - if: steps.packagejson.outputs.exists == 'true'
-        name: Run test
+      - name: Run test
         run: npm test --if-present
       - if: failure() # Only, on failure, send a message on the 94_bot-failing-ci slack channel
         name: Report workflow run status to Slack
@@ -82,28 +57,20 @@ jobs:
           git config --global core.eol lf
       - name: Checkout repository
         uses: actions/checkout@v3
-      - name: Check if Node.js project and has package.json
-        id: packagejson
-        run: test -e ./package.json && echo "exists=true" >> $GITHUB_OUTPUT || echo "exists=false" >> $GITHUB_OUTPUT
-      - if: steps.packagejson.outputs.exists == 'true'
-        name: Check package-lock version
+      - name: Check package-lock version
         uses: asyncapi/.github/.github/actions/get-node-version-from-package-lock@master
         id: lockversion
-      - if: steps.packagejson.outputs.exists == 'true'
-        name: Setup Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: "${{ steps.lockversion.outputs.version }}"
           cache: 'npm'
           cache-dependency-path: '**/package-lock.json'
-      - if: steps.packagejson.outputs.exists == 'true'
-        name: Install dependencies
+      - name: Install dependencies
         run: npm install
-      - if: steps.packagejson.outputs.exists == 'true'
-        name: Add plugin for conventional commits for semantic-release
+      - name: Add plugin for conventional commits for semantic-release
         run: npm install --save-dev conventional-changelog-conventionalcommits@5.0.0
-      - if: steps.packagejson.outputs.exists == 'true'
-        name: Publish to any of NPM, Github, and Docker Hub
+      - name: Publish to any of NPM, Github, and Docker Hub
         id: release
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
