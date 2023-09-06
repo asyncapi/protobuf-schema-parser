@@ -1,6 +1,6 @@
 {
   "name": "@asyncapi/protobuf-schema-parser",
-  "version": "2.0.0",
+  "version": "3.0.0-next-major.1",
   "description": "An AsyncAPI schema parser for Protocol Buffers data types.",
   "main": "index.js",
   "scripts": {
