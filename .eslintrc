@@ -1,3 +1,5 @@
+parser: "@typescript-eslint/parser"
+
 env:
   node: true
   es6: true
@@ -117,10 +119,10 @@ rules:
   "@typescript-eslint/ban-types": "off"
 
 overrides:
-  - files:
-    - "test/**"
-    - "*.spec.ts"
-    - "*.test.ts"
+  - files: 
+      - "test/**"
+      - "*.spec.ts"
+      - "*.test.ts"
     rules:
       prefer-arrow-callback: 0
       sonarjs/no-duplicate-string: 0
