@@ -95,5 +95,4 @@ Refferences are NOT supported:
 - no support for [`import`](https://protobuf.dev/programming-guides/proto3/#importing-definitions), except the default google types:
   - google/protobuf/*
   - google/type/*
-  
 
