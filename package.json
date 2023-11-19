@@ -46,7 +46,7 @@
     "README.md"
   ],
   "dependencies": {
-    "@asyncapi/parser": "^2.1.1",
+    "@asyncapi/parser": "^2.1.2",
     "@types/protocol-buffers-schema": "^3.4.1",
     "protocol-buffers-schema": "^3.6.0"
   },
