@@ -216,6 +216,13 @@
                           "AFDZ_MANUELL_ERGAENZT",
                           "AFDZ_OK"
                         ],
+                        "x-enum-mapping": {
+                          "AFDZ_UNSPECIFIED": 0,
+                          "AFDZ_KEINE_TRAKTION": 1,
+                          "AFDZ_ANHAENGELAST_FEHLT": 2,
+                          "AFDZ_MANUELL_ERGAENZT": 3,
+                          "AFDZ_OK": 4
+                        },
 
                       },
                       "anzahl_loks": {
@@ -621,6 +628,13 @@
                             "FS_NORMAL",
                             "FS_FAHRZEIT_VERTEILEN"
                           ],
+                          "x-enum-mapping": {
+                            "FS_UNSPECIFIED": 0,
+                            "FS_SCHNELL": 1,
+                            "FS_HALTEN": 2,
+                            "FS_NORMAL": 3,
+                            "FS_FAHRZEIT_VERTEILEN": 4
+                          },
 
                         }
                       },
@@ -680,6 +694,13 @@
                             "TST_D",
                             "TST_N"
                           ],
+                          "x-enum-mapping": {
+                            "TST_UNSPECIFIED": 0,
+                            "TST_R": 1,
+                            "TST_A": 2,
+                            "TST_D": 3,
+                            "TST_N": 4
+                          },
 
                         }
                       },
@@ -714,6 +735,13 @@
                         "AOSS_OBSERVE_EARLIEST_TIMES",
                         "AOSS_ONLY_WHEN_ROUTE_IS_SET"
                       ],
+                      "x-enum-mapping": {
+                        "AOSS_UNSPECIFIED": 0,
+                        "AOSS_ALLOWED": 1,
+                        "AOSS_PROHIBITED": 2,
+                        "AOSS_OBSERVE_EARLIEST_TIMES": 4,
+                        "AOSS_ONLY_WHEN_ROUTE_IS_SET": 5
+                      },
 
                     }
                   },
@@ -791,6 +819,13 @@
                       "AFDZ_MANUELL_ERGAENZT",
                       "AFDZ_OK"
                     ],
+                    "x-enum-mapping": {
+                      "AFDZ_UNSPECIFIED": 0,
+                      "AFDZ_KEINE_TRAKTION": 1,
+                      "AFDZ_ANHAENGELAST_FEHLT": 2,
+                      "AFDZ_MANUELL_ERGAENZT": 3,
+                      "AFDZ_OK": 4
+                    },
 
                   },
                   "anzahl_loks": {
@@ -1043,6 +1078,13 @@
                         "AFDZ_MANUELL_ERGAENZT",
                         "AFDZ_OK"
                       ],
+                      "x-enum-mapping": {
+                        "AFDZ_UNSPECIFIED": 0,
+                        "AFDZ_KEINE_TRAKTION": 1,
+                        "AFDZ_ANHAENGELAST_FEHLT": 2,
+                        "AFDZ_MANUELL_ERGAENZT": 3,
+                        "AFDZ_OK": 4
+                      },
 
                     },
                     "anzahl_loks": {
@@ -1448,6 +1490,13 @@
                           "FS_NORMAL",
                           "FS_FAHRZEIT_VERTEILEN"
                         ],
+                        "x-enum-mapping": {
+                          "FS_UNSPECIFIED": 0,
+                          "FS_SCHNELL": 1,
+                          "FS_HALTEN": 2,
+                          "FS_NORMAL": 3,
+                          "FS_FAHRZEIT_VERTEILEN": 4
+                        },
 
                       }
                     },
@@ -1507,6 +1556,13 @@
                           "TST_D",
                           "TST_N"
                         ],
+                        "x-enum-mapping": {
+                          "TST_UNSPECIFIED": 0,
+                          "TST_R": 1,
+                          "TST_A": 2,
+                          "TST_D": 3,
+                          "TST_N": 4
+                        },
 
                       }
                     },
@@ -1541,6 +1597,13 @@
                       "AOSS_OBSERVE_EARLIEST_TIMES",
                       "AOSS_ONLY_WHEN_ROUTE_IS_SET"
                     ],
+                    "x-enum-mapping": {
+                      "AOSS_UNSPECIFIED": 0,
+                      "AOSS_ALLOWED": 1,
+                      "AOSS_PROHIBITED": 2,
+                      "AOSS_OBSERVE_EARLIEST_TIMES": 4,
+                      "AOSS_ONLY_WHEN_ROUTE_IS_SET": 5
+                    },
 
                   }
                 },
@@ -1618,6 +1681,13 @@
                     "AFDZ_MANUELL_ERGAENZT",
                     "AFDZ_OK"
                   ],
+                  "x-enum-mapping": {
+                    "AFDZ_UNSPECIFIED": 0,
+                    "AFDZ_KEINE_TRAKTION": 1,
+                    "AFDZ_ANHAENGELAST_FEHLT": 2,
+                    "AFDZ_MANUELL_ERGAENZT": 3,
+                    "AFDZ_OK": 4
+                  },
 
                 },
                 "anzahl_loks": {
