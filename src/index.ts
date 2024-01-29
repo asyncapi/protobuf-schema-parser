@@ -1,6 +1,6 @@
-import type { SchemaParser, ParseSchemaInput, ValidateSchemaInput, SchemaValidateResult, SpecTypesV2 } from '@asyncapi/parser';
-import { protoj2jsonSchema } from './protoj2jsonSchema';
-import { parse as proto2protoj } from 'protocol-buffers-schema';
+import type {ParseSchemaInput, SchemaParser, SchemaValidateResult, ValidateSchemaInput} from '@asyncapi/parser';
+import {proto2jsonSchema} from './protoj2jsonSchema';
+import type {AsyncAPISchema} from '@asyncapi/parser/esm/types';
 
 export function ProtoBuffSchemaParser(): SchemaParser {
   return {
@@ -9,18 +9,12 @@ export function ProtoBuffSchemaParser(): SchemaParser {
     getMimeTypes,
   };
 }
+
 export default ProtoBuffSchemaParser;
 
 async function validate(input: ValidateSchemaInput<unknown, unknown>): Promise<SchemaValidateResult[]> {
-  const payload = input.data as string;
-
   try {
-    protoj2jsonSchema(
-      proto2protoj(payload),
-      {
-        getOne: true,
-      }
-    );
+    proto2jsonSchema(input.data as string);
 
     // No errors found.
     return [];
@@ -39,15 +33,8 @@ async function validate(input: ValidateSchemaInput<unknown, unknown>): Promise<S
   }
 }
 
-async function parse(input: ParseSchemaInput<unknown, unknown>): Promise<SpecTypesV2.SchemaObject> {
-  const payload = input.data as string;
-
-  return protoj2jsonSchema(
-    proto2protoj(payload),
-    {
-      getOne: true,
-    }
-  );
+function parse(input: ParseSchemaInput<unknown, unknown>): AsyncAPISchema {
+  return proto2jsonSchema(input.data as string);
 }
 
 function getMimeTypes() {

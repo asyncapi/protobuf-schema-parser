@@ -22,6 +22,7 @@
                     "minimum": -2147483648,
                     "maximum": 2147483647,
                     "x-primitive": "int32",
+                    "description": "ObjectId",
 
                   },
                   "trasse_id": {
@@ -30,18 +31,14 @@
 
                   },
                   "betriebstag": {
-                    "type": "object",
                     "title": "Date",
-                    "required": [
-                      "year",
-                      "month",
-                      "day"
-                    ],
+                    "type": "object",
                     "properties": {
                       "year": {
                         "type": "integer",
                         "minimum": 0,
                         "maximum": 9999,
+                        "x-primitive": "int32",
                         "description": "Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year",
 
                       },
@@ -49,6 +46,7 @@
                         "type": "integer",
                         "minimum": 0,
                         "maximum": 12,
+                        "x-primitive": "int32",
                         "description": "Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.",
 
                       },
@@ -56,16 +54,21 @@
                         "type": "integer",
                         "minimum": 0,
                         "maximum": 31,
+                        "x-primitive": "int32",
                         "description": "Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.",
 
                       }
                     },
-                    "description": "Represents a whole or partial calendar date, such as a birthday. The time of day and time zone are either specified elsewhere or are insignificant. The date is relative to the Gregorian Calendar. This can represent one of the following:\n\n* A full date, with non-zero year, month, and day values\n* A month and day value, with a zero year, such as an anniversary\n* A year on its own, with zero month and day values\n* A year and month value, with a zero day, such as a credit card expiration date",
 
                   },
                   "zugnummer": {
                     "type": "string",
                     "x-primitive": "string",
+                    "description": "The train number",
+                    "examples": [
+                      "SBB-612-1",
+                      "SOB-13234-2"
+                    ],
 
                   },
                   "infrastruktur_netz": {
@@ -83,22 +86,19 @@
                         "properties": {
                           "seconds": {
                             "type": "integer",
-                            "minimum": 0,
+                            "minimum": -9007199254740991,
                             "maximum": 9007199254740991,
-                            "default": 0,
-                            "description": "Represents seconds of UTC time since Unix epoch 1970-01-01T00:00:00Z. Must be from 0001-01-01T00:00:00Z to 9999-12-31T23:59:59Z inclusive.",
+                            "x-primitive": "int64",
 
                           },
                           "nanos": {
                             "type": "integer",
-                            "minimum": 0,
-                            "maximum": 999999999,
-                            "default": 0,
-                            "description": "Non-negative fractions of a second at nanosecond resolution.",
+                            "minimum": -2147483648,
+                            "maximum": 2147483647,
+                            "x-primitive": "int32",
 
                           }
                         },
-                        "description": "A Timestamp represents a point in time independent of any time zone or local calendar, encoded as a count of seconds and fractions of seconds at nanosecond resolution. The count is relative to an epoch at UTC midnight on January 1, 1970, in the proleptic Gregorian calendar which extends the Gregorian calendar backwards to year one.\n\nAll minutes are 60 seconds long. Leap seconds are \"smeared\" so that no leap  second table is needed for interpretation, using a [24-hour linear smear](https://developers.google.com/time/smear).\n\nThe range is from 0001-01-01T00:00:00Z to 9999-12-31T23:59:59.999999999Z. By restricting to that range, we ensure that we can convert to and from [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) date strings.",
 
                       },
                       "bis": {
@@ -107,29 +107,21 @@
                         "properties": {
                           "seconds": {
                             "type": "integer",
-                            "minimum": 0,
+                            "minimum": -9007199254740991,
                             "maximum": 9007199254740991,
-                            "default": 0,
-                            "description": "Represents seconds of UTC time since Unix epoch 1970-01-01T00:00:00Z. Must be from 0001-01-01T00:00:00Z to 9999-12-31T23:59:59Z inclusive.",
+                            "x-primitive": "int64",
 
                           },
                           "nanos": {
                             "type": "integer",
-                            "minimum": 0,
-                            "maximum": 999999999,
-                            "default": 0,
-                            "description": "Non-negative fractions of a second at nanosecond resolution.",
+                            "minimum": -2147483648,
+                            "maximum": 2147483647,
+                            "x-primitive": "int32",
 
                           }
                         },
-                        "description": "A Timestamp represents a point in time independent of any time zone or local calendar, encoded as a count of seconds and fractions of seconds at nanosecond resolution. The count is relative to an epoch at UTC midnight on January 1, 1970, in the proleptic Gregorian calendar which extends the Gregorian calendar backwards to year one.\n\nAll minutes are 60 seconds long. Leap seconds are \"smeared\" so that no leap  second table is needed for interpretation, using a [24-hour linear smear](https://developers.google.com/time/smear).\n\nThe range is from 0001-01-01T00:00:00Z to 9999-12-31T23:59:59.999999999Z. By restricting to that range, we ensure that we can convert to and from [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) date strings.",
 
                       }
-                    },
-                    "required": [],
-                    "tags": {
-                      "von": 1,
-                      "bis": 2
                     },
 
                   },
@@ -139,22 +131,19 @@
                     "properties": {
                       "seconds": {
                         "type": "integer",
-                        "minimum": -315576000000,
-                        "maximum": 315576000000,
-                        "default": 0,
-                        "description": "Signed seconds of the span of time. Note: these bounds are computed from: 60 sec/min * 60 min/hr * 24 hr/day * 365.25 days/year * 10000 years",
+                        "minimum": -9007199254740991,
+                        "maximum": 9007199254740991,
+                        "x-primitive": "int64",
 
                       },
                       "nanos": {
                         "type": "integer",
-                        "minimum": -999999999,
-                        "maximum": 999999999,
-                        "default": 0,
-                        "description": "Signed fractions of a second at nanosecond resolution of the span of time. Durations less than one second are represented with a 0 `seconds` field and a positive or negative `nanos` field. For durations of one second or more, a non-zero value for the `nanos` field must be of the same sign as the `seconds` field.",
+                        "minimum": -2147483648,
+                        "maximum": 2147483647,
+                        "x-primitive": "int32",
 
                       }
                     },
-                    "description": "A Duration represents a signed, fixed-length span of time represented as a count of seconds and fractions of seconds at nanosecond resolution. It is independent of any calendar and concepts like day or month",
 
                   },
                   "composition": {
@@ -163,24 +152,32 @@
                     "properties": {
                       "composition_id": {
                         "title": "Int32Value",
-                        "type": [
-                          "null",
-                          "integer"
-                        ],
-                        "minimum": -2147483648,
-                        "maximum": 2147483647,
-                        "x-primitive": "int32",
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "integer",
+                            "minimum": -2147483648,
+                            "maximum": 2147483647,
+                            "x-primitive": "int32",
+
+                          }
+                        },
+                        "description": "ObjectId",
 
                       },
                       "train_run_id": {
                         "title": "Int32Value",
-                        "type": [
-                          "null",
-                          "integer"
-                        ],
-                        "minimum": -2147483648,
-                        "maximum": 2147483647,
-                        "x-primitive": "int32",
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "integer",
+                            "minimum": -2147483648,
+                            "maximum": 2147483647,
+                            "x-primitive": "int32",
+
+                          }
+                        },
+                        "description": "ObjectId",
 
                       },
                       "reihenfolge": {
@@ -197,13 +194,17 @@
                       },
                       "alast_anzahlwagen_chlor": {
                         "title": "Int32Value",
-                        "type": [
-                          "null",
-                          "integer"
-                        ],
-                        "minimum": -2147483648,
-                        "maximum": 2147483647,
-                        "x-primitive": "int32",
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "integer",
+                            "minimum": -2147483648,
+                            "maximum": 2147483647,
+                            "x-primitive": "int32",
+
+                          }
+                        },
+                        "description": "Integer",
 
                       },
                       "formationsdaten_zlr": {
@@ -227,43 +228,27 @@
                       },
                       "anzahl_loks": {
                         "title": "Int32Value",
-                        "type": [
-                          "null",
-                          "integer"
-                        ],
-                        "minimum": -2147483648,
-                        "maximum": 2147483647,
-                        "x-primitive": "int32",
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "integer",
+                            "minimum": -2147483648,
+                            "maximum": 2147483647,
+                            "x-primitive": "int32",
+
+                          }
+                        },
+                        "description": "Integer",
 
                       }
-                    },
-                    "required": [],
-                    "tags": {
-                      "composition_id": 1,
-                      "train_run_id": 2,
-                      "reihenfolge": 3,
-                      "umsystem": 4,
-                      "alast_anzahlwagen_chlor": 27,
-                      "formationsdaten_zlr": 28,
-                      "anzahl_loks": 29
                     },
 
                   }
                 },
-                "required": [],
-                "tags": {
-                  "id": 1,
-                  "trasse_id": 2,
-                  "betriebstag": 3,
-                  "zugnummer": 4,
-                  "infrastruktur_netz": 5,
-                  "object_period": 6,
-                  "dr": 7,
-                  "composition": 8
-                },
 
               },
               "timetable_events": {
+                "description": "",
                 "type": "array",
                 "items": {
                   "title": "TimetableEventMsg",
@@ -274,25 +259,18 @@
                       "minimum": -2147483648,
                       "maximum": 2147483647,
                       "x-primitive": "int32",
+                      "description": "ObjectId",
 
                     },
                     "scheduled_time": {
-                      "type": "object",
                       "title": "DateTime",
-                      "required": [
-                        "year",
-                        "month",
-                        "day",
-                        "hours",
-                        "minutes",
-                        "seconds",
-                        "nanos"
-                      ],
+                      "type": "object",
                       "properties": {
                         "year": {
                           "type": "integer",
                           "minimum": 0,
                           "maximum": 9999,
+                          "x-primitive": "int32",
                           "description": "Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year",
 
                         },
@@ -300,6 +278,7 @@
                           "type": "integer",
                           "minimum": 0,
                           "maximum": 12,
+                          "x-primitive": "int32",
                           "description": "Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.",
 
                         },
@@ -307,6 +286,7 @@
                           "type": "integer",
                           "minimum": 0,
                           "maximum": 31,
+                          "x-primitive": "int32",
                           "description": "Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.",
 
                         },
@@ -314,20 +294,23 @@
                           "type": "integer",
                           "minimum": 0,
                           "maximum": 23,
-                          "description": "Hours of day in 24 hour format. Should be from 0 to 23",
+                          "x-primitive": "int32",
+                          "description": "Hours of day in 24 hour format.",
 
                         },
                         "minutes": {
                           "type": "integer",
                           "minimum": 0,
                           "maximum": 59,
-                          "description": "Minutes of hour of day",
+                          "x-primitive": "int32",
+                          "description": "Minutes of hour of day.",
 
                         },
                         "seconds": {
                           "type": "integer",
                           "minimum": 0,
                           "maximum": 60,
+                          "x-primitive": "int32",
                           "description": "Seconds of minutes of the time. Must normally be from 0 to 59. An API may allow the value 60 if it allows leap-seconds.",
 
                         },
@@ -335,80 +318,62 @@
                           "type": "integer",
                           "minimum": 0,
                           "maximum": 999999999,
+                          "x-primitive": "int32",
                           "description": "Fractions of seconds in nanoseconds.",
 
                         },
-                        "time_offset": {
-                          "oneOf": [
-                            {
-                              "type": "object",
-                              "title": "TimeZone",
-                              "required": [
-                                "id"
-                              ],
-                              "properties": {
-                                "id": {
-                                  "type": "string",
-                                  "description": "IANA Time Zone Database time zone, e.g. \"America/New_York\".",
-
-                                },
-                                "version": {
-                                  "type": "string",
-                                  "description": "IANA Time Zone Database version number, e.g. \"2019a\".",
-
-                                }
-                              },
-                              "description": "Represents a time zone from the [IANA Time Zone Database](https://www.iana.org/time-zones).",
+                        "utcOffset": {
+                          "title": "Duration",
+                          "type": "object",
+                          "properties": {
+                            "seconds": {
+                              "type": "integer",
+                              "minimum": -9007199254740991,
+                              "maximum": 9007199254740991,
+                              "x-primitive": "int64",
 
                             },
-                            {
-                              "type": "object",
-                              "title": "Duration",
-                              "properties": {
-                                "seconds": {
-                                  "type": "integer",
-                                  "minimum": -315576000000,
-                                  "maximum": 315576000000,
-                                  "default": 0,
-                                  "description": "Signed seconds of the span of time. Note: these bounds are computed from: 60 sec/min * 60 min/hr * 24 hr/day * 365.25 days/year * 10000 years",
-
-                                },
-                                "nanos": {
-                                  "type": "integer",
-                                  "minimum": -999999999,
-                                  "maximum": 999999999,
-                                  "default": 0,
-                                  "description": "Signed fractions of a second at nanosecond resolution of the span of time. Durations less than one second are represented with a 0 `seconds` field and a positive or negative `nanos` field. For durations of one second or more, a non-zero value for the `nanos` field must be of the same sign as the `seconds` field.",
-
-                                }
-                              },
-                              "description": "A Duration represents a signed, fixed-length span of time represented as a count of seconds and fractions of seconds at nanosecond resolution. It is independent of any calendar and concepts like day or month",
+                            "nanos": {
+                              "type": "integer",
+                              "minimum": -2147483648,
+                              "maximum": 2147483647,
+                              "x-primitive": "int32",
 
                             }
-                          ],
+                          },
+
+                        },
+                        "timeZone": {
+                          "title": "TimeZone",
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "x-primitive": "string",
+                              "description": "IANA Time Zone Database time zone.",
+
+                            },
+                            "version": {
+                              "type": "string",
+                              "x-primitive": "string",
+                              "description": "IANA Time Zone Database version number.",
+
+                            }
+                          },
 
                         }
                       },
-                      "description": "Represents civil time (or occasionally physical time).",
 
                     },
                     "production_time": {
-                      "type": "object",
                       "title": "DateTime",
-                      "required": [
-                        "year",
-                        "month",
-                        "day",
-                        "hours",
-                        "minutes",
-                        "seconds",
-                        "nanos"
-                      ],
+                      "type": "object",
                       "properties": {
                         "year": {
                           "type": "integer",
                           "minimum": 0,
                           "maximum": 9999,
+                          "x-primitive": "int32",
                           "description": "Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year",
 
                         },
@@ -416,6 +381,7 @@
                           "type": "integer",
                           "minimum": 0,
                           "maximum": 12,
+                          "x-primitive": "int32",
                           "description": "Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.",
 
                         },
@@ -423,6 +389,7 @@
                           "type": "integer",
                           "minimum": 0,
                           "maximum": 31,
+                          "x-primitive": "int32",
                           "description": "Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.",
 
                         },
@@ -430,20 +397,23 @@
                           "type": "integer",
                           "minimum": 0,
                           "maximum": 23,
-                          "description": "Hours of day in 24 hour format. Should be from 0 to 23",
+                          "x-primitive": "int32",
+                          "description": "Hours of day in 24 hour format.",
 
                         },
                         "minutes": {
                           "type": "integer",
                           "minimum": 0,
                           "maximum": 59,
-                          "description": "Minutes of hour of day",
+                          "x-primitive": "int32",
+                          "description": "Minutes of hour of day.",
 
                         },
                         "seconds": {
                           "type": "integer",
                           "minimum": 0,
                           "maximum": 60,
+                          "x-primitive": "int32",
                           "description": "Seconds of minutes of the time. Must normally be from 0 to 59. An API may allow the value 60 if it allows leap-seconds.",
 
                         },
@@ -451,61 +421,51 @@
                           "type": "integer",
                           "minimum": 0,
                           "maximum": 999999999,
+                          "x-primitive": "int32",
                           "description": "Fractions of seconds in nanoseconds.",
 
                         },
-                        "time_offset": {
-                          "oneOf": [
-                            {
-                              "type": "object",
-                              "title": "TimeZone",
-                              "required": [
-                                "id"
-                              ],
-                              "properties": {
-                                "id": {
-                                  "type": "string",
-                                  "description": "IANA Time Zone Database time zone, e.g. \"America/New_York\".",
-
-                                },
-                                "version": {
-                                  "type": "string",
-                                  "description": "IANA Time Zone Database version number, e.g. \"2019a\".",
-
-                                }
-                              },
-                              "description": "Represents a time zone from the [IANA Time Zone Database](https://www.iana.org/time-zones).",
+                        "utcOffset": {
+                          "title": "Duration",
+                          "type": "object",
+                          "properties": {
+                            "seconds": {
+                              "type": "integer",
+                              "minimum": -9007199254740991,
+                              "maximum": 9007199254740991,
+                              "x-primitive": "int64",
 
                             },
-                            {
-                              "type": "object",
-                              "title": "Duration",
-                              "properties": {
-                                "seconds": {
-                                  "type": "integer",
-                                  "minimum": -315576000000,
-                                  "maximum": 315576000000,
-                                  "default": 0,
-                                  "description": "Signed seconds of the span of time. Note: these bounds are computed from: 60 sec/min * 60 min/hr * 24 hr/day * 365.25 days/year * 10000 years",
-
-                                },
-                                "nanos": {
-                                  "type": "integer",
-                                  "minimum": -999999999,
-                                  "maximum": 999999999,
-                                  "default": 0,
-                                  "description": "Signed fractions of a second at nanosecond resolution of the span of time. Durations less than one second are represented with a 0 `seconds` field and a positive or negative `nanos` field. For durations of one second or more, a non-zero value for the `nanos` field must be of the same sign as the `seconds` field.",
-
-                                }
-                              },
-                              "description": "A Duration represents a signed, fixed-length span of time represented as a count of seconds and fractions of seconds at nanosecond resolution. It is independent of any calendar and concepts like day or month",
+                            "nanos": {
+                              "type": "integer",
+                              "minimum": -2147483648,
+                              "maximum": 2147483647,
+                              "x-primitive": "int32",
 
                             }
-                          ],
+                          },
+
+                        },
+                        "timeZone": {
+                          "title": "TimeZone",
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "x-primitive": "string",
+                              "description": "IANA Time Zone Database time zone.",
+
+                            },
+                            "version": {
+                              "type": "string",
+                              "x-primitive": "string",
+                              "description": "IANA Time Zone Database version number.",
+
+                            }
+                          },
 
                         }
                       },
-                      "description": "Represents civil time (or occasionally physical time).",
 
                     },
                     "stop": {
@@ -514,35 +474,47 @@
                       "properties": {
                         "event_id_from": {
                           "title": "Int32Value",
-                          "type": [
-                            "null",
-                            "integer"
-                          ],
-                          "minimum": -2147483648,
-                          "maximum": 2147483647,
-                          "x-primitive": "int32",
+                          "type": "object",
+                          "properties": {
+                            "value": {
+                              "type": "integer",
+                              "minimum": -2147483648,
+                              "maximum": 2147483647,
+                              "x-primitive": "int32",
+
+                            }
+                          },
+                          "description": "ObjectId",
 
                         },
                         "event_id_to": {
                           "title": "UInt32Value",
-                          "type": [
-                            "null",
-                            "integer"
-                          ],
-                          "minimum": 0,
-                          "maximum": 4294967295,
-                          "x-primitive": "uint32",
+                          "type": "object",
+                          "properties": {
+                            "value": {
+                              "type": "integer",
+                              "minimum": 0,
+                              "maximum": 4294967295,
+                              "x-primitive": "uint32",
+
+                            }
+                          },
+                          "description": "ObjectId",
 
                         },
                         "event_link_properties_id": {
                           "title": "UInt64Value",
-                          "type": [
-                            "null",
-                            "integer"
-                          ],
-                          "minimum": 0,
-                          "maximum": 9007199254740991,
-                          "x-primitive": "uint64",
+                          "type": "object",
+                          "properties": {
+                            "value": {
+                              "type": "integer",
+                              "minimum": 0,
+                              "maximum": 9007199254740991,
+                              "x-primitive": "uint64",
+
+                            }
+                          },
+                          "description": "ObjectId",
 
                         },
                         "min_duration": {
@@ -553,6 +525,7 @@
 
                         },
                         "purposes": {
+                          "description": "",
                           "type": "array",
                           "items": {
                             "type": "string",
@@ -561,14 +534,6 @@
                           },
 
                         }
-                      },
-                      "required": [],
-                      "tags": {
-                        "event_id_from": 1,
-                        "event_id_to": 2,
-                        "event_link_properties_id": 3,
-                        "min_duration": 10,
-                        "purposes": 11
                       },
 
                     },
@@ -581,6 +546,7 @@
                           "minimum": -2147483648,
                           "maximum": 2147483647,
                           "x-primitive": "int32",
+                          "description": "ObjectId",
 
                         },
                         "event_id_to": {
@@ -588,17 +554,22 @@
                           "minimum": -2147483648,
                           "maximum": 2147483647,
                           "x-primitive": "int32",
+                          "description": "ObjectId",
 
                         },
                         "event_link_properties_id": {
                           "title": "Int32Value",
-                          "type": [
-                            "null",
-                            "integer"
-                          ],
-                          "minimum": -2147483648,
-                          "maximum": 2147483647,
-                          "x-primitive": "int32",
+                          "type": "object",
+                          "properties": {
+                            "value": {
+                              "type": "integer",
+                              "minimum": -2147483648,
+                              "maximum": 2147483647,
+                              "x-primitive": "int32",
+
+                            }
+                          },
+                          "description": "ObjectId",
 
                         },
                         "min_duration": {
@@ -638,16 +609,6 @@
 
                         }
                       },
-                      "required": [],
-                      "tags": {
-                        "event_id_from": 1,
-                        "event_id_to": 2,
-                        "event_link_properties_id": 3,
-                        "min_duration": 10,
-                        "is_min_duration_calculated": 11,
-                        "is_stop_over": 12,
-                        "fahrstrategie": 13
-                      },
 
                     },
                     "train_run_segment": {
@@ -659,6 +620,7 @@
                           "minimum": -2147483648,
                           "maximum": 2147483647,
                           "x-primitive": "int32",
+                          "description": "ObjectId",
 
                         },
                         "event_id_to": {
@@ -666,17 +628,22 @@
                           "minimum": -2147483648,
                           "maximum": 2147483647,
                           "x-primitive": "int32",
+                          "description": "ObjectId",
 
                         },
                         "abschnitts_formation_id": {
                           "title": "Int32Value",
-                          "type": [
-                            "null",
-                            "integer"
-                          ],
-                          "minimum": -2147483648,
-                          "maximum": 2147483647,
-                          "x-primitive": "int32",
+                          "type": "object",
+                          "properties": {
+                            "value": {
+                              "type": "integer",
+                              "minimum": -2147483648,
+                              "maximum": 2147483647,
+                              "x-primitive": "int32",
+
+                            }
+                          },
+                          "description": "ObjectId",
 
                         },
                         "train_category": {
@@ -704,25 +671,21 @@
 
                         }
                       },
-                      "required": [],
-                      "tags": {
-                        "event_id_from": 1,
-                        "event_id_to": 2,
-                        "abschnitts_formation_id": 3,
-                        "train_category": 4,
-                        "train_series": 5
-                      },
 
                     },
                     "connection_decision_time": {
                       "title": "Int32Value",
-                      "type": [
-                        "null",
-                        "integer"
-                      ],
-                      "minimum": -2147483648,
-                      "maximum": 2147483647,
-                      "x-primitive": "int32",
+                      "type": "object",
+                      "properties": {
+                        "value": {
+                          "type": "integer",
+                          "minimum": -2147483648,
+                          "maximum": 2147483647,
+                          "x-primitive": "int32",
+
+                        }
+                      },
+                      "description": "Integer",
 
                     },
                     "ahead_of_schedule_strategy": {
@@ -745,17 +708,6 @@
 
                     }
                   },
-                  "required": [],
-                  "tags": {
-                    "id": 1,
-                    "scheduled_time": 3,
-                    "production_time": 4,
-                    "stop": 11,
-                    "movement": 12,
-                    "train_run_segment": 13,
-                    "connection_decision_time": 20,
-                    "ahead_of_schedule_strategy": 21
-                  },
 
                 },
 
@@ -766,24 +718,32 @@
                 "properties": {
                   "composition_id": {
                     "title": "Int32Value",
-                    "type": [
-                      "null",
-                      "integer"
-                    ],
-                    "minimum": -2147483648,
-                    "maximum": 2147483647,
-                    "x-primitive": "int32",
+                    "type": "object",
+                    "properties": {
+                      "value": {
+                        "type": "integer",
+                        "minimum": -2147483648,
+                        "maximum": 2147483647,
+                        "x-primitive": "int32",
+
+                      }
+                    },
+                    "description": "ObjectId",
 
                   },
                   "train_run_id": {
                     "title": "Int32Value",
-                    "type": [
-                      "null",
-                      "integer"
-                    ],
-                    "minimum": -2147483648,
-                    "maximum": 2147483647,
-                    "x-primitive": "int32",
+                    "type": "object",
+                    "properties": {
+                      "value": {
+                        "type": "integer",
+                        "minimum": -2147483648,
+                        "maximum": 2147483647,
+                        "x-primitive": "int32",
+
+                      }
+                    },
+                    "description": "ObjectId",
 
                   },
                   "reihenfolge": {
@@ -800,13 +760,17 @@
                   },
                   "alast_anzahlwagen_chlor": {
                     "title": "Int32Value",
-                    "type": [
-                      "null",
-                      "integer"
-                    ],
-                    "minimum": -2147483648,
-                    "maximum": 2147483647,
-                    "x-primitive": "int32",
+                    "type": "object",
+                    "properties": {
+                      "value": {
+                        "type": "integer",
+                        "minimum": -2147483648,
+                        "maximum": 2147483647,
+                        "x-primitive": "int32",
+
+                      }
+                    },
+                    "description": "Integer",
 
                   },
                   "formationsdaten_zlr": {
@@ -830,34 +794,22 @@
                   },
                   "anzahl_loks": {
                     "title": "Int32Value",
-                    "type": [
-                      "null",
-                      "integer"
-                    ],
-                    "minimum": -2147483648,
-                    "maximum": 2147483647,
-                    "x-primitive": "int32",
+                    "type": "object",
+                    "properties": {
+                      "value": {
+                        "type": "integer",
+                        "minimum": -2147483648,
+                        "maximum": 2147483647,
+                        "x-primitive": "int32",
+
+                      }
+                    },
+                    "description": "Integer",
 
                   }
                 },
-                "required": [],
-                "tags": {
-                  "composition_id": 1,
-                  "train_run_id": 2,
-                  "reihenfolge": 3,
-                  "umsystem": 4,
-                  "alast_anzahlwagen_chlor": 27,
-                  "formationsdaten_zlr": 28,
-                  "anzahl_loks": 29
-                },
 
               }
-            },
-            "required": [],
-            "tags": {
-              "train_run": 1,
-              "timetable_events": 2,
-              "composition": 3
             },
 
           },
@@ -884,6 +836,7 @@
                   "minimum": -2147483648,
                   "maximum": 2147483647,
                   "x-primitive": "int32",
+                  "description": "ObjectId",
 
                 },
                 "trasse_id": {
@@ -892,18 +845,14 @@
 
                 },
                 "betriebstag": {
-                  "type": "object",
                   "title": "Date",
-                  "required": [
-                    "year",
-                    "month",
-                    "day"
-                  ],
+                  "type": "object",
                   "properties": {
                     "year": {
                       "type": "integer",
                       "minimum": 0,
                       "maximum": 9999,
+                      "x-primitive": "int32",
                       "description": "Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year",
 
                     },
@@ -911,6 +860,7 @@
                       "type": "integer",
                       "minimum": 0,
                       "maximum": 12,
+                      "x-primitive": "int32",
                       "description": "Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.",
 
                     },
@@ -918,16 +868,21 @@
                       "type": "integer",
                       "minimum": 0,
                       "maximum": 31,
+                      "x-primitive": "int32",
                       "description": "Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.",
 
                     }
                   },
-                  "description": "Represents a whole or partial calendar date, such as a birthday. The time of day and time zone are either specified elsewhere or are insignificant. The date is relative to the Gregorian Calendar. This can represent one of the following:\n\n* A full date, with non-zero year, month, and day values\n* A month and day value, with a zero year, such as an anniversary\n* A year on its own, with zero month and day values\n* A year and month value, with a zero day, such as a credit card expiration date",
 
                 },
                 "zugnummer": {
                   "type": "string",
                   "x-primitive": "string",
+                  "description": "The train number",
+                  "examples": [
+                    "SBB-612-1",
+                    "SOB-13234-2"
+                  ],
 
                 },
                 "infrastruktur_netz": {
@@ -945,22 +900,19 @@
                       "properties": {
                         "seconds": {
                           "type": "integer",
-                          "minimum": 0,
+                          "minimum": -9007199254740991,
                           "maximum": 9007199254740991,
-                          "default": 0,
-                          "description": "Represents seconds of UTC time since Unix epoch 1970-01-01T00:00:00Z. Must be from 0001-01-01T00:00:00Z to 9999-12-31T23:59:59Z inclusive.",
+                          "x-primitive": "int64",
 
                         },
                         "nanos": {
                           "type": "integer",
-                          "minimum": 0,
-                          "maximum": 999999999,
-                          "default": 0,
-                          "description": "Non-negative fractions of a second at nanosecond resolution.",
+                          "minimum": -2147483648,
+                          "maximum": 2147483647,
+                          "x-primitive": "int32",
 
                         }
                       },
-                      "description": "A Timestamp represents a point in time independent of any time zone or local calendar, encoded as a count of seconds and fractions of seconds at nanosecond resolution. The count is relative to an epoch at UTC midnight on January 1, 1970, in the proleptic Gregorian calendar which extends the Gregorian calendar backwards to year one.\n\nAll minutes are 60 seconds long. Leap seconds are \"smeared\" so that no leap  second table is needed for interpretation, using a [24-hour linear smear](https://developers.google.com/time/smear).\n\nThe range is from 0001-01-01T00:00:00Z to 9999-12-31T23:59:59.999999999Z. By restricting to that range, we ensure that we can convert to and from [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) date strings.",
 
                     },
                     "bis": {
@@ -969,29 +921,21 @@
                       "properties": {
                         "seconds": {
                           "type": "integer",
-                          "minimum": 0,
+                          "minimum": -9007199254740991,
                           "maximum": 9007199254740991,
-                          "default": 0,
-                          "description": "Represents seconds of UTC time since Unix epoch 1970-01-01T00:00:00Z. Must be from 0001-01-01T00:00:00Z to 9999-12-31T23:59:59Z inclusive.",
+                          "x-primitive": "int64",
 
                         },
                         "nanos": {
                           "type": "integer",
-                          "minimum": 0,
-                          "maximum": 999999999,
-                          "default": 0,
-                          "description": "Non-negative fractions of a second at nanosecond resolution.",
+                          "minimum": -2147483648,
+                          "maximum": 2147483647,
+                          "x-primitive": "int32",
 
                         }
                       },
-                      "description": "A Timestamp represents a point in time independent of any time zone or local calendar, encoded as a count of seconds and fractions of seconds at nanosecond resolution. The count is relative to an epoch at UTC midnight on January 1, 1970, in the proleptic Gregorian calendar which extends the Gregorian calendar backwards to year one.\n\nAll minutes are 60 seconds long. Leap seconds are \"smeared\" so that no leap  second table is needed for interpretation, using a [24-hour linear smear](https://developers.google.com/time/smear).\n\nThe range is from 0001-01-01T00:00:00Z to 9999-12-31T23:59:59.999999999Z. By restricting to that range, we ensure that we can convert to and from [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) date strings.",
 
                     }
-                  },
-                  "required": [],
-                  "tags": {
-                    "von": 1,
-                    "bis": 2
                   },
 
                 },
@@ -1001,22 +945,19 @@
                   "properties": {
                     "seconds": {
                       "type": "integer",
-                      "minimum": -315576000000,
-                      "maximum": 315576000000,
-                      "default": 0,
-                      "description": "Signed seconds of the span of time. Note: these bounds are computed from: 60 sec/min * 60 min/hr * 24 hr/day * 365.25 days/year * 10000 years",
+                      "minimum": -9007199254740991,
+                      "maximum": 9007199254740991,
+                      "x-primitive": "int64",
 
                     },
                     "nanos": {
                       "type": "integer",
-                      "minimum": -999999999,
-                      "maximum": 999999999,
-                      "default": 0,
-                      "description": "Signed fractions of a second at nanosecond resolution of the span of time. Durations less than one second are represented with a 0 `seconds` field and a positive or negative `nanos` field. For durations of one second or more, a non-zero value for the `nanos` field must be of the same sign as the `seconds` field.",
+                      "minimum": -2147483648,
+                      "maximum": 2147483647,
+                      "x-primitive": "int32",
 
                     }
                   },
-                  "description": "A Duration represents a signed, fixed-length span of time represented as a count of seconds and fractions of seconds at nanosecond resolution. It is independent of any calendar and concepts like day or month",
 
                 },
                 "composition": {
@@ -1025,24 +966,32 @@
                   "properties": {
                     "composition_id": {
                       "title": "Int32Value",
-                      "type": [
-                        "null",
-                        "integer"
-                      ],
-                      "minimum": -2147483648,
-                      "maximum": 2147483647,
-                      "x-primitive": "int32",
+                      "type": "object",
+                      "properties": {
+                        "value": {
+                          "type": "integer",
+                          "minimum": -2147483648,
+                          "maximum": 2147483647,
+                          "x-primitive": "int32",
+
+                        }
+                      },
+                      "description": "ObjectId",
 
                     },
                     "train_run_id": {
                       "title": "Int32Value",
-                      "type": [
-                        "null",
-                        "integer"
-                      ],
-                      "minimum": -2147483648,
-                      "maximum": 2147483647,
-                      "x-primitive": "int32",
+                      "type": "object",
+                      "properties": {
+                        "value": {
+                          "type": "integer",
+                          "minimum": -2147483648,
+                          "maximum": 2147483647,
+                          "x-primitive": "int32",
+
+                        }
+                      },
+                      "description": "ObjectId",
 
                     },
                     "reihenfolge": {
@@ -1059,13 +1008,17 @@
                     },
                     "alast_anzahlwagen_chlor": {
                       "title": "Int32Value",
-                      "type": [
-                        "null",
-                        "integer"
-                      ],
-                      "minimum": -2147483648,
-                      "maximum": 2147483647,
-                      "x-primitive": "int32",
+                      "type": "object",
+                      "properties": {
+                        "value": {
+                          "type": "integer",
+                          "minimum": -2147483648,
+                          "maximum": 2147483647,
+                          "x-primitive": "int32",
+
+                        }
+                      },
+                      "description": "Integer",
 
                     },
                     "formationsdaten_zlr": {
@@ -1089,43 +1042,27 @@
                     },
                     "anzahl_loks": {
                       "title": "Int32Value",
-                      "type": [
-                        "null",
-                        "integer"
-                      ],
-                      "minimum": -2147483648,
-                      "maximum": 2147483647,
-                      "x-primitive": "int32",
+                      "type": "object",
+                      "properties": {
+                        "value": {
+                          "type": "integer",
+                          "minimum": -2147483648,
+                          "maximum": 2147483647,
+                          "x-primitive": "int32",
+
+                        }
+                      },
+                      "description": "Integer",
 
                     }
-                  },
-                  "required": [],
-                  "tags": {
-                    "composition_id": 1,
-                    "train_run_id": 2,
-                    "reihenfolge": 3,
-                    "umsystem": 4,
-                    "alast_anzahlwagen_chlor": 27,
-                    "formationsdaten_zlr": 28,
-                    "anzahl_loks": 29
                   },
 
                 }
               },
-              "required": [],
-              "tags": {
-                "id": 1,
-                "trasse_id": 2,
-                "betriebstag": 3,
-                "zugnummer": 4,
-                "infrastruktur_netz": 5,
-                "object_period": 6,
-                "dr": 7,
-                "composition": 8
-              },
 
             },
             "timetable_events": {
+              "description": "",
               "type": "array",
               "items": {
                 "title": "TimetableEventMsg",
@@ -1136,25 +1073,18 @@
                     "minimum": -2147483648,
                     "maximum": 2147483647,
                     "x-primitive": "int32",
+                    "description": "ObjectId",
 
                   },
                   "scheduled_time": {
-                    "type": "object",
                     "title": "DateTime",
-                    "required": [
-                      "year",
-                      "month",
-                      "day",
-                      "hours",
-                      "minutes",
-                      "seconds",
-                      "nanos"
-                    ],
+                    "type": "object",
                     "properties": {
                       "year": {
                         "type": "integer",
                         "minimum": 0,
                         "maximum": 9999,
+                        "x-primitive": "int32",
                         "description": "Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year",
 
                       },
@@ -1162,6 +1092,7 @@
                         "type": "integer",
                         "minimum": 0,
                         "maximum": 12,
+                        "x-primitive": "int32",
                         "description": "Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.",
 
                       },
@@ -1169,6 +1100,7 @@
                         "type": "integer",
                         "minimum": 0,
                         "maximum": 31,
+                        "x-primitive": "int32",
                         "description": "Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.",
 
                       },
@@ -1176,20 +1108,23 @@
                         "type": "integer",
                         "minimum": 0,
                         "maximum": 23,
-                        "description": "Hours of day in 24 hour format. Should be from 0 to 23",
+                        "x-primitive": "int32",
+                        "description": "Hours of day in 24 hour format.",
 
                       },
                       "minutes": {
                         "type": "integer",
                         "minimum": 0,
                         "maximum": 59,
-                        "description": "Minutes of hour of day",
+                        "x-primitive": "int32",
+                        "description": "Minutes of hour of day.",
 
                       },
                       "seconds": {
                         "type": "integer",
                         "minimum": 0,
                         "maximum": 60,
+                        "x-primitive": "int32",
                         "description": "Seconds of minutes of the time. Must normally be from 0 to 59. An API may allow the value 60 if it allows leap-seconds.",
 
                       },
@@ -1197,80 +1132,62 @@
                         "type": "integer",
                         "minimum": 0,
                         "maximum": 999999999,
+                        "x-primitive": "int32",
                         "description": "Fractions of seconds in nanoseconds.",
 
                       },
-                      "time_offset": {
-                        "oneOf": [
-                          {
-                            "type": "object",
-                            "title": "TimeZone",
-                            "required": [
-                              "id"
-                            ],
-                            "properties": {
-                              "id": {
-                                "type": "string",
-                                "description": "IANA Time Zone Database time zone, e.g. \"America/New_York\".",
-
-                              },
-                              "version": {
-                                "type": "string",
-                                "description": "IANA Time Zone Database version number, e.g. \"2019a\".",
-
-                              }
-                            },
-                            "description": "Represents a time zone from the [IANA Time Zone Database](https://www.iana.org/time-zones).",
+                      "utcOffset": {
+                        "title": "Duration",
+                        "type": "object",
+                        "properties": {
+                          "seconds": {
+                            "type": "integer",
+                            "minimum": -9007199254740991,
+                            "maximum": 9007199254740991,
+                            "x-primitive": "int64",
 
                           },
-                          {
-                            "type": "object",
-                            "title": "Duration",
-                            "properties": {
-                              "seconds": {
-                                "type": "integer",
-                                "minimum": -315576000000,
-                                "maximum": 315576000000,
-                                "default": 0,
-                                "description": "Signed seconds of the span of time. Note: these bounds are computed from: 60 sec/min * 60 min/hr * 24 hr/day * 365.25 days/year * 10000 years",
-
-                              },
-                              "nanos": {
-                                "type": "integer",
-                                "minimum": -999999999,
-                                "maximum": 999999999,
-                                "default": 0,
-                                "description": "Signed fractions of a second at nanosecond resolution of the span of time. Durations less than one second are represented with a 0 `seconds` field and a positive or negative `nanos` field. For durations of one second or more, a non-zero value for the `nanos` field must be of the same sign as the `seconds` field.",
-
-                              }
-                            },
-                            "description": "A Duration represents a signed, fixed-length span of time represented as a count of seconds and fractions of seconds at nanosecond resolution. It is independent of any calendar and concepts like day or month",
+                          "nanos": {
+                            "type": "integer",
+                            "minimum": -2147483648,
+                            "maximum": 2147483647,
+                            "x-primitive": "int32",
 
                           }
-                        ],
+                        },
+
+                      },
+                      "timeZone": {
+                        "title": "TimeZone",
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "x-primitive": "string",
+                            "description": "IANA Time Zone Database time zone.",
+
+                          },
+                          "version": {
+                            "type": "string",
+                            "x-primitive": "string",
+                            "description": "IANA Time Zone Database version number.",
+
+                          }
+                        },
 
                       }
                     },
-                    "description": "Represents civil time (or occasionally physical time).",
 
                   },
                   "production_time": {
-                    "type": "object",
                     "title": "DateTime",
-                    "required": [
-                      "year",
-                      "month",
-                      "day",
-                      "hours",
-                      "minutes",
-                      "seconds",
-                      "nanos"
-                    ],
+                    "type": "object",
                     "properties": {
                       "year": {
                         "type": "integer",
                         "minimum": 0,
                         "maximum": 9999,
+                        "x-primitive": "int32",
                         "description": "Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year",
 
                       },
@@ -1278,6 +1195,7 @@
                         "type": "integer",
                         "minimum": 0,
                         "maximum": 12,
+                        "x-primitive": "int32",
                         "description": "Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.",
 
                       },
@@ -1285,6 +1203,7 @@
                         "type": "integer",
                         "minimum": 0,
                         "maximum": 31,
+                        "x-primitive": "int32",
                         "description": "Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.",
 
                       },
@@ -1292,20 +1211,23 @@
                         "type": "integer",
                         "minimum": 0,
                         "maximum": 23,
-                        "description": "Hours of day in 24 hour format. Should be from 0 to 23",
+                        "x-primitive": "int32",
+                        "description": "Hours of day in 24 hour format.",
 
                       },
                       "minutes": {
                         "type": "integer",
                         "minimum": 0,
                         "maximum": 59,
-                        "description": "Minutes of hour of day",
+                        "x-primitive": "int32",
+                        "description": "Minutes of hour of day.",
 
                       },
                       "seconds": {
                         "type": "integer",
                         "minimum": 0,
                         "maximum": 60,
+                        "x-primitive": "int32",
                         "description": "Seconds of minutes of the time. Must normally be from 0 to 59. An API may allow the value 60 if it allows leap-seconds.",
 
                       },
@@ -1313,61 +1235,51 @@
                         "type": "integer",
                         "minimum": 0,
                         "maximum": 999999999,
+                        "x-primitive": "int32",
                         "description": "Fractions of seconds in nanoseconds.",
 
                       },
-                      "time_offset": {
-                        "oneOf": [
-                          {
-                            "type": "object",
-                            "title": "TimeZone",
-                            "required": [
-                              "id"
-                            ],
-                            "properties": {
-                              "id": {
-                                "type": "string",
-                                "description": "IANA Time Zone Database time zone, e.g. \"America/New_York\".",
-
-                              },
-                              "version": {
-                                "type": "string",
-                                "description": "IANA Time Zone Database version number, e.g. \"2019a\".",
-
-                              }
-                            },
-                            "description": "Represents a time zone from the [IANA Time Zone Database](https://www.iana.org/time-zones).",
+                      "utcOffset": {
+                        "title": "Duration",
+                        "type": "object",
+                        "properties": {
+                          "seconds": {
+                            "type": "integer",
+                            "minimum": -9007199254740991,
+                            "maximum": 9007199254740991,
+                            "x-primitive": "int64",
 
                           },
-                          {
-                            "type": "object",
-                            "title": "Duration",
-                            "properties": {
-                              "seconds": {
-                                "type": "integer",
-                                "minimum": -315576000000,
-                                "maximum": 315576000000,
-                                "default": 0,
-                                "description": "Signed seconds of the span of time. Note: these bounds are computed from: 60 sec/min * 60 min/hr * 24 hr/day * 365.25 days/year * 10000 years",
-
-                              },
-                              "nanos": {
-                                "type": "integer",
-                                "minimum": -999999999,
-                                "maximum": 999999999,
-                                "default": 0,
-                                "description": "Signed fractions of a second at nanosecond resolution of the span of time. Durations less than one second are represented with a 0 `seconds` field and a positive or negative `nanos` field. For durations of one second or more, a non-zero value for the `nanos` field must be of the same sign as the `seconds` field.",
-
-                              }
-                            },
-                            "description": "A Duration represents a signed, fixed-length span of time represented as a count of seconds and fractions of seconds at nanosecond resolution. It is independent of any calendar and concepts like day or month",
+                          "nanos": {
+                            "type": "integer",
+                            "minimum": -2147483648,
+                            "maximum": 2147483647,
+                            "x-primitive": "int32",
 
                           }
-                        ],
+                        },
+
+                      },
+                      "timeZone": {
+                        "title": "TimeZone",
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "x-primitive": "string",
+                            "description": "IANA Time Zone Database time zone.",
+
+                          },
+                          "version": {
+                            "type": "string",
+                            "x-primitive": "string",
+                            "description": "IANA Time Zone Database version number.",
+
+                          }
+                        },
 
                       }
                     },
-                    "description": "Represents civil time (or occasionally physical time).",
 
                   },
                   "stop": {
@@ -1376,35 +1288,47 @@
                     "properties": {
                       "event_id_from": {
                         "title": "Int32Value",
-                        "type": [
-                          "null",
-                          "integer"
-                        ],
-                        "minimum": -2147483648,
-                        "maximum": 2147483647,
-                        "x-primitive": "int32",
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "integer",
+                            "minimum": -2147483648,
+                            "maximum": 2147483647,
+                            "x-primitive": "int32",
+
+                          }
+                        },
+                        "description": "ObjectId",
 
                       },
                       "event_id_to": {
                         "title": "UInt32Value",
-                        "type": [
-                          "null",
-                          "integer"
-                        ],
-                        "minimum": 0,
-                        "maximum": 4294967295,
-                        "x-primitive": "uint32",
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 4294967295,
+                            "x-primitive": "uint32",
+
+                          }
+                        },
+                        "description": "ObjectId",
 
                       },
                       "event_link_properties_id": {
                         "title": "UInt64Value",
-                        "type": [
-                          "null",
-                          "integer"
-                        ],
-                        "minimum": 0,
-                        "maximum": 9007199254740991,
-                        "x-primitive": "uint64",
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 9007199254740991,
+                            "x-primitive": "uint64",
+
+                          }
+                        },
+                        "description": "ObjectId",
 
                       },
                       "min_duration": {
@@ -1415,6 +1339,7 @@
 
                       },
                       "purposes": {
+                        "description": "",
                         "type": "array",
                         "items": {
                           "type": "string",
@@ -1423,14 +1348,6 @@
                         },
 
                       }
-                    },
-                    "required": [],
-                    "tags": {
-                      "event_id_from": 1,
-                      "event_id_to": 2,
-                      "event_link_properties_id": 3,
-                      "min_duration": 10,
-                      "purposes": 11
                     },
 
                   },
@@ -1443,6 +1360,7 @@
                         "minimum": -2147483648,
                         "maximum": 2147483647,
                         "x-primitive": "int32",
+                        "description": "ObjectId",
 
                       },
                       "event_id_to": {
@@ -1450,17 +1368,22 @@
                         "minimum": -2147483648,
                         "maximum": 2147483647,
                         "x-primitive": "int32",
+                        "description": "ObjectId",
 
                       },
                       "event_link_properties_id": {
                         "title": "Int32Value",
-                        "type": [
-                          "null",
-                          "integer"
-                        ],
-                        "minimum": -2147483648,
-                        "maximum": 2147483647,
-                        "x-primitive": "int32",
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "integer",
+                            "minimum": -2147483648,
+                            "maximum": 2147483647,
+                            "x-primitive": "int32",
+
+                          }
+                        },
+                        "description": "ObjectId",
 
                       },
                       "min_duration": {
@@ -1500,16 +1423,6 @@
 
                       }
                     },
-                    "required": [],
-                    "tags": {
-                      "event_id_from": 1,
-                      "event_id_to": 2,
-                      "event_link_properties_id": 3,
-                      "min_duration": 10,
-                      "is_min_duration_calculated": 11,
-                      "is_stop_over": 12,
-                      "fahrstrategie": 13
-                    },
 
                   },
                   "train_run_segment": {
@@ -1521,6 +1434,7 @@
                         "minimum": -2147483648,
                         "maximum": 2147483647,
                         "x-primitive": "int32",
+                        "description": "ObjectId",
 
                       },
                       "event_id_to": {
@@ -1528,17 +1442,22 @@
                         "minimum": -2147483648,
                         "maximum": 2147483647,
                         "x-primitive": "int32",
+                        "description": "ObjectId",
 
                       },
                       "abschnitts_formation_id": {
                         "title": "Int32Value",
-                        "type": [
-                          "null",
-                          "integer"
-                        ],
-                        "minimum": -2147483648,
-                        "maximum": 2147483647,
-                        "x-primitive": "int32",
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "integer",
+                            "minimum": -2147483648,
+                            "maximum": 2147483647,
+                            "x-primitive": "int32",
+
+                          }
+                        },
+                        "description": "ObjectId",
 
                       },
                       "train_category": {
@@ -1566,25 +1485,21 @@
 
                       }
                     },
-                    "required": [],
-                    "tags": {
-                      "event_id_from": 1,
-                      "event_id_to": 2,
-                      "abschnitts_formation_id": 3,
-                      "train_category": 4,
-                      "train_series": 5
-                    },
 
                   },
                   "connection_decision_time": {
                     "title": "Int32Value",
-                    "type": [
-                      "null",
-                      "integer"
-                    ],
-                    "minimum": -2147483648,
-                    "maximum": 2147483647,
-                    "x-primitive": "int32",
+                    "type": "object",
+                    "properties": {
+                      "value": {
+                        "type": "integer",
+                        "minimum": -2147483648,
+                        "maximum": 2147483647,
+                        "x-primitive": "int32",
+
+                      }
+                    },
+                    "description": "Integer",
 
                   },
                   "ahead_of_schedule_strategy": {
@@ -1607,17 +1522,6 @@
 
                   }
                 },
-                "required": [],
-                "tags": {
-                  "id": 1,
-                  "scheduled_time": 3,
-                  "production_time": 4,
-                  "stop": 11,
-                  "movement": 12,
-                  "train_run_segment": 13,
-                  "connection_decision_time": 20,
-                  "ahead_of_schedule_strategy": 21
-                },
 
               },
 
@@ -1628,24 +1532,32 @@
               "properties": {
                 "composition_id": {
                   "title": "Int32Value",
-                  "type": [
-                    "null",
-                    "integer"
-                  ],
-                  "minimum": -2147483648,
-                  "maximum": 2147483647,
-                  "x-primitive": "int32",
+                  "type": "object",
+                  "properties": {
+                    "value": {
+                      "type": "integer",
+                      "minimum": -2147483648,
+                      "maximum": 2147483647,
+                      "x-primitive": "int32",
+
+                    }
+                  },
+                  "description": "ObjectId",
 
                 },
                 "train_run_id": {
                   "title": "Int32Value",
-                  "type": [
-                    "null",
-                    "integer"
-                  ],
-                  "minimum": -2147483648,
-                  "maximum": 2147483647,
-                  "x-primitive": "int32",
+                  "type": "object",
+                  "properties": {
+                    "value": {
+                      "type": "integer",
+                      "minimum": -2147483648,
+                      "maximum": 2147483647,
+                      "x-primitive": "int32",
+
+                    }
+                  },
+                  "description": "ObjectId",
 
                 },
                 "reihenfolge": {
@@ -1662,13 +1574,17 @@
                 },
                 "alast_anzahlwagen_chlor": {
                   "title": "Int32Value",
-                  "type": [
-                    "null",
-                    "integer"
-                  ],
-                  "minimum": -2147483648,
-                  "maximum": 2147483647,
-                  "x-primitive": "int32",
+                  "type": "object",
+                  "properties": {
+                    "value": {
+                      "type": "integer",
+                      "minimum": -2147483648,
+                      "maximum": 2147483647,
+                      "x-primitive": "int32",
+
+                    }
+                  },
+                  "description": "Integer",
 
                 },
                 "formationsdaten_zlr": {
@@ -1692,34 +1608,22 @@
                 },
                 "anzahl_loks": {
                   "title": "Int32Value",
-                  "type": [
-                    "null",
-                    "integer"
-                  ],
-                  "minimum": -2147483648,
-                  "maximum": 2147483647,
-                  "x-primitive": "int32",
+                  "type": "object",
+                  "properties": {
+                    "value": {
+                      "type": "integer",
+                      "minimum": -2147483648,
+                      "maximum": 2147483647,
+                      "x-primitive": "int32",
+
+                    }
+                  },
+                  "description": "Integer",
 
                 }
               },
-              "required": [],
-              "tags": {
-                "composition_id": 1,
-                "train_run_id": 2,
-                "reihenfolge": 3,
-                "umsystem": 4,
-                "alast_anzahlwagen_chlor": 27,
-                "formationsdaten_zlr": 28,
-                "anzahl_loks": 29
-              },
 
             }
-          },
-          "required": [],
-          "tags": {
-            "train_run": 1,
-            "timetable_events": 2,
-            "composition": 3
           },
 
         },

@@ -1,398 +1,399 @@
-// base on https://raw.githubusercontent.com/vipszx/protobuf-jsonschema/master/index.js
+import * as protobuf from 'protobufjs';
+import type {AsyncAPISchema} from '@asyncapi/parser/esm/types';
+import {googleProtoTypes} from './google-types';
+import {Path} from './pathUtils';
+import type {v3} from '@asyncapi/parser/esm/spec-types';
+import {PrimitiveTypes} from './primitive-types';
+import {AsyncAPISchemaDefinition} from '@asyncapi/parser/esm/spec-types/v3';
 
-import { SpecTypesV2 } from '@asyncapi/parser';
-import { GoogleTypes } from './google-types';
-import { AsyncApiTypeMap, PrimitiveTypes } from './primitive-types';
-import { Enum, Message, Schema } from 'protocol-buffers-schema/types';
-
-interface Root {
-  definitions: AsyncApiTypeMap;
-  used: {
-    [key: string]: {
-      base: SpecTypesV2.AsyncAPISchemaDefinition;
-      key: string;
-    };
-  };
-}
-
-interface InternalHavingId {
-  id: string;
-}
-
-interface InternalEnum extends Enum, InternalHavingId {}
-
-interface InternalMessage extends Message, InternalHavingId {}
-
-interface InternalSchema extends Schema, InternalHavingId {
-  enums: InternalEnum[];
-  messages: InternalMessage[];
-}
+const ROOT_FILENAME = 'root';
+const COMMENT_ROOT_NODE = '@RootNode';
+const COMMENT_EXAMPLE = '@Example';
 
 class Proto2JsonSchema {
-  private readonly protoBuffImports = [
-    'google/protobuf/duration.proto',
-    'google/protobuf/empty.proto',
-    'google/protobuf/timestamp.proto',
-    'google/protobuf/wrappers.proto',
-
-    // https://github.com/googleapis/googleapis/tree/master/google/type
-    'google/type/calendar_period.proto',
-    'google/type/color.proto',
-    'google/type/date.proto',
-    'google/type/datetime.proto',
-    'google/type/dayofweek.proto',
-    'google/type/decimal.proto',
-    'google/type/expr.proto',
-    'google/type/fraction.proto',
-    'google/type/interval.proto',
-    'google/type/latlng.proto',
-    'google/type/localized_text.proto',
-    'google/type/money.proto',
-    'google/type/month.proto',
-    'google/type/phone_number.proto',
-    'google/type/postal_address.proto',
-    'google/type/quaternion.proto',
-    'google/type/timeofday.proto',
-  ];
-
-  private messages: {
-    [key: string]: InternalMessage;
-  } = {};
-  private enums: {
-    [key: string]: InternalEnum;
-  } = {};
-
-  private options: Proto2JsonSchemaOptions;
-  private schema: InternalSchema;
-  private root: Root = {
-    definitions: {},
-    used: {},
+  private root = new protobuf.Root();
+  private protoParseOptions = {
+    keepCase: true,
+    alternateCommentMode: true
   };
 
-  constructor(schema: Schema, options: Proto2JsonSchemaOptions) {
-    const _options = Object.assign(
-      {
-        getOne: false, // return just the single root object. Throws error if there are more than one root object. Will return only this items. insted of a list of items.
-        forceInline: false, // force inlining, even if sub model is used multiple times.
-        model: undefined, // Get a model from a single object.
-      },
-      options
-    );
-
-    if (_options.getOne) {
-      _options.forceInline = true;
-    }
-
-    this.options = _options;
-    this.schema = this.convert(schema);
+  constructor(rawSchema: string) {
+    this.process(ROOT_FILENAME, rawSchema);
   }
 
-  private convert(schema: Schema): InternalSchema {
-    this.visit(schema as InternalSchema, schema.package || '');
+  private process(filename: string, source: string | ProtoAsJson) {
+    if (!isString(source)) {
+      const srcObject = source as ProtoAsJson;
+      this.root.setOptions(srcObject.options);
+      this.root.addJSON(srcObject.nested);
+    } else {
+      const srcStr = source as string;
+      (protobuf.parse as any).filename = filename;
+      const parsed = protobuf.parse(srcStr, this.root, this.protoParseOptions);
+      let i = 0;
+      if (parsed.imports) {
+        for (; i < parsed.imports.length; ++i) {
+          this.fetch(parsed.imports[i], filename, false);
+        }
+      }
 
-    for (const i of schema.imports) {
-      if (this.protoBuffImports.indexOf(i) !== -1) {
-        // Well known types, can be handled.
+      if (parsed.weakImports) {
+        for (i = 0; i < parsed.weakImports.length; ++i) {
+          this.fetch(parsed.weakImports[i], filename, true);
+        }
+      }
+    }
+  }
+
+  // Bundled definition existence checking
+  private getBundledFileName(filename: string): string | null {
+    let idx = filename.lastIndexOf('google/protobuf/');
+    if (idx > -1) {
+      const shortName = filename.substring(idx);
+      if (shortName in protobuf.common) {
+        return shortName;
+      }
+    }
+
+    idx = filename.lastIndexOf('google/type/');
+    if (idx > -1) {
+      const shortName = filename.substring(idx);
+      if (shortName in googleProtoTypes) {
+        return shortName;
+      }
+    }
+
+    return null;
+  }
+
+  private fetch(filename: string, parentFilename: string, weak: boolean) {
+    filename = this.getBundledFileName(filename) || filename;
+
+    // Skip if already loaded / attempted
+    if (this.root.files.indexOf(filename) > -1) {
+      return;
+    }
+    this.root.files.push(filename);
+
+    // Shortcut bundled definitions
+    if (filename in protobuf.common) {
+      // @ts-ignore
+      this.process(filename, protobuf.common[filename] as ProtoAsJson);
+      return;
+    }
+
+    if (filename in googleProtoTypes) {
+      this.process(filename, googleProtoTypes[filename] as ProtoAsJson);
+      return;
+    }
+
+    filename = Path.resolve(filename, parentFilename);
+
+    if (!weak) {
+      throw new Error('Imports are currently not implemented');
+    }
+    /*
+    // Otherwise fetch from disk or network
+    let source: string;
+    try {
+      source = util.fs.readFileSync(filename).toString('utf8');
+    } catch (err) {
+      if (!weak) {
+        throw err;
+      }
+
+      return;
+    }
+    this.process(filename, source);
+    */
+  }
+
+  public compile(): AsyncAPISchema {
+    this.root.resolveAll();
+
+    const rootItemCandidates = this.resolveByFilename(ROOT_FILENAME, this.root.nested as ProtoItems);
+    const rootItem = this.findRootItem(rootItemCandidates);
+
+    return this.compileMessage(rootItem);
+  }
+
+  private resolveByFilename(filename: string, items: ProtoItems) {
+    const hits: protobuf.Type[] = [];
+    for (const itemName in items) {
+      const item = items[itemName] as any;
+      if (item.filename === filename && item instanceof protobuf.Type) {
+        hits.push(item);
+      }
+
+      if (item.nested) {
+        hits.push(...this.resolveByFilename(filename, item.nested));
+      }
+    }
+
+    return hits;
+  }
+
+  // eslint-disable-next-line sonarjs/cognitive-complexity
+  private findRootItem(candidates: protobuf.Type[]): protobuf.Type {
+    const usedTypes = new Map<string, Set<string>>();
+    for (const candidate of candidates) {
+      for (const fieldName in candidate.fields) {
+        if (!usedTypes.has(candidate.fields[fieldName].type)) {
+          usedTypes.set(
+            candidate.fields[fieldName].type,
+            new Set<string>([candidate.name])
+          );
+        } else {
+          usedTypes.get(candidate.fields[fieldName].type)?.add(candidate.name);
+        }
+      }
+    }
+
+    const rootTypes: protobuf.Type[] = [];
+    for (const candidate of candidates) {
+      const isUsedBy = usedTypes.get(candidate.name);
+      if (isUsedBy && (isUsedBy?.size > 1 || !isUsedBy.has(candidate.name))) {
+        // This type was used in another type. And not only by itself.
         continue;
       }
 
-      throw new Error(`Protobuff imports are not supported: ${i}`);
+      rootTypes.push(candidate);
     }
 
-    return schema as InternalSchema;
-  }
-
-  /**
-   * Visits a schema in the tree, and assigns messages and enums to the lookup tables.
-   */
-  private visit(schema: InternalSchema, prefix: string) {
-    const that = this;
-    if (schema.enums) {
-      schema.enums.forEach((e) => {
-        e.id = prefix + (prefix ? '.' : '') + (e.id || e.name);
-        that.enums[e.id] = e;
-        that.visit(e as any, e.id);
-      }, this);
+    if (rootTypes.length < 1) {
+      throw new Error('Not found a root proto messages');
     }
 
-    if (schema.messages) {
-      schema.messages.forEach((m) => {
-        m.id = prefix + (prefix ? '.' : '') + (m.id || m.name);
-        that.messages[m.id] = m;
-        that.visit(m as any, m.id);
-      }, this);
-    }
-  }
-
-  /**
-   * Top level compile method. If a type name is provided,
-   * compiles just that type and its dependencies. Otherwise,
-   * compiles all types in the file.
-   */
-  public compile(): AsyncApiTypeMap | SpecTypesV2.AsyncAPISchemaObject {
-    const that = this;
-
-    this.root = {
-      definitions: {},
-      used: {},
-    };
-
-    if (this.options.getOne) {
-      // Get the single defined root object
-      const messagesNotUsedInOthers = this.findMessagesNotUsedInOthers();
-      if (messagesNotUsedInOthers.length > 1) {
-        throw new Error(
-          `Option getOne is set but there are multple proto messages: ${messagesNotUsedInOthers.join(
-            ','
-          )}`
-        );
-      }
-
-      if (messagesNotUsedInOthers.length < 1) {
-        throw new Error('Option getOne is set but there are no proto messages');
-      }
-
-      this.options.model = messagesNotUsedInOthers[0];
+    if (rootTypes.length === 1) {
+      return rootTypes[0];
     }
 
-    if (this.options.model) {
-      this.resolve(this.options.model, '');
-    } else {
-      this.schema.messages.forEach((message) => {
-        that.resolve(message.id, '');
-      }, this);
-
-      this.schema.enums.forEach((e) => {
-        that.resolve(e.id, '');
-      }, this);
-    }
-
-    if (this.options.model && this.options.forceInline) {
-      return this.root.definitions[this.options.model];
-    }
-
-    return this.root.definitions;
-  }
-
-  /**
-   * Resolves a type name at the given path in the schema tree.
-   * Returns a compiled JSON schema.
-   */
-  private resolve(
-    type: string,
-    from: string,
-    base?: SpecTypesV2.AsyncAPISchemaDefinition | undefined,
-    key?: string | undefined
-  ) {
-    if (PrimitiveTypes.PRIMITIVE_TYPES[type]) {
-      return PrimitiveTypes.PRIMITIVE_TYPES[type];
-    }
-
-    if (GoogleTypes.GOOGLE_API_TYPES[type]) {
-      return GoogleTypes.GOOGLE_API_TYPES[type];
-    }
-
-    if (GoogleTypes.WELL_KNOWN_TYPES[type]) {
-      return GoogleTypes.WELL_KNOWN_TYPES[type];
-    }
-
-    for (const id of this.possibleIds(type, from)) {
-      const res = this.resolveLevel(id, base, key);
-      if (res) {
-        return res;
+    for (const rootType of rootTypes) {
+      if (rootType.comment && rootType.comment.indexOf(COMMENT_ROOT_NODE) !== -1) {
+        return rootType;
       }
     }
 
-    throw new Error(`Could not resolve ${type}`);
-  }
+    const allRootTypes = rootTypes
+      .map(rootType => rootType.name)
+      .join(', ');
 
-  private possibleIds(type: string, from: string): string[] {
-    const ids = [];
-    const lookup = from.split('.');
-    for (let i = lookup.length; i >= 0; i--) {
-      ids.push(lookup.slice(0, i).concat(type).join('.'));
-    }
-    return ids;
-  }
-
-  private resolveLevel(
-    id: string,
-    base: SpecTypesV2.AsyncAPISchemaDefinition | undefined,
-    key: string | undefined
-  ) {
-    // If this type was used before, move it from inline to a reusable definition
-    if (
-      this.root.used[id] &&
-      !this.root.definitions[id] &&
-      !this.options.forceInline
-    ) {
-      const k = this.root.used[id];
-      this.root.definitions[id] = k.base[k.key];
-      k.base[k.key] = this.root.definitions[id];
-    }
-
-    // If already defined, reuse
-    if (this.root.definitions[id]) {
-      return this.root.definitions[id];
-    }
-
-    // Compile the message or enum
-    let res;
-    if (this.messages[id]) {
-      res = this.compileMessage(this.messages[id]);
-    }
-
-    if (this.enums[id]) {
-      res = this.compileEnum(this.enums[id]);
-    }
-
-    if (res) {
-      // If used, or at the root level, make a definition
-      if (this.root.used[id] || !base) {
-        this.root.definitions[id] = res;
-        res = this.root.definitions[id];
-      }
-
-      // Mark as used if not an Enum
-      if (base && key && !this.root.used[id] && !this.enums[id]) {
-        this.root.used[id] = {
-          base,
-          key,
-        };
-      }
-
-      return res;
-    }
-  }
-
-  /**
-   * Compiles and assigns a type
-   */
-  private build(
-    type: string,
-    from: string,
-    base: SpecTypesV2.AsyncAPISchemaDefinition | undefined,
-    key: string | undefined
-  ): void {
-    const res = this.resolve(type, from, base, key);
-    if (base && key) {
-      base[key] = res;
-    }
-  }
-
-  /**
-   * Compiles a protobuf enum to JSON schema
-   */
-  private compileEnum(
-    enumType: InternalEnum
-  ): SpecTypesV2.AsyncAPISchemaDefinition {
-    const enumMapping: {[key: string]: number} = {};
-    for (const enumKey of Object.keys(enumType.values)) {
-      enumMapping[enumKey] = enumType.values[enumKey].value;
-    }
-    
-    return {
-      title: enumType.name,
-      type: 'string',
-      enum: Object.keys(enumType.values),
-      'x-enum-mapping': enumMapping
-    };
+    throw new Error(`Found more than one root proto messages: ${allRootTypes}`);
   }
 
   /**
    * Compiles a protobuf message to JSON schema
    */
-  private compileMessage(
-    message: InternalMessage
-  ): SpecTypesV2.AsyncAPISchemaDefinition {
-    const res: SpecTypesV2.AsyncAPISchemaDefinition = {
-      title: message.name,
+  // eslint-disable-next-line sonarjs/cognitive-complexity
+  private compileMessage(item: protobuf.Type): AsyncAPISchemaDefinition {
+    const obj: v3.AsyncAPISchemaDefinition = {
+      title: item.name,
       type: 'object',
-      properties: {},
       required: [],
-      tags: {},
+      properties: {},
     };
 
-    const that = this;
-
-    message.fields.forEach((field) => {
-      if (field.map) {
-        if (field.map.from !== 'string') {
-          throw new Error(
-            `Can only use strings as map keys at ${message.id} ${field.name}`
-          );
-        }
-
-        // eslint-disable-next-line  @typescript-eslint/no-non-null-assertion
-        const f = (res.properties![field.name] = {
-          type: 'object',
-          additionalProperties: false,
-        });
-
-        that.build(field.map.to, message.id, f, 'additionalProperties');
-      } else if (field.repeated) {
-        // eslint-disable-next-line  @typescript-eslint/no-non-null-assertion
-        const f = (res.properties![field.name] = {
-          type: 'array',
-          items: [],
-        });
-
-        that.build(field.type, message.id, f, 'items');
-      } else {
-        that.build(field.type, message.id, res.properties, field.name);
-      }
-
+    for (const fieldName in item.fields) {
+      const field = item.fields[fieldName];
       if (field.required) {
+        obj.required?.push(fieldName);
+      }
+
+      if (field.repeated) {
         // eslint-disable-next-line  @typescript-eslint/no-non-null-assertion
-        res.required!.push(field.name);
-      }
+        obj.properties![field.name] = {
+          description: this.extractDescription(field.comment) || '',
+          type: 'array',
+          items: this.compileField(field, item),
+        };
 
-      if (field.tag) {
-        res.tags[field.name] = field.tag;
-      }
-    }, this);
-
-    return res;
-  }
-
-  private findMessagesNotUsedInOthers(): string[] {
-    const complexTypes = [];
-    for (const message of this.schema.messages) {
-      complexTypes.push(message.id);
-    }
-
-    const messagesUsedInOtherMessages = [];
-    for (const message of this.schema.messages) {
-      for (const field of message.fields) {
-        for (const typePath of this.possibleIds(field.type, message.id)) {
-          if (
-            complexTypes.indexOf(typePath) !== -1 && // Is complex type and not a sub message
-            typePath !== message.id // filter recursions with own type
-          ) {
-            messagesUsedInOtherMessages.push(typePath);
+        if (field.comment) {
+          const minItemsPattern = /@maxItems\\s(\\d+?)/i;
+          const maxItemsPattern = /@maxItems\\s(\\d+?)/i;
+          let m: RegExpExecArray | null;
+          if ((m = minItemsPattern.exec(field.comment)) !== null) {
+            obj.minItems = parseFloat(m[1]);
+          }
+          if ((m = maxItemsPattern.exec(field.comment)) !== null) {
+            obj.maxItems = parseFloat(m[1]);
           }
         }
+      } else {
+        // eslint-disable-next-line  @typescript-eslint/no-non-null-assertion
+        obj.properties![field.name] = this.compileField(field, item);
       }
     }
 
-    const messagesNotUsedInOtherMessages = [];
-    for (const message of this.schema.messages) {
-      if (messagesUsedInOtherMessages.indexOf(message.id) === -1) {
-        messagesNotUsedInOtherMessages.push(message.id);
+    // @ts-ignore
+    if (obj.required?.length < 1) {
+      delete obj.required;
+    }
+
+    return obj;
+  }
+
+  /**
+   * Compiles a protobuf enum to JSON schema
+   */
+  private compileEnum(field: protobuf.Enum): v3.AsyncAPISchemaDefinition {
+    const enumMapping: { [key: string]: number } = {};
+    for (const enumKey of Object.keys(field.values)) {
+      enumMapping[enumKey] = field.values[enumKey];
+    }
+
+    const obj: v3.AsyncAPISchemaDefinition = {
+      title: field.name,
+      type: 'string',
+      enum: Object.keys(field.values),
+      'x-enum-mapping': enumMapping
+    };
+
+    this.addDefaultFromCommentAnnotations(obj, field.comment);
+
+    return obj;
+  }
+
+  private compileField(field: protobuf.Field, parentItem: protobuf.Type): v3.AsyncAPISchemaDefinition {
+    let obj: v3.AsyncAPISchemaDefinition = {};
+
+    if (PrimitiveTypes.PRIMITIVE_TYPES[field.type.toLowerCase()]) {
+      obj = Object.assign(obj, PrimitiveTypes.PRIMITIVE_TYPES[field.type.toLowerCase()]);
+      obj['x-primitive'] = field.type;
+    } else {
+      const item = parentItem.lookupTypeOrEnum(field.type);
+      if (!item) {
+        throw new Error(`Unable to resolve type "${field.type}" @ ${parentItem.fullName}`);
+      }
+
+      // noinspection SuspiciousTypeOfGuard
+      if (item instanceof protobuf.Enum) {
+        obj = Object.assign(obj, this.compileEnum(item));
+      } else {
+        obj = Object.assign(obj, this.compileMessage(item));
       }
     }
 
-    return messagesNotUsedInOtherMessages;
+    this.addValidatorFromCommentAnnotations(obj, field.comment);
+    this.addDefaultFromCommentAnnotations(obj, field.comment);
+
+    const desc = this.extractDescription(field.comment);
+    if (desc !== null) {
+      obj.description = desc;
+    }
+
+    const examples = this.extractExamples(field.comment);
+    if (examples !== null) {
+      obj.examples = examples;
+    }
+
+    return obj;
+  }
+
+  private extractDescription(comment: string | null): string | null {
+    if (!comment || comment?.length < 1) {
+      return null;
+    }
+
+    comment = comment
+      .replace(new RegExp(`\\s{0,15}${COMMENT_EXAMPLE}\\s{0,15}(.+)`, 'ig'), '')
+      .replace(new RegExp(`\\s{0,15}${COMMENT_ROOT_NODE}`, 'ig'), '')
+      .replace(new RegExp('\\s{0,15}@(Min|Max|Pattern|Minimum|Maximum|ExclusiveMinimum|ExclusiveMaximum|MultipleOf|MaxLength|MinLength|MaxItems|MinItems|Default)\\s{0,15}[\\d.]{1,20}', 'ig'), '')
+      .trim();
+
+    if (comment.length < 1) {
+      return null;
+    }
+
+    return comment;
+  }
+
+  private extractExamples(comment: string | null): string[] | null {
+    if (!comment) {
+      return null;
+    }
+
+    const examples: string[] = [];
+
+    let m: RegExpExecArray | null;
+    const examplePattern = new RegExp(`\\s*${COMMENT_EXAMPLE}\\s(.+)$`, 'i');
+    for (const line of comment.split('\n')) {
+      if ((m = examplePattern.exec(line)) !== null) {
+        // The result can be accessed through the `m`-variable.
+        examples.push(m[1].trim());
+      }
+    }
+
+    if (examples.length < 1) {
+      return null;
+    }
+
+    return examples;
+  }
+
+  /* eslint-disable security/detect-unsafe-regex */
+  private addValidatorFromCommentAnnotations(obj: AsyncAPISchemaDefinition, comment: string | null) {
+    if (comment === null || comment?.length < 1) {
+      return;
+    }
+
+    const patternMin = /@Min\s([+-]?\d+(\.\d+)?)/i;
+    const patternMax = /@Max\s([+-]?\d+(\.\d+)?)/i;
+    const patternPattern = /@Pattern\\s([^\n]+)/i;
+
+    const patterns = new Map<string, RegExp>([
+      ['minimum', /@Minimum\\s([+-]?\\d+(\\.\\d+)?)/i],
+      ['maximum', /@Maximum\\s([+-]?\\d+(\\.\\d+)?)/i],
+      ['exclusiveMinimum', /@ExclusiveMinimum\\s(\\d+(\\.\\d+)?)/i],
+      ['exclusiveMaximum', /@ExclusiveMaximum\\s(\\d+(\\.\\d+)?)/i],
+      ['multipleOf', /@MultipleOf\\s(\\d+(\\.\\d+)?)/i],
+      ['maxLength', /@MultipleOf\\s(\\d+(\\.\\d+)?)/i],
+      ['minLength', /@MultipleOf\\s(\\d+(\\.\\d+)?)/i],
+    ]);
+
+    let m: RegExpExecArray | null;
+
+    if ((m = patternMin.exec(comment)) !== null) {
+      obj.minimum = parseFloat(m[1]);
+    }
+
+    if ((m = patternMax.exec(comment)) !== null) {
+      obj.maximum = parseFloat(m[1]);
+    }
+
+    if ((m = patternPattern.exec(comment)) !== null) {
+      obj.pattern = m[1];
+    }
+
+    for (const e of patterns.entries()) {
+      if ((m = e[1].exec(comment)) !== null) {
+        obj[e[0]] = parseFloat(m[1]);
+      }
+    }
+  }
+  /* eslint-enable security/detect-unsafe-regex */
+
+  private addDefaultFromCommentAnnotations(obj: AsyncAPISchemaDefinition, comment: string | null) {
+    if (comment === null || comment?.length < 1) {
+      return;
+    }
+
+    const defaultPattern = /@Default\\s([^\n]+)/i;
+    let m: RegExpExecArray | null;
+
+    if ((m = defaultPattern.exec(comment)) !== null) {
+      obj.default = m[1];
+    }
   }
 }
 
-export interface Proto2JsonSchemaOptions {
-  getOne?: boolean; // return just the single root object. Throws error if there are more than one root object. Will return only this items. insted of a list of items.
-  forceInline?: boolean; // force inlining, even if sub model is used multiple times.
-  model?: string; // Get a model from a single object.
-}
-
-export function protoj2jsonSchema(protoSchema: Schema, options: Proto2JsonSchemaOptions): AsyncApiTypeMap | SpecTypesV2.AsyncAPISchemaObject {
-  const compiler = new Proto2JsonSchema(protoSchema, options);
+export function proto2jsonSchema(rawSchema: string): AsyncAPISchema {
+  const compiler = new Proto2JsonSchema(rawSchema);
   return compiler.compile();
 }
+
+function isString(value: any): boolean {
+  return typeof value === 'string' || value instanceof String;
+}
+
+type ProtoAsJson = { [k: string]: any };
+type ProtoItems = { [k: string]: protobuf.ReflectionObject };

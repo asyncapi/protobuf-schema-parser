@@ -1,7 +1,7 @@
-import type { SpecTypesV2 } from '@asyncapi/parser';
+import {AsyncAPISchemaDefinition} from '@asyncapi/parser/esm/spec-types/v3';
 
 export interface AsyncApiTypeMap {
-  [key: string]: SpecTypesV2.AsyncAPISchemaObject;
+  [key: string]: AsyncAPISchemaDefinition;
 }
 
 /**
