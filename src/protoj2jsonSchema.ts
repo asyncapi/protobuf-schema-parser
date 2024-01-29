@@ -286,10 +286,16 @@ class Proto2JsonSchema {
   private compileEnum(
     enumType: InternalEnum
   ): SpecTypesV2.AsyncAPISchemaDefinition {
+    const enumMapping: {[key: string]: number} = {};
+    for (const enumKey of Object.keys(enumType.values)) {
+      enumMapping[enumKey] = enumType.values[enumKey].value;
+    }
+    
     return {
       title: enumType.name,
       type: 'string',
       enum: Object.keys(enumType.values),
+      'x-enum-mapping': enumMapping
     };
   }
 
