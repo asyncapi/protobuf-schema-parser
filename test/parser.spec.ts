@@ -7,7 +7,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { ProtoBuffSchemaParser } from '../src';
 
-function stripAsyncApiTags(json) {
+function stripAsyncApiTags(json: string) {
   if (!json) {
     return json;
   }

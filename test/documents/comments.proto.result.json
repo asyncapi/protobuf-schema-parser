@@ -12,10 +12,18 @@
           "payload": {
             "title": "Line",
             "type": "object",
+            "required": [
+              "start",
+              "end"
+            ],
             "properties": {
               "start": {
                 "title": "Point",
                 "type": "object",
+                "required": [
+                  "x",
+                  "y"
+                ],
                 "properties": {
                   "x": {
                     "type": "integer",
@@ -36,21 +44,16 @@
                     "x-primitive": "string",
 
                   }
-                },
-                "required": [
-                  "x",
-                  "y"
-                ],
-                "tags": {
-                  "x": 1,
-                  "y": 2,
-                  "label": 3
                 },
 
               },
               "end": {
                 "title": "Point",
                 "type": "object",
+                "required": [
+                  "x",
+                  "y"
+                ],
                 "properties": {
                   "x": {
                     "type": "integer",
@@ -71,15 +74,6 @@
                     "x-primitive": "string",
 
                   }
-                },
-                "required": [
-                  "x",
-                  "y"
-                ],
-                "tags": {
-                  "x": 1,
-                  "y": 2,
-                  "label": 3
                 },
 
               },
@@ -88,15 +82,6 @@
                 "x-primitive": "string",
 
               }
-            },
-            "required": [
-              "start",
-              "end"
-            ],
-            "tags": {
-              "start": 1,
-              "end": 2,
-              "label": 3
             },
 
           },
@@ -113,10 +98,18 @@
         "payload": {
           "title": "Line",
           "type": "object",
+          "required": [
+            "start",
+            "end"
+          ],
           "properties": {
             "start": {
               "title": "Point",
               "type": "object",
+              "required": [
+                "x",
+                "y"
+              ],
               "properties": {
                 "x": {
                   "type": "integer",
@@ -137,21 +130,16 @@
                   "x-primitive": "string",
 
                 }
-              },
-              "required": [
-                "x",
-                "y"
-              ],
-              "tags": {
-                "x": 1,
-                "y": 2,
-                "label": 3
               },
 
             },
             "end": {
               "title": "Point",
               "type": "object",
+              "required": [
+                "x",
+                "y"
+              ],
               "properties": {
                 "x": {
                   "type": "integer",
@@ -172,15 +160,6 @@
                   "x-primitive": "string",
 
                 }
-              },
-              "required": [
-                "x",
-                "y"
-              ],
-              "tags": {
-                "x": 1,
-                "y": 2,
-                "label": 3
               },
 
             },
@@ -189,15 +168,6 @@
               "x-primitive": "string",
 
             }
-          },
-          "required": [
-            "start",
-            "end"
-          ],
-          "tags": {
-            "start": 1,
-            "end": 2,
-            "label": 3
           },
 
         },
