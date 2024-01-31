@@ -126,20 +126,20 @@ message Point {
 
 ### Per field annotation
 
-| annotation         	 | description 	                                                                                                      |
-|----------------------|:-------------------------------------------------------------------------------------------------------------------|
-| @Example  	          | json schema examples keyword. Can exists multiple times.	                                                          |
-| @Min or @Minimum     | json schema [numeric validator](https://json-schema.org/understanding-json-schema/reference/numeric#range)	        |
-| @Max or @Maximum     | json schema [numeric validator](https://json-schema.org/understanding-json-schema/reference/numeric#range)         |
-| @Pattern             | json scheme [string validator](https://json-schema.org/understanding-json-schema/reference/string#regexp)	         |
-| @ExclusiveMinimum    | json schema [numeric validator](https://json-schema.org/understanding-json-schema/reference/numeric#range)         |
-| @ExclusiveMaximum    | json schema [numeric validator](https://json-schema.org/understanding-json-schema/reference/numeric#range)	        |
-| @MultipleOf          | json schema [numeric validator](https://json-schema.org/understanding-json-schema/reference/numeric#multiples)   	 |
-| @MinLength           | json scheme [string validator](https://json-schema.org/understanding-json-schema/reference/string#length)          |
-| @MaxLength           | json scheme [string validator](https://json-schema.org/understanding-json-schema/reference/string#length)          |
-| @MinItems            | json scheme [array validator](https://json-schema.org/understanding-json-schema/reference/array#length)	           |
-| @MaxItems            | json scheme [array validator](https://json-schema.org/understanding-json-schema/reference/array#length)		          |
-| @Default             | json schema [default value](https://opis.io/json-schema/1.x/default-value.html)	                                   |
+| annotation         	 | description 	                                                                                                                        |
+|----------------------|:-------------------------------------------------------------------------------------------------------------------------------------|
+| @Example  	          | json schema examples keyword. Can exists multiple times. If used with an complex type, an single lines json object hast to be used.	 |
+| @Min or @Minimum     | json schema [numeric validator](https://json-schema.org/understanding-json-schema/reference/numeric#range)	                          |
+| @Max or @Maximum     | json schema [numeric validator](https://json-schema.org/understanding-json-schema/reference/numeric#range)                           |
+| @Pattern             | json scheme [string validator](https://json-schema.org/understanding-json-schema/reference/string#regexp)	                           |
+| @ExclusiveMinimum    | json schema [numeric validator](https://json-schema.org/understanding-json-schema/reference/numeric#range)                           |
+| @ExclusiveMaximum    | json schema [numeric validator](https://json-schema.org/understanding-json-schema/reference/numeric#range)	                          |
+| @MultipleOf          | json schema [numeric validator](https://json-schema.org/understanding-json-schema/reference/numeric#multiples)   	                   |
+| @MinLength           | json scheme [string validator](https://json-schema.org/understanding-json-schema/reference/string#length)                            |
+| @MaxLength           | json scheme [string validator](https://json-schema.org/understanding-json-schema/reference/string#length)                            |
+| @MinItems            | json scheme [array validator](https://json-schema.org/understanding-json-schema/reference/array#length)	                             |
+| @MaxItems            | json scheme [array validator](https://json-schema.org/understanding-json-schema/reference/array#length)		                            |
+| @Default             | json schema [default value](https://opis.io/json-schema/1.x/default-value.html)	                                                     |
 
 ### Per message annotation
 
