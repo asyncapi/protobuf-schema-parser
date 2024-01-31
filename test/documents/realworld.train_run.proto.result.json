@@ -144,6 +144,16 @@
 
                       }
                     },
+                    "default": {
+                      "seconds": 946681200,
+                      "nanos": 0
+                    },
+                    "examples": [
+                      {
+                        "seconds": 1706685920,
+                        "nanos": 0
+                      }
+                    ],
 
                   },
                   "composition": {
@@ -958,6 +968,16 @@
 
                     }
                   },
+                  "default": {
+                    "seconds": 946681200,
+                    "nanos": 0
+                  },
+                  "examples": [
+                    {
+                      "seconds": 1706685920,
+                      "nanos": 0
+                    }
+                  ],
 
                 },
                 "composition": {

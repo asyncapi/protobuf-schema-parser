@@ -9,6 +9,7 @@ import {AsyncAPISchemaDefinition} from '@asyncapi/parser/esm/spec-types/v3';
 const ROOT_FILENAME = 'root';
 const COMMENT_ROOT_NODE = '@RootNode';
 const COMMENT_EXAMPLE = '@Example';
+const COMMENT_DEFAULT = '@Default';
 
 class Proto2JsonSchema {
   private root = new protobuf.Root();
@@ -296,8 +297,9 @@ class Proto2JsonSchema {
 
     comment = comment
       .replace(new RegExp(`\\s{0,15}${COMMENT_EXAMPLE}\\s{0,15}(.+)`, 'ig'), '')
+      .replace(new RegExp(`\\s{0,15}${COMMENT_DEFAULT}\\s{0,15}(.+)`, 'ig'), '')
       .replace(new RegExp(`\\s{0,15}${COMMENT_ROOT_NODE}`, 'ig'), '')
-      .replace(new RegExp('\\s{0,15}@(Min|Max|Pattern|Minimum|Maximum|ExclusiveMinimum|ExclusiveMaximum|MultipleOf|MaxLength|MinLength|MaxItems|MinItems|Default)\\s{0,15}[\\d.]{1,20}', 'ig'), '')
+      .replace(new RegExp('\\s{0,15}@(Min|Max|Pattern|Minimum|Maximum|ExclusiveMinimum|ExclusiveMaximum|MultipleOf|MaxLength|MinLength|MaxItems|MinItems)\\s{0,15}[\\d.]{1,20}', 'ig'), '')
       .trim();
 
     if (comment.length < 1) {
@@ -307,19 +309,19 @@ class Proto2JsonSchema {
     return comment;
   }
 
-  private extractExamples(comment: string | null): string[] | null {
+  private extractExamples(comment: string | null): (string|ProtoAsJson)[] | null {
     if (!comment) {
       return null;
     }
 
-    const examples: string[] = [];
+    const examples: (string|ProtoAsJson)[] = [];
 
     let m: RegExpExecArray | null;
     const examplePattern = new RegExp(`\\s*${COMMENT_EXAMPLE}\\s(.+)$`, 'i');
     for (const line of comment.split('\n')) {
       if ((m = examplePattern.exec(line)) !== null) {
         // The result can be accessed through the `m`-variable.
-        examples.push(m[1].trim());
+        examples.push(tryParseToObject(m[1].trim()));
       }
     }
 
@@ -376,12 +378,11 @@ class Proto2JsonSchema {
     if (comment === null || comment?.length < 1) {
       return;
     }
-
-    const defaultPattern = /@Default\\s([^\n]+)/i;
+    const defaultPattern = new RegExp(`\\s*${COMMENT_DEFAULT}\\s(.+)$`, 'i');
     let m: RegExpExecArray | null;
 
     if ((m = defaultPattern.exec(comment)) !== null) {
-      obj.default = m[1];
+      obj.default = tryParseToObject(m[1]);
     }
   }
 }
@@ -393,6 +394,21 @@ export function proto2jsonSchema(rawSchema: string): AsyncAPISchema {
 
 function isString(value: any): boolean {
   return typeof value === 'string' || value instanceof String;
+}
+
+function tryParseToObject(value: string): string | ProtoAsJson {
+  if (value.charAt(0) === '{') {
+    try {
+      const json = JSON.parse(value);
+      if (json) {
+        return  json;
+      }
+    } catch (_) {
+      // Ignored error, seams not to be a valid json. Maybe just an example starting with an { but is not a json.
+    }
+  }
+
+  return value;
 }
 
 type ProtoAsJson = { [k: string]: any };

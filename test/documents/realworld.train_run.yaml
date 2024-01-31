@@ -47,6 +47,10 @@ components:
             string zugnummer = 4;
             string infrastruktur_netz = 5;
             PeriodMsg object_period = 6;
+            /*
+             * @Example { "seconds": 1706685920, "nanos": 0 }
+             * @Default { "seconds": 946681200, "nanos": 0 }
+             */
             google.protobuf.Duration dr = 7;
             CompositionMsg composition = 8;
         }
