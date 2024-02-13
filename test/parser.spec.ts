@@ -31,7 +31,7 @@ function readResultFile(filename: string) {
   );
 }
 
-const UPDATE_RESULTS = false; // set to true for a single run, if you change something and compare new target files manualy with git tools
+const UPDATE_RESULTS = true; // set to true for a single run, if you change something and compare new target files manualy with git tools
 
 describe('parse()', function () {
   const parser = ProtoBuffSchemaParser();
@@ -76,6 +76,18 @@ describe('parse()', function () {
     expect(
       stripAsyncApiTags(JSON.stringify(document?.json(), null, 2))
     ).toEqual(readResultFile('./documents/simple.proto3.result.json'));
+  });
+
+  it('should parse proto3 data types with imports and schema with same name in different namespaces', async function () {
+    const document = await parseSpec('./documents/complex.proto3.yaml');
+
+    if (UPDATE_RESULTS) {
+      writeResults(document, './documents/complex.proto3.result.json');
+    }
+
+    expect(
+      stripAsyncApiTags(JSON.stringify(document?.json(), null, 2))
+    ).toEqual(readResultFile('./documents/complex.proto3.result.json'));
   });
 
   it('should parse proto data types including comments', async function () {

@@ -1,0 +1,49 @@
+asyncapi: 3.0.0
+info:
+  title: Example using ProtoBuff data types
+  version: '1.0.0'
+channels:
+  mychannel:
+    address: mychannel
+    messages:
+      testMessage:
+        $ref: '#/components/messages/testMessage'
+
+components:
+  messages:
+    testMessage:
+      payload:
+        $ref: '#/components/schemas/protoSample'
+  schemas:
+    protoSample:
+      schemaFormat: 'application/vnd.google.protobuf;version=3'
+      schema: |
+        syntax = "proto3";
+               
+        import "google/type/date.proto";
+        import "google/protobuf/duration.proto";
+        import "google/type/datetime.proto";
+        import "google/type/timeofday.proto";
+        import "google/type/decimal.proto";
+        import "google/protobuf/wrappers.proto";
+        
+        package the.example.package;
+        
+        option java_multiple_files = true;
+        option java_package = "xx.xx.xx.sample";
+        option java_outer_classname = "MyProtoClass";
+
+        // @RootNode
+        message Test {
+          google.type.Date date = 1;
+          google.protobuf.Duration delay = 2;
+          google.type.DateTime timestamp = 3;
+          google.type.Decimal offset = 4;
+          google.protobuf.Int32Value y = 5;
+          Duration dur = 6;
+        }
+
+        message Duration {
+          required int32 from = 1;
+          required int32 to = 2;
+        }
