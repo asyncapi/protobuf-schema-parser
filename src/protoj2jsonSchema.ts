@@ -196,7 +196,6 @@ class Proto2JsonSchema {
 
       if (field.repeated) {
         // eslint-disable-next-line  @typescript-eslint/no-non-null-assertion
-
         obj.properties![field.name] = {
           description: this.extractDescription(field.comment) || '',
           type: 'array',
