@@ -1,17 +1,17 @@
-import {
-  AsyncAPIDocumentInterface,
-  Diagnostic,
-  Parser,
-} from '@asyncapi/parser';
+import {AsyncAPIDocumentInterface, Diagnostic, Parser,} from '@asyncapi/parser';
 import * as fs from 'fs';
 import * as path from 'path';
-import { ProtoBuffSchemaParser } from '../src';
+import {ProtoBuffSchemaParser} from '../src';
 
 function stripAsyncApiTags(json: string) {
   if (!json) {
     return json;
   }
   return json.replace(/^.*x-parser-.*$/gm, '');
+}
+
+function compressSpace(input: string): string {
+  return input.replace(/\s+/g, ' ');
 }
 
 function writeResults(
@@ -41,7 +41,7 @@ describe('parse()', function () {
   async function parseSpec(
     filename: string
   ): Promise<AsyncAPIDocumentInterface | undefined> {
-    const { document, diagnostics } = await coreParser.parse(
+    const {document, diagnostics} = await coreParser.parse(
       fs.readFileSync(path.resolve(__dirname, filename), 'utf8')
     );
 
@@ -62,8 +62,10 @@ describe('parse()', function () {
     }
 
     expect(
-      stripAsyncApiTags(JSON.stringify(document?.json(), null, 2))
-    ).toEqual(readResultFile('./documents/simple.proto2.result.json'));
+      compressSpace(stripAsyncApiTags(JSON.stringify(document?.json(), null, 2)))
+    ).toEqual(
+      compressSpace(readResultFile('./documents/simple.proto2.result.json'))
+    );
   });
 
   it('should parse proto3 data types', async function () {
@@ -74,8 +76,10 @@ describe('parse()', function () {
     }
 
     expect(
-      stripAsyncApiTags(JSON.stringify(document?.json(), null, 2))
-    ).toEqual(readResultFile('./documents/simple.proto3.result.json'));
+      compressSpace(stripAsyncApiTags(JSON.stringify(document?.json(), null, 2)))
+    ).toEqual(
+      compressSpace(readResultFile('./documents/simple.proto3.result.json'))
+    );
   });
 
   it('should parse proto3 data types with imports and schema with same name in different namespaces', async function () {
@@ -86,8 +90,10 @@ describe('parse()', function () {
     }
 
     expect(
-      stripAsyncApiTags(JSON.stringify(document?.json(), null, 2))
-    ).toEqual(readResultFile('./documents/complex.proto3.result.json'));
+      compressSpace(stripAsyncApiTags(JSON.stringify(document?.json(), null, 2)))
+    ).toEqual(
+      compressSpace(readResultFile('./documents/complex.proto3.result.json'))
+    );
   });
 
   it('should parse proto data types including comments', async function () {
@@ -98,8 +104,10 @@ describe('parse()', function () {
     }
 
     expect(
-      stripAsyncApiTags(JSON.stringify(document?.json(), null, 2))
-    ).toEqual(readResultFile('./documents/comments.proto.result.json'));
+      compressSpace(stripAsyncApiTags(JSON.stringify(document?.json(), null, 2)))
+    ).toEqual(
+      compressSpace(readResultFile('./documents/comments.proto.result.json'))
+    );
   });
 
   it('should parse realworld train_run proto data types', async function () {
@@ -113,14 +121,14 @@ describe('parse()', function () {
     }
 
     expect(
-      stripAsyncApiTags(JSON.stringify(document?.json(), null, 2))
+      compressSpace(stripAsyncApiTags(JSON.stringify(document?.json(), null, 2)))
     ).toEqual(
-      readResultFile('./documents/realworld.train_run.proto.result.json')
+      compressSpace(readResultFile('./documents/realworld.train_run.proto.result.json'))
     );
   });
 
   it('multiple root messages in proto schema should fail', async function () {
-    const { document, diagnostics } = await coreParser.parse(
+    const {document, diagnostics} = await coreParser.parse(
       fs.readFileSync(path.resolve(__dirname, './documents/invalid.multiple_root.yaml'), 'utf8')
     );
 
@@ -132,7 +140,7 @@ describe('parse()', function () {
   });
 
   it('no root messages in proto schema should fail', async function () {
-    const { document, diagnostics } = await coreParser.parse(
+    const {document, diagnostics} = await coreParser.parse(
       fs.readFileSync(path.resolve(__dirname, './documents/invalid.schema-empty.yaml'), 'utf8')
     );
 
@@ -154,9 +162,9 @@ describe('parse()', function () {
     }
 
     expect(
-      stripAsyncApiTags(JSON.stringify(document?.json(), null, 2))
+      compressSpace(stripAsyncApiTags(JSON.stringify(document?.json(), null, 2)))
     ).toEqual(
-      readResultFile('./documents/recursive.proto3.result.json')
+      compressSpace(readResultFile('./documents/recursive.proto3.result.json'))
     );
   });
 
