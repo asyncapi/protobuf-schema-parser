@@ -1,0 +1,227 @@
+{
+  "asyncapi": "3.0.0",
+  "info": {
+    "title": "Account Service",
+    "version": "1.0.0",
+    "description": "This service is in charge of processing user signups"
+  },
+  "channels": {
+    "userSignedup": {
+      "address": "user/signedup",
+      "messages": {
+        "UserSignedUp": {
+          "payload": {
+            "schemaFormat": "application/vnd.google.protobuf;version=3",
+            "schema": {
+              "title": "A",
+              "type": "object",
+              "properties": {
+                "something": {
+                  "type": "string",
+                  "x-primitive": "string",
+
+                },
+                "recursive": {
+                  "description": "",
+                  "type": "array",
+                  "items": {
+                    "title": "A",
+                    "type": "object",
+                    "properties": {
+                      "something": {
+                        "type": "string",
+                        "x-primitive": "string",
+
+                      },
+                      "recursive": {
+                        "description": "",
+                        "type": "array",
+                        "items": {
+                          "title": "A",
+                          "type": "object",
+                          "required": [],
+                          "properties": {},
+
+                        },
+
+                      }
+                    },
+
+                  },
+
+                }
+              },
+
+            },
+
+          },
+
+        }
+      },
+
+    }
+  },
+  "operations": {
+    "sendUserSignedup": {
+      "action": "send",
+      "channel": {
+        "address": "user/signedup",
+        "messages": {
+          "UserSignedUp": {
+            "payload": {
+              "schemaFormat": "application/vnd.google.protobuf;version=3",
+              "schema": {
+                "title": "A",
+                "type": "object",
+                "properties": {
+                  "something": {
+                    "type": "string",
+                    "x-primitive": "string",
+
+                  },
+                  "recursive": {
+                    "description": "",
+                    "type": "array",
+                    "items": {
+                      "title": "A",
+                      "type": "object",
+                      "properties": {
+                        "something": {
+                          "type": "string",
+                          "x-primitive": "string",
+
+                        },
+                        "recursive": {
+                          "description": "",
+                          "type": "array",
+                          "items": {
+                            "title": "A",
+                            "type": "object",
+                            "required": [],
+                            "properties": {},
+
+                          },
+
+                        }
+                      },
+
+                    },
+
+                  }
+                },
+
+              },
+
+            },
+
+          }
+        },
+
+      },
+      "messages": [
+        {
+          "payload": {
+            "schemaFormat": "application/vnd.google.protobuf;version=3",
+            "schema": {
+              "title": "A",
+              "type": "object",
+              "properties": {
+                "something": {
+                  "type": "string",
+                  "x-primitive": "string",
+
+                },
+                "recursive": {
+                  "description": "",
+                  "type": "array",
+                  "items": {
+                    "title": "A",
+                    "type": "object",
+                    "properties": {
+                      "something": {
+                        "type": "string",
+                        "x-primitive": "string",
+
+                      },
+                      "recursive": {
+                        "description": "",
+                        "type": "array",
+                        "items": {
+                          "title": "A",
+                          "type": "object",
+                          "required": [],
+                          "properties": {},
+
+                        },
+
+                      }
+                    },
+
+                  },
+
+                }
+              },
+
+            },
+
+          },
+
+        }
+      ]
+    }
+  },
+  "components": {
+    "messages": {
+      "UserSignedUp": {
+        "payload": {
+          "schemaFormat": "application/vnd.google.protobuf;version=3",
+          "schema": {
+            "title": "A",
+            "type": "object",
+            "properties": {
+              "something": {
+                "type": "string",
+                "x-primitive": "string",
+
+              },
+              "recursive": {
+                "description": "",
+                "type": "array",
+                "items": {
+                  "title": "A",
+                  "type": "object",
+                  "properties": {
+                    "something": {
+                      "type": "string",
+                      "x-primitive": "string",
+
+                    },
+                    "recursive": {
+                      "description": "",
+                      "type": "array",
+                      "items": {
+                        "title": "A",
+                        "type": "object",
+                        "required": [],
+                        "properties": {},
+
+                      },
+
+                    }
+                  },
+
+                },
+
+              }
+            },
+
+          },
+
+        },
+
+      }
+    }
+  },
+
+
+}

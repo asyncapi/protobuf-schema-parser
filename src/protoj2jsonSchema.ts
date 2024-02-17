@@ -93,20 +93,6 @@ class Proto2JsonSchema {
     if (!weak) {
       throw new Error('Imports are currently not implemented');
     }
-    /*
-    // Otherwise fetch from disk or network
-    let source: string;
-    try {
-      source = util.fs.readFileSync(filename).toString('utf8');
-    } catch (err) {
-      if (!weak) {
-        throw err;
-      }
-
-      return;
-    }
-    this.process(filename, source);
-    */
   }
 
   public compile(): AsyncAPISchema {
@@ -115,7 +101,8 @@ class Proto2JsonSchema {
     const rootItemCandidates = this.resolveByFilename(ROOT_FILENAME, this.root.nested as ProtoItems);
     const rootItem = this.findRootItem(rootItemCandidates);
 
-    return this.compileMessage(rootItem);
+    debugger;
+    return this.compileMessage(rootItem, []);
   }
 
   private resolveByFilename(filename: string, items: ProtoItems) {
@@ -186,13 +173,21 @@ class Proto2JsonSchema {
    * Compiles a protobuf message to JSON schema
    */
   // eslint-disable-next-line sonarjs/cognitive-complexity
-  private compileMessage(item: protobuf.Type): AsyncAPISchemaDefinition {
+  private compileMessage(item: protobuf.Type, stack: string[]): AsyncAPISchemaDefinition {
     const obj: v3.AsyncAPISchemaDefinition = {
       title: item.name,
       type: 'object',
       required: [],
       properties: {},
     };
+
+    const timesSeenThisClassInStack = stack.filter(x => x === item.name).length;
+    if (timesSeenThisClassInStack >= 2) {
+      // Detected a recursion.
+      return obj;
+    }
+
+    stack.push(item.name);
 
     for (const fieldName in item.fields) {
       const field = item.fields[fieldName];
@@ -202,10 +197,11 @@ class Proto2JsonSchema {
 
       if (field.repeated) {
         // eslint-disable-next-line  @typescript-eslint/no-non-null-assertion
+
         obj.properties![field.name] = {
           description: this.extractDescription(field.comment) || '',
           type: 'array',
-          items: this.compileField(field, item),
+          items: this.compileField(field, item, stack.slice()),
         };
 
         if (field.comment) {
@@ -221,7 +217,7 @@ class Proto2JsonSchema {
         }
       } else {
         // eslint-disable-next-line  @typescript-eslint/no-non-null-assertion
-        obj.properties![field.name] = this.compileField(field, item);
+        obj.properties![field.name] = this.compileField(field, item, stack.slice());
       }
     }
 
@@ -254,7 +250,7 @@ class Proto2JsonSchema {
     return obj;
   }
 
-  private compileField(field: protobuf.Field, parentItem: protobuf.Type): v3.AsyncAPISchemaDefinition {
+  private compileField(field: protobuf.Field, parentItem: protobuf.Type, stack: string[]): v3.AsyncAPISchemaDefinition {
     let obj: v3.AsyncAPISchemaDefinition = {};
 
     if (PrimitiveTypes.PRIMITIVE_TYPES[field.type.toLowerCase()]) {
@@ -270,7 +266,7 @@ class Proto2JsonSchema {
       if (item instanceof protobuf.Enum) {
         obj = Object.assign(obj, this.compileEnum(item));
       } else {
-        obj = Object.assign(obj, this.compileMessage(item));
+        obj = Object.assign(obj, this.compileMessage(item, stack));
       }
     }
 

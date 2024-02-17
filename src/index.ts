@@ -24,12 +24,10 @@ async function validate(input: ValidateSchemaInput<unknown, unknown>): Promise<S
       message = error.message;
     }
 
-    const validateResult: SchemaValidateResult[] = [{
+    return [{
       message,
-      path: input.path, // protobuff parser doesn't provide a path to the error.
+      path: input.path, // protobuf parser doesn't provide a path to the error.
     }];
-
-    return validateResult;
   }
 }
 

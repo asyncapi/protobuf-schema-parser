@@ -31,7 +31,7 @@ function readResultFile(filename: string) {
   );
 }
 
-const UPDATE_RESULTS = true; // set to true for a single run, if you change something and compare new target files manualy with git tools
+const UPDATE_RESULTS = false; // set to true for a single run if you change something and compare new target files manually with git tools
 
 describe('parse()', function () {
   const parser = ProtoBuffSchemaParser();
@@ -140,6 +140,23 @@ describe('parse()', function () {
 
     expect(filterDiagnostics(diagnostics, 'asyncapi2-schemas')).not.toHaveLength(
       0
+    );
+  });
+
+  it('recursion in proto should not lead to a infinity loop', async function () {
+    const document = await parseSpec('./documents/recursive.proto3.yaml');
+
+    if (UPDATE_RESULTS) {
+      writeResults(
+        document,
+        './documents/recursive.proto3.result.json'
+      );
+    }
+
+    expect(
+      stripAsyncApiTags(JSON.stringify(document?.json(), null, 2))
+    ).toEqual(
+      readResultFile('./documents/recursive.proto3.result.json')
     );
   });
 
