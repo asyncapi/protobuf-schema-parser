@@ -3,15 +3,29 @@ import * as fs from 'fs';
 import * as path from 'path';
 import {ProtoBuffSchemaParser} from '../src';
 
-function stripAsyncApiTags(json: string) {
-  if (!json) {
-    return json;
+function stripParserExtraInfos(json: any): any {
+  if (json === undefined || json === null) {
+    return;
   }
-  return json.replace(/^.*x-parser-.*$/gm, '');
-}
 
-function compressSpace(input: string): string {
-  return input.replace(/\s+/g, ' ');
+  for (const [key, value] of Object.entries(json)) {
+    if (key.startsWith('x-parser-')) {
+      delete json[key];
+      continue;
+    }
+
+    if (Array.isArray(value)) {
+      for (let i = 0; i < value.length; i++) {
+        if (typeof key[i] === 'object') {
+          json[key][i] = stripParserExtraInfos(key[i]);
+        }
+      }
+    } else if (typeof value === 'object') {
+      json[key] = stripParserExtraInfos(value);
+    }
+  }
+
+  return json;
 }
 
 function writeResults(
@@ -20,15 +34,15 @@ function writeResults(
 ) {
   fs.writeFileSync(
     path.resolve(__dirname, filename),
-    stripAsyncApiTags(JSON.stringify(document?.json(), null, 2)),
+    JSON.stringify(stripParserExtraInfos(document?.json()), null, 2),
     'utf8'
   );
 }
 
 function readResultFile(filename: string) {
-  return stripAsyncApiTags(
+  return stripParserExtraInfos(JSON.parse(
     fs.readFileSync(path.resolve(__dirname, filename), 'utf8')
-  );
+  ));
 }
 
 const UPDATE_RESULTS = false; // set to true for a single run if you change something and compare new target files manually with git tools
@@ -62,9 +76,9 @@ describe('parse()', function () {
     }
 
     expect(
-      compressSpace(stripAsyncApiTags(JSON.stringify(document?.json(), null, 2)))
+      stripParserExtraInfos(document?.json())
     ).toEqual(
-      compressSpace(readResultFile('./documents/simple.proto2.result.json'))
+      readResultFile('./documents/simple.proto2.result.json')
     );
   });
 
@@ -76,9 +90,9 @@ describe('parse()', function () {
     }
 
     expect(
-      compressSpace(stripAsyncApiTags(JSON.stringify(document?.json(), null, 2)))
+      stripParserExtraInfos(document?.json())
     ).toEqual(
-      compressSpace(readResultFile('./documents/simple.proto3.result.json'))
+      readResultFile('./documents/simple.proto3.result.json')
     );
   });
 
@@ -90,9 +104,9 @@ describe('parse()', function () {
     }
 
     expect(
-      compressSpace(stripAsyncApiTags(JSON.stringify(document?.json(), null, 2)))
+      stripParserExtraInfos(document?.json())
     ).toEqual(
-      compressSpace(readResultFile('./documents/complex.proto3.result.json'))
+      readResultFile('./documents/complex.proto3.result.json')
     );
   });
 
@@ -104,9 +118,9 @@ describe('parse()', function () {
     }
 
     expect(
-      compressSpace(stripAsyncApiTags(JSON.stringify(document?.json(), null, 2)))
+      stripParserExtraInfos(document?.json())
     ).toEqual(
-      compressSpace(readResultFile('./documents/comments.proto.result.json'))
+      readResultFile('./documents/comments.proto.result.json')
     );
   });
 
@@ -121,9 +135,9 @@ describe('parse()', function () {
     }
 
     expect(
-      compressSpace(stripAsyncApiTags(JSON.stringify(document?.json(), null, 2)))
+      stripParserExtraInfos(document?.json())
     ).toEqual(
-      compressSpace(readResultFile('./documents/realworld.train_run.proto.result.json'))
+      readResultFile('./documents/realworld.train_run.proto.result.json')
     );
   });
 
@@ -162,9 +176,9 @@ describe('parse()', function () {
     }
 
     expect(
-      compressSpace(stripAsyncApiTags(JSON.stringify(document?.json(), null, 2)))
+      stripParserExtraInfos(document?.json())
     ).toEqual(
-      compressSpace(readResultFile('./documents/recursive.proto3.result.json'))
+      readResultFile('./documents/recursive.proto3.result.json')
     );
   });
 

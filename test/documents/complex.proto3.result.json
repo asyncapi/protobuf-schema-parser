@@ -24,27 +24,23 @@
                       "minimum": 0,
                       "maximum": 9999,
                       "x-primitive": "int32",
-                      "description": "Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year",
-
+                      "description": "Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year"
                     },
                     "month": {
                       "type": "integer",
                       "minimum": 0,
                       "maximum": 12,
                       "x-primitive": "int32",
-                      "description": "Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.",
-
+                      "description": "Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day."
                     },
                     "day": {
                       "type": "integer",
                       "minimum": 0,
                       "maximum": 31,
                       "x-primitive": "int32",
-                      "description": "Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.",
-
+                      "description": "Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant."
                     }
-                  },
-
+                  }
                 },
                 "delay": {
                   "title": "Duration",
@@ -54,18 +50,15 @@
                       "type": "integer",
                       "minimum": -9007199254740991,
                       "maximum": 9007199254740991,
-                      "x-primitive": "int64",
-
+                      "x-primitive": "int64"
                     },
                     "nanos": {
                       "type": "integer",
                       "minimum": -2147483648,
                       "maximum": 2147483647,
-                      "x-primitive": "int32",
-
+                      "x-primitive": "int32"
                     }
-                  },
-
+                  }
                 },
                 "timestamp": {
                   "title": "DateTime",
@@ -76,56 +69,49 @@
                       "minimum": 0,
                       "maximum": 9999,
                       "x-primitive": "int32",
-                      "description": "Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year",
-
+                      "description": "Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year"
                     },
                     "month": {
                       "type": "integer",
                       "minimum": 0,
                       "maximum": 12,
                       "x-primitive": "int32",
-                      "description": "Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.",
-
+                      "description": "Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day."
                     },
                     "day": {
                       "type": "integer",
                       "minimum": 0,
                       "maximum": 31,
                       "x-primitive": "int32",
-                      "description": "Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.",
-
+                      "description": "Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant."
                     },
                     "hours": {
                       "type": "integer",
                       "minimum": 0,
                       "maximum": 23,
                       "x-primitive": "int32",
-                      "description": "Hours of day in 24 hour format.",
-
+                      "description": "Hours of day in 24 hour format."
                     },
                     "minutes": {
                       "type": "integer",
                       "minimum": 0,
                       "maximum": 59,
                       "x-primitive": "int32",
-                      "description": "Minutes of hour of day.",
-
+                      "description": "Minutes of hour of day."
                     },
                     "seconds": {
                       "type": "integer",
                       "minimum": 0,
                       "maximum": 60,
                       "x-primitive": "int32",
-                      "description": "Seconds of minutes of the time. Must normally be from 0 to 59. An API may allow the value 60 if it allows leap-seconds.",
-
+                      "description": "Seconds of minutes of the time. Must normally be from 0 to 59. An API may allow the value 60 if it allows leap-seconds."
                     },
                     "nanos": {
                       "type": "integer",
                       "minimum": 0,
                       "maximum": 999999999,
                       "x-primitive": "int32",
-                      "description": "Fractions of seconds in nanoseconds.",
-
+                      "description": "Fractions of seconds in nanoseconds."
                     },
                     "utcOffset": {
                       "title": "Duration",
@@ -135,18 +121,15 @@
                           "type": "integer",
                           "minimum": -9007199254740991,
                           "maximum": 9007199254740991,
-                          "x-primitive": "int64",
-
+                          "x-primitive": "int64"
                         },
                         "nanos": {
                           "type": "integer",
                           "minimum": -2147483648,
                           "maximum": 2147483647,
-                          "x-primitive": "int32",
-
+                          "x-primitive": "int32"
                         }
-                      },
-
+                      }
                     },
                     "timeZone": {
                       "title": "TimeZone",
@@ -155,20 +138,16 @@
                         "id": {
                           "type": "string",
                           "x-primitive": "string",
-                          "description": "IANA Time Zone Database time zone.",
-
+                          "description": "IANA Time Zone Database time zone."
                         },
                         "version": {
                           "type": "string",
                           "x-primitive": "string",
-                          "description": "IANA Time Zone Database version number.",
-
+                          "description": "IANA Time Zone Database version number."
                         }
-                      },
-
+                      }
                     }
-                  },
-
+                  }
                 },
                 "offset": {
                   "title": "Decimal",
@@ -182,11 +161,9 @@
                         "2.5e8",
                         "-2.5e8",
                         "2.5"
-                      ],
-
+                      ]
                     }
-                  },
-
+                  }
                 },
                 "y": {
                   "title": "Int32Value",
@@ -196,11 +173,9 @@
                       "type": "integer",
                       "minimum": -2147483648,
                       "maximum": 2147483647,
-                      "x-primitive": "int32",
-
+                      "x-primitive": "int32"
                     }
-                  },
-
+                  }
                 },
                 "dur": {
                   "title": "Duration",
@@ -214,29 +189,21 @@
                       "type": "integer",
                       "minimum": -2147483648,
                       "maximum": 2147483647,
-                      "x-primitive": "int32",
-
+                      "x-primitive": "int32"
                     },
                     "to": {
                       "type": "integer",
                       "minimum": -2147483648,
                       "maximum": 2147483647,
-                      "x-primitive": "int32",
-
+                      "x-primitive": "int32"
                     }
-                  },
-
+                  }
                 }
-              },
-
-            },
-
-
-          },
-
+              }
+            }
+          }
         }
-      },
-
+      }
     }
   },
   "components": {
@@ -257,27 +224,23 @@
                     "minimum": 0,
                     "maximum": 9999,
                     "x-primitive": "int32",
-                    "description": "Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year",
-
+                    "description": "Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year"
                   },
                   "month": {
                     "type": "integer",
                     "minimum": 0,
                     "maximum": 12,
                     "x-primitive": "int32",
-                    "description": "Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.",
-
+                    "description": "Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day."
                   },
                   "day": {
                     "type": "integer",
                     "minimum": 0,
                     "maximum": 31,
                     "x-primitive": "int32",
-                    "description": "Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.",
-
+                    "description": "Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant."
                   }
-                },
-
+                }
               },
               "delay": {
                 "title": "Duration",
@@ -287,18 +250,15 @@
                     "type": "integer",
                     "minimum": -9007199254740991,
                     "maximum": 9007199254740991,
-                    "x-primitive": "int64",
-
+                    "x-primitive": "int64"
                   },
                   "nanos": {
                     "type": "integer",
                     "minimum": -2147483648,
                     "maximum": 2147483647,
-                    "x-primitive": "int32",
-
+                    "x-primitive": "int32"
                   }
-                },
-
+                }
               },
               "timestamp": {
                 "title": "DateTime",
@@ -309,56 +269,49 @@
                     "minimum": 0,
                     "maximum": 9999,
                     "x-primitive": "int32",
-                    "description": "Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year",
-
+                    "description": "Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year"
                   },
                   "month": {
                     "type": "integer",
                     "minimum": 0,
                     "maximum": 12,
                     "x-primitive": "int32",
-                    "description": "Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.",
-
+                    "description": "Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day."
                   },
                   "day": {
                     "type": "integer",
                     "minimum": 0,
                     "maximum": 31,
                     "x-primitive": "int32",
-                    "description": "Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.",
-
+                    "description": "Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant."
                   },
                   "hours": {
                     "type": "integer",
                     "minimum": 0,
                     "maximum": 23,
                     "x-primitive": "int32",
-                    "description": "Hours of day in 24 hour format.",
-
+                    "description": "Hours of day in 24 hour format."
                   },
                   "minutes": {
                     "type": "integer",
                     "minimum": 0,
                     "maximum": 59,
                     "x-primitive": "int32",
-                    "description": "Minutes of hour of day.",
-
+                    "description": "Minutes of hour of day."
                   },
                   "seconds": {
                     "type": "integer",
                     "minimum": 0,
                     "maximum": 60,
                     "x-primitive": "int32",
-                    "description": "Seconds of minutes of the time. Must normally be from 0 to 59. An API may allow the value 60 if it allows leap-seconds.",
-
+                    "description": "Seconds of minutes of the time. Must normally be from 0 to 59. An API may allow the value 60 if it allows leap-seconds."
                   },
                   "nanos": {
                     "type": "integer",
                     "minimum": 0,
                     "maximum": 999999999,
                     "x-primitive": "int32",
-                    "description": "Fractions of seconds in nanoseconds.",
-
+                    "description": "Fractions of seconds in nanoseconds."
                   },
                   "utcOffset": {
                     "title": "Duration",
@@ -368,18 +321,15 @@
                         "type": "integer",
                         "minimum": -9007199254740991,
                         "maximum": 9007199254740991,
-                        "x-primitive": "int64",
-
+                        "x-primitive": "int64"
                       },
                       "nanos": {
                         "type": "integer",
                         "minimum": -2147483648,
                         "maximum": 2147483647,
-                        "x-primitive": "int32",
-
+                        "x-primitive": "int32"
                       }
-                    },
-
+                    }
                   },
                   "timeZone": {
                     "title": "TimeZone",
@@ -388,20 +338,16 @@
                       "id": {
                         "type": "string",
                         "x-primitive": "string",
-                        "description": "IANA Time Zone Database time zone.",
-
+                        "description": "IANA Time Zone Database time zone."
                       },
                       "version": {
                         "type": "string",
                         "x-primitive": "string",
-                        "description": "IANA Time Zone Database version number.",
-
+                        "description": "IANA Time Zone Database version number."
                       }
-                    },
-
+                    }
                   }
-                },
-
+                }
               },
               "offset": {
                 "title": "Decimal",
@@ -415,11 +361,9 @@
                       "2.5e8",
                       "-2.5e8",
                       "2.5"
-                    ],
-
+                    ]
                   }
-                },
-
+                }
               },
               "y": {
                 "title": "Int32Value",
@@ -429,11 +373,9 @@
                     "type": "integer",
                     "minimum": -2147483648,
                     "maximum": 2147483647,
-                    "x-primitive": "int32",
-
+                    "x-primitive": "int32"
                   }
-                },
-
+                }
               },
               "dur": {
                 "title": "Duration",
@@ -447,26 +389,19 @@
                     "type": "integer",
                     "minimum": -2147483648,
                     "maximum": 2147483647,
-                    "x-primitive": "int32",
-
+                    "x-primitive": "int32"
                   },
                   "to": {
                     "type": "integer",
                     "minimum": -2147483648,
                     "maximum": 2147483647,
-                    "x-primitive": "int32",
-
+                    "x-primitive": "int32"
                   }
-                },
-
+                }
               }
-            },
-
-          },
-
-
-        },
-
+            }
+          }
+        }
       }
     },
     "schemas": {
@@ -485,27 +420,23 @@
                   "minimum": 0,
                   "maximum": 9999,
                   "x-primitive": "int32",
-                  "description": "Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year",
-
+                  "description": "Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year"
                 },
                 "month": {
                   "type": "integer",
                   "minimum": 0,
                   "maximum": 12,
                   "x-primitive": "int32",
-                  "description": "Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.",
-
+                  "description": "Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day."
                 },
                 "day": {
                   "type": "integer",
                   "minimum": 0,
                   "maximum": 31,
                   "x-primitive": "int32",
-                  "description": "Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.",
-
+                  "description": "Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant."
                 }
-              },
-
+              }
             },
             "delay": {
               "title": "Duration",
@@ -515,18 +446,15 @@
                   "type": "integer",
                   "minimum": -9007199254740991,
                   "maximum": 9007199254740991,
-                  "x-primitive": "int64",
-
+                  "x-primitive": "int64"
                 },
                 "nanos": {
                   "type": "integer",
                   "minimum": -2147483648,
                   "maximum": 2147483647,
-                  "x-primitive": "int32",
-
+                  "x-primitive": "int32"
                 }
-              },
-
+              }
             },
             "timestamp": {
               "title": "DateTime",
@@ -537,56 +465,49 @@
                   "minimum": 0,
                   "maximum": 9999,
                   "x-primitive": "int32",
-                  "description": "Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year",
-
+                  "description": "Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year"
                 },
                 "month": {
                   "type": "integer",
                   "minimum": 0,
                   "maximum": 12,
                   "x-primitive": "int32",
-                  "description": "Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.",
-
+                  "description": "Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day."
                 },
                 "day": {
                   "type": "integer",
                   "minimum": 0,
                   "maximum": 31,
                   "x-primitive": "int32",
-                  "description": "Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.",
-
+                  "description": "Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant."
                 },
                 "hours": {
                   "type": "integer",
                   "minimum": 0,
                   "maximum": 23,
                   "x-primitive": "int32",
-                  "description": "Hours of day in 24 hour format.",
-
+                  "description": "Hours of day in 24 hour format."
                 },
                 "minutes": {
                   "type": "integer",
                   "minimum": 0,
                   "maximum": 59,
                   "x-primitive": "int32",
-                  "description": "Minutes of hour of day.",
-
+                  "description": "Minutes of hour of day."
                 },
                 "seconds": {
                   "type": "integer",
                   "minimum": 0,
                   "maximum": 60,
                   "x-primitive": "int32",
-                  "description": "Seconds of minutes of the time. Must normally be from 0 to 59. An API may allow the value 60 if it allows leap-seconds.",
-
+                  "description": "Seconds of minutes of the time. Must normally be from 0 to 59. An API may allow the value 60 if it allows leap-seconds."
                 },
                 "nanos": {
                   "type": "integer",
                   "minimum": 0,
                   "maximum": 999999999,
                   "x-primitive": "int32",
-                  "description": "Fractions of seconds in nanoseconds.",
-
+                  "description": "Fractions of seconds in nanoseconds."
                 },
                 "utcOffset": {
                   "title": "Duration",
@@ -596,18 +517,15 @@
                       "type": "integer",
                       "minimum": -9007199254740991,
                       "maximum": 9007199254740991,
-                      "x-primitive": "int64",
-
+                      "x-primitive": "int64"
                     },
                     "nanos": {
                       "type": "integer",
                       "minimum": -2147483648,
                       "maximum": 2147483647,
-                      "x-primitive": "int32",
-
+                      "x-primitive": "int32"
                     }
-                  },
-
+                  }
                 },
                 "timeZone": {
                   "title": "TimeZone",
@@ -616,20 +534,16 @@
                     "id": {
                       "type": "string",
                       "x-primitive": "string",
-                      "description": "IANA Time Zone Database time zone.",
-
+                      "description": "IANA Time Zone Database time zone."
                     },
                     "version": {
                       "type": "string",
                       "x-primitive": "string",
-                      "description": "IANA Time Zone Database version number.",
-
+                      "description": "IANA Time Zone Database version number."
                     }
-                  },
-
+                  }
                 }
-              },
-
+              }
             },
             "offset": {
               "title": "Decimal",
@@ -643,11 +557,9 @@
                     "2.5e8",
                     "-2.5e8",
                     "2.5"
-                  ],
-
+                  ]
                 }
-              },
-
+              }
             },
             "y": {
               "title": "Int32Value",
@@ -657,11 +569,9 @@
                   "type": "integer",
                   "minimum": -2147483648,
                   "maximum": 2147483647,
-                  "x-primitive": "int32",
-
+                  "x-primitive": "int32"
                 }
-              },
-
+              }
             },
             "dur": {
               "title": "Duration",
@@ -675,27 +585,19 @@
                   "type": "integer",
                   "minimum": -2147483648,
                   "maximum": 2147483647,
-                  "x-primitive": "int32",
-
+                  "x-primitive": "int32"
                 },
                 "to": {
                   "type": "integer",
                   "minimum": -2147483648,
                   "maximum": 2147483647,
-                  "x-primitive": "int32",
-
+                  "x-primitive": "int32"
                 }
-              },
-
+              }
             }
-          },
-
-        },
-
-
+          }
+        }
       }
     }
-  },
-
-
+  }
 }
