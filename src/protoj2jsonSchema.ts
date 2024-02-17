@@ -101,7 +101,6 @@ class Proto2JsonSchema {
     const rootItemCandidates = this.resolveByFilename(ROOT_FILENAME, this.root.nested as ProtoItems);
     const rootItem = this.findRootItem(rootItemCandidates);
 
-    debugger;
     return this.compileMessage(rootItem, []);
   }
 
