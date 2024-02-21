@@ -190,6 +190,11 @@ class Proto2JsonSchema {
 
     for (const fieldName in item.fields) {
       const field = item.fields[fieldName];
+
+      if (field.partOf) {
+        continue;
+      }
+
       if (field.required) {
         obj.required?.push(fieldName);
       }
@@ -216,6 +221,23 @@ class Proto2JsonSchema {
       } else {
         // eslint-disable-next-line  @typescript-eslint/no-non-null-assertion
         obj.properties![field.name] = this.compileField(field, item, stack.slice());
+      }
+    }
+
+    for (const oneOff of item.oneofsArray) {
+      // eslint-disable-next-line  @typescript-eslint/no-non-null-assertion
+      if (!obj.properties![oneOff.name]) {
+        // eslint-disable-next-line  @typescript-eslint/no-non-null-assertion
+        obj.properties![oneOff.name] = {
+          oneOf: []
+        };
+      }
+      // eslint-disable-next-line  @typescript-eslint/no-non-null-assertion
+      const oneOf = (obj.properties![oneOff.name] as any)['oneOf'] as any[];
+
+      for (const fieldName of oneOff.oneof) {
+        const field = item.fields[fieldName];
+        oneOf.push(this.compileField(field, item, stack.slice()));
       }
     }
 

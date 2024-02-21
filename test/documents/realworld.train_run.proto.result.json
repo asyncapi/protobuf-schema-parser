@@ -293,39 +293,49 @@
                           "x-primitive": "int32",
                           "description": "Fractions of seconds in nanoseconds."
                         },
-                        "utcOffset": {
-                          "title": "Duration",
-                          "type": "object",
-                          "properties": {
-                            "seconds": {
-                              "type": "integer",
-                              "minimum": -9007199254740991,
-                              "maximum": 9007199254740991,
-                              "x-primitive": "int64"
+                        "timeOffset": {
+                          "oneOf": [
+                            {
+                              "title": "Duration",
+                              "type": "object",
+                              "properties": {
+                                "seconds": {
+                                  "type": "integer",
+                                  "minimum": -9007199254740991,
+                                  "maximum": 9007199254740991,
+                                  "x-primitive": "int64",
+                                  "x-parser-schema-id": "<anonymous-schema-46>"
+                                },
+                                "nanos": {
+                                  "type": "integer",
+                                  "minimum": -2147483648,
+                                  "maximum": 2147483647,
+                                  "x-primitive": "int32",
+                                  "x-parser-schema-id": "<anonymous-schema-47>"
+                                }
+                              },
+                              "x-parser-schema-id": "<anonymous-schema-45>"
                             },
-                            "nanos": {
-                              "type": "integer",
-                              "minimum": -2147483648,
-                              "maximum": 2147483647,
-                              "x-primitive": "int32"
+                            {
+                              "title": "TimeZone",
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string",
+                                  "x-primitive": "string",
+                                  "description": "IANA Time Zone Database time zone.",
+                                  "x-parser-schema-id": "<anonymous-schema-49>"
+                                },
+                                "version": {
+                                  "type": "string",
+                                  "x-primitive": "string",
+                                  "description": "IANA Time Zone Database version number.",
+                                  "x-parser-schema-id": "<anonymous-schema-50>"
+                                }
+                              },
+                              "x-parser-schema-id": "<anonymous-schema-48>"
                             }
-                          }
-                        },
-                        "timeZone": {
-                          "title": "TimeZone",
-                          "type": "object",
-                          "properties": {
-                            "id": {
-                              "type": "string",
-                              "x-primitive": "string",
-                              "description": "IANA Time Zone Database time zone."
-                            },
-                            "version": {
-                              "type": "string",
-                              "x-primitive": "string",
-                              "description": "IANA Time Zone Database version number."
-                            }
-                          }
+                          ]
                         }
                       }
                     },
@@ -382,163 +392,49 @@
                           "x-primitive": "int32",
                           "description": "Fractions of seconds in nanoseconds."
                         },
-                        "utcOffset": {
-                          "title": "Duration",
-                          "type": "object",
-                          "properties": {
-                            "seconds": {
-                              "type": "integer",
-                              "minimum": -9007199254740991,
-                              "maximum": 9007199254740991,
-                              "x-primitive": "int64"
+                        "timeOffset": {
+                          "oneOf": [
+                            {
+                              "title": "Duration",
+                              "type": "object",
+                              "properties": {
+                                "seconds": {
+                                  "type": "integer",
+                                  "minimum": -9007199254740991,
+                                  "maximum": 9007199254740991,
+                                  "x-primitive": "int64",
+                                  "x-parser-schema-id": "<anonymous-schema-61>"
+                                },
+                                "nanos": {
+                                  "type": "integer",
+                                  "minimum": -2147483648,
+                                  "maximum": 2147483647,
+                                  "x-primitive": "int32",
+                                  "x-parser-schema-id": "<anonymous-schema-62>"
+                                }
+                              },
+                              "x-parser-schema-id": "<anonymous-schema-60>"
                             },
-                            "nanos": {
-                              "type": "integer",
-                              "minimum": -2147483648,
-                              "maximum": 2147483647,
-                              "x-primitive": "int32"
+                            {
+                              "title": "TimeZone",
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string",
+                                  "x-primitive": "string",
+                                  "description": "IANA Time Zone Database time zone.",
+                                  "x-parser-schema-id": "<anonymous-schema-64>"
+                                },
+                                "version": {
+                                  "type": "string",
+                                  "x-primitive": "string",
+                                  "description": "IANA Time Zone Database version number.",
+                                  "x-parser-schema-id": "<anonymous-schema-65>"
+                                }
+                              },
+                              "x-parser-schema-id": "<anonymous-schema-63>"
                             }
-                          }
-                        },
-                        "timeZone": {
-                          "title": "TimeZone",
-                          "type": "object",
-                          "properties": {
-                            "id": {
-                              "type": "string",
-                              "x-primitive": "string",
-                              "description": "IANA Time Zone Database time zone."
-                            },
-                            "version": {
-                              "type": "string",
-                              "x-primitive": "string",
-                              "description": "IANA Time Zone Database version number."
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "stop": {
-                      "title": "StopMsg",
-                      "type": "object",
-                      "properties": {
-                        "event_id_from": {
-                          "title": "Int32Value",
-                          "type": "object",
-                          "properties": {
-                            "value": {
-                              "type": "integer",
-                              "minimum": -2147483648,
-                              "maximum": 2147483647,
-                              "x-primitive": "int32"
-                            }
-                          },
-                          "description": "ObjectId"
-                        },
-                        "event_id_to": {
-                          "title": "UInt32Value",
-                          "type": "object",
-                          "properties": {
-                            "value": {
-                              "type": "integer",
-                              "minimum": 0,
-                              "maximum": 4294967295,
-                              "x-primitive": "uint32"
-                            }
-                          },
-                          "description": "ObjectId"
-                        },
-                        "event_link_properties_id": {
-                          "title": "UInt64Value",
-                          "type": "object",
-                          "properties": {
-                            "value": {
-                              "type": "integer",
-                              "minimum": 0,
-                              "maximum": 9007199254740991,
-                              "x-primitive": "uint64"
-                            }
-                          },
-                          "description": "ObjectId"
-                        },
-                        "min_duration": {
-                          "type": "integer",
-                          "minimum": -2147483648,
-                          "maximum": 2147483647,
-                          "x-primitive": "int32"
-                        },
-                        "purposes": {
-                          "description": "",
-                          "type": "array",
-                          "items": {
-                            "type": "string",
-                            "x-primitive": "string"
-                          }
-                        }
-                      }
-                    },
-                    "movement": {
-                      "title": "MovementMsg",
-                      "type": "object",
-                      "properties": {
-                        "event_id_from": {
-                          "type": "integer",
-                          "minimum": -2147483648,
-                          "maximum": 2147483647,
-                          "x-primitive": "int32",
-                          "description": "ObjectId"
-                        },
-                        "event_id_to": {
-                          "type": "integer",
-                          "minimum": -2147483648,
-                          "maximum": 2147483647,
-                          "x-primitive": "int32",
-                          "description": "ObjectId"
-                        },
-                        "event_link_properties_id": {
-                          "title": "Int32Value",
-                          "type": "object",
-                          "properties": {
-                            "value": {
-                              "type": "integer",
-                              "minimum": -2147483648,
-                              "maximum": 2147483647,
-                              "x-primitive": "int32"
-                            }
-                          },
-                          "description": "ObjectId"
-                        },
-                        "min_duration": {
-                          "type": "integer",
-                          "minimum": -2147483648,
-                          "maximum": 2147483647,
-                          "x-primitive": "int32"
-                        },
-                        "is_min_duration_calculated": {
-                          "type": "boolean",
-                          "x-primitive": "bool"
-                        },
-                        "is_stop_over": {
-                          "type": "boolean",
-                          "x-primitive": "bool"
-                        },
-                        "fahrstrategie": {
-                          "title": "FahrstrategieEnum",
-                          "type": "string",
-                          "enum": [
-                            "FS_UNSPECIFIED",
-                            "FS_SCHNELL",
-                            "FS_HALTEN",
-                            "FS_NORMAL",
-                            "FS_FAHRZEIT_VERTEILEN"
-                          ],
-                          "x-enum-mapping": {
-                            "FS_UNSPECIFIED": 0,
-                            "FS_SCHNELL": 1,
-                            "FS_HALTEN": 2,
-                            "FS_NORMAL": 3,
-                            "FS_FAHRZEIT_VERTEILEN": 4
-                          }
+                          ]
                         }
                       }
                     },
@@ -627,6 +523,153 @@
                         "AOSS_OBSERVE_EARLIEST_TIMES": 4,
                         "AOSS_ONLY_WHEN_ROUTE_IS_SET": 5
                       }
+                    },
+                    "event_link": {
+                      "oneOf": [
+                        {
+                          "title": "StopMsg",
+                          "type": "object",
+                          "properties": {
+                            "event_id_from": {
+                              "title": "Int32Value",
+                              "type": "object",
+                              "properties": {
+                                "value": {
+                                  "type": "integer",
+                                  "minimum": -2147483648,
+                                  "maximum": 2147483647,
+                                  "x-primitive": "int32",
+                                  "x-parser-schema-id": "<anonymous-schema-79>"
+                                }
+                              },
+                              "description": "ObjectId",
+                              "x-parser-schema-id": "<anonymous-schema-78>"
+                            },
+                            "event_id_to": {
+                              "title": "UInt32Value",
+                              "type": "object",
+                              "properties": {
+                                "value": {
+                                  "type": "integer",
+                                  "minimum": 0,
+                                  "maximum": 4294967295,
+                                  "x-primitive": "uint32",
+                                  "x-parser-schema-id": "<anonymous-schema-81>"
+                                }
+                              },
+                              "description": "ObjectId",
+                              "x-parser-schema-id": "<anonymous-schema-80>"
+                            },
+                            "event_link_properties_id": {
+                              "title": "UInt64Value",
+                              "type": "object",
+                              "properties": {
+                                "value": {
+                                  "type": "integer",
+                                  "minimum": 0,
+                                  "maximum": 9007199254740991,
+                                  "x-primitive": "uint64",
+                                  "x-parser-schema-id": "<anonymous-schema-83>"
+                                }
+                              },
+                              "description": "ObjectId",
+                              "x-parser-schema-id": "<anonymous-schema-82>"
+                            },
+                            "min_duration": {
+                              "type": "integer",
+                              "minimum": -2147483648,
+                              "maximum": 2147483647,
+                              "x-primitive": "int32",
+                              "x-parser-schema-id": "<anonymous-schema-84>"
+                            },
+                            "purposes": {
+                              "description": "",
+                              "type": "array",
+                              "items": {
+                                "type": "string",
+                                "x-primitive": "string",
+                                "x-parser-schema-id": "<anonymous-schema-86>"
+                              },
+                              "x-parser-schema-id": "<anonymous-schema-85>"
+                            }
+                          },
+                          "x-parser-schema-id": "<anonymous-schema-77>"
+                        },
+                        {
+                          "title": "MovementMsg",
+                          "type": "object",
+                          "properties": {
+                            "event_id_from": {
+                              "type": "integer",
+                              "minimum": -2147483648,
+                              "maximum": 2147483647,
+                              "x-primitive": "int32",
+                              "description": "ObjectId",
+                              "x-parser-schema-id": "<anonymous-schema-88>"
+                            },
+                            "event_id_to": {
+                              "type": "integer",
+                              "minimum": -2147483648,
+                              "maximum": 2147483647,
+                              "x-primitive": "int32",
+                              "description": "ObjectId",
+                              "x-parser-schema-id": "<anonymous-schema-89>"
+                            },
+                            "event_link_properties_id": {
+                              "title": "Int32Value",
+                              "type": "object",
+                              "properties": {
+                                "value": {
+                                  "type": "integer",
+                                  "minimum": -2147483648,
+                                  "maximum": 2147483647,
+                                  "x-primitive": "int32",
+                                  "x-parser-schema-id": "<anonymous-schema-91>"
+                                }
+                              },
+                              "description": "ObjectId",
+                              "x-parser-schema-id": "<anonymous-schema-90>"
+                            },
+                            "min_duration": {
+                              "type": "integer",
+                              "minimum": -2147483648,
+                              "maximum": 2147483647,
+                              "x-primitive": "int32",
+                              "x-parser-schema-id": "<anonymous-schema-92>"
+                            },
+                            "is_min_duration_calculated": {
+                              "type": "boolean",
+                              "x-primitive": "bool",
+                              "x-parser-schema-id": "<anonymous-schema-93>"
+                            },
+                            "is_stop_over": {
+                              "type": "boolean",
+                              "x-primitive": "bool",
+                              "x-parser-schema-id": "<anonymous-schema-94>"
+                            },
+                            "fahrstrategie": {
+                              "title": "FahrstrategieEnum",
+                              "type": "string",
+                              "enum": [
+                                "FS_UNSPECIFIED",
+                                "FS_SCHNELL",
+                                "FS_HALTEN",
+                                "FS_NORMAL",
+                                "FS_FAHRZEIT_VERTEILEN"
+                              ],
+                              "x-enum-mapping": {
+                                "FS_UNSPECIFIED": 0,
+                                "FS_SCHNELL": 1,
+                                "FS_HALTEN": 2,
+                                "FS_NORMAL": 3,
+                                "FS_FAHRZEIT_VERTEILEN": 4
+                              },
+                              "x-parser-schema-id": "<anonymous-schema-95>"
+                            }
+                          },
+                          "x-parser-schema-id": "<anonymous-schema-87>"
+                        }
+                      ]
                     }
                   }
                 }
@@ -1011,39 +1054,49 @@
                         "x-primitive": "int32",
                         "description": "Fractions of seconds in nanoseconds."
                       },
-                      "utcOffset": {
-                        "title": "Duration",
-                        "type": "object",
-                        "properties": {
-                          "seconds": {
-                            "type": "integer",
-                            "minimum": -9007199254740991,
-                            "maximum": 9007199254740991,
-                            "x-primitive": "int64"
+                      "timeOffset": {
+                        "oneOf": [
+                          {
+                            "title": "Duration",
+                            "type": "object",
+                            "properties": {
+                              "seconds": {
+                                "type": "integer",
+                                "minimum": -9007199254740991,
+                                "maximum": 9007199254740991,
+                                "x-primitive": "int64",
+                                "x-parser-schema-id": "<anonymous-schema-46>"
+                              },
+                              "nanos": {
+                                "type": "integer",
+                                "minimum": -2147483648,
+                                "maximum": 2147483647,
+                                "x-primitive": "int32",
+                                "x-parser-schema-id": "<anonymous-schema-47>"
+                              }
+                            },
+                            "x-parser-schema-id": "<anonymous-schema-45>"
                           },
-                          "nanos": {
-                            "type": "integer",
-                            "minimum": -2147483648,
-                            "maximum": 2147483647,
-                            "x-primitive": "int32"
+                          {
+                            "title": "TimeZone",
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "x-primitive": "string",
+                                "description": "IANA Time Zone Database time zone.",
+                                "x-parser-schema-id": "<anonymous-schema-49>"
+                              },
+                              "version": {
+                                "type": "string",
+                                "x-primitive": "string",
+                                "description": "IANA Time Zone Database version number.",
+                                "x-parser-schema-id": "<anonymous-schema-50>"
+                              }
+                            },
+                            "x-parser-schema-id": "<anonymous-schema-48>"
                           }
-                        }
-                      },
-                      "timeZone": {
-                        "title": "TimeZone",
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "string",
-                            "x-primitive": "string",
-                            "description": "IANA Time Zone Database time zone."
-                          },
-                          "version": {
-                            "type": "string",
-                            "x-primitive": "string",
-                            "description": "IANA Time Zone Database version number."
-                          }
-                        }
+                        ]
                       }
                     }
                   },
@@ -1100,163 +1153,49 @@
                         "x-primitive": "int32",
                         "description": "Fractions of seconds in nanoseconds."
                       },
-                      "utcOffset": {
-                        "title": "Duration",
-                        "type": "object",
-                        "properties": {
-                          "seconds": {
-                            "type": "integer",
-                            "minimum": -9007199254740991,
-                            "maximum": 9007199254740991,
-                            "x-primitive": "int64"
+                      "timeOffset": {
+                        "oneOf": [
+                          {
+                            "title": "Duration",
+                            "type": "object",
+                            "properties": {
+                              "seconds": {
+                                "type": "integer",
+                                "minimum": -9007199254740991,
+                                "maximum": 9007199254740991,
+                                "x-primitive": "int64",
+                                "x-parser-schema-id": "<anonymous-schema-61>"
+                              },
+                              "nanos": {
+                                "type": "integer",
+                                "minimum": -2147483648,
+                                "maximum": 2147483647,
+                                "x-primitive": "int32",
+                                "x-parser-schema-id": "<anonymous-schema-62>"
+                              }
+                            },
+                            "x-parser-schema-id": "<anonymous-schema-60>"
                           },
-                          "nanos": {
-                            "type": "integer",
-                            "minimum": -2147483648,
-                            "maximum": 2147483647,
-                            "x-primitive": "int32"
+                          {
+                            "title": "TimeZone",
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "x-primitive": "string",
+                                "description": "IANA Time Zone Database time zone.",
+                                "x-parser-schema-id": "<anonymous-schema-64>"
+                              },
+                              "version": {
+                                "type": "string",
+                                "x-primitive": "string",
+                                "description": "IANA Time Zone Database version number.",
+                                "x-parser-schema-id": "<anonymous-schema-65>"
+                              }
+                            },
+                            "x-parser-schema-id": "<anonymous-schema-63>"
                           }
-                        }
-                      },
-                      "timeZone": {
-                        "title": "TimeZone",
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "string",
-                            "x-primitive": "string",
-                            "description": "IANA Time Zone Database time zone."
-                          },
-                          "version": {
-                            "type": "string",
-                            "x-primitive": "string",
-                            "description": "IANA Time Zone Database version number."
-                          }
-                        }
-                      }
-                    }
-                  },
-                  "stop": {
-                    "title": "StopMsg",
-                    "type": "object",
-                    "properties": {
-                      "event_id_from": {
-                        "title": "Int32Value",
-                        "type": "object",
-                        "properties": {
-                          "value": {
-                            "type": "integer",
-                            "minimum": -2147483648,
-                            "maximum": 2147483647,
-                            "x-primitive": "int32"
-                          }
-                        },
-                        "description": "ObjectId"
-                      },
-                      "event_id_to": {
-                        "title": "UInt32Value",
-                        "type": "object",
-                        "properties": {
-                          "value": {
-                            "type": "integer",
-                            "minimum": 0,
-                            "maximum": 4294967295,
-                            "x-primitive": "uint32"
-                          }
-                        },
-                        "description": "ObjectId"
-                      },
-                      "event_link_properties_id": {
-                        "title": "UInt64Value",
-                        "type": "object",
-                        "properties": {
-                          "value": {
-                            "type": "integer",
-                            "minimum": 0,
-                            "maximum": 9007199254740991,
-                            "x-primitive": "uint64"
-                          }
-                        },
-                        "description": "ObjectId"
-                      },
-                      "min_duration": {
-                        "type": "integer",
-                        "minimum": -2147483648,
-                        "maximum": 2147483647,
-                        "x-primitive": "int32"
-                      },
-                      "purposes": {
-                        "description": "",
-                        "type": "array",
-                        "items": {
-                          "type": "string",
-                          "x-primitive": "string"
-                        }
-                      }
-                    }
-                  },
-                  "movement": {
-                    "title": "MovementMsg",
-                    "type": "object",
-                    "properties": {
-                      "event_id_from": {
-                        "type": "integer",
-                        "minimum": -2147483648,
-                        "maximum": 2147483647,
-                        "x-primitive": "int32",
-                        "description": "ObjectId"
-                      },
-                      "event_id_to": {
-                        "type": "integer",
-                        "minimum": -2147483648,
-                        "maximum": 2147483647,
-                        "x-primitive": "int32",
-                        "description": "ObjectId"
-                      },
-                      "event_link_properties_id": {
-                        "title": "Int32Value",
-                        "type": "object",
-                        "properties": {
-                          "value": {
-                            "type": "integer",
-                            "minimum": -2147483648,
-                            "maximum": 2147483647,
-                            "x-primitive": "int32"
-                          }
-                        },
-                        "description": "ObjectId"
-                      },
-                      "min_duration": {
-                        "type": "integer",
-                        "minimum": -2147483648,
-                        "maximum": 2147483647,
-                        "x-primitive": "int32"
-                      },
-                      "is_min_duration_calculated": {
-                        "type": "boolean",
-                        "x-primitive": "bool"
-                      },
-                      "is_stop_over": {
-                        "type": "boolean",
-                        "x-primitive": "bool"
-                      },
-                      "fahrstrategie": {
-                        "title": "FahrstrategieEnum",
-                        "type": "string",
-                        "enum": [
-                          "FS_UNSPECIFIED",
-                          "FS_SCHNELL",
-                          "FS_HALTEN",
-                          "FS_NORMAL",
-                          "FS_FAHRZEIT_VERTEILEN"
-                        ],
-                        "x-enum-mapping": {
-                          "FS_UNSPECIFIED": 0,
-                          "FS_SCHNELL": 1,
-                          "FS_HALTEN": 2,
-                          "FS_NORMAL": 3,
-                          "FS_FAHRZEIT_VERTEILEN": 4
-                        }
+                        ]
                       }
                     }
                   },
@@ -1345,6 +1284,153 @@
                       "AOSS_OBSERVE_EARLIEST_TIMES": 4,
                       "AOSS_ONLY_WHEN_ROUTE_IS_SET": 5
                     }
+                  },
+                  "event_link": {
+                    "oneOf": [
+                      {
+                        "title": "StopMsg",
+                        "type": "object",
+                        "properties": {
+                          "event_id_from": {
+                            "title": "Int32Value",
+                            "type": "object",
+                            "properties": {
+                              "value": {
+                                "type": "integer",
+                                "minimum": -2147483648,
+                                "maximum": 2147483647,
+                                "x-primitive": "int32",
+                                "x-parser-schema-id": "<anonymous-schema-79>"
+                              }
+                            },
+                            "description": "ObjectId",
+                            "x-parser-schema-id": "<anonymous-schema-78>"
+                          },
+                          "event_id_to": {
+                            "title": "UInt32Value",
+                            "type": "object",
+                            "properties": {
+                              "value": {
+                                "type": "integer",
+                                "minimum": 0,
+                                "maximum": 4294967295,
+                                "x-primitive": "uint32",
+                                "x-parser-schema-id": "<anonymous-schema-81>"
+                              }
+                            },
+                            "description": "ObjectId",
+                            "x-parser-schema-id": "<anonymous-schema-80>"
+                          },
+                          "event_link_properties_id": {
+                            "title": "UInt64Value",
+                            "type": "object",
+                            "properties": {
+                              "value": {
+                                "type": "integer",
+                                "minimum": 0,
+                                "maximum": 9007199254740991,
+                                "x-primitive": "uint64",
+                                "x-parser-schema-id": "<anonymous-schema-83>"
+                              }
+                            },
+                            "description": "ObjectId",
+                            "x-parser-schema-id": "<anonymous-schema-82>"
+                          },
+                          "min_duration": {
+                            "type": "integer",
+                            "minimum": -2147483648,
+                            "maximum": 2147483647,
+                            "x-primitive": "int32",
+                            "x-parser-schema-id": "<anonymous-schema-84>"
+                          },
+                          "purposes": {
+                            "description": "",
+                            "type": "array",
+                            "items": {
+                              "type": "string",
+                              "x-primitive": "string",
+                              "x-parser-schema-id": "<anonymous-schema-86>"
+                            },
+                            "x-parser-schema-id": "<anonymous-schema-85>"
+                          }
+                        },
+                        "x-parser-schema-id": "<anonymous-schema-77>"
+                      },
+                      {
+                        "title": "MovementMsg",
+                        "type": "object",
+                        "properties": {
+                          "event_id_from": {
+                            "type": "integer",
+                            "minimum": -2147483648,
+                            "maximum": 2147483647,
+                            "x-primitive": "int32",
+                            "description": "ObjectId",
+                            "x-parser-schema-id": "<anonymous-schema-88>"
+                          },
+                          "event_id_to": {
+                            "type": "integer",
+                            "minimum": -2147483648,
+                            "maximum": 2147483647,
+                            "x-primitive": "int32",
+                            "description": "ObjectId",
+                            "x-parser-schema-id": "<anonymous-schema-89>"
+                          },
+                          "event_link_properties_id": {
+                            "title": "Int32Value",
+                            "type": "object",
+                            "properties": {
+                              "value": {
+                                "type": "integer",
+                                "minimum": -2147483648,
+                                "maximum": 2147483647,
+                                "x-primitive": "int32",
+                                "x-parser-schema-id": "<anonymous-schema-91>"
+                              }
+                            },
+                            "description": "ObjectId",
+                            "x-parser-schema-id": "<anonymous-schema-90>"
+                          },
+                          "min_duration": {
+                            "type": "integer",
+                            "minimum": -2147483648,
+                            "maximum": 2147483647,
+                            "x-primitive": "int32",
+                            "x-parser-schema-id": "<anonymous-schema-92>"
+                          },
+                          "is_min_duration_calculated": {
+                            "type": "boolean",
+                            "x-primitive": "bool",
+                            "x-parser-schema-id": "<anonymous-schema-93>"
+                          },
+                          "is_stop_over": {
+                            "type": "boolean",
+                            "x-primitive": "bool",
+                            "x-parser-schema-id": "<anonymous-schema-94>"
+                          },
+                          "fahrstrategie": {
+                            "title": "FahrstrategieEnum",
+                            "type": "string",
+                            "enum": [
+                              "FS_UNSPECIFIED",
+                              "FS_SCHNELL",
+                              "FS_HALTEN",
+                              "FS_NORMAL",
+                              "FS_FAHRZEIT_VERTEILEN"
+                            ],
+                            "x-enum-mapping": {
+                              "FS_UNSPECIFIED": 0,
+                              "FS_SCHNELL": 1,
+                              "FS_HALTEN": 2,
+                              "FS_NORMAL": 3,
+                              "FS_FAHRZEIT_VERTEILEN": 4
+                            },
+                            "x-parser-schema-id": "<anonymous-schema-95>"
+                          }
+                        },
+                        "x-parser-schema-id": "<anonymous-schema-87>"
+                      }
+                    ]
                   }
                 }
               }
