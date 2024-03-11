@@ -227,7 +227,6 @@
                 }
               },
               "timetable_events": {
-                "description": "",
                 "type": "array",
                 "items": {
                   "title": "TimetableEventMsg",
@@ -583,7 +582,6 @@
                               "x-parser-schema-id": "<anonymous-schema-84>"
                             },
                             "purposes": {
-                              "description": "",
                               "type": "array",
                               "items": {
                                 "type": "string",
@@ -988,7 +986,6 @@
               }
             },
             "timetable_events": {
-              "description": "",
               "type": "array",
               "items": {
                 "title": "TimetableEventMsg",
@@ -1344,7 +1341,6 @@
                             "x-parser-schema-id": "<anonymous-schema-84>"
                           },
                           "purposes": {
-                            "description": "",
                             "type": "array",
                             "items": {
                               "type": "string",
