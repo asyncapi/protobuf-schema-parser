@@ -93,20 +93,6 @@ class Proto2JsonSchema {
     if (!weak) {
       throw new Error('Imports are currently not implemented');
     }
-    /*
-    // Otherwise fetch from disk or network
-    let source: string;
-    try {
-      source = util.fs.readFileSync(filename).toString('utf8');
-    } catch (err) {
-      if (!weak) {
-        throw err;
-      }
-
-      return;
-    }
-    this.process(filename, source);
-    */
   }
 
   public compile(): AsyncAPISchema {
@@ -115,7 +101,7 @@ class Proto2JsonSchema {
     const rootItemCandidates = this.resolveByFilename(ROOT_FILENAME, this.root.nested as ProtoItems);
     const rootItem = this.findRootItem(rootItemCandidates);
 
-    return this.compileMessage(rootItem);
+    return this.compileMessage(rootItem, []);
   }
 
   private resolveByFilename(filename: string, items: ProtoItems) {
@@ -186,27 +172,51 @@ class Proto2JsonSchema {
    * Compiles a protobuf message to JSON schema
    */
   // eslint-disable-next-line sonarjs/cognitive-complexity
-  private compileMessage(item: protobuf.Type): AsyncAPISchemaDefinition {
+  private compileMessage(item: protobuf.Type, stack: string[]): AsyncAPISchemaDefinition {
+    const properties: {[key: string]: AsyncAPISchemaDefinition} = {};
+
     const obj: v3.AsyncAPISchemaDefinition = {
       title: item.name,
       type: 'object',
       required: [],
-      properties: {},
+      properties,
     };
+
+    const desc = this.extractDescription(item.comment);
+    if (desc !== null && desc.length > 0) {
+      obj.description = desc;
+    }
+
+    const timesSeenThisClassInStack = stack.filter(x => x === item.name).length;
+    if (timesSeenThisClassInStack >= 2) {
+      // Detected a recursion.
+      return obj;
+    }
+
+    stack.push(item.name);
 
     for (const fieldName in item.fields) {
       const field = item.fields[fieldName];
+
+      if (field.partOf && field.partOf.oneof.length > 1) {
+        // Filter only real oneof. Don't do for false positives optionals (oneof starting with _ and contain only one entry)
+        continue;
+      }
+
       if (field.required) {
         obj.required?.push(fieldName);
       }
 
       if (field.repeated) {
-        // eslint-disable-next-line  @typescript-eslint/no-non-null-assertion
-        obj.properties![field.name] = {
-          description: this.extractDescription(field.comment) || '',
+        properties[field.name] = {
           type: 'array',
-          items: this.compileField(field, item),
+          items: this.compileField(field, item, stack.slice()),
         };
+
+        const desc = this.extractDescription(field.comment);
+        if (desc !== null && desc.length > 0) {
+          properties[field.name].description = desc;
+        }
 
         if (field.comment) {
           const minItemsPattern = /@maxItems\\s(\\d+?)/i;
@@ -220,8 +230,26 @@ class Proto2JsonSchema {
           }
         }
       } else {
-        // eslint-disable-next-line  @typescript-eslint/no-non-null-assertion
-        obj.properties![field.name] = this.compileField(field, item);
+        properties[field.name] = this.compileField(field, item, stack.slice());
+      }
+    }
+
+    for (const oneOff of item.oneofsArray) {
+      if (oneOff.fieldsArray.length < 2) {
+        // Filter optionals (oneof starting with _ and contain only one entry)
+        continue;
+      }
+
+      if (!properties[oneOff.name]) {
+        properties[oneOff.name] = {
+          oneOf: []
+        };
+      }
+      const oneOf = (properties[oneOff.name] as any)['oneOf'] as any[];
+
+      for (const fieldName of oneOff.oneof) {
+        const field = item.fields[fieldName];
+        oneOf.push(this.compileField(field, item, stack.slice()));
       }
     }
 
@@ -254,7 +282,7 @@ class Proto2JsonSchema {
     return obj;
   }
 
-  private compileField(field: protobuf.Field, parentItem: protobuf.Type): v3.AsyncAPISchemaDefinition {
+  private compileField(field: protobuf.Field, parentItem: protobuf.Type, stack: string[]): v3.AsyncAPISchemaDefinition {
     let obj: v3.AsyncAPISchemaDefinition = {};
 
     if (PrimitiveTypes.PRIMITIVE_TYPES[field.type.toLowerCase()]) {
@@ -270,7 +298,7 @@ class Proto2JsonSchema {
       if (item instanceof protobuf.Enum) {
         obj = Object.assign(obj, this.compileEnum(item));
       } else {
-        obj = Object.assign(obj, this.compileMessage(item));
+        obj = Object.assign(obj, this.compileMessage(item, stack));
       }
     }
 
@@ -278,8 +306,12 @@ class Proto2JsonSchema {
     this.addDefaultFromCommentAnnotations(obj, field.comment);
 
     const desc = this.extractDescription(field.comment);
-    if (desc !== null) {
-      obj.description = desc;
+    if (desc !== null && desc.length > 0) {
+      if (obj.description) {
+        obj.description = (`${desc}\n${obj.description}`).trim();
+      } else {
+        obj.description = desc;
+      }
     }
 
     const examples = this.extractExamples(field.comment);
@@ -404,7 +436,7 @@ function tryParseToObject(value: string): string | ProtoAsJson {
         return  json;
       }
     } catch (_) {
-      // Ignored error, seams not to be a valid json. Maybe just an example starting with an { but is not a json.
+      // Ignored error, seams not to be a valid json. Maybe just an example starting with an "{" but is not a json.
     }
   }
 

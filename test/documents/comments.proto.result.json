@@ -14,7 +14,8 @@
             "type": "object",
             "required": [
               "start",
-              "end"
+              "end",
+              "line_size"
             ],
             "properties": {
               "start": {
@@ -29,23 +30,20 @@
                     "type": "integer",
                     "minimum": -2147483648,
                     "maximum": 2147483647,
-                    "x-primitive": "int32",
-
+                    "x-primitive": "int32"
                   },
                   "y": {
                     "type": "integer",
                     "minimum": -2147483648,
                     "maximum": 2147483647,
-                    "x-primitive": "int32",
-
+                    "x-primitive": "int32"
                   },
                   "label": {
                     "type": "string",
-                    "x-primitive": "string",
-
+                    "x-primitive": "string"
                   }
                 },
-
+                "description": "Single-line comment"
               },
               "end": {
                 "title": "Point",
@@ -59,34 +57,44 @@
                     "type": "integer",
                     "minimum": -2147483648,
                     "maximum": 2147483647,
-                    "x-primitive": "int32",
-
+                    "x-primitive": "int32"
                   },
                   "y": {
                     "type": "integer",
                     "minimum": -2147483648,
                     "maximum": 2147483647,
-                    "x-primitive": "int32",
-
+                    "x-primitive": "int32"
                   },
                   "label": {
                     "type": "string",
-                    "x-primitive": "string",
-
+                    "x-primitive": "string"
                   }
                 },
-
+                "description": "field comment A\nSingle-line comment"
               },
               "label": {
                 "type": "string",
                 "x-primitive": "string",
-
+                "description": "field comment B"
+              },
+              "line_size": {
+                "title": "LineSize",
+                "type": "string",
+                "enum": [
+                  "TST_A",
+                  "TST_B",
+                  "TST_C"
+                ],
+                "x-enum-mapping": {
+                  "TST_A": 1,
+                  "TST_B": 2,
+                  "TST_C": 3
+                },
+                "description": "Multi line\nfield comment B"
               }
             },
-
-          },
-
-
+            "description": "Multi-line comment"
+          }
         }
       }
     }
@@ -100,7 +108,8 @@
           "type": "object",
           "required": [
             "start",
-            "end"
+            "end",
+            "line_size"
           ],
           "properties": {
             "start": {
@@ -115,23 +124,20 @@
                   "type": "integer",
                   "minimum": -2147483648,
                   "maximum": 2147483647,
-                  "x-primitive": "int32",
-
+                  "x-primitive": "int32"
                 },
                 "y": {
                   "type": "integer",
                   "minimum": -2147483648,
                   "maximum": 2147483647,
-                  "x-primitive": "int32",
-
+                  "x-primitive": "int32"
                 },
                 "label": {
                   "type": "string",
-                  "x-primitive": "string",
-
+                  "x-primitive": "string"
                 }
               },
-
+              "description": "Single-line comment"
             },
             "end": {
               "title": "Point",
@@ -145,37 +151,45 @@
                   "type": "integer",
                   "minimum": -2147483648,
                   "maximum": 2147483647,
-                  "x-primitive": "int32",
-
+                  "x-primitive": "int32"
                 },
                 "y": {
                   "type": "integer",
                   "minimum": -2147483648,
                   "maximum": 2147483647,
-                  "x-primitive": "int32",
-
+                  "x-primitive": "int32"
                 },
                 "label": {
                   "type": "string",
-                  "x-primitive": "string",
-
+                  "x-primitive": "string"
                 }
               },
-
+              "description": "field comment A\nSingle-line comment"
             },
             "label": {
               "type": "string",
               "x-primitive": "string",
-
+              "description": "field comment B"
+            },
+            "line_size": {
+              "title": "LineSize",
+              "type": "string",
+              "enum": [
+                "TST_A",
+                "TST_B",
+                "TST_C"
+              ],
+              "x-enum-mapping": {
+                "TST_A": 1,
+                "TST_B": 2,
+                "TST_C": 3
+              },
+              "description": "Multi line\nfield comment B"
             }
           },
-
-        },
-
-
+          "description": "Multi-line comment"
+        }
       }
     }
-  },
-
-
+  }
 }

@@ -29,23 +29,19 @@
                     "type": "integer",
                     "minimum": -2147483648,
                     "maximum": 2147483647,
-                    "x-primitive": "int32",
-
+                    "x-primitive": "int32"
                   },
                   "y": {
                     "type": "integer",
                     "minimum": -2147483648,
                     "maximum": 2147483647,
-                    "x-primitive": "int32",
-
+                    "x-primitive": "int32"
                   },
                   "label": {
                     "type": "string",
-                    "x-primitive": "string",
-
+                    "x-primitive": "string"
                   }
-                },
-
+                }
               },
               "end": {
                 "title": "Point",
@@ -59,34 +55,26 @@
                     "type": "integer",
                     "minimum": -2147483648,
                     "maximum": 2147483647,
-                    "x-primitive": "int32",
-
+                    "x-primitive": "int32"
                   },
                   "y": {
                     "type": "integer",
                     "minimum": -2147483648,
                     "maximum": 2147483647,
-                    "x-primitive": "int32",
-
+                    "x-primitive": "int32"
                   },
                   "label": {
                     "type": "string",
-                    "x-primitive": "string",
-
+                    "x-primitive": "string"
                   }
-                },
-
+                }
               },
               "label": {
                 "type": "string",
-                "x-primitive": "string",
-
+                "x-primitive": "string"
               }
-            },
-
-          },
-
-
+            }
+          }
         }
       }
     }
@@ -115,23 +103,19 @@
                   "type": "integer",
                   "minimum": -2147483648,
                   "maximum": 2147483647,
-                  "x-primitive": "int32",
-
+                  "x-primitive": "int32"
                 },
                 "y": {
                   "type": "integer",
                   "minimum": -2147483648,
                   "maximum": 2147483647,
-                  "x-primitive": "int32",
-
+                  "x-primitive": "int32"
                 },
                 "label": {
                   "type": "string",
-                  "x-primitive": "string",
-
+                  "x-primitive": "string"
                 }
-              },
-
+              }
             },
             "end": {
               "title": "Point",
@@ -145,37 +129,27 @@
                   "type": "integer",
                   "minimum": -2147483648,
                   "maximum": 2147483647,
-                  "x-primitive": "int32",
-
+                  "x-primitive": "int32"
                 },
                 "y": {
                   "type": "integer",
                   "minimum": -2147483648,
                   "maximum": 2147483647,
-                  "x-primitive": "int32",
-
+                  "x-primitive": "int32"
                 },
                 "label": {
                   "type": "string",
-                  "x-primitive": "string",
-
+                  "x-primitive": "string"
                 }
-              },
-
+              }
             },
             "label": {
               "type": "string",
-              "x-primitive": "string",
-
+              "x-primitive": "string"
             }
-          },
-
-        },
-
-
+          }
+        }
       }
     }
-  },
-
-
+  }
 }

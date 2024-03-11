@@ -1,17 +1,31 @@
-import {
-  AsyncAPIDocumentInterface,
-  Diagnostic,
-  Parser,
-} from '@asyncapi/parser';
+import {AsyncAPIDocumentInterface, Diagnostic, Parser,} from '@asyncapi/parser';
 import * as fs from 'fs';
 import * as path from 'path';
-import { ProtoBuffSchemaParser } from '../src';
+import {ProtoBuffSchemaParser} from '../src';
 
-function stripAsyncApiTags(json: string) {
-  if (!json) {
-    return json;
+function stripParserExtraInfos(json: any): any {
+  if (json === undefined || json === null) {
+    return;
   }
-  return json.replace(/^.*x-parser-.*$/gm, '');
+
+  for (const [key, value] of Object.entries(json)) {
+    if (key.startsWith('x-parser-')) {
+      delete json[key];
+      continue;
+    }
+
+    if (Array.isArray(value)) {
+      for (let i = 0; i < value.length; i++) {
+        if (typeof key[i] === 'object') {
+          json[key][i] = stripParserExtraInfos(key[i]);
+        }
+      }
+    } else if (typeof value === 'object') {
+      json[key] = stripParserExtraInfos(value);
+    }
+  }
+
+  return json;
 }
 
 function writeResults(
@@ -20,18 +34,18 @@ function writeResults(
 ) {
   fs.writeFileSync(
     path.resolve(__dirname, filename),
-    stripAsyncApiTags(JSON.stringify(document?.json(), null, 2)),
+    JSON.stringify(stripParserExtraInfos(document?.json()), null, 2),
     'utf8'
   );
 }
 
 function readResultFile(filename: string) {
-  return stripAsyncApiTags(
+  return stripParserExtraInfos(JSON.parse(
     fs.readFileSync(path.resolve(__dirname, filename), 'utf8')
-  );
+  ));
 }
 
-const UPDATE_RESULTS = false; // set to true for a single run, if you change something and compare new target files manualy with git tools
+const UPDATE_RESULTS = false; // set to true for a single run if you change something and compare new target files manually with git tools
 
 describe('parse()', function () {
   const parser = ProtoBuffSchemaParser();
@@ -41,7 +55,7 @@ describe('parse()', function () {
   async function parseSpec(
     filename: string
   ): Promise<AsyncAPIDocumentInterface | undefined> {
-    const { document, diagnostics } = await coreParser.parse(
+    const {document, diagnostics} = await coreParser.parse(
       fs.readFileSync(path.resolve(__dirname, filename), 'utf8')
     );
 
@@ -62,8 +76,10 @@ describe('parse()', function () {
     }
 
     expect(
-      stripAsyncApiTags(JSON.stringify(document?.json(), null, 2))
-    ).toEqual(readResultFile('./documents/simple.proto2.result.json'));
+      stripParserExtraInfos(document?.json())
+    ).toEqual(
+      readResultFile('./documents/simple.proto2.result.json')
+    );
   });
 
   it('should parse proto3 data types', async function () {
@@ -74,8 +90,24 @@ describe('parse()', function () {
     }
 
     expect(
-      stripAsyncApiTags(JSON.stringify(document?.json(), null, 2))
-    ).toEqual(readResultFile('./documents/simple.proto3.result.json'));
+      stripParserExtraInfos(document?.json())
+    ).toEqual(
+      readResultFile('./documents/simple.proto3.result.json')
+    );
+  });
+
+  it('should parse proto3 data types with imports and schema with same name in different namespaces', async function () {
+    const document = await parseSpec('./documents/complex.proto3.yaml');
+
+    if (UPDATE_RESULTS) {
+      writeResults(document, './documents/complex.proto3.result.json');
+    }
+
+    expect(
+      stripParserExtraInfos(document?.json())
+    ).toEqual(
+      readResultFile('./documents/complex.proto3.result.json')
+    );
   });
 
   it('should parse proto data types including comments', async function () {
@@ -86,8 +118,10 @@ describe('parse()', function () {
     }
 
     expect(
-      stripAsyncApiTags(JSON.stringify(document?.json(), null, 2))
-    ).toEqual(readResultFile('./documents/comments.proto.result.json'));
+      stripParserExtraInfos(document?.json())
+    ).toEqual(
+      readResultFile('./documents/comments.proto.result.json')
+    );
   });
 
   it('should parse realworld train_run proto data types', async function () {
@@ -101,14 +135,14 @@ describe('parse()', function () {
     }
 
     expect(
-      stripAsyncApiTags(JSON.stringify(document?.json(), null, 2))
+      stripParserExtraInfos(document?.json())
     ).toEqual(
       readResultFile('./documents/realworld.train_run.proto.result.json')
     );
   });
 
   it('multiple root messages in proto schema should fail', async function () {
-    const { document, diagnostics } = await coreParser.parse(
+    const {document, diagnostics} = await coreParser.parse(
       fs.readFileSync(path.resolve(__dirname, './documents/invalid.multiple_root.yaml'), 'utf8')
     );
 
@@ -120,7 +154,7 @@ describe('parse()', function () {
   });
 
   it('no root messages in proto schema should fail', async function () {
-    const { document, diagnostics } = await coreParser.parse(
+    const {document, diagnostics} = await coreParser.parse(
       fs.readFileSync(path.resolve(__dirname, './documents/invalid.schema-empty.yaml'), 'utf8')
     );
 
@@ -128,6 +162,23 @@ describe('parse()', function () {
 
     expect(filterDiagnostics(diagnostics, 'asyncapi2-schemas')).not.toHaveLength(
       0
+    );
+  });
+
+  it('recursion in proto should not lead to a infinity loop', async function () {
+    const document = await parseSpec('./documents/recursive.proto3.yaml');
+
+    if (UPDATE_RESULTS) {
+      writeResults(
+        document,
+        './documents/recursive.proto3.result.json'
+      );
+    }
+
+    expect(
+      stripParserExtraInfos(document?.json())
+    ).toEqual(
+      readResultFile('./documents/recursive.proto3.result.json')
     );
   });
 

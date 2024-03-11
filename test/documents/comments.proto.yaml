@@ -13,16 +13,33 @@ components:
     testMessage:
       schemaFormat: 'application/vnd.google.protobuf;version=3'
       payload: |
-        //Single-line comment
+        // Single-line comment
         message Point {
           required int32 x = 1;
           required int32 y = 2;
           optional string label = 3;
         }
 
-        /*Multi-line comment*/
+        /* Multi-line comment */
         message Line {/*
         */required Point start = 1;
+          // field comment A
           required Point end = 2;
+          /* field comment B */
           optional string label = 3;
+          /* 
+           * Multi line
+           * field comment B
+           */
+          required LineSize line_size = 4;
         }//Comment after closing brace of last message
+
+        // Line size
+        enum LineSize{
+            // the first enum comment
+            TST_A = 1;
+            // the second enum comment
+            TST_B = 2;
+            // the third enum comment
+            TST_C = 3;
+        }
