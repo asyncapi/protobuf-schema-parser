@@ -191,7 +191,8 @@ class Proto2JsonSchema {
     for (const fieldName in item.fields) {
       const field = item.fields[fieldName];
 
-      if (field.partOf) {
+      if (field.partOf && field.partOf.oneof.length > 1) {
+        // Filter only real oneof. Dont do for false positives optionals (oneoff starting with _ and contain only one entry)
         continue;
       }
 
@@ -225,6 +226,11 @@ class Proto2JsonSchema {
     }
 
     for (const oneOff of item.oneofsArray) {
+      if (oneOff.fieldsArray.length < 2) {
+        // Filter optionals (oneoff starting with _ and contain only one entry)
+        continue;
+      }
+
       // eslint-disable-next-line  @typescript-eslint/no-non-null-assertion
       if (!obj.properties![oneOff.name]) {
         // eslint-disable-next-line  @typescript-eslint/no-non-null-assertion

@@ -113,39 +113,49 @@
                       "x-primitive": "int32",
                       "description": "Fractions of seconds in nanoseconds."
                     },
-                    "utcOffset": {
-                      "title": "Duration",
-                      "type": "object",
-                      "properties": {
-                        "seconds": {
-                          "type": "integer",
-                          "minimum": -9007199254740991,
-                          "maximum": 9007199254740991,
-                          "x-primitive": "int64"
+                    "timeOffset": {
+                      "oneOf": [
+                        {
+                          "title": "Duration",
+                          "type": "object",
+                          "properties": {
+                            "seconds": {
+                              "type": "integer",
+                              "minimum": -9007199254740991,
+                              "maximum": 9007199254740991,
+                              "x-primitive": "int64",
+                              "x-parser-schema-id": "<anonymous-schema-19>"
+                            },
+                            "nanos": {
+                              "type": "integer",
+                              "minimum": -2147483648,
+                              "maximum": 2147483647,
+                              "x-primitive": "int32",
+                              "x-parser-schema-id": "<anonymous-schema-20>"
+                            }
+                          },
+                          "x-parser-schema-id": "<anonymous-schema-18>"
                         },
-                        "nanos": {
-                          "type": "integer",
-                          "minimum": -2147483648,
-                          "maximum": 2147483647,
-                          "x-primitive": "int32"
+                        {
+                          "title": "TimeZone",
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "x-primitive": "string",
+                              "description": "IANA Time Zone Database time zone.",
+                              "x-parser-schema-id": "<anonymous-schema-22>"
+                            },
+                            "version": {
+                              "type": "string",
+                              "x-primitive": "string",
+                              "description": "IANA Time Zone Database version number.",
+                              "x-parser-schema-id": "<anonymous-schema-23>"
+                            }
+                          },
+                          "x-parser-schema-id": "<anonymous-schema-21>"
                         }
-                      }
-                    },
-                    "timeZone": {
-                      "title": "TimeZone",
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "string",
-                          "x-primitive": "string",
-                          "description": "IANA Time Zone Database time zone."
-                        },
-                        "version": {
-                          "type": "string",
-                          "x-primitive": "string",
-                          "description": "IANA Time Zone Database version number."
-                        }
-                      }
+                      ]
                     }
                   }
                 },
@@ -313,39 +323,49 @@
                     "x-primitive": "int32",
                     "description": "Fractions of seconds in nanoseconds."
                   },
-                  "utcOffset": {
-                    "title": "Duration",
-                    "type": "object",
-                    "properties": {
-                      "seconds": {
-                        "type": "integer",
-                        "minimum": -9007199254740991,
-                        "maximum": 9007199254740991,
-                        "x-primitive": "int64"
+                  "timeOffset": {
+                    "oneOf": [
+                      {
+                        "title": "Duration",
+                        "type": "object",
+                        "properties": {
+                          "seconds": {
+                            "type": "integer",
+                            "minimum": -9007199254740991,
+                            "maximum": 9007199254740991,
+                            "x-primitive": "int64",
+                            "x-parser-schema-id": "<anonymous-schema-19>"
+                          },
+                          "nanos": {
+                            "type": "integer",
+                            "minimum": -2147483648,
+                            "maximum": 2147483647,
+                            "x-primitive": "int32",
+                            "x-parser-schema-id": "<anonymous-schema-20>"
+                          }
+                        },
+                        "x-parser-schema-id": "<anonymous-schema-18>"
                       },
-                      "nanos": {
-                        "type": "integer",
-                        "minimum": -2147483648,
-                        "maximum": 2147483647,
-                        "x-primitive": "int32"
+                      {
+                        "title": "TimeZone",
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "x-primitive": "string",
+                            "description": "IANA Time Zone Database time zone.",
+                            "x-parser-schema-id": "<anonymous-schema-22>"
+                          },
+                          "version": {
+                            "type": "string",
+                            "x-primitive": "string",
+                            "description": "IANA Time Zone Database version number.",
+                            "x-parser-schema-id": "<anonymous-schema-23>"
+                          }
+                        },
+                        "x-parser-schema-id": "<anonymous-schema-21>"
                       }
-                    }
-                  },
-                  "timeZone": {
-                    "title": "TimeZone",
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "string",
-                        "x-primitive": "string",
-                        "description": "IANA Time Zone Database time zone."
-                      },
-                      "version": {
-                        "type": "string",
-                        "x-primitive": "string",
-                        "description": "IANA Time Zone Database version number."
-                      }
-                    }
+                    ]
                   }
                 }
               },
@@ -509,39 +529,49 @@
                   "x-primitive": "int32",
                   "description": "Fractions of seconds in nanoseconds."
                 },
-                "utcOffset": {
-                  "title": "Duration",
-                  "type": "object",
-                  "properties": {
-                    "seconds": {
-                      "type": "integer",
-                      "minimum": -9007199254740991,
-                      "maximum": 9007199254740991,
-                      "x-primitive": "int64"
+                "timeOffset": {
+                  "oneOf": [
+                    {
+                      "title": "Duration",
+                      "type": "object",
+                      "properties": {
+                        "seconds": {
+                          "type": "integer",
+                          "minimum": -9007199254740991,
+                          "maximum": 9007199254740991,
+                          "x-primitive": "int64",
+                          "x-parser-schema-id": "<anonymous-schema-19>"
+                        },
+                        "nanos": {
+                          "type": "integer",
+                          "minimum": -2147483648,
+                          "maximum": 2147483647,
+                          "x-primitive": "int32",
+                          "x-parser-schema-id": "<anonymous-schema-20>"
+                        }
+                      },
+                      "x-parser-schema-id": "<anonymous-schema-18>"
                     },
-                    "nanos": {
-                      "type": "integer",
-                      "minimum": -2147483648,
-                      "maximum": 2147483647,
-                      "x-primitive": "int32"
+                    {
+                      "title": "TimeZone",
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "x-primitive": "string",
+                          "description": "IANA Time Zone Database time zone.",
+                          "x-parser-schema-id": "<anonymous-schema-22>"
+                        },
+                        "version": {
+                          "type": "string",
+                          "x-primitive": "string",
+                          "description": "IANA Time Zone Database version number.",
+                          "x-parser-schema-id": "<anonymous-schema-23>"
+                        }
+                      },
+                      "x-parser-schema-id": "<anonymous-schema-21>"
                     }
-                  }
-                },
-                "timeZone": {
-                  "title": "TimeZone",
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "string",
-                      "x-primitive": "string",
-                      "description": "IANA Time Zone Database time zone."
-                    },
-                    "version": {
-                      "type": "string",
-                      "x-primitive": "string",
-                      "description": "IANA Time Zone Database version number."
-                    }
-                  }
+                  ]
                 }
               }
             },
