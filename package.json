@@ -46,7 +46,7 @@
     "README.md"
   ],
   "dependencies": {
-    "@asyncapi/parser": "^3.0.12",
+    "@asyncapi/parser": "^3.0.13",
     "@types/protocol-buffers-schema": "^3.4.1",
     "protobufjs": "^7.2.6"
   },
