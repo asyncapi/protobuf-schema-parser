@@ -15,6 +15,10 @@
             "schema": {
               "title": "A",
               "type": "object",
+              "required": [
+                "something",
+                "recursive"
+              ],
               "properties": {
                 "something": {
                   "type": "string",
@@ -25,6 +29,10 @@
                   "items": {
                     "title": "A",
                     "type": "object",
+                    "required": [
+                      "something",
+                      "recursive"
+                    ],
                     "properties": {
                       "something": {
                         "type": "string",
@@ -61,6 +69,10 @@
               "schema": {
                 "title": "A",
                 "type": "object",
+                "required": [
+                  "something",
+                  "recursive"
+                ],
                 "properties": {
                   "something": {
                     "type": "string",
@@ -71,6 +83,10 @@
                     "items": {
                       "title": "A",
                       "type": "object",
+                      "required": [
+                        "something",
+                        "recursive"
+                      ],
                       "properties": {
                         "something": {
                           "type": "string",
@@ -101,6 +117,10 @@
             "schema": {
               "title": "A",
               "type": "object",
+              "required": [
+                "something",
+                "recursive"
+              ],
               "properties": {
                 "something": {
                   "type": "string",
@@ -111,6 +131,10 @@
                   "items": {
                     "title": "A",
                     "type": "object",
+                    "required": [
+                      "something",
+                      "recursive"
+                    ],
                     "properties": {
                       "something": {
                         "type": "string",
@@ -143,6 +167,10 @@
           "schema": {
             "title": "A",
             "type": "object",
+            "required": [
+              "something",
+              "recursive"
+            ],
             "properties": {
               "something": {
                 "type": "string",
@@ -153,6 +181,10 @@
                 "items": {
                   "title": "A",
                   "type": "object",
+                  "required": [
+                    "something",
+                    "recursive"
+                  ],
                   "properties": {
                     "something": {
                       "type": "string",
