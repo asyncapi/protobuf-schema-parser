@@ -119,7 +119,7 @@ rules:
   "@typescript-eslint/ban-types": "off"
 
 overrides:
-  - files: 
+  - files:
       - "test/**"
       - "*.spec.ts"
       - "*.test.ts"
@@ -130,3 +130,14 @@ overrides:
       security/detect-non-literal-fs-filename: 0
       "@typescript-eslint/no-non-null-assertion": 0
       "@typescript-eslint/no-unused-vars": 0
+
+ignorePatterns:
+  - node_modules
+  - '*.tgz'
+  - .vscode
+  - .DS_Store
+  - /docs
+  - /coverage
+  - /lib
+  - /esm
+  - /cjs
