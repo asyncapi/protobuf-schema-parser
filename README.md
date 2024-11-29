@@ -143,9 +143,35 @@ message Point {
 
 ### Per message annotation
 
-
 | annotation | description 	                                                                                            |
 |------------|:---------------------------------------------------------------------------------------------------------|
 | @RootNode  | If there are multiple types without an parent you can give a hint to the root node with this annotation. |
+
+### Head annotation
+
+| annotation | description 	                                             |
+|------------|:----------------------------------------------------------|
+| @Option    | In head of your file you can place options for the parser |
+
+
+### Head annotation "Option"
+
+The `@Option` have to follow by space separated options key and another space separated value 
+
+```
+// @Option primitiveTypesWithLimits false
+
+message Point {
+
+}
+```
+
+Possible options are:
+
+
+| option                   | description  	                                                                                             | def  |
+|--------------------------|:-----------------------------------------------------------------------------------------------------------|:-----|
+| primitiveTypesWithLimits | If you dont like to get default Min and Max limits for primitive types, you can set this option to `false` | true |
+
 
 

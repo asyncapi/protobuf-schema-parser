@@ -8,6 +8,7 @@ import {AsyncAPISchemaDefinition} from '@asyncapi/parser/esm/spec-types/v3';
 
 const ROOT_FILENAME = 'root';
 const COMMENT_ROOT_NODE = '@RootNode';
+const COMMENT_OPTION = '@Option';
 const COMMENT_EXAMPLE = '@Example';
 const COMMENT_DEFAULT = '@Default';
 
@@ -18,9 +19,37 @@ class Proto2JsonSchema {
     keepCase: true,
     alternateCommentMode: true
   };
+  private mapperOptions: { [key: string]: string | boolean } = {
+    primitiveTypesWithLimits: true
+  };
 
   constructor(rawSchema: string) {
+    this.parseOptionsAnnotation(rawSchema);
+
     this.process(ROOT_FILENAME, rawSchema);
+  }
+
+  private parseOptionsAnnotation(rawSchema: string) {
+    const regex = /\s*(\/\/|\*)\s*@Option\s+(?<key>\w{1,50})\s+(?<value>[^\r\n]{1,200})/g;
+    let m: RegExpExecArray | null;
+    while ((m = regex.exec(rawSchema)) !== null) {
+      // This is necessary to avoid infinite loops with zero-width matches
+      if (m.index === regex.lastIndex) {
+        regex.lastIndex++;
+      }
+
+      if (m.groups === undefined) {
+        break;
+      }
+
+      if (m.groups.value === 'true') {
+        this.mapperOptions[m.groups.key] = true;
+      } else if (m.groups.value === 'false') {
+        this.mapperOptions[m.groups.key] = false;
+      } else {
+        this.mapperOptions[m.groups.key] = m.groups.value;
+      }
+    }
   }
 
   private process(filename: string, source: string | ProtoAsJson) {
@@ -182,7 +211,7 @@ class Proto2JsonSchema {
    */
   // eslint-disable-next-line sonarjs/cognitive-complexity
   private compileMessage(item: protobuf.Type, stack: string[]): AsyncAPISchemaDefinition {
-    const properties: {[key: string]: AsyncAPISchemaDefinition} = {};
+    const properties: { [key: string]: AsyncAPISchemaDefinition } = {};
 
     const obj: v3.AsyncAPISchemaDefinition = {
       title: item.name,
@@ -228,7 +257,7 @@ class Proto2JsonSchema {
         }
 
         if (field.comment) {
-          const minItemsPattern = /@maxItems\\s(\\d+?)/i;
+          const minItemsPattern = /@minItems\\s(\\d+?)/i;
           const maxItemsPattern = /@maxItems\\s(\\d+?)/i;
           let m: RegExpExecArray | null;
           if ((m = minItemsPattern.exec(field.comment)) !== null) {
@@ -294,8 +323,10 @@ class Proto2JsonSchema {
   private compileField(field: protobuf.Field, parentItem: protobuf.Type, stack: string[]): v3.AsyncAPISchemaDefinition {
     let obj: v3.AsyncAPISchemaDefinition = {};
 
-    if (PrimitiveTypes.PRIMITIVE_TYPES[field.type.toLowerCase()]) {
-      obj = Object.assign(obj, PrimitiveTypes.PRIMITIVE_TYPES[field.type.toLowerCase()]);
+    if (PrimitiveTypes.PRIMITIVE_TYPES_WITH_LIMITS[field.type.toLowerCase()]) {
+      obj = (this.mapperOptions.primitiveTypesWithLimits) ?
+        Object.assign(obj, PrimitiveTypes.PRIMITIVE_TYPES_WITH_LIMITS[field.type.toLowerCase()]) :
+        Object.assign(obj, PrimitiveTypes.PRIMITIVE_TYPES_MINIMAL[field.type.toLowerCase()]);
       obj['x-primitive'] = field.type;
     } else {
       const item = parentItem.lookupTypeOrEnum(field.type);
@@ -339,6 +370,7 @@ class Proto2JsonSchema {
     comment = comment
       .replace(new RegExp(`\\s{0,15}${COMMENT_EXAMPLE}\\s{0,15}(.+)`, 'ig'), '')
       .replace(new RegExp(`\\s{0,15}${COMMENT_DEFAULT}\\s{0,15}(.+)`, 'ig'), '')
+      .replace(new RegExp(`\\s{0,15}${COMMENT_OPTION}\\s{0,15}(.+)`, 'ig'), '')
       .replace(new RegExp(`\\s{0,15}${COMMENT_ROOT_NODE}`, 'ig'), '')
       .replace(new RegExp('\\s{0,15}@(Min|Max|Pattern|Minimum|Maximum|ExclusiveMinimum|ExclusiveMaximum|MultipleOf|MaxLength|MinLength|MaxItems|MinItems)\\s{0,15}[\\d.]{1,20}', 'ig'), '')
       .trim();
@@ -350,12 +382,12 @@ class Proto2JsonSchema {
     return comment;
   }
 
-  private extractExamples(comment: string | null): (string|ProtoAsJson)[] | null {
+  private extractExamples(comment: string | null): (string | ProtoAsJson)[] | null {
     if (!comment) {
       return null;
     }
 
-    const examples: (string|ProtoAsJson)[] = [];
+    const examples: (string | ProtoAsJson)[] = [];
 
     let m: RegExpExecArray | null;
     const examplePattern = new RegExp(`\\s*${COMMENT_EXAMPLE}\\s(.+)$`, 'i');
@@ -413,6 +445,7 @@ class Proto2JsonSchema {
       }
     }
   }
+
   /* eslint-enable security/detect-unsafe-regex */
 
   private addDefaultFromCommentAnnotations(obj: AsyncAPISchemaDefinition, comment: string | null) {
@@ -442,7 +475,7 @@ function tryParseToObject(value: string): string | ProtoAsJson {
     try {
       const json = JSON.parse(value);
       if (json) {
-        return  json;
+        return json;
       }
     } catch (_) {
       // Ignored error, seams not to be a valid json. Maybe just an example starting with an "{" but is not a json.

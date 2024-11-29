@@ -34,8 +34,6 @@
                 "properties": {
                   "id": {
                     "type": "integer",
-                    "minimum": -2147483648,
-                    "maximum": 2147483647,
                     "x-primitive": "int32",
                     "description": "ObjectId"
                   },
@@ -54,23 +52,23 @@
                     "properties": {
                       "year": {
                         "type": "integer",
+                        "x-primitive": "int32",
                         "minimum": 0,
                         "maximum": 9999,
-                        "x-primitive": "int32",
                         "description": "Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year"
                       },
                       "month": {
                         "type": "integer",
+                        "x-primitive": "int32",
                         "minimum": 0,
                         "maximum": 12,
-                        "x-primitive": "int32",
                         "description": "Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day."
                       },
                       "day": {
                         "type": "integer",
+                        "x-primitive": "int32",
                         "minimum": 0,
                         "maximum": 31,
-                        "x-primitive": "int32",
                         "description": "Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant."
                       }
                     }
@@ -106,14 +104,10 @@
                         "properties": {
                           "seconds": {
                             "type": "integer",
-                            "minimum": -9007199254740991,
-                            "maximum": 9007199254740991,
                             "x-primitive": "int64"
                           },
                           "nanos": {
                             "type": "integer",
-                            "minimum": -2147483648,
-                            "maximum": 2147483647,
                             "x-primitive": "int32"
                           }
                         }
@@ -128,14 +122,10 @@
                         "properties": {
                           "seconds": {
                             "type": "integer",
-                            "minimum": -9007199254740991,
-                            "maximum": 9007199254740991,
                             "x-primitive": "int64"
                           },
                           "nanos": {
                             "type": "integer",
-                            "minimum": -2147483648,
-                            "maximum": 2147483647,
                             "x-primitive": "int32"
                           }
                         }
@@ -152,14 +142,10 @@
                     "properties": {
                       "seconds": {
                         "type": "integer",
-                        "minimum": -9007199254740991,
-                        "maximum": 9007199254740991,
                         "x-primitive": "int64"
                       },
                       "nanos": {
                         "type": "integer",
-                        "minimum": -2147483648,
-                        "maximum": 2147483647,
                         "x-primitive": "int32"
                       }
                     },
@@ -196,8 +182,6 @@
                         "properties": {
                           "value": {
                             "type": "integer",
-                            "minimum": -2147483648,
-                            "maximum": 2147483647,
                             "x-primitive": "int32"
                           }
                         },
@@ -212,8 +196,6 @@
                         "properties": {
                           "value": {
                             "type": "integer",
-                            "minimum": -2147483648,
-                            "maximum": 2147483647,
                             "x-primitive": "int32"
                           }
                         },
@@ -221,8 +203,6 @@
                       },
                       "reihenfolge": {
                         "type": "integer",
-                        "minimum": -2147483648,
-                        "maximum": 2147483647,
                         "x-primitive": "int32"
                       },
                       "umsystem": {
@@ -238,8 +218,6 @@
                         "properties": {
                           "value": {
                             "type": "integer",
-                            "minimum": -2147483648,
-                            "maximum": 2147483647,
                             "x-primitive": "int32"
                           }
                         },
@@ -272,8 +250,6 @@
                         "properties": {
                           "value": {
                             "type": "integer",
-                            "minimum": -2147483648,
-                            "maximum": 2147483647,
                             "x-primitive": "int32"
                           }
                         },
@@ -290,6 +266,7 @@
                   "type": "object",
                   "required": [
                     "id",
+                    "nodeId",
                     "scheduled_time",
                     "production_time",
                     "train_run_segment",
@@ -299,10 +276,18 @@
                   "properties": {
                     "id": {
                       "type": "integer",
-                      "minimum": -2147483648,
-                      "maximum": 2147483647,
                       "x-primitive": "int32",
                       "description": "ObjectId"
+                    },
+                    "nodeId": {
+                      "type": "integer",
+                      "x-primitive": "int32",
+                      "minimum": 0,
+                      "maximum": 1200,
+                      "description": "Reference to a topology node.",
+                      "examples": [
+                        "42217"
+                      ]
                     },
                     "scheduled_time": {
                       "title": "DateTime",
@@ -319,51 +304,51 @@
                       "properties": {
                         "year": {
                           "type": "integer",
+                          "x-primitive": "int32",
                           "minimum": 0,
                           "maximum": 9999,
-                          "x-primitive": "int32",
                           "description": "Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year"
                         },
                         "month": {
                           "type": "integer",
+                          "x-primitive": "int32",
                           "minimum": 0,
                           "maximum": 12,
-                          "x-primitive": "int32",
                           "description": "Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day."
                         },
                         "day": {
                           "type": "integer",
+                          "x-primitive": "int32",
                           "minimum": 0,
                           "maximum": 31,
-                          "x-primitive": "int32",
                           "description": "Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant."
                         },
                         "hours": {
                           "type": "integer",
+                          "x-primitive": "int32",
                           "minimum": 0,
                           "maximum": 23,
-                          "x-primitive": "int32",
                           "description": "Hours of day in 24 hour format."
                         },
                         "minutes": {
                           "type": "integer",
+                          "x-primitive": "int32",
                           "minimum": 0,
                           "maximum": 59,
-                          "x-primitive": "int32",
                           "description": "Minutes of hour of day."
                         },
                         "seconds": {
                           "type": "integer",
+                          "x-primitive": "int32",
                           "minimum": 0,
                           "maximum": 60,
-                          "x-primitive": "int32",
                           "description": "Seconds of minutes of the time. Must normally be from 0 to 59. An API may allow the value 60 if it allows leap-seconds."
                         },
                         "nanos": {
                           "type": "integer",
+                          "x-primitive": "int32",
                           "minimum": 0,
                           "maximum": 999999999,
-                          "x-primitive": "int32",
                           "description": "Fractions of seconds in nanoseconds."
                         },
                         "timeOffset": {
@@ -378,20 +363,16 @@
                               "properties": {
                                 "seconds": {
                                   "type": "integer",
-                                  "minimum": -9007199254740991,
-                                  "maximum": 9007199254740991,
                                   "x-primitive": "int64",
-                                  "x-parser-schema-id": "<anonymous-schema-46>"
+                                  "x-parser-schema-id": "<anonymous-schema-47>"
                                 },
                                 "nanos": {
                                   "type": "integer",
-                                  "minimum": -2147483648,
-                                  "maximum": 2147483647,
                                   "x-primitive": "int32",
-                                  "x-parser-schema-id": "<anonymous-schema-47>"
+                                  "x-parser-schema-id": "<anonymous-schema-48>"
                                 }
                               },
-                              "x-parser-schema-id": "<anonymous-schema-45>"
+                              "x-parser-schema-id": "<anonymous-schema-46>"
                             },
                             {
                               "title": "TimeZone",
@@ -405,16 +386,16 @@
                                   "type": "string",
                                   "x-primitive": "string",
                                   "description": "IANA Time Zone Database time zone.",
-                                  "x-parser-schema-id": "<anonymous-schema-49>"
+                                  "x-parser-schema-id": "<anonymous-schema-50>"
                                 },
                                 "version": {
                                   "type": "string",
                                   "x-primitive": "string",
                                   "description": "IANA Time Zone Database version number.",
-                                  "x-parser-schema-id": "<anonymous-schema-50>"
+                                  "x-parser-schema-id": "<anonymous-schema-51>"
                                 }
                               },
-                              "x-parser-schema-id": "<anonymous-schema-48>"
+                              "x-parser-schema-id": "<anonymous-schema-49>"
                             }
                           ]
                         }
@@ -435,51 +416,51 @@
                       "properties": {
                         "year": {
                           "type": "integer",
+                          "x-primitive": "int32",
                           "minimum": 0,
                           "maximum": 9999,
-                          "x-primitive": "int32",
                           "description": "Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year"
                         },
                         "month": {
                           "type": "integer",
+                          "x-primitive": "int32",
                           "minimum": 0,
                           "maximum": 12,
-                          "x-primitive": "int32",
                           "description": "Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day."
                         },
                         "day": {
                           "type": "integer",
+                          "x-primitive": "int32",
                           "minimum": 0,
                           "maximum": 31,
-                          "x-primitive": "int32",
                           "description": "Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant."
                         },
                         "hours": {
                           "type": "integer",
+                          "x-primitive": "int32",
                           "minimum": 0,
                           "maximum": 23,
-                          "x-primitive": "int32",
                           "description": "Hours of day in 24 hour format."
                         },
                         "minutes": {
                           "type": "integer",
+                          "x-primitive": "int32",
                           "minimum": 0,
                           "maximum": 59,
-                          "x-primitive": "int32",
                           "description": "Minutes of hour of day."
                         },
                         "seconds": {
                           "type": "integer",
+                          "x-primitive": "int32",
                           "minimum": 0,
                           "maximum": 60,
-                          "x-primitive": "int32",
                           "description": "Seconds of minutes of the time. Must normally be from 0 to 59. An API may allow the value 60 if it allows leap-seconds."
                         },
                         "nanos": {
                           "type": "integer",
+                          "x-primitive": "int32",
                           "minimum": 0,
                           "maximum": 999999999,
-                          "x-primitive": "int32",
                           "description": "Fractions of seconds in nanoseconds."
                         },
                         "timeOffset": {
@@ -494,20 +475,16 @@
                               "properties": {
                                 "seconds": {
                                   "type": "integer",
-                                  "minimum": -9007199254740991,
-                                  "maximum": 9007199254740991,
                                   "x-primitive": "int64",
-                                  "x-parser-schema-id": "<anonymous-schema-61>"
+                                  "x-parser-schema-id": "<anonymous-schema-62>"
                                 },
                                 "nanos": {
                                   "type": "integer",
-                                  "minimum": -2147483648,
-                                  "maximum": 2147483647,
                                   "x-primitive": "int32",
-                                  "x-parser-schema-id": "<anonymous-schema-62>"
+                                  "x-parser-schema-id": "<anonymous-schema-63>"
                                 }
                               },
-                              "x-parser-schema-id": "<anonymous-schema-60>"
+                              "x-parser-schema-id": "<anonymous-schema-61>"
                             },
                             {
                               "title": "TimeZone",
@@ -521,16 +498,16 @@
                                   "type": "string",
                                   "x-primitive": "string",
                                   "description": "IANA Time Zone Database time zone.",
-                                  "x-parser-schema-id": "<anonymous-schema-64>"
+                                  "x-parser-schema-id": "<anonymous-schema-65>"
                                 },
                                 "version": {
                                   "type": "string",
                                   "x-primitive": "string",
                                   "description": "IANA Time Zone Database version number.",
-                                  "x-parser-schema-id": "<anonymous-schema-65>"
+                                  "x-parser-schema-id": "<anonymous-schema-66>"
                                 }
                               },
-                              "x-parser-schema-id": "<anonymous-schema-63>"
+                              "x-parser-schema-id": "<anonymous-schema-64>"
                             }
                           ]
                         }
@@ -549,15 +526,11 @@
                       "properties": {
                         "event_id_from": {
                           "type": "integer",
-                          "minimum": -2147483648,
-                          "maximum": 2147483647,
                           "x-primitive": "int32",
                           "description": "ObjectId"
                         },
                         "event_id_to": {
                           "type": "integer",
-                          "minimum": -2147483648,
-                          "maximum": 2147483647,
                           "x-primitive": "int32",
                           "description": "ObjectId"
                         },
@@ -570,8 +543,6 @@
                           "properties": {
                             "value": {
                               "type": "integer",
-                              "minimum": -2147483648,
-                              "maximum": 2147483647,
                               "x-primitive": "int32"
                             }
                           },
@@ -610,8 +581,6 @@
                       "properties": {
                         "value": {
                           "type": "integer",
-                          "minimum": -2147483648,
-                          "maximum": 2147483647,
                           "x-primitive": "int32"
                         }
                       },
@@ -657,14 +626,12 @@
                               "properties": {
                                 "value": {
                                   "type": "integer",
-                                  "minimum": -2147483648,
-                                  "maximum": 2147483647,
                                   "x-primitive": "int32",
-                                  "x-parser-schema-id": "<anonymous-schema-79>"
+                                  "x-parser-schema-id": "<anonymous-schema-80>"
                                 }
                               },
                               "description": "ObjectId",
-                              "x-parser-schema-id": "<anonymous-schema-78>"
+                              "x-parser-schema-id": "<anonymous-schema-79>"
                             },
                             "event_id_to": {
                               "title": "UInt32Value",
@@ -675,14 +642,12 @@
                               "properties": {
                                 "value": {
                                   "type": "integer",
-                                  "minimum": 0,
-                                  "maximum": 4294967295,
                                   "x-primitive": "uint32",
-                                  "x-parser-schema-id": "<anonymous-schema-81>"
+                                  "x-parser-schema-id": "<anonymous-schema-82>"
                                 }
                               },
                               "description": "ObjectId",
-                              "x-parser-schema-id": "<anonymous-schema-80>"
+                              "x-parser-schema-id": "<anonymous-schema-81>"
                             },
                             "event_link_properties_id": {
                               "title": "UInt64Value",
@@ -693,33 +658,29 @@
                               "properties": {
                                 "value": {
                                   "type": "integer",
-                                  "minimum": 0,
-                                  "maximum": 9007199254740991,
                                   "x-primitive": "uint64",
-                                  "x-parser-schema-id": "<anonymous-schema-83>"
+                                  "x-parser-schema-id": "<anonymous-schema-84>"
                                 }
                               },
                               "description": "ObjectId",
-                              "x-parser-schema-id": "<anonymous-schema-82>"
+                              "x-parser-schema-id": "<anonymous-schema-83>"
                             },
                             "min_duration": {
                               "type": "integer",
-                              "minimum": -2147483648,
-                              "maximum": 2147483647,
                               "x-primitive": "int32",
-                              "x-parser-schema-id": "<anonymous-schema-84>"
+                              "x-parser-schema-id": "<anonymous-schema-85>"
                             },
                             "purposes": {
                               "type": "array",
                               "items": {
                                 "type": "string",
                                 "x-primitive": "string",
-                                "x-parser-schema-id": "<anonymous-schema-86>"
+                                "x-parser-schema-id": "<anonymous-schema-87>"
                               },
-                              "x-parser-schema-id": "<anonymous-schema-85>"
+                              "x-parser-schema-id": "<anonymous-schema-86>"
                             }
                           },
-                          "x-parser-schema-id": "<anonymous-schema-77>"
+                          "x-parser-schema-id": "<anonymous-schema-78>"
                         },
                         {
                           "title": "MovementMsg",
@@ -736,19 +697,15 @@
                           "properties": {
                             "event_id_from": {
                               "type": "integer",
-                              "minimum": -2147483648,
-                              "maximum": 2147483647,
-                              "x-primitive": "int32",
-                              "description": "ObjectId",
-                              "x-parser-schema-id": "<anonymous-schema-88>"
-                            },
-                            "event_id_to": {
-                              "type": "integer",
-                              "minimum": -2147483648,
-                              "maximum": 2147483647,
                               "x-primitive": "int32",
                               "description": "ObjectId",
                               "x-parser-schema-id": "<anonymous-schema-89>"
+                            },
+                            "event_id_to": {
+                              "type": "integer",
+                              "x-primitive": "int32",
+                              "description": "ObjectId",
+                              "x-parser-schema-id": "<anonymous-schema-90>"
                             },
                             "event_link_properties_id": {
                               "title": "Int32Value",
@@ -759,31 +716,27 @@
                               "properties": {
                                 "value": {
                                   "type": "integer",
-                                  "minimum": -2147483648,
-                                  "maximum": 2147483647,
                                   "x-primitive": "int32",
-                                  "x-parser-schema-id": "<anonymous-schema-91>"
+                                  "x-parser-schema-id": "<anonymous-schema-92>"
                                 }
                               },
                               "description": "ObjectId",
-                              "x-parser-schema-id": "<anonymous-schema-90>"
+                              "x-parser-schema-id": "<anonymous-schema-91>"
                             },
                             "min_duration": {
                               "type": "integer",
-                              "minimum": -2147483648,
-                              "maximum": 2147483647,
                               "x-primitive": "int32",
-                              "x-parser-schema-id": "<anonymous-schema-92>"
+                              "x-parser-schema-id": "<anonymous-schema-93>"
                             },
                             "is_min_duration_calculated": {
                               "type": "boolean",
                               "x-primitive": "bool",
-                              "x-parser-schema-id": "<anonymous-schema-93>"
+                              "x-parser-schema-id": "<anonymous-schema-94>"
                             },
                             "is_stop_over": {
                               "type": "boolean",
                               "x-primitive": "bool",
-                              "x-parser-schema-id": "<anonymous-schema-94>"
+                              "x-parser-schema-id": "<anonymous-schema-95>"
                             },
                             "fahrstrategie": {
                               "title": "FahrstrategieEnum",
@@ -802,10 +755,10 @@
                                 "FS_NORMAL": 3,
                                 "FS_FAHRZEIT_VERTEILEN": 4
                               },
-                              "x-parser-schema-id": "<anonymous-schema-95>"
+                              "x-parser-schema-id": "<anonymous-schema-96>"
                             }
                           },
-                          "x-parser-schema-id": "<anonymous-schema-87>"
+                          "x-parser-schema-id": "<anonymous-schema-88>"
                         }
                       ]
                     }
@@ -834,8 +787,6 @@
                     "properties": {
                       "value": {
                         "type": "integer",
-                        "minimum": -2147483648,
-                        "maximum": 2147483647,
                         "x-primitive": "int32"
                       }
                     },
@@ -850,8 +801,6 @@
                     "properties": {
                       "value": {
                         "type": "integer",
-                        "minimum": -2147483648,
-                        "maximum": 2147483647,
                         "x-primitive": "int32"
                       }
                     },
@@ -859,8 +808,6 @@
                   },
                   "reihenfolge": {
                     "type": "integer",
-                    "minimum": -2147483648,
-                    "maximum": 2147483647,
                     "x-primitive": "int32"
                   },
                   "umsystem": {
@@ -876,8 +823,6 @@
                     "properties": {
                       "value": {
                         "type": "integer",
-                        "minimum": -2147483648,
-                        "maximum": 2147483647,
                         "x-primitive": "int32"
                       }
                     },
@@ -910,8 +855,6 @@
                     "properties": {
                       "value": {
                         "type": "integer",
-                        "minimum": -2147483648,
-                        "maximum": 2147483647,
                         "x-primitive": "int32"
                       }
                     },
@@ -954,8 +897,6 @@
               "properties": {
                 "id": {
                   "type": "integer",
-                  "minimum": -2147483648,
-                  "maximum": 2147483647,
                   "x-primitive": "int32",
                   "description": "ObjectId"
                 },
@@ -974,23 +915,23 @@
                   "properties": {
                     "year": {
                       "type": "integer",
+                      "x-primitive": "int32",
                       "minimum": 0,
                       "maximum": 9999,
-                      "x-primitive": "int32",
                       "description": "Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year"
                     },
                     "month": {
                       "type": "integer",
+                      "x-primitive": "int32",
                       "minimum": 0,
                       "maximum": 12,
-                      "x-primitive": "int32",
                       "description": "Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day."
                     },
                     "day": {
                       "type": "integer",
+                      "x-primitive": "int32",
                       "minimum": 0,
                       "maximum": 31,
-                      "x-primitive": "int32",
                       "description": "Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant."
                     }
                   }
@@ -1026,14 +967,10 @@
                       "properties": {
                         "seconds": {
                           "type": "integer",
-                          "minimum": -9007199254740991,
-                          "maximum": 9007199254740991,
                           "x-primitive": "int64"
                         },
                         "nanos": {
                           "type": "integer",
-                          "minimum": -2147483648,
-                          "maximum": 2147483647,
                           "x-primitive": "int32"
                         }
                       }
@@ -1048,14 +985,10 @@
                       "properties": {
                         "seconds": {
                           "type": "integer",
-                          "minimum": -9007199254740991,
-                          "maximum": 9007199254740991,
                           "x-primitive": "int64"
                         },
                         "nanos": {
                           "type": "integer",
-                          "minimum": -2147483648,
-                          "maximum": 2147483647,
                           "x-primitive": "int32"
                         }
                       }
@@ -1072,14 +1005,10 @@
                   "properties": {
                     "seconds": {
                       "type": "integer",
-                      "minimum": -9007199254740991,
-                      "maximum": 9007199254740991,
                       "x-primitive": "int64"
                     },
                     "nanos": {
                       "type": "integer",
-                      "minimum": -2147483648,
-                      "maximum": 2147483647,
                       "x-primitive": "int32"
                     }
                   },
@@ -1116,8 +1045,6 @@
                       "properties": {
                         "value": {
                           "type": "integer",
-                          "minimum": -2147483648,
-                          "maximum": 2147483647,
                           "x-primitive": "int32"
                         }
                       },
@@ -1132,8 +1059,6 @@
                       "properties": {
                         "value": {
                           "type": "integer",
-                          "minimum": -2147483648,
-                          "maximum": 2147483647,
                           "x-primitive": "int32"
                         }
                       },
@@ -1141,8 +1066,6 @@
                     },
                     "reihenfolge": {
                       "type": "integer",
-                      "minimum": -2147483648,
-                      "maximum": 2147483647,
                       "x-primitive": "int32"
                     },
                     "umsystem": {
@@ -1158,8 +1081,6 @@
                       "properties": {
                         "value": {
                           "type": "integer",
-                          "minimum": -2147483648,
-                          "maximum": 2147483647,
                           "x-primitive": "int32"
                         }
                       },
@@ -1192,8 +1113,6 @@
                       "properties": {
                         "value": {
                           "type": "integer",
-                          "minimum": -2147483648,
-                          "maximum": 2147483647,
                           "x-primitive": "int32"
                         }
                       },
@@ -1210,6 +1129,7 @@
                 "type": "object",
                 "required": [
                   "id",
+                  "nodeId",
                   "scheduled_time",
                   "production_time",
                   "train_run_segment",
@@ -1219,10 +1139,18 @@
                 "properties": {
                   "id": {
                     "type": "integer",
-                    "minimum": -2147483648,
-                    "maximum": 2147483647,
                     "x-primitive": "int32",
                     "description": "ObjectId"
+                  },
+                  "nodeId": {
+                    "type": "integer",
+                    "x-primitive": "int32",
+                    "minimum": 0,
+                    "maximum": 1200,
+                    "description": "Reference to a topology node.",
+                    "examples": [
+                      "42217"
+                    ]
                   },
                   "scheduled_time": {
                     "title": "DateTime",
@@ -1239,51 +1167,51 @@
                     "properties": {
                       "year": {
                         "type": "integer",
+                        "x-primitive": "int32",
                         "minimum": 0,
                         "maximum": 9999,
-                        "x-primitive": "int32",
                         "description": "Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year"
                       },
                       "month": {
                         "type": "integer",
+                        "x-primitive": "int32",
                         "minimum": 0,
                         "maximum": 12,
-                        "x-primitive": "int32",
                         "description": "Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day."
                       },
                       "day": {
                         "type": "integer",
+                        "x-primitive": "int32",
                         "minimum": 0,
                         "maximum": 31,
-                        "x-primitive": "int32",
                         "description": "Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant."
                       },
                       "hours": {
                         "type": "integer",
+                        "x-primitive": "int32",
                         "minimum": 0,
                         "maximum": 23,
-                        "x-primitive": "int32",
                         "description": "Hours of day in 24 hour format."
                       },
                       "minutes": {
                         "type": "integer",
+                        "x-primitive": "int32",
                         "minimum": 0,
                         "maximum": 59,
-                        "x-primitive": "int32",
                         "description": "Minutes of hour of day."
                       },
                       "seconds": {
                         "type": "integer",
+                        "x-primitive": "int32",
                         "minimum": 0,
                         "maximum": 60,
-                        "x-primitive": "int32",
                         "description": "Seconds of minutes of the time. Must normally be from 0 to 59. An API may allow the value 60 if it allows leap-seconds."
                       },
                       "nanos": {
                         "type": "integer",
+                        "x-primitive": "int32",
                         "minimum": 0,
                         "maximum": 999999999,
-                        "x-primitive": "int32",
                         "description": "Fractions of seconds in nanoseconds."
                       },
                       "timeOffset": {
@@ -1298,20 +1226,16 @@
                             "properties": {
                               "seconds": {
                                 "type": "integer",
-                                "minimum": -9007199254740991,
-                                "maximum": 9007199254740991,
                                 "x-primitive": "int64",
-                                "x-parser-schema-id": "<anonymous-schema-46>"
+                                "x-parser-schema-id": "<anonymous-schema-47>"
                               },
                               "nanos": {
                                 "type": "integer",
-                                "minimum": -2147483648,
-                                "maximum": 2147483647,
                                 "x-primitive": "int32",
-                                "x-parser-schema-id": "<anonymous-schema-47>"
+                                "x-parser-schema-id": "<anonymous-schema-48>"
                               }
                             },
-                            "x-parser-schema-id": "<anonymous-schema-45>"
+                            "x-parser-schema-id": "<anonymous-schema-46>"
                           },
                           {
                             "title": "TimeZone",
@@ -1325,16 +1249,16 @@
                                 "type": "string",
                                 "x-primitive": "string",
                                 "description": "IANA Time Zone Database time zone.",
-                                "x-parser-schema-id": "<anonymous-schema-49>"
+                                "x-parser-schema-id": "<anonymous-schema-50>"
                               },
                               "version": {
                                 "type": "string",
                                 "x-primitive": "string",
                                 "description": "IANA Time Zone Database version number.",
-                                "x-parser-schema-id": "<anonymous-schema-50>"
+                                "x-parser-schema-id": "<anonymous-schema-51>"
                               }
                             },
-                            "x-parser-schema-id": "<anonymous-schema-48>"
+                            "x-parser-schema-id": "<anonymous-schema-49>"
                           }
                         ]
                       }
@@ -1355,51 +1279,51 @@
                     "properties": {
                       "year": {
                         "type": "integer",
+                        "x-primitive": "int32",
                         "minimum": 0,
                         "maximum": 9999,
-                        "x-primitive": "int32",
                         "description": "Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year"
                       },
                       "month": {
                         "type": "integer",
+                        "x-primitive": "int32",
                         "minimum": 0,
                         "maximum": 12,
-                        "x-primitive": "int32",
                         "description": "Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day."
                       },
                       "day": {
                         "type": "integer",
+                        "x-primitive": "int32",
                         "minimum": 0,
                         "maximum": 31,
-                        "x-primitive": "int32",
                         "description": "Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant."
                       },
                       "hours": {
                         "type": "integer",
+                        "x-primitive": "int32",
                         "minimum": 0,
                         "maximum": 23,
-                        "x-primitive": "int32",
                         "description": "Hours of day in 24 hour format."
                       },
                       "minutes": {
                         "type": "integer",
+                        "x-primitive": "int32",
                         "minimum": 0,
                         "maximum": 59,
-                        "x-primitive": "int32",
                         "description": "Minutes of hour of day."
                       },
                       "seconds": {
                         "type": "integer",
+                        "x-primitive": "int32",
                         "minimum": 0,
                         "maximum": 60,
-                        "x-primitive": "int32",
                         "description": "Seconds of minutes of the time. Must normally be from 0 to 59. An API may allow the value 60 if it allows leap-seconds."
                       },
                       "nanos": {
                         "type": "integer",
+                        "x-primitive": "int32",
                         "minimum": 0,
                         "maximum": 999999999,
-                        "x-primitive": "int32",
                         "description": "Fractions of seconds in nanoseconds."
                       },
                       "timeOffset": {
@@ -1414,20 +1338,16 @@
                             "properties": {
                               "seconds": {
                                 "type": "integer",
-                                "minimum": -9007199254740991,
-                                "maximum": 9007199254740991,
                                 "x-primitive": "int64",
-                                "x-parser-schema-id": "<anonymous-schema-61>"
+                                "x-parser-schema-id": "<anonymous-schema-62>"
                               },
                               "nanos": {
                                 "type": "integer",
-                                "minimum": -2147483648,
-                                "maximum": 2147483647,
                                 "x-primitive": "int32",
-                                "x-parser-schema-id": "<anonymous-schema-62>"
+                                "x-parser-schema-id": "<anonymous-schema-63>"
                               }
                             },
-                            "x-parser-schema-id": "<anonymous-schema-60>"
+                            "x-parser-schema-id": "<anonymous-schema-61>"
                           },
                           {
                             "title": "TimeZone",
@@ -1441,16 +1361,16 @@
                                 "type": "string",
                                 "x-primitive": "string",
                                 "description": "IANA Time Zone Database time zone.",
-                                "x-parser-schema-id": "<anonymous-schema-64>"
+                                "x-parser-schema-id": "<anonymous-schema-65>"
                               },
                               "version": {
                                 "type": "string",
                                 "x-primitive": "string",
                                 "description": "IANA Time Zone Database version number.",
-                                "x-parser-schema-id": "<anonymous-schema-65>"
+                                "x-parser-schema-id": "<anonymous-schema-66>"
                               }
                             },
-                            "x-parser-schema-id": "<anonymous-schema-63>"
+                            "x-parser-schema-id": "<anonymous-schema-64>"
                           }
                         ]
                       }
@@ -1469,15 +1389,11 @@
                     "properties": {
                       "event_id_from": {
                         "type": "integer",
-                        "minimum": -2147483648,
-                        "maximum": 2147483647,
                         "x-primitive": "int32",
                         "description": "ObjectId"
                       },
                       "event_id_to": {
                         "type": "integer",
-                        "minimum": -2147483648,
-                        "maximum": 2147483647,
                         "x-primitive": "int32",
                         "description": "ObjectId"
                       },
@@ -1490,8 +1406,6 @@
                         "properties": {
                           "value": {
                             "type": "integer",
-                            "minimum": -2147483648,
-                            "maximum": 2147483647,
                             "x-primitive": "int32"
                           }
                         },
@@ -1530,8 +1444,6 @@
                     "properties": {
                       "value": {
                         "type": "integer",
-                        "minimum": -2147483648,
-                        "maximum": 2147483647,
                         "x-primitive": "int32"
                       }
                     },
@@ -1577,14 +1489,12 @@
                             "properties": {
                               "value": {
                                 "type": "integer",
-                                "minimum": -2147483648,
-                                "maximum": 2147483647,
                                 "x-primitive": "int32",
-                                "x-parser-schema-id": "<anonymous-schema-79>"
+                                "x-parser-schema-id": "<anonymous-schema-80>"
                               }
                             },
                             "description": "ObjectId",
-                            "x-parser-schema-id": "<anonymous-schema-78>"
+                            "x-parser-schema-id": "<anonymous-schema-79>"
                           },
                           "event_id_to": {
                             "title": "UInt32Value",
@@ -1595,14 +1505,12 @@
                             "properties": {
                               "value": {
                                 "type": "integer",
-                                "minimum": 0,
-                                "maximum": 4294967295,
                                 "x-primitive": "uint32",
-                                "x-parser-schema-id": "<anonymous-schema-81>"
+                                "x-parser-schema-id": "<anonymous-schema-82>"
                               }
                             },
                             "description": "ObjectId",
-                            "x-parser-schema-id": "<anonymous-schema-80>"
+                            "x-parser-schema-id": "<anonymous-schema-81>"
                           },
                           "event_link_properties_id": {
                             "title": "UInt64Value",
@@ -1613,33 +1521,29 @@
                             "properties": {
                               "value": {
                                 "type": "integer",
-                                "minimum": 0,
-                                "maximum": 9007199254740991,
                                 "x-primitive": "uint64",
-                                "x-parser-schema-id": "<anonymous-schema-83>"
+                                "x-parser-schema-id": "<anonymous-schema-84>"
                               }
                             },
                             "description": "ObjectId",
-                            "x-parser-schema-id": "<anonymous-schema-82>"
+                            "x-parser-schema-id": "<anonymous-schema-83>"
                           },
                           "min_duration": {
                             "type": "integer",
-                            "minimum": -2147483648,
-                            "maximum": 2147483647,
                             "x-primitive": "int32",
-                            "x-parser-schema-id": "<anonymous-schema-84>"
+                            "x-parser-schema-id": "<anonymous-schema-85>"
                           },
                           "purposes": {
                             "type": "array",
                             "items": {
                               "type": "string",
                               "x-primitive": "string",
-                              "x-parser-schema-id": "<anonymous-schema-86>"
+                              "x-parser-schema-id": "<anonymous-schema-87>"
                             },
-                            "x-parser-schema-id": "<anonymous-schema-85>"
+                            "x-parser-schema-id": "<anonymous-schema-86>"
                           }
                         },
-                        "x-parser-schema-id": "<anonymous-schema-77>"
+                        "x-parser-schema-id": "<anonymous-schema-78>"
                       },
                       {
                         "title": "MovementMsg",
@@ -1656,19 +1560,15 @@
                         "properties": {
                           "event_id_from": {
                             "type": "integer",
-                            "minimum": -2147483648,
-                            "maximum": 2147483647,
-                            "x-primitive": "int32",
-                            "description": "ObjectId",
-                            "x-parser-schema-id": "<anonymous-schema-88>"
-                          },
-                          "event_id_to": {
-                            "type": "integer",
-                            "minimum": -2147483648,
-                            "maximum": 2147483647,
                             "x-primitive": "int32",
                             "description": "ObjectId",
                             "x-parser-schema-id": "<anonymous-schema-89>"
+                          },
+                          "event_id_to": {
+                            "type": "integer",
+                            "x-primitive": "int32",
+                            "description": "ObjectId",
+                            "x-parser-schema-id": "<anonymous-schema-90>"
                           },
                           "event_link_properties_id": {
                             "title": "Int32Value",
@@ -1679,31 +1579,27 @@
                             "properties": {
                               "value": {
                                 "type": "integer",
-                                "minimum": -2147483648,
-                                "maximum": 2147483647,
                                 "x-primitive": "int32",
-                                "x-parser-schema-id": "<anonymous-schema-91>"
+                                "x-parser-schema-id": "<anonymous-schema-92>"
                               }
                             },
                             "description": "ObjectId",
-                            "x-parser-schema-id": "<anonymous-schema-90>"
+                            "x-parser-schema-id": "<anonymous-schema-91>"
                           },
                           "min_duration": {
                             "type": "integer",
-                            "minimum": -2147483648,
-                            "maximum": 2147483647,
                             "x-primitive": "int32",
-                            "x-parser-schema-id": "<anonymous-schema-92>"
+                            "x-parser-schema-id": "<anonymous-schema-93>"
                           },
                           "is_min_duration_calculated": {
                             "type": "boolean",
                             "x-primitive": "bool",
-                            "x-parser-schema-id": "<anonymous-schema-93>"
+                            "x-parser-schema-id": "<anonymous-schema-94>"
                           },
                           "is_stop_over": {
                             "type": "boolean",
                             "x-primitive": "bool",
-                            "x-parser-schema-id": "<anonymous-schema-94>"
+                            "x-parser-schema-id": "<anonymous-schema-95>"
                           },
                           "fahrstrategie": {
                             "title": "FahrstrategieEnum",
@@ -1722,10 +1618,10 @@
                               "FS_NORMAL": 3,
                               "FS_FAHRZEIT_VERTEILEN": 4
                             },
-                            "x-parser-schema-id": "<anonymous-schema-95>"
+                            "x-parser-schema-id": "<anonymous-schema-96>"
                           }
                         },
-                        "x-parser-schema-id": "<anonymous-schema-87>"
+                        "x-parser-schema-id": "<anonymous-schema-88>"
                       }
                     ]
                   }
@@ -1754,8 +1650,6 @@
                   "properties": {
                     "value": {
                       "type": "integer",
-                      "minimum": -2147483648,
-                      "maximum": 2147483647,
                       "x-primitive": "int32"
                     }
                   },
@@ -1770,8 +1664,6 @@
                   "properties": {
                     "value": {
                       "type": "integer",
-                      "minimum": -2147483648,
-                      "maximum": 2147483647,
                       "x-primitive": "int32"
                     }
                   },
@@ -1779,8 +1671,6 @@
                 },
                 "reihenfolge": {
                   "type": "integer",
-                  "minimum": -2147483648,
-                  "maximum": 2147483647,
                   "x-primitive": "int32"
                 },
                 "umsystem": {
@@ -1796,8 +1686,6 @@
                   "properties": {
                     "value": {
                       "type": "integer",
-                      "minimum": -2147483648,
-                      "maximum": 2147483647,
                       "x-primitive": "int32"
                     }
                   },
@@ -1830,8 +1718,6 @@
                   "properties": {
                     "value": {
                       "type": "integer",
-                      "minimum": -2147483648,
-                      "maximum": 2147483647,
                       "x-primitive": "int32"
                     }
                   },

@@ -11,7 +11,7 @@ export class PrimitiveTypes {
   private static readonly MAX_SAFE_INTEGER = Math.pow(2, 53) - 1;
   private static readonly MIN_SAFE_INTEGER = -this.MAX_SAFE_INTEGER;
 
-  public static readonly PRIMITIVE_TYPES: AsyncApiTypeMap = {
+  public static readonly PRIMITIVE_TYPES_WITH_LIMITS: AsyncApiTypeMap = {
     bytes: {
       type: 'string',
       'x-primitive': 'bytes',
@@ -58,6 +58,69 @@ export class PrimitiveTypes {
       type: 'integer',
       minimum: 0,
       maximum: this.MAX_SAFE_INTEGER,
+      'x-primitive': 'uint64',
+    },
+    fixed32: {
+      type: 'number',
+      'x-primitive': 'fixed32',
+    },
+    fixed64: {
+      type: 'number',
+      'x-primitive': 'fixed64',
+    },
+    sfixed32: {
+      type: 'number',
+      'x-primitive': 'sfixed32',
+    },
+    sfixed64: {
+      type: 'number',
+      'x-primitive': 'sfixed64',
+    },
+    float: {
+      type: 'number',
+      'x-primitive': 'float',
+    },
+    double: {
+      type: 'number',
+      'x-primitive': 'double',
+    },
+  };
+
+  public static readonly PRIMITIVE_TYPES_MINIMAL: AsyncApiTypeMap = {
+    bytes: {
+      type: 'string',
+      'x-primitive': 'bytes',
+    },
+    string: {
+      type: 'string',
+      'x-primitive': 'string',
+    },
+    bool: {
+      type: 'boolean',
+      'x-primitive': 'bool',
+    },
+    int32: {
+      type: 'integer',
+      'x-primitive': 'int32',
+    },
+    sint32: {
+      type: 'integer',
+      'x-primitive': 'sint32',
+    },
+    uint32: {
+      type: 'integer',
+      'x-primitive': 'uint32',
+    },
+    int64: {
+      type: 'integer',
+      'x-primitive': 'int64',
+    },
+    sint64: {
+      type: 'integer',
+      'x-primitive': 'sint64',
+    },
+    uint64: {
+      type: 'integer',
       'x-primitive': 'uint64',
     },
     fixed32: {
