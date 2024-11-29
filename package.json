@@ -45,6 +45,10 @@
     "LICENSE",
     "README.md"
   ],
+  "engines": {
+    "node": ">=18"
+  },
+  "packageManager": "npm@10.2.4",
   "dependencies": {
     "@asyncapi/parser": "^3.4.0",
     "@types/protocol-buffers-schema": "^3.4.3",
