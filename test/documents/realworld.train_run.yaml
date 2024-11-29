@@ -14,6 +14,8 @@ components:
       schemaFormat: 'application/vnd.google.protobuf;version=3'
       payload: |
         syntax = "proto3";
+        
+        // @Option primitiveTypesWithLimits false
 
         import "google/protobuf/timestamp.proto";
         import "google/protobuf/wrappers.proto";
@@ -63,6 +65,12 @@ components:
         message TimetableEventMsg {
             //ObjectId
             int32 id = 1;
+        
+            // Reference to a topology node.
+            // @Example 42217
+            // @Min 0 
+            // @Max 1200 
+            int32 nodeId = 17;
 
             google.type.DateTime scheduled_time = 3;
             google.type.DateTime production_time = 4;
