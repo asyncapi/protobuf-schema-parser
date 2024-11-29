@@ -45,10 +45,14 @@
     "LICENSE",
     "README.md"
   ],
+  "engines": {
+    "node": ">=18"
+  },
+  "packageManager": "npm@10.2.4",
   "dependencies": {
-    "@asyncapi/parser": "^3.1.0",
-    "@types/protocol-buffers-schema": "^3.4.1",
-    "protobufjs": "^7.2.6"
+    "@asyncapi/parser": "^3.4.0",
+    "@types/protocol-buffers-schema": "^3.4.3",
+    "protobufjs": "^7.4.0"
   },
   "devDependencies": {
     "@jest/types": "^29.2.1",

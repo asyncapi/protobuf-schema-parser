@@ -13,6 +13,7 @@ const COMMENT_DEFAULT = '@Default';
 
 class Proto2JsonSchema {
   private root = new protobuf.Root();
+  private proto3 = false;
   private protoParseOptions = {
     keepCase: true,
     alternateCommentMode: true
@@ -168,6 +169,14 @@ class Proto2JsonSchema {
     throw new Error(`Found more than one root proto messages: ${allRootTypes}`);
   }
 
+  private isProto3() {
+    return this.root.options?.syntax === 'proto3';
+  }
+
+  private isProto3Required(field: protobuf.Field) {
+    return (field.options?.proto3_optional !== true && this.isProto3());
+  }
+
   /**
    * Compiles a protobuf message to JSON schema
    */
@@ -203,7 +212,7 @@ class Proto2JsonSchema {
         continue;
       }
 
-      if (field.required) {
+      if (field.required || this.isProto3Required(field)) {
         obj.required?.push(fieldName);
       }
 

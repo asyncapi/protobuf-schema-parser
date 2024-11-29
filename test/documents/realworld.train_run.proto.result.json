@@ -12,10 +12,25 @@
           "payload": {
             "title": "TrainRunContainerMsg",
             "type": "object",
+            "required": [
+              "train_run",
+              "timetable_events",
+              "composition"
+            ],
             "properties": {
               "train_run": {
                 "title": "TrainRunMsg",
                 "type": "object",
+                "required": [
+                  "id",
+                  "trasse_id",
+                  "betriebstag",
+                  "zugnummer",
+                  "infrastruktur_netz",
+                  "object_period",
+                  "dr",
+                  "composition"
+                ],
                 "properties": {
                   "id": {
                     "type": "integer",
@@ -31,6 +46,11 @@
                   "betriebstag": {
                     "title": "Date",
                     "type": "object",
+                    "required": [
+                      "year",
+                      "month",
+                      "day"
+                    ],
                     "properties": {
                       "year": {
                         "type": "integer",
@@ -71,10 +91,18 @@
                   "object_period": {
                     "title": "PeriodMsg",
                     "type": "object",
+                    "required": [
+                      "von",
+                      "bis"
+                    ],
                     "properties": {
                       "von": {
                         "title": "Timestamp",
                         "type": "object",
+                        "required": [
+                          "seconds",
+                          "nanos"
+                        ],
                         "properties": {
                           "seconds": {
                             "type": "integer",
@@ -93,6 +121,10 @@
                       "bis": {
                         "title": "Timestamp",
                         "type": "object",
+                        "required": [
+                          "seconds",
+                          "nanos"
+                        ],
                         "properties": {
                           "seconds": {
                             "type": "integer",
@@ -113,6 +145,10 @@
                   "dr": {
                     "title": "Duration",
                     "type": "object",
+                    "required": [
+                      "seconds",
+                      "nanos"
+                    ],
                     "properties": {
                       "seconds": {
                         "type": "integer",
@@ -141,10 +177,22 @@
                   "composition": {
                     "title": "CompositionMsg",
                     "type": "object",
+                    "required": [
+                      "composition_id",
+                      "train_run_id",
+                      "reihenfolge",
+                      "umsystem",
+                      "alast_anzahlwagen_chlor",
+                      "formationsdaten_zlr",
+                      "anzahl_loks"
+                    ],
                     "properties": {
                       "composition_id": {
                         "title": "Int32Value",
                         "type": "object",
+                        "required": [
+                          "value"
+                        ],
                         "properties": {
                           "value": {
                             "type": "integer",
@@ -158,6 +206,9 @@
                       "train_run_id": {
                         "title": "Int32Value",
                         "type": "object",
+                        "required": [
+                          "value"
+                        ],
                         "properties": {
                           "value": {
                             "type": "integer",
@@ -181,6 +232,9 @@
                       "alast_anzahlwagen_chlor": {
                         "title": "Int32Value",
                         "type": "object",
+                        "required": [
+                          "value"
+                        ],
                         "properties": {
                           "value": {
                             "type": "integer",
@@ -212,6 +266,9 @@
                       "anzahl_loks": {
                         "title": "Int32Value",
                         "type": "object",
+                        "required": [
+                          "value"
+                        ],
                         "properties": {
                           "value": {
                             "type": "integer",
@@ -231,6 +288,14 @@
                 "items": {
                   "title": "TimetableEventMsg",
                   "type": "object",
+                  "required": [
+                    "id",
+                    "scheduled_time",
+                    "production_time",
+                    "train_run_segment",
+                    "connection_decision_time",
+                    "ahead_of_schedule_strategy"
+                  ],
                   "properties": {
                     "id": {
                       "type": "integer",
@@ -242,6 +307,15 @@
                     "scheduled_time": {
                       "title": "DateTime",
                       "type": "object",
+                      "required": [
+                        "year",
+                        "month",
+                        "day",
+                        "hours",
+                        "minutes",
+                        "seconds",
+                        "nanos"
+                      ],
                       "properties": {
                         "year": {
                           "type": "integer",
@@ -297,6 +371,10 @@
                             {
                               "title": "Duration",
                               "type": "object",
+                              "required": [
+                                "seconds",
+                                "nanos"
+                              ],
                               "properties": {
                                 "seconds": {
                                   "type": "integer",
@@ -318,6 +396,10 @@
                             {
                               "title": "TimeZone",
                               "type": "object",
+                              "required": [
+                                "id",
+                                "version"
+                              ],
                               "properties": {
                                 "id": {
                                   "type": "string",
@@ -341,6 +423,15 @@
                     "production_time": {
                       "title": "DateTime",
                       "type": "object",
+                      "required": [
+                        "year",
+                        "month",
+                        "day",
+                        "hours",
+                        "minutes",
+                        "seconds",
+                        "nanos"
+                      ],
                       "properties": {
                         "year": {
                           "type": "integer",
@@ -396,6 +487,10 @@
                             {
                               "title": "Duration",
                               "type": "object",
+                              "required": [
+                                "seconds",
+                                "nanos"
+                              ],
                               "properties": {
                                 "seconds": {
                                   "type": "integer",
@@ -417,6 +512,10 @@
                             {
                               "title": "TimeZone",
                               "type": "object",
+                              "required": [
+                                "id",
+                                "version"
+                              ],
                               "properties": {
                                 "id": {
                                   "type": "string",
@@ -440,6 +539,13 @@
                     "train_run_segment": {
                       "title": "TrainRunSegmentMsg",
                       "type": "object",
+                      "required": [
+                        "event_id_from",
+                        "event_id_to",
+                        "abschnitts_formation_id",
+                        "train_category",
+                        "train_series"
+                      ],
                       "properties": {
                         "event_id_from": {
                           "type": "integer",
@@ -458,6 +564,9 @@
                         "abschnitts_formation_id": {
                           "title": "Int32Value",
                           "type": "object",
+                          "required": [
+                            "value"
+                          ],
                           "properties": {
                             "value": {
                               "type": "integer",
@@ -495,6 +604,9 @@
                     "connection_decision_time": {
                       "title": "Int32Value",
                       "type": "object",
+                      "required": [
+                        "value"
+                      ],
                       "properties": {
                         "value": {
                           "type": "integer",
@@ -528,10 +640,20 @@
                         {
                           "title": "StopMsg",
                           "type": "object",
+                          "required": [
+                            "event_id_from",
+                            "event_id_to",
+                            "event_link_properties_id",
+                            "min_duration",
+                            "purposes"
+                          ],
                           "properties": {
                             "event_id_from": {
                               "title": "Int32Value",
                               "type": "object",
+                              "required": [
+                                "value"
+                              ],
                               "properties": {
                                 "value": {
                                   "type": "integer",
@@ -547,6 +669,9 @@
                             "event_id_to": {
                               "title": "UInt32Value",
                               "type": "object",
+                              "required": [
+                                "value"
+                              ],
                               "properties": {
                                 "value": {
                                   "type": "integer",
@@ -562,6 +687,9 @@
                             "event_link_properties_id": {
                               "title": "UInt64Value",
                               "type": "object",
+                              "required": [
+                                "value"
+                              ],
                               "properties": {
                                 "value": {
                                   "type": "integer",
@@ -596,6 +724,15 @@
                         {
                           "title": "MovementMsg",
                           "type": "object",
+                          "required": [
+                            "event_id_from",
+                            "event_id_to",
+                            "event_link_properties_id",
+                            "min_duration",
+                            "is_min_duration_calculated",
+                            "is_stop_over",
+                            "fahrstrategie"
+                          ],
                           "properties": {
                             "event_id_from": {
                               "type": "integer",
@@ -616,6 +753,9 @@
                             "event_link_properties_id": {
                               "title": "Int32Value",
                               "type": "object",
+                              "required": [
+                                "value"
+                              ],
                               "properties": {
                                 "value": {
                                   "type": "integer",
@@ -675,10 +815,22 @@
               "composition": {
                 "title": "CompositionMsg",
                 "type": "object",
+                "required": [
+                  "composition_id",
+                  "train_run_id",
+                  "reihenfolge",
+                  "umsystem",
+                  "alast_anzahlwagen_chlor",
+                  "formationsdaten_zlr",
+                  "anzahl_loks"
+                ],
                 "properties": {
                   "composition_id": {
                     "title": "Int32Value",
                     "type": "object",
+                    "required": [
+                      "value"
+                    ],
                     "properties": {
                       "value": {
                         "type": "integer",
@@ -692,6 +844,9 @@
                   "train_run_id": {
                     "title": "Int32Value",
                     "type": "object",
+                    "required": [
+                      "value"
+                    ],
                     "properties": {
                       "value": {
                         "type": "integer",
@@ -715,6 +870,9 @@
                   "alast_anzahlwagen_chlor": {
                     "title": "Int32Value",
                     "type": "object",
+                    "required": [
+                      "value"
+                    ],
                     "properties": {
                       "value": {
                         "type": "integer",
@@ -746,6 +904,9 @@
                   "anzahl_loks": {
                     "title": "Int32Value",
                     "type": "object",
+                    "required": [
+                      "value"
+                    ],
                     "properties": {
                       "value": {
                         "type": "integer",
@@ -771,10 +932,25 @@
         "payload": {
           "title": "TrainRunContainerMsg",
           "type": "object",
+          "required": [
+            "train_run",
+            "timetable_events",
+            "composition"
+          ],
           "properties": {
             "train_run": {
               "title": "TrainRunMsg",
               "type": "object",
+              "required": [
+                "id",
+                "trasse_id",
+                "betriebstag",
+                "zugnummer",
+                "infrastruktur_netz",
+                "object_period",
+                "dr",
+                "composition"
+              ],
               "properties": {
                 "id": {
                   "type": "integer",
@@ -790,6 +966,11 @@
                 "betriebstag": {
                   "title": "Date",
                   "type": "object",
+                  "required": [
+                    "year",
+                    "month",
+                    "day"
+                  ],
                   "properties": {
                     "year": {
                       "type": "integer",
@@ -830,10 +1011,18 @@
                 "object_period": {
                   "title": "PeriodMsg",
                   "type": "object",
+                  "required": [
+                    "von",
+                    "bis"
+                  ],
                   "properties": {
                     "von": {
                       "title": "Timestamp",
                       "type": "object",
+                      "required": [
+                        "seconds",
+                        "nanos"
+                      ],
                       "properties": {
                         "seconds": {
                           "type": "integer",
@@ -852,6 +1041,10 @@
                     "bis": {
                       "title": "Timestamp",
                       "type": "object",
+                      "required": [
+                        "seconds",
+                        "nanos"
+                      ],
                       "properties": {
                         "seconds": {
                           "type": "integer",
@@ -872,6 +1065,10 @@
                 "dr": {
                   "title": "Duration",
                   "type": "object",
+                  "required": [
+                    "seconds",
+                    "nanos"
+                  ],
                   "properties": {
                     "seconds": {
                       "type": "integer",
@@ -900,10 +1097,22 @@
                 "composition": {
                   "title": "CompositionMsg",
                   "type": "object",
+                  "required": [
+                    "composition_id",
+                    "train_run_id",
+                    "reihenfolge",
+                    "umsystem",
+                    "alast_anzahlwagen_chlor",
+                    "formationsdaten_zlr",
+                    "anzahl_loks"
+                  ],
                   "properties": {
                     "composition_id": {
                       "title": "Int32Value",
                       "type": "object",
+                      "required": [
+                        "value"
+                      ],
                       "properties": {
                         "value": {
                           "type": "integer",
@@ -917,6 +1126,9 @@
                     "train_run_id": {
                       "title": "Int32Value",
                       "type": "object",
+                      "required": [
+                        "value"
+                      ],
                       "properties": {
                         "value": {
                           "type": "integer",
@@ -940,6 +1152,9 @@
                     "alast_anzahlwagen_chlor": {
                       "title": "Int32Value",
                       "type": "object",
+                      "required": [
+                        "value"
+                      ],
                       "properties": {
                         "value": {
                           "type": "integer",
@@ -971,6 +1186,9 @@
                     "anzahl_loks": {
                       "title": "Int32Value",
                       "type": "object",
+                      "required": [
+                        "value"
+                      ],
                       "properties": {
                         "value": {
                           "type": "integer",
@@ -990,6 +1208,14 @@
               "items": {
                 "title": "TimetableEventMsg",
                 "type": "object",
+                "required": [
+                  "id",
+                  "scheduled_time",
+                  "production_time",
+                  "train_run_segment",
+                  "connection_decision_time",
+                  "ahead_of_schedule_strategy"
+                ],
                 "properties": {
                   "id": {
                     "type": "integer",
@@ -1001,6 +1227,15 @@
                   "scheduled_time": {
                     "title": "DateTime",
                     "type": "object",
+                    "required": [
+                      "year",
+                      "month",
+                      "day",
+                      "hours",
+                      "minutes",
+                      "seconds",
+                      "nanos"
+                    ],
                     "properties": {
                       "year": {
                         "type": "integer",
@@ -1056,6 +1291,10 @@
                           {
                             "title": "Duration",
                             "type": "object",
+                            "required": [
+                              "seconds",
+                              "nanos"
+                            ],
                             "properties": {
                               "seconds": {
                                 "type": "integer",
@@ -1077,6 +1316,10 @@
                           {
                             "title": "TimeZone",
                             "type": "object",
+                            "required": [
+                              "id",
+                              "version"
+                            ],
                             "properties": {
                               "id": {
                                 "type": "string",
@@ -1100,6 +1343,15 @@
                   "production_time": {
                     "title": "DateTime",
                     "type": "object",
+                    "required": [
+                      "year",
+                      "month",
+                      "day",
+                      "hours",
+                      "minutes",
+                      "seconds",
+                      "nanos"
+                    ],
                     "properties": {
                       "year": {
                         "type": "integer",
@@ -1155,6 +1407,10 @@
                           {
                             "title": "Duration",
                             "type": "object",
+                            "required": [
+                              "seconds",
+                              "nanos"
+                            ],
                             "properties": {
                               "seconds": {
                                 "type": "integer",
@@ -1176,6 +1432,10 @@
                           {
                             "title": "TimeZone",
                             "type": "object",
+                            "required": [
+                              "id",
+                              "version"
+                            ],
                             "properties": {
                               "id": {
                                 "type": "string",
@@ -1199,6 +1459,13 @@
                   "train_run_segment": {
                     "title": "TrainRunSegmentMsg",
                     "type": "object",
+                    "required": [
+                      "event_id_from",
+                      "event_id_to",
+                      "abschnitts_formation_id",
+                      "train_category",
+                      "train_series"
+                    ],
                     "properties": {
                       "event_id_from": {
                         "type": "integer",
@@ -1217,6 +1484,9 @@
                       "abschnitts_formation_id": {
                         "title": "Int32Value",
                         "type": "object",
+                        "required": [
+                          "value"
+                        ],
                         "properties": {
                           "value": {
                             "type": "integer",
@@ -1254,6 +1524,9 @@
                   "connection_decision_time": {
                     "title": "Int32Value",
                     "type": "object",
+                    "required": [
+                      "value"
+                    ],
                     "properties": {
                       "value": {
                         "type": "integer",
@@ -1287,10 +1560,20 @@
                       {
                         "title": "StopMsg",
                         "type": "object",
+                        "required": [
+                          "event_id_from",
+                          "event_id_to",
+                          "event_link_properties_id",
+                          "min_duration",
+                          "purposes"
+                        ],
                         "properties": {
                           "event_id_from": {
                             "title": "Int32Value",
                             "type": "object",
+                            "required": [
+                              "value"
+                            ],
                             "properties": {
                               "value": {
                                 "type": "integer",
@@ -1306,6 +1589,9 @@
                           "event_id_to": {
                             "title": "UInt32Value",
                             "type": "object",
+                            "required": [
+                              "value"
+                            ],
                             "properties": {
                               "value": {
                                 "type": "integer",
@@ -1321,6 +1607,9 @@
                           "event_link_properties_id": {
                             "title": "UInt64Value",
                             "type": "object",
+                            "required": [
+                              "value"
+                            ],
                             "properties": {
                               "value": {
                                 "type": "integer",
@@ -1355,6 +1644,15 @@
                       {
                         "title": "MovementMsg",
                         "type": "object",
+                        "required": [
+                          "event_id_from",
+                          "event_id_to",
+                          "event_link_properties_id",
+                          "min_duration",
+                          "is_min_duration_calculated",
+                          "is_stop_over",
+                          "fahrstrategie"
+                        ],
                         "properties": {
                           "event_id_from": {
                             "type": "integer",
@@ -1375,6 +1673,9 @@
                           "event_link_properties_id": {
                             "title": "Int32Value",
                             "type": "object",
+                            "required": [
+                              "value"
+                            ],
                             "properties": {
                               "value": {
                                 "type": "integer",
@@ -1434,10 +1735,22 @@
             "composition": {
               "title": "CompositionMsg",
               "type": "object",
+              "required": [
+                "composition_id",
+                "train_run_id",
+                "reihenfolge",
+                "umsystem",
+                "alast_anzahlwagen_chlor",
+                "formationsdaten_zlr",
+                "anzahl_loks"
+              ],
               "properties": {
                 "composition_id": {
                   "title": "Int32Value",
                   "type": "object",
+                  "required": [
+                    "value"
+                  ],
                   "properties": {
                     "value": {
                       "type": "integer",
@@ -1451,6 +1764,9 @@
                 "train_run_id": {
                   "title": "Int32Value",
                   "type": "object",
+                  "required": [
+                    "value"
+                  ],
                   "properties": {
                     "value": {
                       "type": "integer",
@@ -1474,6 +1790,9 @@
                 "alast_anzahlwagen_chlor": {
                   "title": "Int32Value",
                   "type": "object",
+                  "required": [
+                    "value"
+                  ],
                   "properties": {
                     "value": {
                       "type": "integer",
@@ -1505,6 +1824,9 @@
                 "anzahl_loks": {
                   "title": "Int32Value",
                   "type": "object",
+                  "required": [
+                    "value"
+                  ],
                   "properties": {
                     "value": {
                       "type": "integer",
