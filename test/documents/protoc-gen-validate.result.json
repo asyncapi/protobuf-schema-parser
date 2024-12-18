@@ -1,0 +1,2027 @@
+{
+  "asyncapi": "2.0.0",
+  "info": {
+    "title": "Example using ProtoBuff and https://github.com/bufbuild/protoc-gen-validate/blob/main/validate/validate.proto",
+    "version": "1.0.0"
+  },
+  "channels": {
+    "mychannel": {
+      "publish": {
+        "message": {
+          "schemaFormat": "application/vnd.google.protobuf;version=3",
+          "payload": {
+            "title": "RootNode",
+            "type": "object",
+            "required": [
+              "n",
+              "s",
+              "b",
+              "o",
+              "r",
+              "m",
+              "g"
+            ],
+            "properties": {
+              "n": {
+                "title": "NumericExamples",
+                "type": "object",
+                "required": [
+                  "na",
+                  "nb",
+                  "nc",
+                  "nd",
+                  "ne",
+                  "nf",
+                  "ng",
+                  "nh",
+                  "nk",
+                  "nl"
+                ],
+                "properties": {
+                  "na": {
+                    "type": "number",
+                    "x-primitive": "float",
+                    "const": 1.23,
+                    "description": "x must equal 1.23 exactly"
+                  },
+                  "nb": {
+                    "type": "integer",
+                    "minimum": -2147483648,
+                    "x-primitive": "int32",
+                    "exclusiveMaximum": 10,
+                    "description": "x must be less than 10"
+                  },
+                  "nc": {
+                    "type": "integer",
+                    "minimum": 20,
+                    "maximum": 9007199254740991,
+                    "x-primitive": "uint64",
+                    "description": "x must be greater than or equal to 20"
+                  },
+                  "nd": {
+                    "type": "number",
+                    "x-primitive": "fixed32",
+                    "minimum": 30,
+                    "exclusiveMaximum": 40,
+                    "description": "x must be in the range [30, 40)"
+                  },
+                  "ne": {
+                    "type": "number",
+                    "x-primitive": "double",
+                    "exclusiveMaximum": 30,
+                    "minimum": 40,
+                    "description": "x must be outside the range [30, 40)"
+                  },
+                  "nf": {
+                    "type": "number",
+                    "x-primitive": "double",
+                    "exclusiveMaximum": 30,
+                    "minimum": 40,
+                    "description": "x must be outside the range [30, 40)"
+                  },
+                  "ng": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 4294967295,
+                    "x-primitive": "uint32",
+                    "oneOf": [
+                      {
+                        "const": 1,
+                        "x-parser-schema-id": "<anonymous-schema-10>"
+                      },
+                      {
+                        "const": 2,
+                        "x-parser-schema-id": "<anonymous-schema-11>"
+                      },
+                      {
+                        "const": 3,
+                        "x-parser-schema-id": "<anonymous-schema-12>"
+                      }
+                    ],
+                    "description": "x must be either 1, 2, or 3"
+                  },
+                  "nh": {
+                    "type": "number",
+                    "x-primitive": "float",
+                    "not": {
+                      "oneOf": [
+                        {
+                          "const": 0,
+                          "x-parser-schema-id": "<anonymous-schema-15>"
+                        },
+                        {
+                          "const": 0.99,
+                          "x-parser-schema-id": "<anonymous-schema-16>"
+                        }
+                      ]
+                    },
+                    "description": "x cannot be 0 nor 0.99"
+                  },
+                  "ni": {
+                    "type": "integer",
+                    "minimum": 200,
+                    "maximum": 4294967295,
+                    "x-primitive": "uint32",
+                    "description": "x must but greater or equal 200 and being optional"
+                  },
+                  "nk": {
+                    "type": "boolean",
+                    "x-primitive": "bool",
+                    "const": true,
+                    "description": "x must be set to true"
+                  },
+                  "nl": {
+                    "type": "boolean",
+                    "x-primitive": "bool",
+                    "const": false,
+                    "description": "x cannot be set to true"
+                  }
+                }
+              },
+              "s": {
+                "title": "StringExamples",
+                "type": "object",
+                "required": [
+                  "sa",
+                  "sb",
+                  "sc",
+                  "sd",
+                  "se",
+                  "sf",
+                  "sg",
+                  "sh",
+                  "si",
+                  "sj",
+                  "sk",
+                  "sl",
+                  "sm",
+                  "sn",
+                  "so",
+                  "sp",
+                  "sq",
+                  "sr",
+                  "ss",
+                  "ip4",
+                  "ip6",
+                  "uri",
+                  "absuri",
+                  "uuid",
+                  "httpheadname",
+                  "httpheadvalue"
+                ],
+                "properties": {
+                  "sa": {
+                    "type": "string",
+                    "x-primitive": "string",
+                    "const": "foo",
+                    "description": "x must be set to \"foo\""
+                  },
+                  "sb": {
+                    "type": "string",
+                    "x-primitive": "string",
+                    "minLength": 5,
+                    "maxLength": 5,
+                    "description": "x must be exactly 5 characters long"
+                  },
+                  "sc": {
+                    "type": "string",
+                    "x-primitive": "string",
+                    "minLength": 3,
+                    "description": "x must be at least 3 characters long"
+                  },
+                  "sd": {
+                    "type": "string",
+                    "x-primitive": "string",
+                    "minLength": 5,
+                    "maxLength": 10,
+                    "description": "x must be between 5 and 10 characters, inclusive"
+                  },
+                  "se": {
+                    "type": "string",
+                    "x-primitive": "string",
+                    "maxLength": 15,
+                    "description": "x must be at most 15 bytes long"
+                  },
+                  "sf": {
+                    "type": "string",
+                    "x-primitive": "string",
+                    "minLength": 128,
+                    "maxLength": 1024,
+                    "description": "x must be between 128 and 1024 bytes long"
+                  },
+                  "sg": {
+                    "type": "string",
+                    "x-primitive": "string",
+                    "pattern": "(?i)^[0-9a-f]+$",
+                    "description": "x must be a non-empty, case-insensitive hexadecimal string"
+                  },
+                  "sh": {
+                    "type": "string",
+                    "x-primitive": "string",
+                    "pattern": "^foo.*",
+                    "description": "x must begin with \"foo\""
+                  },
+                  "si": {
+                    "type": "string",
+                    "x-primitive": "string",
+                    "pattern": ".*bar$",
+                    "description": "x must end with \"bar\""
+                  },
+                  "sj": {
+                    "type": "string",
+                    "x-primitive": "string",
+                    "pattern": ".*baz.*",
+                    "description": "x must contain \"baz\" anywhere inside it"
+                  },
+                  "sk": {
+                    "type": "string",
+                    "x-primitive": "string",
+                    "pattern": "^((?!baz).)*$",
+                    "description": "x cannot contain \"baz\" anywhere inside it"
+                  },
+                  "sl": {
+                    "type": "string",
+                    "x-primitive": "string",
+                    "pattern": ".*buzz$",
+                    "description": "x must begin with \"fizz\" and end with \"buzz\""
+                  },
+                  "sm": {
+                    "type": "string",
+                    "x-primitive": "string",
+                    "pattern": ".*\\.proto$",
+                    "maxLength": 64,
+                    "description": "x must end with \".proto\" and be less than 64 characters"
+                  },
+                  "sn": {
+                    "type": "string",
+                    "x-primitive": "string",
+                    "oneOf": [
+                      {
+                        "const": "foo",
+                        "x-parser-schema-id": "<anonymous-schema-35>"
+                      },
+                      {
+                        "const": "bar",
+                        "x-parser-schema-id": "<anonymous-schema-36>"
+                      },
+                      {
+                        "const": "baz",
+                        "x-parser-schema-id": "<anonymous-schema-37>"
+                      }
+                    ],
+                    "description": "x must be either \"foo\", \"bar\", or \"baz\""
+                  },
+                  "so": {
+                    "type": "string",
+                    "x-primitive": "string",
+                    "not": {
+                      "oneOf": [
+                        {
+                          "const": "fizz",
+                          "x-parser-schema-id": "<anonymous-schema-40>"
+                        },
+                        {
+                          "const": "buzz",
+                          "x-parser-schema-id": "<anonymous-schema-41>"
+                        }
+                      ]
+                    },
+                    "description": "x cannot be \"fizz\" nor \"buzz\""
+                  },
+                  "sp": {
+                    "type": "string",
+                    "x-primitive": "string",
+                    "format": "email",
+                    "description": "x must be a valid email address (via RFC 5322)"
+                  },
+                  "sq": {
+                    "type": "string",
+                    "x-primitive": "string",
+                    "anyOf": [
+                      {
+                        "format": "hostname",
+                        "x-parser-schema-id": "<anonymous-schema-44>"
+                      },
+                      {
+                        "format": "ipv4",
+                        "x-parser-schema-id": "<anonymous-schema-45>"
+                      },
+                      {
+                        "format": "ipv6",
+                        "x-parser-schema-id": "<anonymous-schema-46>"
+                      }
+                    ],
+                    "description": "x must be a valid address (IP or Hostname)."
+                  },
+                  "sr": {
+                    "type": "string",
+                    "x-primitive": "string",
+                    "format": "hostname",
+                    "description": "x must be a valid hostname (via RFC 1034)"
+                  },
+                  "ss": {
+                    "type": "string",
+                    "x-primitive": "string",
+                    "anyOf": [
+                      {
+                        "format": "ipv4",
+                        "x-parser-schema-id": "<anonymous-schema-49>"
+                      },
+                      {
+                        "format": "ipv6",
+                        "x-parser-schema-id": "<anonymous-schema-50>"
+                      }
+                    ],
+                    "description": "x must be a valid IP address (either v4 or v6)"
+                  },
+                  "ip4": {
+                    "type": "string",
+                    "x-primitive": "string",
+                    "format": "ipv4",
+                    "description": "x must be a valid IPv4 address\neg: \"192.168.0.1\""
+                  },
+                  "ip6": {
+                    "type": "string",
+                    "x-primitive": "string",
+                    "format": "ipv6",
+                    "description": "x must be a valid IPv6 address\neg: \"fe80::3\""
+                  },
+                  "uri": {
+                    "type": "string",
+                    "x-primitive": "string",
+                    "format": "uri",
+                    "description": "x must be a valid absolute URI (via RFC 3986)"
+                  },
+                  "absuri": {
+                    "type": "string",
+                    "x-primitive": "string",
+                    "format": "uri-reference",
+                    "description": "x must be a valid URI reference (either absolute or relative)"
+                  },
+                  "uuid": {
+                    "type": "string",
+                    "x-primitive": "string",
+                    "format": "uuid",
+                    "description": "x must be a valid UUID (via RFC 4122)"
+                  },
+                  "httpheadname": {
+                    "type": "string",
+                    "x-primitive": "string",
+                    "pattern": "^:?[0-9a-zA-Z!#$%&'*+-.^_|~`]+$",
+                    "description": "x must conform to a well known regex for HTTP header names (via RFC 7230)"
+                  },
+                  "httpheadvalue": {
+                    "type": "string",
+                    "x-primitive": "string",
+                    "pattern": "^[^\u0000-\b\n-\u001f]*$",
+                    "description": "x must conform to a well known regex for HTTP header values (via RFC 7230)"
+                  }
+                }
+              },
+              "b": {
+                "title": "ByteExamples",
+                "type": "object",
+                "required": [
+                  "ba",
+                  "bb",
+                  "bc",
+                  "bd",
+                  "be",
+                  "bf",
+                  "bg",
+                  "bh",
+                  "bi",
+                  "bj",
+                  "bk",
+                  "bm",
+                  "bn",
+                  "bo"
+                ],
+                "properties": {
+                  "ba": {
+                    "type": "string",
+                    "x-primitive": "bytes",
+                    "const": "foo",
+                    "description": "x must be set to \"foo\" (\"\\x66\\x6f\\x6f\")"
+                  },
+                  "bb": {
+                    "type": "string",
+                    "x-primitive": "bytes",
+                    "const": "f09028bc",
+                    "description": "x must be set to \"\\xf0\\x90\\x28\\xbc\""
+                  },
+                  "bc": {
+                    "type": "string",
+                    "x-primitive": "bytes",
+                    "minLength": 3,
+                    "maxLength": 3,
+                    "description": "x must be exactly 3 bytes"
+                  },
+                  "bd": {
+                    "type": "string",
+                    "x-primitive": "bytes",
+                    "minLength": 3,
+                    "description": "x must be at least 3 bytes long"
+                  },
+                  "be": {
+                    "type": "string",
+                    "x-primitive": "bytes",
+                    "minLength": 5,
+                    "maxLength": 10,
+                    "description": "x must be between 5 and 10 bytes, inclusive"
+                  },
+                  "bf": {
+                    "type": "string",
+                    "x-primitive": "bytes",
+                    "pattern": "^[00-7F]+$",
+                    "description": "x must be a non-empty, ASCII byte sequence"
+                  },
+                  "bg": {
+                    "type": "string",
+                    "x-primitive": "bytes",
+                    "pattern": "^99.*",
+                    "description": "x must begin with \"\\x99\""
+                  },
+                  "bh": {
+                    "type": "string",
+                    "x-primitive": "bytes",
+                    "pattern": ".*buz7a$",
+                    "description": "x must end with \"buz\\x7a\""
+                  },
+                  "bi": {
+                    "type": "string",
+                    "x-primitive": "bytes",
+                    "pattern": ".*baz.*",
+                    "description": "x must contain \"baz\" anywhere inside it"
+                  },
+                  "bj": {
+                    "type": "string",
+                    "x-primitive": "bytes",
+                    "oneOf": [
+                      {
+                        "const": "foo",
+                        "x-parser-schema-id": "<anonymous-schema-69>"
+                      },
+                      {
+                        "const": "bar",
+                        "x-parser-schema-id": "<anonymous-schema-70>"
+                      },
+                      {
+                        "const": "baz",
+                        "x-parser-schema-id": "<anonymous-schema-71>"
+                      }
+                    ],
+                    "description": "x must be either \"foo\", \"bar\", or \"baz\""
+                  },
+                  "bk": {
+                    "type": "string",
+                    "x-primitive": "bytes",
+                    "not": {
+                      "oneOf": [
+                        {
+                          "const": "fizz",
+                          "x-parser-schema-id": "<anonymous-schema-74>"
+                        },
+                        {
+                          "const": "buzz",
+                          "x-parser-schema-id": "<anonymous-schema-75>"
+                        }
+                      ]
+                    },
+                    "description": "x cannot be \"fizz\" nor \"buzz\""
+                  },
+                  "bl": {
+                    "type": "string",
+                    "x-primitive": "bytes",
+                    "oneOf": [
+                      {
+                        "const": "foo",
+                        "x-parser-schema-id": "<anonymous-schema-77>"
+                      },
+                      {
+                        "const": "bar",
+                        "x-parser-schema-id": "<anonymous-schema-78>"
+                      },
+                      {
+                        "const": "baz",
+                        "x-parser-schema-id": "<anonymous-schema-79>"
+                      }
+                    ]
+                  },
+                  "bm": {
+                    "type": "string",
+                    "x-primitive": "bytes",
+                    "anyOf": [
+                      {
+                        "format": "ipv4",
+                        "x-parser-schema-id": "<anonymous-schema-81>"
+                      },
+                      {
+                        "format": "ipv6",
+                        "x-parser-schema-id": "<anonymous-schema-82>"
+                      }
+                    ],
+                    "description": "x must be a valid IP address (either v4 or v6) in byte format"
+                  },
+                  "bn": {
+                    "type": "string",
+                    "x-primitive": "bytes",
+                    "format": "ipv4",
+                    "description": "x must be a valid IPv4 address in byte format\neg: \"\\xC0\\xA8\\x00\\x01\""
+                  },
+                  "bo": {
+                    "type": "string",
+                    "x-primitive": "bytes",
+                    "format": "ipv6",
+                    "description": "x must be a valid IPv6 address in byte format\neg: \"\\x20\\x01\\x0D\\xB8\\x85\\xA3\\x00\\x00\\x00\\x00\\x8A\\x2E\\x03\\x70\\x73\\x34\""
+                  }
+                }
+              },
+              "o": {
+                "title": "ObjectExamples",
+                "type": "object",
+                "properties": {},
+                "description": "Dont have an idea how to represent those in JsonSchema"
+              },
+              "r": {
+                "title": "RepeatedExamples",
+                "type": "object",
+                "required": [
+                  "ra",
+                  "rb",
+                  "rc",
+                  "rd",
+                  "re",
+                  "rf",
+                  "rk",
+                  "rl"
+                ],
+                "properties": {
+                  "ra": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer",
+                      "minimum": -2147483648,
+                      "maximum": 2147483647,
+                      "x-primitive": "int32",
+                      "description": "x must contain at least 3 elements"
+                    },
+                    "description": "x must contain at least 3 elements",
+                    "minItems": 3
+                  },
+                  "rb": {
+                    "type": "array",
+                    "items": {
+                      "title": "Person",
+                      "type": "object",
+                      "required": [
+                        "id",
+                        "email",
+                        "name",
+                        "home"
+                      ],
+                      "properties": {
+                        "id": {
+                          "type": "integer",
+                          "maximum": 9007199254740991,
+                          "x-primitive": "uint64",
+                          "exclusiveMinimum": 999
+                        },
+                        "email": {
+                          "type": "string",
+                          "x-primitive": "string",
+                          "format": "email"
+                        },
+                        "name": {
+                          "type": "string",
+                          "x-primitive": "string",
+                          "pattern": "^[A-Za-z]+( [A-Za-z]+)*$",
+                          "maxLength": 256
+                        },
+                        "home": {
+                          "title": "Location",
+                          "type": "object",
+                          "required": [
+                            "lat",
+                            "lng"
+                          ],
+                          "properties": {
+                            "lat": {
+                              "type": "number",
+                              "x-primitive": "double",
+                              "minimum": -90,
+                              "maximum": 90
+                            },
+                            "lng": {
+                              "type": "number",
+                              "x-primitive": "double",
+                              "minimum": -180,
+                              "maximum": 180
+                            }
+                          }
+                        }
+                      },
+                      "description": "x must contain between 5 and 10 Persons, inclusive"
+                    },
+                    "description": "x must contain between 5 and 10 Persons, inclusive",
+                    "minItems": 5,
+                    "maxItems": 10
+                  },
+                  "rc": {
+                    "type": "array",
+                    "items": {
+                      "type": "number",
+                      "x-primitive": "double",
+                      "description": "x must contain exactly 7 elements"
+                    },
+                    "description": "x must contain exactly 7 elements",
+                    "minItems": 7,
+                    "maxItems": 7
+                  },
+                  "rd": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer",
+                      "minimum": -9007199254740991,
+                      "maximum": 9007199254740991,
+                      "x-primitive": "int64",
+                      "description": "x must contain unique int64 values"
+                    },
+                    "description": "x must contain unique int64 values",
+                    "uniqueItems": true
+                  },
+                  "re": {
+                    "type": "array",
+                    "items": {
+                      "type": "number",
+                      "x-primitive": "float",
+                      "description": "x must contain positive float values",
+                      "exclusiveMinimum": 0
+                    },
+                    "description": "x must contain positive float values"
+                  },
+                  "rf": {
+                    "type": "array",
+                    "items": {
+                      "title": "Person",
+                      "type": "object",
+                      "required": [
+                        "id",
+                        "email",
+                        "name",
+                        "home"
+                      ],
+                      "properties": {
+                        "id": {
+                          "type": "integer",
+                          "maximum": 9007199254740991,
+                          "x-primitive": "uint64",
+                          "exclusiveMinimum": 999
+                        },
+                        "email": {
+                          "type": "string",
+                          "x-primitive": "string",
+                          "format": "email"
+                        },
+                        "name": {
+                          "type": "string",
+                          "x-primitive": "string",
+                          "pattern": "^[A-Za-z]+( [A-Za-z]+)*$",
+                          "maxLength": 256
+                        },
+                        "home": {
+                          "title": "Location",
+                          "type": "object",
+                          "required": [
+                            "lat",
+                            "lng"
+                          ],
+                          "properties": {
+                            "lat": {
+                              "type": "number",
+                              "x-primitive": "double",
+                              "minimum": -90,
+                              "maximum": 90
+                            },
+                            "lng": {
+                              "type": "number",
+                              "x-primitive": "double",
+                              "minimum": -180,
+                              "maximum": 180
+                            }
+                          }
+                        }
+                      },
+                      "description": "x must contain Persons but don't validate them"
+                    },
+                    "description": "x must contain Persons but don't validate them"
+                  },
+                  "rk": {
+                    "type": "array",
+                    "items": {
+                      "type": "number",
+                      "x-primitive": "float",
+                      "description": "x must contain positive float values",
+                      "exclusiveMinimum": 0
+                    },
+                    "description": "x must contain positive float values"
+                  },
+                  "rl": {
+                    "type": "array",
+                    "items": {
+                      "title": "Person",
+                      "type": "object",
+                      "required": [
+                        "id",
+                        "email",
+                        "name",
+                        "home"
+                      ],
+                      "properties": {
+                        "id": {
+                          "type": "integer",
+                          "maximum": 9007199254740991,
+                          "x-primitive": "uint64",
+                          "exclusiveMinimum": 999
+                        },
+                        "email": {
+                          "type": "string",
+                          "x-primitive": "string",
+                          "format": "email"
+                        },
+                        "name": {
+                          "type": "string",
+                          "x-primitive": "string",
+                          "pattern": "^[A-Za-z]+( [A-Za-z]+)*$",
+                          "maxLength": 256
+                        },
+                        "home": {
+                          "title": "Location",
+                          "type": "object",
+                          "required": [
+                            "lat",
+                            "lng"
+                          ],
+                          "properties": {
+                            "lat": {
+                              "type": "number",
+                              "x-primitive": "double",
+                              "minimum": -90,
+                              "maximum": 90
+                            },
+                            "lng": {
+                              "type": "number",
+                              "x-primitive": "double",
+                              "minimum": -180,
+                              "maximum": 180
+                            }
+                          }
+                        }
+                      },
+                      "description": "x must contain Persons but don't validate them"
+                    },
+                    "description": "x must contain Persons but don't validate them"
+                  }
+                }
+              },
+              "m": {
+                "title": "MapExamples",
+                "type": "object",
+                "properties": {},
+                "description": "Dont have an idea how to represent those in JsonSchema"
+              },
+              "g": {
+                "title": "GoogleExamples",
+                "type": "object",
+                "required": [
+                  "ga",
+                  "gb",
+                  "gd",
+                  "ge",
+                  "gj",
+                  "gl",
+                  "gm",
+                  "gp",
+                  "gq"
+                ],
+                "properties": {
+                  "ga": {
+                    "title": "Int32Value",
+                    "type": "object",
+                    "required": [
+                      "value"
+                    ],
+                    "properties": {
+                      "value": {
+                        "type": "integer",
+                        "minimum": -2147483648,
+                        "maximum": 2147483647,
+                        "x-primitive": "int32"
+                      }
+                    },
+                    "exclusiveMinimum": 3,
+                    "description": "if it is set, x must be greater than 3"
+                  },
+                  "gb": {
+                    "title": "Duration",
+                    "type": "object",
+                    "required": [
+                      "seconds",
+                      "nanos"
+                    ],
+                    "properties": {
+                      "seconds": {
+                        "type": "integer",
+                        "minimum": -9007199254740991,
+                        "maximum": 9007199254740991,
+                        "x-primitive": "int64"
+                      },
+                      "nanos": {
+                        "type": "integer",
+                        "minimum": -2147483648,
+                        "maximum": 2147483647,
+                        "x-primitive": "int32"
+                      }
+                    },
+                    "description": "x cannot be unset"
+                  },
+                  "gd": {
+                    "title": "Duration",
+                    "type": "object",
+                    "required": [
+                      "seconds",
+                      "nanos"
+                    ],
+                    "properties": {
+                      "seconds": {
+                        "type": "integer",
+                        "minimum": -9007199254740991,
+                        "maximum": 9007199254740991,
+                        "x-primitive": "int64"
+                      },
+                      "nanos": {
+                        "type": "integer",
+                        "minimum": -2147483648,
+                        "maximum": 2147483647,
+                        "x-primitive": "int32"
+                      }
+                    },
+                    "description": "x must be less than 10s"
+                  },
+                  "ge": {
+                    "title": "Duration",
+                    "type": "object",
+                    "required": [
+                      "seconds",
+                      "nanos"
+                    ],
+                    "properties": {
+                      "seconds": {
+                        "type": "integer",
+                        "minimum": -9007199254740991,
+                        "maximum": 9007199254740991,
+                        "x-primitive": "int64"
+                      },
+                      "nanos": {
+                        "type": "integer",
+                        "minimum": -2147483648,
+                        "maximum": 2147483647,
+                        "x-primitive": "int32"
+                      }
+                    },
+                    "description": "x must be greater than or equal to 20ns"
+                  },
+                  "gj": {
+                    "title": "Timestamp",
+                    "type": "object",
+                    "required": [
+                      "seconds",
+                      "nanos"
+                    ],
+                    "properties": {
+                      "seconds": {
+                        "type": "integer",
+                        "minimum": -9007199254740991,
+                        "maximum": 9007199254740991,
+                        "x-primitive": "int64"
+                      },
+                      "nanos": {
+                        "type": "integer",
+                        "minimum": -2147483648,
+                        "maximum": 2147483647,
+                        "x-primitive": "int32"
+                      }
+                    },
+                    "description": "x cannot be unset"
+                  },
+                  "gl": {
+                    "title": "Timestamp",
+                    "type": "object",
+                    "required": [
+                      "seconds",
+                      "nanos"
+                    ],
+                    "properties": {
+                      "seconds": {
+                        "type": "integer",
+                        "minimum": -9007199254740991,
+                        "maximum": 9007199254740991,
+                        "x-primitive": "int64"
+                      },
+                      "nanos": {
+                        "type": "integer",
+                        "minimum": -2147483648,
+                        "maximum": 2147483647,
+                        "x-primitive": "int32"
+                      }
+                    },
+                    "description": "x must be less than the Unix Epoch"
+                  },
+                  "gm": {
+                    "title": "Timestamp",
+                    "type": "object",
+                    "required": [
+                      "seconds",
+                      "nanos"
+                    ],
+                    "properties": {
+                      "seconds": {
+                        "type": "integer",
+                        "minimum": -9007199254740991,
+                        "maximum": 9007199254740991,
+                        "x-primitive": "int64"
+                      },
+                      "nanos": {
+                        "type": "integer",
+                        "minimum": -2147483648,
+                        "maximum": 2147483647,
+                        "x-primitive": "int32"
+                      }
+                    },
+                    "description": "x must be greater than or equal to 2009/11/10T23:00:00Z"
+                  },
+                  "gp": {
+                    "title": "Timestamp",
+                    "type": "object",
+                    "required": [
+                      "seconds",
+                      "nanos"
+                    ],
+                    "properties": {
+                      "seconds": {
+                        "type": "integer",
+                        "minimum": -9007199254740991,
+                        "maximum": 9007199254740991,
+                        "x-primitive": "int64"
+                      },
+                      "nanos": {
+                        "type": "integer",
+                        "minimum": -2147483648,
+                        "maximum": 2147483647,
+                        "x-primitive": "int32"
+                      }
+                    },
+                    "description": "x must be less than the current timestamp"
+                  },
+                  "gq": {
+                    "title": "Timestamp",
+                    "type": "object",
+                    "required": [
+                      "seconds",
+                      "nanos"
+                    ],
+                    "properties": {
+                      "seconds": {
+                        "type": "integer",
+                        "minimum": -9007199254740991,
+                        "maximum": 9007199254740991,
+                        "x-primitive": "int64"
+                      },
+                      "nanos": {
+                        "type": "integer",
+                        "minimum": -2147483648,
+                        "maximum": 2147483647,
+                        "x-primitive": "int32"
+                      }
+                    },
+                    "description": "x must be within ±1s of the current time"
+                  }
+                }
+              }
+            },
+            "description": "Root"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "messages": {
+      "testMessage": {
+        "schemaFormat": "application/vnd.google.protobuf;version=3",
+        "payload": {
+          "title": "RootNode",
+          "type": "object",
+          "required": [
+            "n",
+            "s",
+            "b",
+            "o",
+            "r",
+            "m",
+            "g"
+          ],
+          "properties": {
+            "n": {
+              "title": "NumericExamples",
+              "type": "object",
+              "required": [
+                "na",
+                "nb",
+                "nc",
+                "nd",
+                "ne",
+                "nf",
+                "ng",
+                "nh",
+                "nk",
+                "nl"
+              ],
+              "properties": {
+                "na": {
+                  "type": "number",
+                  "x-primitive": "float",
+                  "const": 1.23,
+                  "description": "x must equal 1.23 exactly"
+                },
+                "nb": {
+                  "type": "integer",
+                  "minimum": -2147483648,
+                  "x-primitive": "int32",
+                  "exclusiveMaximum": 10,
+                  "description": "x must be less than 10"
+                },
+                "nc": {
+                  "type": "integer",
+                  "minimum": 20,
+                  "maximum": 9007199254740991,
+                  "x-primitive": "uint64",
+                  "description": "x must be greater than or equal to 20"
+                },
+                "nd": {
+                  "type": "number",
+                  "x-primitive": "fixed32",
+                  "minimum": 30,
+                  "exclusiveMaximum": 40,
+                  "description": "x must be in the range [30, 40)"
+                },
+                "ne": {
+                  "type": "number",
+                  "x-primitive": "double",
+                  "exclusiveMaximum": 30,
+                  "minimum": 40,
+                  "description": "x must be outside the range [30, 40)"
+                },
+                "nf": {
+                  "type": "number",
+                  "x-primitive": "double",
+                  "exclusiveMaximum": 30,
+                  "minimum": 40,
+                  "description": "x must be outside the range [30, 40)"
+                },
+                "ng": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 4294967295,
+                  "x-primitive": "uint32",
+                  "oneOf": [
+                    {
+                      "const": 1,
+                      "x-parser-schema-id": "<anonymous-schema-10>"
+                    },
+                    {
+                      "const": 2,
+                      "x-parser-schema-id": "<anonymous-schema-11>"
+                    },
+                    {
+                      "const": 3,
+                      "x-parser-schema-id": "<anonymous-schema-12>"
+                    }
+                  ],
+                  "description": "x must be either 1, 2, or 3"
+                },
+                "nh": {
+                  "type": "number",
+                  "x-primitive": "float",
+                  "not": {
+                    "oneOf": [
+                      {
+                        "const": 0,
+                        "x-parser-schema-id": "<anonymous-schema-15>"
+                      },
+                      {
+                        "const": 0.99,
+                        "x-parser-schema-id": "<anonymous-schema-16>"
+                      }
+                    ]
+                  },
+                  "description": "x cannot be 0 nor 0.99"
+                },
+                "ni": {
+                  "type": "integer",
+                  "minimum": 200,
+                  "maximum": 4294967295,
+                  "x-primitive": "uint32",
+                  "description": "x must but greater or equal 200 and being optional"
+                },
+                "nk": {
+                  "type": "boolean",
+                  "x-primitive": "bool",
+                  "const": true,
+                  "description": "x must be set to true"
+                },
+                "nl": {
+                  "type": "boolean",
+                  "x-primitive": "bool",
+                  "const": false,
+                  "description": "x cannot be set to true"
+                }
+              }
+            },
+            "s": {
+              "title": "StringExamples",
+              "type": "object",
+              "required": [
+                "sa",
+                "sb",
+                "sc",
+                "sd",
+                "se",
+                "sf",
+                "sg",
+                "sh",
+                "si",
+                "sj",
+                "sk",
+                "sl",
+                "sm",
+                "sn",
+                "so",
+                "sp",
+                "sq",
+                "sr",
+                "ss",
+                "ip4",
+                "ip6",
+                "uri",
+                "absuri",
+                "uuid",
+                "httpheadname",
+                "httpheadvalue"
+              ],
+              "properties": {
+                "sa": {
+                  "type": "string",
+                  "x-primitive": "string",
+                  "const": "foo",
+                  "description": "x must be set to \"foo\""
+                },
+                "sb": {
+                  "type": "string",
+                  "x-primitive": "string",
+                  "minLength": 5,
+                  "maxLength": 5,
+                  "description": "x must be exactly 5 characters long"
+                },
+                "sc": {
+                  "type": "string",
+                  "x-primitive": "string",
+                  "minLength": 3,
+                  "description": "x must be at least 3 characters long"
+                },
+                "sd": {
+                  "type": "string",
+                  "x-primitive": "string",
+                  "minLength": 5,
+                  "maxLength": 10,
+                  "description": "x must be between 5 and 10 characters, inclusive"
+                },
+                "se": {
+                  "type": "string",
+                  "x-primitive": "string",
+                  "maxLength": 15,
+                  "description": "x must be at most 15 bytes long"
+                },
+                "sf": {
+                  "type": "string",
+                  "x-primitive": "string",
+                  "minLength": 128,
+                  "maxLength": 1024,
+                  "description": "x must be between 128 and 1024 bytes long"
+                },
+                "sg": {
+                  "type": "string",
+                  "x-primitive": "string",
+                  "pattern": "(?i)^[0-9a-f]+$",
+                  "description": "x must be a non-empty, case-insensitive hexadecimal string"
+                },
+                "sh": {
+                  "type": "string",
+                  "x-primitive": "string",
+                  "pattern": "^foo.*",
+                  "description": "x must begin with \"foo\""
+                },
+                "si": {
+                  "type": "string",
+                  "x-primitive": "string",
+                  "pattern": ".*bar$",
+                  "description": "x must end with \"bar\""
+                },
+                "sj": {
+                  "type": "string",
+                  "x-primitive": "string",
+                  "pattern": ".*baz.*",
+                  "description": "x must contain \"baz\" anywhere inside it"
+                },
+                "sk": {
+                  "type": "string",
+                  "x-primitive": "string",
+                  "pattern": "^((?!baz).)*$",
+                  "description": "x cannot contain \"baz\" anywhere inside it"
+                },
+                "sl": {
+                  "type": "string",
+                  "x-primitive": "string",
+                  "pattern": ".*buzz$",
+                  "description": "x must begin with \"fizz\" and end with \"buzz\""
+                },
+                "sm": {
+                  "type": "string",
+                  "x-primitive": "string",
+                  "pattern": ".*\\.proto$",
+                  "maxLength": 64,
+                  "description": "x must end with \".proto\" and be less than 64 characters"
+                },
+                "sn": {
+                  "type": "string",
+                  "x-primitive": "string",
+                  "oneOf": [
+                    {
+                      "const": "foo",
+                      "x-parser-schema-id": "<anonymous-schema-35>"
+                    },
+                    {
+                      "const": "bar",
+                      "x-parser-schema-id": "<anonymous-schema-36>"
+                    },
+                    {
+                      "const": "baz",
+                      "x-parser-schema-id": "<anonymous-schema-37>"
+                    }
+                  ],
+                  "description": "x must be either \"foo\", \"bar\", or \"baz\""
+                },
+                "so": {
+                  "type": "string",
+                  "x-primitive": "string",
+                  "not": {
+                    "oneOf": [
+                      {
+                        "const": "fizz",
+                        "x-parser-schema-id": "<anonymous-schema-40>"
+                      },
+                      {
+                        "const": "buzz",
+                        "x-parser-schema-id": "<anonymous-schema-41>"
+                      }
+                    ]
+                  },
+                  "description": "x cannot be \"fizz\" nor \"buzz\""
+                },
+                "sp": {
+                  "type": "string",
+                  "x-primitive": "string",
+                  "format": "email",
+                  "description": "x must be a valid email address (via RFC 5322)"
+                },
+                "sq": {
+                  "type": "string",
+                  "x-primitive": "string",
+                  "anyOf": [
+                    {
+                      "format": "hostname",
+                      "x-parser-schema-id": "<anonymous-schema-44>"
+                    },
+                    {
+                      "format": "ipv4",
+                      "x-parser-schema-id": "<anonymous-schema-45>"
+                    },
+                    {
+                      "format": "ipv6",
+                      "x-parser-schema-id": "<anonymous-schema-46>"
+                    }
+                  ],
+                  "description": "x must be a valid address (IP or Hostname)."
+                },
+                "sr": {
+                  "type": "string",
+                  "x-primitive": "string",
+                  "format": "hostname",
+                  "description": "x must be a valid hostname (via RFC 1034)"
+                },
+                "ss": {
+                  "type": "string",
+                  "x-primitive": "string",
+                  "anyOf": [
+                    {
+                      "format": "ipv4",
+                      "x-parser-schema-id": "<anonymous-schema-49>"
+                    },
+                    {
+                      "format": "ipv6",
+                      "x-parser-schema-id": "<anonymous-schema-50>"
+                    }
+                  ],
+                  "description": "x must be a valid IP address (either v4 or v6)"
+                },
+                "ip4": {
+                  "type": "string",
+                  "x-primitive": "string",
+                  "format": "ipv4",
+                  "description": "x must be a valid IPv4 address\neg: \"192.168.0.1\""
+                },
+                "ip6": {
+                  "type": "string",
+                  "x-primitive": "string",
+                  "format": "ipv6",
+                  "description": "x must be a valid IPv6 address\neg: \"fe80::3\""
+                },
+                "uri": {
+                  "type": "string",
+                  "x-primitive": "string",
+                  "format": "uri",
+                  "description": "x must be a valid absolute URI (via RFC 3986)"
+                },
+                "absuri": {
+                  "type": "string",
+                  "x-primitive": "string",
+                  "format": "uri-reference",
+                  "description": "x must be a valid URI reference (either absolute or relative)"
+                },
+                "uuid": {
+                  "type": "string",
+                  "x-primitive": "string",
+                  "format": "uuid",
+                  "description": "x must be a valid UUID (via RFC 4122)"
+                },
+                "httpheadname": {
+                  "type": "string",
+                  "x-primitive": "string",
+                  "pattern": "^:?[0-9a-zA-Z!#$%&'*+-.^_|~`]+$",
+                  "description": "x must conform to a well known regex for HTTP header names (via RFC 7230)"
+                },
+                "httpheadvalue": {
+                  "type": "string",
+                  "x-primitive": "string",
+                  "pattern": "^[^\u0000-\b\n-\u001f]*$",
+                  "description": "x must conform to a well known regex for HTTP header values (via RFC 7230)"
+                }
+              }
+            },
+            "b": {
+              "title": "ByteExamples",
+              "type": "object",
+              "required": [
+                "ba",
+                "bb",
+                "bc",
+                "bd",
+                "be",
+                "bf",
+                "bg",
+                "bh",
+                "bi",
+                "bj",
+                "bk",
+                "bm",
+                "bn",
+                "bo"
+              ],
+              "properties": {
+                "ba": {
+                  "type": "string",
+                  "x-primitive": "bytes",
+                  "const": "foo",
+                  "description": "x must be set to \"foo\" (\"\\x66\\x6f\\x6f\")"
+                },
+                "bb": {
+                  "type": "string",
+                  "x-primitive": "bytes",
+                  "const": "f09028bc",
+                  "description": "x must be set to \"\\xf0\\x90\\x28\\xbc\""
+                },
+                "bc": {
+                  "type": "string",
+                  "x-primitive": "bytes",
+                  "minLength": 3,
+                  "maxLength": 3,
+                  "description": "x must be exactly 3 bytes"
+                },
+                "bd": {
+                  "type": "string",
+                  "x-primitive": "bytes",
+                  "minLength": 3,
+                  "description": "x must be at least 3 bytes long"
+                },
+                "be": {
+                  "type": "string",
+                  "x-primitive": "bytes",
+                  "minLength": 5,
+                  "maxLength": 10,
+                  "description": "x must be between 5 and 10 bytes, inclusive"
+                },
+                "bf": {
+                  "type": "string",
+                  "x-primitive": "bytes",
+                  "pattern": "^[00-7F]+$",
+                  "description": "x must be a non-empty, ASCII byte sequence"
+                },
+                "bg": {
+                  "type": "string",
+                  "x-primitive": "bytes",
+                  "pattern": "^99.*",
+                  "description": "x must begin with \"\\x99\""
+                },
+                "bh": {
+                  "type": "string",
+                  "x-primitive": "bytes",
+                  "pattern": ".*buz7a$",
+                  "description": "x must end with \"buz\\x7a\""
+                },
+                "bi": {
+                  "type": "string",
+                  "x-primitive": "bytes",
+                  "pattern": ".*baz.*",
+                  "description": "x must contain \"baz\" anywhere inside it"
+                },
+                "bj": {
+                  "type": "string",
+                  "x-primitive": "bytes",
+                  "oneOf": [
+                    {
+                      "const": "foo",
+                      "x-parser-schema-id": "<anonymous-schema-69>"
+                    },
+                    {
+                      "const": "bar",
+                      "x-parser-schema-id": "<anonymous-schema-70>"
+                    },
+                    {
+                      "const": "baz",
+                      "x-parser-schema-id": "<anonymous-schema-71>"
+                    }
+                  ],
+                  "description": "x must be either \"foo\", \"bar\", or \"baz\""
+                },
+                "bk": {
+                  "type": "string",
+                  "x-primitive": "bytes",
+                  "not": {
+                    "oneOf": [
+                      {
+                        "const": "fizz",
+                        "x-parser-schema-id": "<anonymous-schema-74>"
+                      },
+                      {
+                        "const": "buzz",
+                        "x-parser-schema-id": "<anonymous-schema-75>"
+                      }
+                    ]
+                  },
+                  "description": "x cannot be \"fizz\" nor \"buzz\""
+                },
+                "bl": {
+                  "type": "string",
+                  "x-primitive": "bytes",
+                  "oneOf": [
+                    {
+                      "const": "foo",
+                      "x-parser-schema-id": "<anonymous-schema-77>"
+                    },
+                    {
+                      "const": "bar",
+                      "x-parser-schema-id": "<anonymous-schema-78>"
+                    },
+                    {
+                      "const": "baz",
+                      "x-parser-schema-id": "<anonymous-schema-79>"
+                    }
+                  ]
+                },
+                "bm": {
+                  "type": "string",
+                  "x-primitive": "bytes",
+                  "anyOf": [
+                    {
+                      "format": "ipv4",
+                      "x-parser-schema-id": "<anonymous-schema-81>"
+                    },
+                    {
+                      "format": "ipv6",
+                      "x-parser-schema-id": "<anonymous-schema-82>"
+                    }
+                  ],
+                  "description": "x must be a valid IP address (either v4 or v6) in byte format"
+                },
+                "bn": {
+                  "type": "string",
+                  "x-primitive": "bytes",
+                  "format": "ipv4",
+                  "description": "x must be a valid IPv4 address in byte format\neg: \"\\xC0\\xA8\\x00\\x01\""
+                },
+                "bo": {
+                  "type": "string",
+                  "x-primitive": "bytes",
+                  "format": "ipv6",
+                  "description": "x must be a valid IPv6 address in byte format\neg: \"\\x20\\x01\\x0D\\xB8\\x85\\xA3\\x00\\x00\\x00\\x00\\x8A\\x2E\\x03\\x70\\x73\\x34\""
+                }
+              }
+            },
+            "o": {
+              "title": "ObjectExamples",
+              "type": "object",
+              "properties": {},
+              "description": "Dont have an idea how to represent those in JsonSchema"
+            },
+            "r": {
+              "title": "RepeatedExamples",
+              "type": "object",
+              "required": [
+                "ra",
+                "rb",
+                "rc",
+                "rd",
+                "re",
+                "rf",
+                "rk",
+                "rl"
+              ],
+              "properties": {
+                "ra": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer",
+                    "minimum": -2147483648,
+                    "maximum": 2147483647,
+                    "x-primitive": "int32",
+                    "description": "x must contain at least 3 elements"
+                  },
+                  "description": "x must contain at least 3 elements",
+                  "minItems": 3
+                },
+                "rb": {
+                  "type": "array",
+                  "items": {
+                    "title": "Person",
+                    "type": "object",
+                    "required": [
+                      "id",
+                      "email",
+                      "name",
+                      "home"
+                    ],
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "maximum": 9007199254740991,
+                        "x-primitive": "uint64",
+                        "exclusiveMinimum": 999
+                      },
+                      "email": {
+                        "type": "string",
+                        "x-primitive": "string",
+                        "format": "email"
+                      },
+                      "name": {
+                        "type": "string",
+                        "x-primitive": "string",
+                        "pattern": "^[A-Za-z]+( [A-Za-z]+)*$",
+                        "maxLength": 256
+                      },
+                      "home": {
+                        "title": "Location",
+                        "type": "object",
+                        "required": [
+                          "lat",
+                          "lng"
+                        ],
+                        "properties": {
+                          "lat": {
+                            "type": "number",
+                            "x-primitive": "double",
+                            "minimum": -90,
+                            "maximum": 90
+                          },
+                          "lng": {
+                            "type": "number",
+                            "x-primitive": "double",
+                            "minimum": -180,
+                            "maximum": 180
+                          }
+                        }
+                      }
+                    },
+                    "description": "x must contain between 5 and 10 Persons, inclusive"
+                  },
+                  "description": "x must contain between 5 and 10 Persons, inclusive",
+                  "minItems": 5,
+                  "maxItems": 10
+                },
+                "rc": {
+                  "type": "array",
+                  "items": {
+                    "type": "number",
+                    "x-primitive": "double",
+                    "description": "x must contain exactly 7 elements"
+                  },
+                  "description": "x must contain exactly 7 elements",
+                  "minItems": 7,
+                  "maxItems": 7
+                },
+                "rd": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer",
+                    "minimum": -9007199254740991,
+                    "maximum": 9007199254740991,
+                    "x-primitive": "int64",
+                    "description": "x must contain unique int64 values"
+                  },
+                  "description": "x must contain unique int64 values",
+                  "uniqueItems": true
+                },
+                "re": {
+                  "type": "array",
+                  "items": {
+                    "type": "number",
+                    "x-primitive": "float",
+                    "description": "x must contain positive float values",
+                    "exclusiveMinimum": 0
+                  },
+                  "description": "x must contain positive float values"
+                },
+                "rf": {
+                  "type": "array",
+                  "items": {
+                    "title": "Person",
+                    "type": "object",
+                    "required": [
+                      "id",
+                      "email",
+                      "name",
+                      "home"
+                    ],
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "maximum": 9007199254740991,
+                        "x-primitive": "uint64",
+                        "exclusiveMinimum": 999
+                      },
+                      "email": {
+                        "type": "string",
+                        "x-primitive": "string",
+                        "format": "email"
+                      },
+                      "name": {
+                        "type": "string",
+                        "x-primitive": "string",
+                        "pattern": "^[A-Za-z]+( [A-Za-z]+)*$",
+                        "maxLength": 256
+                      },
+                      "home": {
+                        "title": "Location",
+                        "type": "object",
+                        "required": [
+                          "lat",
+                          "lng"
+                        ],
+                        "properties": {
+                          "lat": {
+                            "type": "number",
+                            "x-primitive": "double",
+                            "minimum": -90,
+                            "maximum": 90
+                          },
+                          "lng": {
+                            "type": "number",
+                            "x-primitive": "double",
+                            "minimum": -180,
+                            "maximum": 180
+                          }
+                        }
+                      }
+                    },
+                    "description": "x must contain Persons but don't validate them"
+                  },
+                  "description": "x must contain Persons but don't validate them"
+                },
+                "rk": {
+                  "type": "array",
+                  "items": {
+                    "type": "number",
+                    "x-primitive": "float",
+                    "description": "x must contain positive float values",
+                    "exclusiveMinimum": 0
+                  },
+                  "description": "x must contain positive float values"
+                },
+                "rl": {
+                  "type": "array",
+                  "items": {
+                    "title": "Person",
+                    "type": "object",
+                    "required": [
+                      "id",
+                      "email",
+                      "name",
+                      "home"
+                    ],
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "maximum": 9007199254740991,
+                        "x-primitive": "uint64",
+                        "exclusiveMinimum": 999
+                      },
+                      "email": {
+                        "type": "string",
+                        "x-primitive": "string",
+                        "format": "email"
+                      },
+                      "name": {
+                        "type": "string",
+                        "x-primitive": "string",
+                        "pattern": "^[A-Za-z]+( [A-Za-z]+)*$",
+                        "maxLength": 256
+                      },
+                      "home": {
+                        "title": "Location",
+                        "type": "object",
+                        "required": [
+                          "lat",
+                          "lng"
+                        ],
+                        "properties": {
+                          "lat": {
+                            "type": "number",
+                            "x-primitive": "double",
+                            "minimum": -90,
+                            "maximum": 90
+                          },
+                          "lng": {
+                            "type": "number",
+                            "x-primitive": "double",
+                            "minimum": -180,
+                            "maximum": 180
+                          }
+                        }
+                      }
+                    },
+                    "description": "x must contain Persons but don't validate them"
+                  },
+                  "description": "x must contain Persons but don't validate them"
+                }
+              }
+            },
+            "m": {
+              "title": "MapExamples",
+              "type": "object",
+              "properties": {},
+              "description": "Dont have an idea how to represent those in JsonSchema"
+            },
+            "g": {
+              "title": "GoogleExamples",
+              "type": "object",
+              "required": [
+                "ga",
+                "gb",
+                "gd",
+                "ge",
+                "gj",
+                "gl",
+                "gm",
+                "gp",
+                "gq"
+              ],
+              "properties": {
+                "ga": {
+                  "title": "Int32Value",
+                  "type": "object",
+                  "required": [
+                    "value"
+                  ],
+                  "properties": {
+                    "value": {
+                      "type": "integer",
+                      "minimum": -2147483648,
+                      "maximum": 2147483647,
+                      "x-primitive": "int32"
+                    }
+                  },
+                  "exclusiveMinimum": 3,
+                  "description": "if it is set, x must be greater than 3"
+                },
+                "gb": {
+                  "title": "Duration",
+                  "type": "object",
+                  "required": [
+                    "seconds",
+                    "nanos"
+                  ],
+                  "properties": {
+                    "seconds": {
+                      "type": "integer",
+                      "minimum": -9007199254740991,
+                      "maximum": 9007199254740991,
+                      "x-primitive": "int64"
+                    },
+                    "nanos": {
+                      "type": "integer",
+                      "minimum": -2147483648,
+                      "maximum": 2147483647,
+                      "x-primitive": "int32"
+                    }
+                  },
+                  "description": "x cannot be unset"
+                },
+                "gd": {
+                  "title": "Duration",
+                  "type": "object",
+                  "required": [
+                    "seconds",
+                    "nanos"
+                  ],
+                  "properties": {
+                    "seconds": {
+                      "type": "integer",
+                      "minimum": -9007199254740991,
+                      "maximum": 9007199254740991,
+                      "x-primitive": "int64"
+                    },
+                    "nanos": {
+                      "type": "integer",
+                      "minimum": -2147483648,
+                      "maximum": 2147483647,
+                      "x-primitive": "int32"
+                    }
+                  },
+                  "description": "x must be less than 10s"
+                },
+                "ge": {
+                  "title": "Duration",
+                  "type": "object",
+                  "required": [
+                    "seconds",
+                    "nanos"
+                  ],
+                  "properties": {
+                    "seconds": {
+                      "type": "integer",
+                      "minimum": -9007199254740991,
+                      "maximum": 9007199254740991,
+                      "x-primitive": "int64"
+                    },
+                    "nanos": {
+                      "type": "integer",
+                      "minimum": -2147483648,
+                      "maximum": 2147483647,
+                      "x-primitive": "int32"
+                    }
+                  },
+                  "description": "x must be greater than or equal to 20ns"
+                },
+                "gj": {
+                  "title": "Timestamp",
+                  "type": "object",
+                  "required": [
+                    "seconds",
+                    "nanos"
+                  ],
+                  "properties": {
+                    "seconds": {
+                      "type": "integer",
+                      "minimum": -9007199254740991,
+                      "maximum": 9007199254740991,
+                      "x-primitive": "int64"
+                    },
+                    "nanos": {
+                      "type": "integer",
+                      "minimum": -2147483648,
+                      "maximum": 2147483647,
+                      "x-primitive": "int32"
+                    }
+                  },
+                  "description": "x cannot be unset"
+                },
+                "gl": {
+                  "title": "Timestamp",
+                  "type": "object",
+                  "required": [
+                    "seconds",
+                    "nanos"
+                  ],
+                  "properties": {
+                    "seconds": {
+                      "type": "integer",
+                      "minimum": -9007199254740991,
+                      "maximum": 9007199254740991,
+                      "x-primitive": "int64"
+                    },
+                    "nanos": {
+                      "type": "integer",
+                      "minimum": -2147483648,
+                      "maximum": 2147483647,
+                      "x-primitive": "int32"
+                    }
+                  },
+                  "description": "x must be less than the Unix Epoch"
+                },
+                "gm": {
+                  "title": "Timestamp",
+                  "type": "object",
+                  "required": [
+                    "seconds",
+                    "nanos"
+                  ],
+                  "properties": {
+                    "seconds": {
+                      "type": "integer",
+                      "minimum": -9007199254740991,
+                      "maximum": 9007199254740991,
+                      "x-primitive": "int64"
+                    },
+                    "nanos": {
+                      "type": "integer",
+                      "minimum": -2147483648,
+                      "maximum": 2147483647,
+                      "x-primitive": "int32"
+                    }
+                  },
+                  "description": "x must be greater than or equal to 2009/11/10T23:00:00Z"
+                },
+                "gp": {
+                  "title": "Timestamp",
+                  "type": "object",
+                  "required": [
+                    "seconds",
+                    "nanos"
+                  ],
+                  "properties": {
+                    "seconds": {
+                      "type": "integer",
+                      "minimum": -9007199254740991,
+                      "maximum": 9007199254740991,
+                      "x-primitive": "int64"
+                    },
+                    "nanos": {
+                      "type": "integer",
+                      "minimum": -2147483648,
+                      "maximum": 2147483647,
+                      "x-primitive": "int32"
+                    }
+                  },
+                  "description": "x must be less than the current timestamp"
+                },
+                "gq": {
+                  "title": "Timestamp",
+                  "type": "object",
+                  "required": [
+                    "seconds",
+                    "nanos"
+                  ],
+                  "properties": {
+                    "seconds": {
+                      "type": "integer",
+                      "minimum": -9007199254740991,
+                      "maximum": 9007199254740991,
+                      "x-primitive": "int64"
+                    },
+                    "nanos": {
+                      "type": "integer",
+                      "minimum": -2147483648,
+                      "maximum": 2147483647,
+                      "x-primitive": "int32"
+                    }
+                  },
+                  "description": "x must be within ±1s of the current time"
+                }
+              }
+            }
+          },
+          "description": "Root"
+        }
+      }
+    }
+  }
+}

@@ -5,6 +5,7 @@ import {Path} from './pathUtils';
 import type {v3} from '@asyncapi/parser/esm/spec-types';
 import {PrimitiveTypes} from './primitive-types';
 import {AsyncAPISchemaDefinition} from '@asyncapi/parser/esm/spec-types/v3';
+import {isOptional as protocGenValidateIsOptional, visit as protocGenValidateVisit} from './protoc-gen-validate';
 
 const ROOT_FILENAME = 'root';
 const COMMENT_ROOT_NODE = '@RootNode';
@@ -78,6 +79,10 @@ class Proto2JsonSchema {
 
   // Bundled definition existence checking
   private getBundledFileName(filename: string): string | null {
+    if (filename === 'validate/validate.proto' || filename === '/validate/validate.proto') {
+      return 'validate/validate.proto';
+    }
+
     let idx = filename.lastIndexOf('google/protobuf/');
     if (idx > -1) {
       const shortName = filename.substring(idx);
@@ -203,6 +208,9 @@ class Proto2JsonSchema {
   }
 
   private isProto3Required(field: protobuf.Field) {
+    if (protocGenValidateIsOptional(field)) {
+      return false;
+    }
     return (field.options?.proto3_optional !== true && this.isProto3());
   }
 
@@ -267,6 +275,8 @@ class Proto2JsonSchema {
             obj.maxItems = parseFloat(m[1]);
           }
         }
+
+        protocGenValidateVisit(properties[field.name], field);
       } else {
         properties[field.name] = this.compileField(field, item, stack.slice());
       }
@@ -320,6 +330,7 @@ class Proto2JsonSchema {
     return obj;
   }
 
+  // eslint-disable-next-line sonarjs/cognitive-complexity
   private compileField(field: protobuf.Field, parentItem: protobuf.Type, stack: string[]): v3.AsyncAPISchemaDefinition {
     let obj: v3.AsyncAPISchemaDefinition = {};
 
@@ -344,6 +355,9 @@ class Proto2JsonSchema {
 
     this.addValidatorFromCommentAnnotations(obj, field.comment);
     this.addDefaultFromCommentAnnotations(obj, field.comment);
+    if (!field.repeated) {
+      protocGenValidateVisit(obj, field);
+    }
 
     const desc = this.extractDescription(field.comment);
     if (desc !== null && desc.length > 0) {

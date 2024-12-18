@@ -182,6 +182,23 @@ describe('parse()', function () {
     );
   });
 
+  it('protoc-gen-validate should added as correct validations', async function () {
+    const document = await parseSpec('./documents/protoc-gen-validate.yaml');
+
+    if (UPDATE_RESULTS) {
+      writeResults(
+        document,
+        './documents/protoc-gen-validate.result.json'
+      );
+    }
+
+    expect(
+      stripParserExtraInfos(document?.json())
+    ).toEqual(
+      readResultFile('./documents/protoc-gen-validate.result.json')
+    );
+  });
+
   function filterDiagnostics(diagnostics: Diagnostic[], code: string) {
     return diagnostics.filter((d) => d.code === code);
   }
