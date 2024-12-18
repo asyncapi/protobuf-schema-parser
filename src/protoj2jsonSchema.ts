@@ -330,6 +330,7 @@ class Proto2JsonSchema {
     return obj;
   }
 
+  // eslint-disable-next-line sonarjs/cognitive-complexity
   private compileField(field: protobuf.Field, parentItem: protobuf.Type, stack: string[]): v3.AsyncAPISchemaDefinition {
     let obj: v3.AsyncAPISchemaDefinition = {};
 
