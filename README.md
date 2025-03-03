@@ -173,5 +173,9 @@ Possible options are:
 |--------------------------|:-----------------------------------------------------------------------------------------------------------|:-----|
 | primitiveTypesWithLimits | If you dont like to get default Min and Max limits for primitive types, you can set this option to `false` | true |
 
+## Supported validation frameworks
 
+If you would like to add additional validation to your proto files, you can use one of the following validation frameworks.
+
+- [proto-gen-validate](https://github.com/bufbuild/protoc-gen-validate) Validation of lists are not 100% supported
 

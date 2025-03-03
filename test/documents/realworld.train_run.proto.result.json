@@ -399,7 +399,8 @@
                             }
                           ]
                         }
-                      }
+                      },
+                      "x-oneof-item": "timeZone"
                     },
                     "production_time": {
                       "title": "DateTime",
@@ -511,7 +512,8 @@
                             }
                           ]
                         }
-                      }
+                      },
+                      "x-oneof-item": "timeZone"
                     },
                     "train_run_segment": {
                       "title": "TrainRunSegmentMsg",
@@ -762,7 +764,8 @@
                         }
                       ]
                     }
-                  }
+                  },
+                  "x-oneof-item": "movement"
                 }
               },
               "composition": {
@@ -1262,7 +1265,8 @@
                           }
                         ]
                       }
-                    }
+                    },
+                    "x-oneof-item": "timeZone"
                   },
                   "production_time": {
                     "title": "DateTime",
@@ -1374,7 +1378,8 @@
                           }
                         ]
                       }
-                    }
+                    },
+                    "x-oneof-item": "timeZone"
                   },
                   "train_run_segment": {
                     "title": "TrainRunSegmentMsg",
@@ -1625,7 +1630,8 @@
                       }
                     ]
                   }
-                }
+                },
+                "x-oneof-item": "movement"
               }
             },
             "composition": {
