@@ -372,6 +372,7 @@
                                   "x-parser-schema-id": "<anonymous-schema-48>"
                                 }
                               },
+                              "x-oneof-item": "utcOffset",
                               "x-parser-schema-id": "<anonymous-schema-46>"
                             },
                             {
@@ -395,12 +396,12 @@
                                   "x-parser-schema-id": "<anonymous-schema-51>"
                                 }
                               },
+                              "x-oneof-item": "timeZone",
                               "x-parser-schema-id": "<anonymous-schema-49>"
                             }
                           ]
                         }
-                      },
-                      "x-oneof-item": "timeZone"
+                      }
                     },
                     "production_time": {
                       "title": "DateTime",
@@ -485,6 +486,7 @@
                                   "x-parser-schema-id": "<anonymous-schema-63>"
                                 }
                               },
+                              "x-oneof-item": "utcOffset",
                               "x-parser-schema-id": "<anonymous-schema-61>"
                             },
                             {
@@ -508,12 +510,12 @@
                                   "x-parser-schema-id": "<anonymous-schema-66>"
                                 }
                               },
+                              "x-oneof-item": "timeZone",
                               "x-parser-schema-id": "<anonymous-schema-64>"
                             }
                           ]
                         }
-                      },
-                      "x-oneof-item": "timeZone"
+                      }
                     },
                     "train_run_segment": {
                       "title": "TrainRunSegmentMsg",
@@ -682,6 +684,7 @@
                               "x-parser-schema-id": "<anonymous-schema-86>"
                             }
                           },
+                          "x-oneof-item": "stop",
                           "x-parser-schema-id": "<anonymous-schema-78>"
                         },
                         {
@@ -760,12 +763,12 @@
                               "x-parser-schema-id": "<anonymous-schema-96>"
                             }
                           },
+                          "x-oneof-item": "movement",
                           "x-parser-schema-id": "<anonymous-schema-88>"
                         }
                       ]
                     }
-                  },
-                  "x-oneof-item": "movement"
+                  }
                 }
               },
               "composition": {
@@ -1238,6 +1241,7 @@
                                 "x-parser-schema-id": "<anonymous-schema-48>"
                               }
                             },
+                            "x-oneof-item": "utcOffset",
                             "x-parser-schema-id": "<anonymous-schema-46>"
                           },
                           {
@@ -1261,12 +1265,12 @@
                                 "x-parser-schema-id": "<anonymous-schema-51>"
                               }
                             },
+                            "x-oneof-item": "timeZone",
                             "x-parser-schema-id": "<anonymous-schema-49>"
                           }
                         ]
                       }
-                    },
-                    "x-oneof-item": "timeZone"
+                    }
                   },
                   "production_time": {
                     "title": "DateTime",
@@ -1351,6 +1355,7 @@
                                 "x-parser-schema-id": "<anonymous-schema-63>"
                               }
                             },
+                            "x-oneof-item": "utcOffset",
                             "x-parser-schema-id": "<anonymous-schema-61>"
                           },
                           {
@@ -1374,12 +1379,12 @@
                                 "x-parser-schema-id": "<anonymous-schema-66>"
                               }
                             },
+                            "x-oneof-item": "timeZone",
                             "x-parser-schema-id": "<anonymous-schema-64>"
                           }
                         ]
                       }
-                    },
-                    "x-oneof-item": "timeZone"
+                    }
                   },
                   "train_run_segment": {
                     "title": "TrainRunSegmentMsg",
@@ -1548,6 +1553,7 @@
                             "x-parser-schema-id": "<anonymous-schema-86>"
                           }
                         },
+                        "x-oneof-item": "stop",
                         "x-parser-schema-id": "<anonymous-schema-78>"
                       },
                       {
@@ -1626,12 +1632,12 @@
                             "x-parser-schema-id": "<anonymous-schema-96>"
                           }
                         },
+                        "x-oneof-item": "movement",
                         "x-parser-schema-id": "<anonymous-schema-88>"
                       }
                     ]
                   }
-                },
-                "x-oneof-item": "movement"
+                }
               }
             },
             "composition": {

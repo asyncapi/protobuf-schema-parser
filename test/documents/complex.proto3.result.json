@@ -164,6 +164,7 @@
                               "x-parser-schema-id": "<anonymous-schema-20>"
                             }
                           },
+                          "x-oneof-item": "utcOffset",
                           "x-parser-schema-id": "<anonymous-schema-18>"
                         },
                         {
@@ -187,12 +188,12 @@
                               "x-parser-schema-id": "<anonymous-schema-23>"
                             }
                           },
+                          "x-oneof-item": "timeZone",
                           "x-parser-schema-id": "<anonymous-schema-21>"
                         }
                       ]
                     }
-                  },
-                  "x-oneof-item": "timeZone"
+                  }
                 },
                 "offset": {
                   "title": "Decimal",
@@ -249,6 +250,178 @@
                       "x-primitive": "int32"
                     }
                   }
+                },
+                "first": {
+                  "oneOf": [
+                    {
+                      "title": "SubTypeA",
+                      "type": "object",
+                      "required": [
+                        "element",
+                        "identification"
+                      ],
+                      "properties": {
+                        "element": {
+                          "type": "string",
+                          "x-primitive": "string",
+                          "x-parser-schema-id": "<anonymous-schema-33>"
+                        },
+                        "identification": {
+                          "type": "string",
+                          "x-primitive": "string",
+                          "x-parser-schema-id": "<anonymous-schema-34>"
+                        }
+                      },
+                      "x-oneof-item": "optionA",
+                      "x-parser-schema-id": "<anonymous-schema-32>"
+                    },
+                    {
+                      "title": "SubTypeB",
+                      "type": "object",
+                      "required": [
+                        "sourceElement",
+                        "targetElement"
+                      ],
+                      "properties": {
+                        "sourceElement": {
+                          "type": "string",
+                          "x-primitive": "string",
+                          "x-parser-schema-id": "<anonymous-schema-36>"
+                        },
+                        "targetElement": {
+                          "type": "string",
+                          "x-primitive": "string",
+                          "x-parser-schema-id": "<anonymous-schema-37>"
+                        }
+                      },
+                      "x-oneof-item": "optionB",
+                      "x-parser-schema-id": "<anonymous-schema-35>"
+                    },
+                    {
+                      "title": "SubTypeC",
+                      "type": "object",
+                      "required": [
+                        "element",
+                        "identification"
+                      ],
+                      "properties": {
+                        "element": {
+                          "type": "string",
+                          "x-primitive": "string",
+                          "x-parser-schema-id": "<anonymous-schema-39>"
+                        },
+                        "identification": {
+                          "type": "string",
+                          "x-primitive": "string",
+                          "x-parser-schema-id": "<anonymous-schema-40>"
+                        }
+                      },
+                      "x-oneof-item": "optionC",
+                      "x-parser-schema-id": "<anonymous-schema-38>"
+                    },
+                    {
+                      "title": "SubTypeD",
+                      "type": "object",
+                      "required": [
+                        "element"
+                      ],
+                      "properties": {
+                        "element": {
+                          "type": "string",
+                          "x-primitive": "string",
+                          "x-parser-schema-id": "<anonymous-schema-42>"
+                        }
+                      },
+                      "x-oneof-item": "optionD",
+                      "x-parser-schema-id": "<anonymous-schema-41>"
+                    }
+                  ]
+                },
+                "second": {
+                  "oneOf": [
+                    {
+                      "title": "SubTypeA",
+                      "type": "object",
+                      "required": [
+                        "element",
+                        "identification"
+                      ],
+                      "properties": {
+                        "element": {
+                          "type": "string",
+                          "x-primitive": "string",
+                          "x-parser-schema-id": "<anonymous-schema-45>"
+                        },
+                        "identification": {
+                          "type": "string",
+                          "x-primitive": "string",
+                          "x-parser-schema-id": "<anonymous-schema-46>"
+                        }
+                      },
+                      "x-oneof-item": "optionH",
+                      "x-parser-schema-id": "<anonymous-schema-44>"
+                    },
+                    {
+                      "title": "SubTypeB",
+                      "type": "object",
+                      "required": [
+                        "sourceElement",
+                        "targetElement"
+                      ],
+                      "properties": {
+                        "sourceElement": {
+                          "type": "string",
+                          "x-primitive": "string",
+                          "x-parser-schema-id": "<anonymous-schema-48>"
+                        },
+                        "targetElement": {
+                          "type": "string",
+                          "x-primitive": "string",
+                          "x-parser-schema-id": "<anonymous-schema-49>"
+                        }
+                      },
+                      "x-oneof-item": "optionI",
+                      "x-parser-schema-id": "<anonymous-schema-47>"
+                    },
+                    {
+                      "title": "SubTypeC",
+                      "type": "object",
+                      "required": [
+                        "element",
+                        "identification"
+                      ],
+                      "properties": {
+                        "element": {
+                          "type": "string",
+                          "x-primitive": "string",
+                          "x-parser-schema-id": "<anonymous-schema-51>"
+                        },
+                        "identification": {
+                          "type": "string",
+                          "x-primitive": "string",
+                          "x-parser-schema-id": "<anonymous-schema-52>"
+                        }
+                      },
+                      "x-oneof-item": "optionK",
+                      "x-parser-schema-id": "<anonymous-schema-50>"
+                    },
+                    {
+                      "title": "SubTypeD",
+                      "type": "object",
+                      "required": [
+                        "element"
+                      ],
+                      "properties": {
+                        "element": {
+                          "type": "string",
+                          "x-primitive": "string",
+                          "x-parser-schema-id": "<anonymous-schema-54>"
+                        }
+                      },
+                      "x-oneof-item": "optionL",
+                      "x-parser-schema-id": "<anonymous-schema-53>"
+                    }
+                  ]
                 }
               }
             }
@@ -415,6 +588,7 @@
                             "x-parser-schema-id": "<anonymous-schema-20>"
                           }
                         },
+                        "x-oneof-item": "utcOffset",
                         "x-parser-schema-id": "<anonymous-schema-18>"
                       },
                       {
@@ -438,12 +612,12 @@
                             "x-parser-schema-id": "<anonymous-schema-23>"
                           }
                         },
+                        "x-oneof-item": "timeZone",
                         "x-parser-schema-id": "<anonymous-schema-21>"
                       }
                     ]
                   }
-                },
-                "x-oneof-item": "timeZone"
+                }
               },
               "offset": {
                 "title": "Decimal",
@@ -500,6 +674,178 @@
                     "x-primitive": "int32"
                   }
                 }
+              },
+              "first": {
+                "oneOf": [
+                  {
+                    "title": "SubTypeA",
+                    "type": "object",
+                    "required": [
+                      "element",
+                      "identification"
+                    ],
+                    "properties": {
+                      "element": {
+                        "type": "string",
+                        "x-primitive": "string",
+                        "x-parser-schema-id": "<anonymous-schema-33>"
+                      },
+                      "identification": {
+                        "type": "string",
+                        "x-primitive": "string",
+                        "x-parser-schema-id": "<anonymous-schema-34>"
+                      }
+                    },
+                    "x-oneof-item": "optionA",
+                    "x-parser-schema-id": "<anonymous-schema-32>"
+                  },
+                  {
+                    "title": "SubTypeB",
+                    "type": "object",
+                    "required": [
+                      "sourceElement",
+                      "targetElement"
+                    ],
+                    "properties": {
+                      "sourceElement": {
+                        "type": "string",
+                        "x-primitive": "string",
+                        "x-parser-schema-id": "<anonymous-schema-36>"
+                      },
+                      "targetElement": {
+                        "type": "string",
+                        "x-primitive": "string",
+                        "x-parser-schema-id": "<anonymous-schema-37>"
+                      }
+                    },
+                    "x-oneof-item": "optionB",
+                    "x-parser-schema-id": "<anonymous-schema-35>"
+                  },
+                  {
+                    "title": "SubTypeC",
+                    "type": "object",
+                    "required": [
+                      "element",
+                      "identification"
+                    ],
+                    "properties": {
+                      "element": {
+                        "type": "string",
+                        "x-primitive": "string",
+                        "x-parser-schema-id": "<anonymous-schema-39>"
+                      },
+                      "identification": {
+                        "type": "string",
+                        "x-primitive": "string",
+                        "x-parser-schema-id": "<anonymous-schema-40>"
+                      }
+                    },
+                    "x-oneof-item": "optionC",
+                    "x-parser-schema-id": "<anonymous-schema-38>"
+                  },
+                  {
+                    "title": "SubTypeD",
+                    "type": "object",
+                    "required": [
+                      "element"
+                    ],
+                    "properties": {
+                      "element": {
+                        "type": "string",
+                        "x-primitive": "string",
+                        "x-parser-schema-id": "<anonymous-schema-42>"
+                      }
+                    },
+                    "x-oneof-item": "optionD",
+                    "x-parser-schema-id": "<anonymous-schema-41>"
+                  }
+                ]
+              },
+              "second": {
+                "oneOf": [
+                  {
+                    "title": "SubTypeA",
+                    "type": "object",
+                    "required": [
+                      "element",
+                      "identification"
+                    ],
+                    "properties": {
+                      "element": {
+                        "type": "string",
+                        "x-primitive": "string",
+                        "x-parser-schema-id": "<anonymous-schema-45>"
+                      },
+                      "identification": {
+                        "type": "string",
+                        "x-primitive": "string",
+                        "x-parser-schema-id": "<anonymous-schema-46>"
+                      }
+                    },
+                    "x-oneof-item": "optionH",
+                    "x-parser-schema-id": "<anonymous-schema-44>"
+                  },
+                  {
+                    "title": "SubTypeB",
+                    "type": "object",
+                    "required": [
+                      "sourceElement",
+                      "targetElement"
+                    ],
+                    "properties": {
+                      "sourceElement": {
+                        "type": "string",
+                        "x-primitive": "string",
+                        "x-parser-schema-id": "<anonymous-schema-48>"
+                      },
+                      "targetElement": {
+                        "type": "string",
+                        "x-primitive": "string",
+                        "x-parser-schema-id": "<anonymous-schema-49>"
+                      }
+                    },
+                    "x-oneof-item": "optionI",
+                    "x-parser-schema-id": "<anonymous-schema-47>"
+                  },
+                  {
+                    "title": "SubTypeC",
+                    "type": "object",
+                    "required": [
+                      "element",
+                      "identification"
+                    ],
+                    "properties": {
+                      "element": {
+                        "type": "string",
+                        "x-primitive": "string",
+                        "x-parser-schema-id": "<anonymous-schema-51>"
+                      },
+                      "identification": {
+                        "type": "string",
+                        "x-primitive": "string",
+                        "x-parser-schema-id": "<anonymous-schema-52>"
+                      }
+                    },
+                    "x-oneof-item": "optionK",
+                    "x-parser-schema-id": "<anonymous-schema-50>"
+                  },
+                  {
+                    "title": "SubTypeD",
+                    "type": "object",
+                    "required": [
+                      "element"
+                    ],
+                    "properties": {
+                      "element": {
+                        "type": "string",
+                        "x-primitive": "string",
+                        "x-parser-schema-id": "<anonymous-schema-54>"
+                      }
+                    },
+                    "x-oneof-item": "optionL",
+                    "x-parser-schema-id": "<anonymous-schema-53>"
+                  }
+                ]
               }
             }
           }
@@ -662,6 +1008,7 @@
                           "x-parser-schema-id": "<anonymous-schema-20>"
                         }
                       },
+                      "x-oneof-item": "utcOffset",
                       "x-parser-schema-id": "<anonymous-schema-18>"
                     },
                     {
@@ -685,12 +1032,12 @@
                           "x-parser-schema-id": "<anonymous-schema-23>"
                         }
                       },
+                      "x-oneof-item": "timeZone",
                       "x-parser-schema-id": "<anonymous-schema-21>"
                     }
                   ]
                 }
-              },
-              "x-oneof-item": "timeZone"
+              }
             },
             "offset": {
               "title": "Decimal",
@@ -747,6 +1094,178 @@
                   "x-primitive": "int32"
                 }
               }
+            },
+            "first": {
+              "oneOf": [
+                {
+                  "title": "SubTypeA",
+                  "type": "object",
+                  "required": [
+                    "element",
+                    "identification"
+                  ],
+                  "properties": {
+                    "element": {
+                      "type": "string",
+                      "x-primitive": "string",
+                      "x-parser-schema-id": "<anonymous-schema-33>"
+                    },
+                    "identification": {
+                      "type": "string",
+                      "x-primitive": "string",
+                      "x-parser-schema-id": "<anonymous-schema-34>"
+                    }
+                  },
+                  "x-oneof-item": "optionA",
+                  "x-parser-schema-id": "<anonymous-schema-32>"
+                },
+                {
+                  "title": "SubTypeB",
+                  "type": "object",
+                  "required": [
+                    "sourceElement",
+                    "targetElement"
+                  ],
+                  "properties": {
+                    "sourceElement": {
+                      "type": "string",
+                      "x-primitive": "string",
+                      "x-parser-schema-id": "<anonymous-schema-36>"
+                    },
+                    "targetElement": {
+                      "type": "string",
+                      "x-primitive": "string",
+                      "x-parser-schema-id": "<anonymous-schema-37>"
+                    }
+                  },
+                  "x-oneof-item": "optionB",
+                  "x-parser-schema-id": "<anonymous-schema-35>"
+                },
+                {
+                  "title": "SubTypeC",
+                  "type": "object",
+                  "required": [
+                    "element",
+                    "identification"
+                  ],
+                  "properties": {
+                    "element": {
+                      "type": "string",
+                      "x-primitive": "string",
+                      "x-parser-schema-id": "<anonymous-schema-39>"
+                    },
+                    "identification": {
+                      "type": "string",
+                      "x-primitive": "string",
+                      "x-parser-schema-id": "<anonymous-schema-40>"
+                    }
+                  },
+                  "x-oneof-item": "optionC",
+                  "x-parser-schema-id": "<anonymous-schema-38>"
+                },
+                {
+                  "title": "SubTypeD",
+                  "type": "object",
+                  "required": [
+                    "element"
+                  ],
+                  "properties": {
+                    "element": {
+                      "type": "string",
+                      "x-primitive": "string",
+                      "x-parser-schema-id": "<anonymous-schema-42>"
+                    }
+                  },
+                  "x-oneof-item": "optionD",
+                  "x-parser-schema-id": "<anonymous-schema-41>"
+                }
+              ]
+            },
+            "second": {
+              "oneOf": [
+                {
+                  "title": "SubTypeA",
+                  "type": "object",
+                  "required": [
+                    "element",
+                    "identification"
+                  ],
+                  "properties": {
+                    "element": {
+                      "type": "string",
+                      "x-primitive": "string",
+                      "x-parser-schema-id": "<anonymous-schema-45>"
+                    },
+                    "identification": {
+                      "type": "string",
+                      "x-primitive": "string",
+                      "x-parser-schema-id": "<anonymous-schema-46>"
+                    }
+                  },
+                  "x-oneof-item": "optionH",
+                  "x-parser-schema-id": "<anonymous-schema-44>"
+                },
+                {
+                  "title": "SubTypeB",
+                  "type": "object",
+                  "required": [
+                    "sourceElement",
+                    "targetElement"
+                  ],
+                  "properties": {
+                    "sourceElement": {
+                      "type": "string",
+                      "x-primitive": "string",
+                      "x-parser-schema-id": "<anonymous-schema-48>"
+                    },
+                    "targetElement": {
+                      "type": "string",
+                      "x-primitive": "string",
+                      "x-parser-schema-id": "<anonymous-schema-49>"
+                    }
+                  },
+                  "x-oneof-item": "optionI",
+                  "x-parser-schema-id": "<anonymous-schema-47>"
+                },
+                {
+                  "title": "SubTypeC",
+                  "type": "object",
+                  "required": [
+                    "element",
+                    "identification"
+                  ],
+                  "properties": {
+                    "element": {
+                      "type": "string",
+                      "x-primitive": "string",
+                      "x-parser-schema-id": "<anonymous-schema-51>"
+                    },
+                    "identification": {
+                      "type": "string",
+                      "x-primitive": "string",
+                      "x-parser-schema-id": "<anonymous-schema-52>"
+                    }
+                  },
+                  "x-oneof-item": "optionK",
+                  "x-parser-schema-id": "<anonymous-schema-50>"
+                },
+                {
+                  "title": "SubTypeD",
+                  "type": "object",
+                  "required": [
+                    "element"
+                  ],
+                  "properties": {
+                    "element": {
+                      "type": "string",
+                      "x-primitive": "string",
+                      "x-parser-schema-id": "<anonymous-schema-54>"
+                    }
+                  },
+                  "x-oneof-item": "optionL",
+                  "x-parser-schema-id": "<anonymous-schema-53>"
+                }
+              ]
             }
           }
         }
