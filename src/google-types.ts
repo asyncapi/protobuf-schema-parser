@@ -853,4 +853,5 @@ export const googleProtoTypes: { [key: string]: { [k: string]: any } } = {
     }
   },
   'validate/validate.proto': {},
+  'buf/validate/validate.proto': {},
 };
