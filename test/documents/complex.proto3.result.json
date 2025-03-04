@@ -191,7 +191,8 @@
                         }
                       ]
                     }
-                  }
+                  },
+                  "x-oneof-item": "timeZone"
                 },
                 "offset": {
                   "title": "Decimal",
@@ -441,7 +442,8 @@
                       }
                     ]
                   }
-                }
+                },
+                "x-oneof-item": "timeZone"
               },
               "offset": {
                 "title": "Decimal",
@@ -687,7 +689,8 @@
                     }
                   ]
                 }
-              }
+              },
+              "x-oneof-item": "timeZone"
             },
             "offset": {
               "title": "Decimal",

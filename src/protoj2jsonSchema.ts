@@ -103,30 +103,30 @@ class Proto2JsonSchema {
   }
 
   private fetch(filename: string, parentFilename: string, weak: boolean) {
-    filename = this.getBundledFileName(filename) || filename;
+    const bundledFilename = this.getBundledFileName(filename) || filename;
 
     // Skip if already loaded / attempted
-    if (this.root.files.indexOf(filename) > -1) {
+    if (this.root.files.indexOf(bundledFilename) > -1) {
       return;
     }
-    this.root.files.push(filename);
+    this.root.files.push(bundledFilename);
 
     // Shortcut bundled definitions
-    if (filename in protobuf.common) {
+    if (bundledFilename in protobuf.common) {
       // @ts-ignore
-      this.process(filename, protobuf.common[filename] as ProtoAsJson);
+      this.process(bundledFilename, protobuf.common[bundledFilename] as ProtoAsJson);
       return;
     }
 
-    if (filename in googleProtoTypes) {
-      this.process(filename, googleProtoTypes[filename] as ProtoAsJson);
+    if (bundledFilename in googleProtoTypes) {
+      this.process(bundledFilename, googleProtoTypes[bundledFilename] as ProtoAsJson);
       return;
     }
 
-    filename = Path.resolve(filename, parentFilename);
+    const resolvedFilename = Path.resolve(bundledFilename, parentFilename);
 
     if (!weak) {
-      throw new Error('Imports are currently not implemented');
+      throw new Error(`Imports are currently not implemented. Can not load: ${resolvedFilename} defined in as ${filename} in ${parentFilename}`);
     }
   }
 
@@ -282,22 +282,24 @@ class Proto2JsonSchema {
       }
     }
 
-    for (const oneOff of item.oneofsArray) {
-      if (oneOff.fieldsArray.length < 2) {
+    for (const oneOfItem of item.oneofsArray) {
+      if (oneOfItem.fieldsArray.length < 2) {
         // Filter optionals (oneof starting with _ and contain only one entry)
         continue;
       }
 
-      if (!properties[oneOff.name]) {
-        properties[oneOff.name] = {
+      if (!properties[oneOfItem.name]) {
+        properties[oneOfItem.name] = {
           oneOf: []
         };
       }
-      const oneOf = (properties[oneOff.name] as any)['oneOf'] as any[];
+      const oneOf = (properties[oneOfItem.name] as any)['oneOf'] as any[];
 
-      for (const fieldName of oneOff.oneof) {
-        const field = item.fields[fieldName];
-        oneOf.push(this.compileField(field, item, stack.slice()));
+      for (const fieldName of oneOfItem.oneof) {
+        const field = this.compileField(item.fields[fieldName], item, stack.slice());
+        obj['x-oneof-item'] = fieldName;
+
+        oneOf.push(field);
       }
     }
 
