@@ -40,10 +40,45 @@ components:
           google.type.DateTime timestamp = 3;
           google.type.Decimal offset = 4;
           google.protobuf.Int32Value y = 5;
+        
+          oneof first {
+            SubTypeA optionA = 21;
+            SubTypeB optionB = 22;
+            SubTypeC optionC = 23;
+            SubTypeD optionD = 24;
+          }
+      
+          oneof second {
+            SubTypeA optionH = 11;
+            SubTypeB optionI = 12;
+            SubTypeC optionK = 13;
+            SubTypeD optionL = 14;
+          }
+        
+        
           Duration dur = 6;
         }
 
         message Duration {
           required int32 from = 1;
           required int32 to = 2;
+        }
+        
+        message SubTypeA {
+          string element = 1;
+          string identification = 2;
+        }
+        
+        message SubTypeB {
+          string sourceElement = 1;
+          string targetElement = 2;
+        }
+        
+        message SubTypeC {
+          string element = 1;
+          string identification = 2;
+        }
+        
+        message SubTypeD {
+          string element = 1;
         }

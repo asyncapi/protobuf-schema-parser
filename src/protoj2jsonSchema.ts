@@ -302,7 +302,7 @@ class Proto2JsonSchema {
 
       for (const fieldName of oneOfItem.oneof) {
         const field = this.compileField(item.fields[fieldName], item, stack.slice());
-        obj['x-oneof-item'] = fieldName;
+        field['x-oneof-item'] = fieldName;
 
         oneOf.push(field);
       }
