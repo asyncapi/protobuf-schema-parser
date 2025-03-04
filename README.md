@@ -178,4 +178,5 @@ Possible options are:
 If you would like to add additional validation to your proto files, you can use one of the following validation frameworks.
 
 - [proto-gen-validate](https://github.com/bufbuild/protoc-gen-validate) Validation of lists are not 100% supported
+- [protovalid](https://github.com/bufbuild/protovalidate)
 

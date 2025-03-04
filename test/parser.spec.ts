@@ -199,6 +199,23 @@ describe('parse()', function () {
     );
   });
 
+  it('protovalidate should added as correct validations', async function () {
+    const document = await parseSpec('./documents/protovalidate-simple.yaml');
+
+    if (UPDATE_RESULTS) {
+      writeResults(
+        document,
+        './documents/protovalidate-simple.result.json'
+      );
+    }
+
+    expect(
+      stripParserExtraInfos(document?.json())
+    ).toEqual(
+      readResultFile('./documents/protovalidate-simple.result.json')
+    );
+  });
+
   function filterDiagnostics(diagnostics: Diagnostic[], code: string) {
     return diagnostics.filter((d) => d.code === code);
   }

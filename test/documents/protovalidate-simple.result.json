@@ -18,7 +18,6 @@
               "b",
               "o",
               "r",
-              "m",
               "g"
             ],
             "properties": {
@@ -34,7 +33,6 @@
                   "nf",
                   "ng",
                   "nh",
-                  "ni",
                   "nk",
                   "nl"
                 ],
@@ -394,7 +392,6 @@
                   "bi",
                   "bj",
                   "bk",
-                  "bl",
                   "bm",
                   "bn",
                   "bo"
@@ -554,9 +551,7 @@
                   "rc",
                   "rd",
                   "re",
-                  "rf",
-                  "rk",
-                  "rl"
+                  "rk"
                 ],
                 "properties": {
                   "ra": {
@@ -662,62 +657,6 @@
                     },
                     "description": "x must contain positive float values"
                   },
-                  "rf": {
-                    "type": "array",
-                    "items": {
-                      "title": "Person",
-                      "type": "object",
-                      "required": [
-                        "id",
-                        "email",
-                        "name",
-                        "home"
-                      ],
-                      "properties": {
-                        "id": {
-                          "type": "integer",
-                          "maximum": 9007199254740991,
-                          "x-primitive": "uint64",
-                          "exclusiveMinimum": 999
-                        },
-                        "email": {
-                          "type": "string",
-                          "x-primitive": "string",
-                          "format": "email"
-                        },
-                        "name": {
-                          "type": "string",
-                          "x-primitive": "string",
-                          "pattern": "^[A-Za-z]+( [A-Za-z]+)*$",
-                          "maxLength": 256
-                        },
-                        "home": {
-                          "title": "Location",
-                          "type": "object",
-                          "required": [
-                            "lat",
-                            "lng"
-                          ],
-                          "properties": {
-                            "lat": {
-                              "type": "number",
-                              "x-primitive": "double",
-                              "minimum": -90,
-                              "maximum": 90
-                            },
-                            "lng": {
-                              "type": "number",
-                              "x-primitive": "double",
-                              "minimum": -180,
-                              "maximum": 180
-                            }
-                          }
-                        }
-                      },
-                      "description": "x must contain Persons but don't validate them"
-                    },
-                    "description": "x must contain Persons but don't validate them"
-                  },
                   "rk": {
                     "type": "array",
                     "items": {
@@ -727,70 +666,8 @@
                       "exclusiveMinimum": 0
                     },
                     "description": "x must contain positive float values"
-                  },
-                  "rl": {
-                    "type": "array",
-                    "items": {
-                      "title": "Person",
-                      "type": "object",
-                      "required": [
-                        "id",
-                        "email",
-                        "name",
-                        "home"
-                      ],
-                      "properties": {
-                        "id": {
-                          "type": "integer",
-                          "maximum": 9007199254740991,
-                          "x-primitive": "uint64",
-                          "exclusiveMinimum": 999
-                        },
-                        "email": {
-                          "type": "string",
-                          "x-primitive": "string",
-                          "format": "email"
-                        },
-                        "name": {
-                          "type": "string",
-                          "x-primitive": "string",
-                          "pattern": "^[A-Za-z]+( [A-Za-z]+)*$",
-                          "maxLength": 256
-                        },
-                        "home": {
-                          "title": "Location",
-                          "type": "object",
-                          "required": [
-                            "lat",
-                            "lng"
-                          ],
-                          "properties": {
-                            "lat": {
-                              "type": "number",
-                              "x-primitive": "double",
-                              "minimum": -90,
-                              "maximum": 90
-                            },
-                            "lng": {
-                              "type": "number",
-                              "x-primitive": "double",
-                              "minimum": -180,
-                              "maximum": 180
-                            }
-                          }
-                        }
-                      },
-                      "description": "x must contain Persons but don't validate them"
-                    },
-                    "description": "x must contain Persons but don't validate them"
                   }
                 }
-              },
-              "m": {
-                "title": "MapExamples",
-                "type": "object",
-                "properties": {},
-                "description": "Dont have an idea how to represent those in JsonSchema"
               },
               "g": {
                 "title": "GoogleExamples",
@@ -1030,7 +907,6 @@
             "b",
             "o",
             "r",
-            "m",
             "g"
           ],
           "properties": {
@@ -1046,7 +922,6 @@
                 "nf",
                 "ng",
                 "nh",
-                "ni",
                 "nk",
                 "nl"
               ],
@@ -1406,7 +1281,6 @@
                 "bi",
                 "bj",
                 "bk",
-                "bl",
                 "bm",
                 "bn",
                 "bo"
@@ -1566,9 +1440,7 @@
                 "rc",
                 "rd",
                 "re",
-                "rf",
-                "rk",
-                "rl"
+                "rk"
               ],
               "properties": {
                 "ra": {
@@ -1674,62 +1546,6 @@
                   },
                   "description": "x must contain positive float values"
                 },
-                "rf": {
-                  "type": "array",
-                  "items": {
-                    "title": "Person",
-                    "type": "object",
-                    "required": [
-                      "id",
-                      "email",
-                      "name",
-                      "home"
-                    ],
-                    "properties": {
-                      "id": {
-                        "type": "integer",
-                        "maximum": 9007199254740991,
-                        "x-primitive": "uint64",
-                        "exclusiveMinimum": 999
-                      },
-                      "email": {
-                        "type": "string",
-                        "x-primitive": "string",
-                        "format": "email"
-                      },
-                      "name": {
-                        "type": "string",
-                        "x-primitive": "string",
-                        "pattern": "^[A-Za-z]+( [A-Za-z]+)*$",
-                        "maxLength": 256
-                      },
-                      "home": {
-                        "title": "Location",
-                        "type": "object",
-                        "required": [
-                          "lat",
-                          "lng"
-                        ],
-                        "properties": {
-                          "lat": {
-                            "type": "number",
-                            "x-primitive": "double",
-                            "minimum": -90,
-                            "maximum": 90
-                          },
-                          "lng": {
-                            "type": "number",
-                            "x-primitive": "double",
-                            "minimum": -180,
-                            "maximum": 180
-                          }
-                        }
-                      }
-                    },
-                    "description": "x must contain Persons but don't validate them"
-                  },
-                  "description": "x must contain Persons but don't validate them"
-                },
                 "rk": {
                   "type": "array",
                   "items": {
@@ -1739,70 +1555,8 @@
                     "exclusiveMinimum": 0
                   },
                   "description": "x must contain positive float values"
-                },
-                "rl": {
-                  "type": "array",
-                  "items": {
-                    "title": "Person",
-                    "type": "object",
-                    "required": [
-                      "id",
-                      "email",
-                      "name",
-                      "home"
-                    ],
-                    "properties": {
-                      "id": {
-                        "type": "integer",
-                        "maximum": 9007199254740991,
-                        "x-primitive": "uint64",
-                        "exclusiveMinimum": 999
-                      },
-                      "email": {
-                        "type": "string",
-                        "x-primitive": "string",
-                        "format": "email"
-                      },
-                      "name": {
-                        "type": "string",
-                        "x-primitive": "string",
-                        "pattern": "^[A-Za-z]+( [A-Za-z]+)*$",
-                        "maxLength": 256
-                      },
-                      "home": {
-                        "title": "Location",
-                        "type": "object",
-                        "required": [
-                          "lat",
-                          "lng"
-                        ],
-                        "properties": {
-                          "lat": {
-                            "type": "number",
-                            "x-primitive": "double",
-                            "minimum": -90,
-                            "maximum": 90
-                          },
-                          "lng": {
-                            "type": "number",
-                            "x-primitive": "double",
-                            "minimum": -180,
-                            "maximum": 180
-                          }
-                        }
-                      }
-                    },
-                    "description": "x must contain Persons but don't validate them"
-                  },
-                  "description": "x must contain Persons but don't validate them"
                 }
               }
-            },
-            "m": {
-              "title": "MapExamples",
-              "type": "object",
-              "properties": {},
-              "description": "Dont have an idea how to represent those in JsonSchema"
             },
             "g": {
               "title": "GoogleExamples",
