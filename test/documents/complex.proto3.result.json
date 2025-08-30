@@ -53,7 +53,8 @@
                       "x-primitive": "int32",
                       "description": "Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant."
                     }
-                  }
+                  },
+                  "x-type": "google.type.Date"
                 },
                 "delay": {
                   "title": "Duration",
@@ -75,7 +76,8 @@
                       "maximum": 2147483647,
                       "x-primitive": "int32"
                     }
-                  }
+                  },
+                  "x-type": "google.protobuf.Duration"
                 },
                 "timestamp": {
                   "title": "DateTime",
@@ -164,6 +166,7 @@
                               "x-parser-schema-id": "<anonymous-schema-20>"
                             }
                           },
+                          "x-type": "google.protobufNested.Duration",
                           "x-oneof-item": "utcOffset",
                           "x-parser-schema-id": "<anonymous-schema-18>"
                         },
@@ -188,12 +191,14 @@
                               "x-parser-schema-id": "<anonymous-schema-23>"
                             }
                           },
+                          "x-type": "TimeZone",
                           "x-oneof-item": "timeZone",
                           "x-parser-schema-id": "<anonymous-schema-21>"
                         }
                       ]
                     }
-                  }
+                  },
+                  "x-type": "google.type.DateTime"
                 },
                 "offset": {
                   "title": "Decimal",
@@ -212,7 +217,8 @@
                         "2.5"
                       ]
                     }
-                  }
+                  },
+                  "x-type": "google.type.Decimal"
                 },
                 "y": {
                   "title": "Int32Value",
@@ -227,7 +233,8 @@
                       "maximum": 2147483647,
                       "x-primitive": "int32"
                     }
-                  }
+                  },
+                  "x-type": "google.protobuf.Int32Value"
                 },
                 "dur": {
                   "title": "Duration",
@@ -249,7 +256,8 @@
                       "maximum": 2147483647,
                       "x-primitive": "int32"
                     }
-                  }
+                  },
+                  "x-type": "Duration"
                 },
                 "first": {
                   "oneOf": [
@@ -272,6 +280,7 @@
                           "x-parser-schema-id": "<anonymous-schema-34>"
                         }
                       },
+                      "x-type": "SubTypeA",
                       "x-oneof-item": "optionA",
                       "x-parser-schema-id": "<anonymous-schema-32>"
                     },
@@ -294,6 +303,7 @@
                           "x-parser-schema-id": "<anonymous-schema-37>"
                         }
                       },
+                      "x-type": "SubTypeB",
                       "x-oneof-item": "optionB",
                       "x-parser-schema-id": "<anonymous-schema-35>"
                     },
@@ -316,6 +326,7 @@
                           "x-parser-schema-id": "<anonymous-schema-40>"
                         }
                       },
+                      "x-type": "SubTypeC",
                       "x-oneof-item": "optionC",
                       "x-parser-schema-id": "<anonymous-schema-38>"
                     },
@@ -332,6 +343,7 @@
                           "x-parser-schema-id": "<anonymous-schema-42>"
                         }
                       },
+                      "x-type": "SubTypeD",
                       "x-oneof-item": "optionD",
                       "x-parser-schema-id": "<anonymous-schema-41>"
                     }
@@ -358,6 +370,7 @@
                           "x-parser-schema-id": "<anonymous-schema-46>"
                         }
                       },
+                      "x-type": "SubTypeA",
                       "x-oneof-item": "optionH",
                       "x-parser-schema-id": "<anonymous-schema-44>"
                     },
@@ -380,6 +393,7 @@
                           "x-parser-schema-id": "<anonymous-schema-49>"
                         }
                       },
+                      "x-type": "SubTypeB",
                       "x-oneof-item": "optionI",
                       "x-parser-schema-id": "<anonymous-schema-47>"
                     },
@@ -402,6 +416,7 @@
                           "x-parser-schema-id": "<anonymous-schema-52>"
                         }
                       },
+                      "x-type": "SubTypeC",
                       "x-oneof-item": "optionK",
                       "x-parser-schema-id": "<anonymous-schema-50>"
                     },
@@ -418,6 +433,7 @@
                           "x-parser-schema-id": "<anonymous-schema-54>"
                         }
                       },
+                      "x-type": "SubTypeD",
                       "x-oneof-item": "optionL",
                       "x-parser-schema-id": "<anonymous-schema-53>"
                     }
@@ -477,7 +493,8 @@
                     "x-primitive": "int32",
                     "description": "Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant."
                   }
-                }
+                },
+                "x-type": "google.type.Date"
               },
               "delay": {
                 "title": "Duration",
@@ -499,7 +516,8 @@
                     "maximum": 2147483647,
                     "x-primitive": "int32"
                   }
-                }
+                },
+                "x-type": "google.protobuf.Duration"
               },
               "timestamp": {
                 "title": "DateTime",
@@ -588,6 +606,7 @@
                             "x-parser-schema-id": "<anonymous-schema-20>"
                           }
                         },
+                        "x-type": "google.protobufNested.Duration",
                         "x-oneof-item": "utcOffset",
                         "x-parser-schema-id": "<anonymous-schema-18>"
                       },
@@ -612,12 +631,14 @@
                             "x-parser-schema-id": "<anonymous-schema-23>"
                           }
                         },
+                        "x-type": "TimeZone",
                         "x-oneof-item": "timeZone",
                         "x-parser-schema-id": "<anonymous-schema-21>"
                       }
                     ]
                   }
-                }
+                },
+                "x-type": "google.type.DateTime"
               },
               "offset": {
                 "title": "Decimal",
@@ -636,7 +657,8 @@
                       "2.5"
                     ]
                   }
-                }
+                },
+                "x-type": "google.type.Decimal"
               },
               "y": {
                 "title": "Int32Value",
@@ -651,7 +673,8 @@
                     "maximum": 2147483647,
                     "x-primitive": "int32"
                   }
-                }
+                },
+                "x-type": "google.protobuf.Int32Value"
               },
               "dur": {
                 "title": "Duration",
@@ -673,7 +696,8 @@
                     "maximum": 2147483647,
                     "x-primitive": "int32"
                   }
-                }
+                },
+                "x-type": "Duration"
               },
               "first": {
                 "oneOf": [
@@ -696,6 +720,7 @@
                         "x-parser-schema-id": "<anonymous-schema-34>"
                       }
                     },
+                    "x-type": "SubTypeA",
                     "x-oneof-item": "optionA",
                     "x-parser-schema-id": "<anonymous-schema-32>"
                   },
@@ -718,6 +743,7 @@
                         "x-parser-schema-id": "<anonymous-schema-37>"
                       }
                     },
+                    "x-type": "SubTypeB",
                     "x-oneof-item": "optionB",
                     "x-parser-schema-id": "<anonymous-schema-35>"
                   },
@@ -740,6 +766,7 @@
                         "x-parser-schema-id": "<anonymous-schema-40>"
                       }
                     },
+                    "x-type": "SubTypeC",
                     "x-oneof-item": "optionC",
                     "x-parser-schema-id": "<anonymous-schema-38>"
                   },
@@ -756,6 +783,7 @@
                         "x-parser-schema-id": "<anonymous-schema-42>"
                       }
                     },
+                    "x-type": "SubTypeD",
                     "x-oneof-item": "optionD",
                     "x-parser-schema-id": "<anonymous-schema-41>"
                   }
@@ -782,6 +810,7 @@
                         "x-parser-schema-id": "<anonymous-schema-46>"
                       }
                     },
+                    "x-type": "SubTypeA",
                     "x-oneof-item": "optionH",
                     "x-parser-schema-id": "<anonymous-schema-44>"
                   },
@@ -804,6 +833,7 @@
                         "x-parser-schema-id": "<anonymous-schema-49>"
                       }
                     },
+                    "x-type": "SubTypeB",
                     "x-oneof-item": "optionI",
                     "x-parser-schema-id": "<anonymous-schema-47>"
                   },
@@ -826,6 +856,7 @@
                         "x-parser-schema-id": "<anonymous-schema-52>"
                       }
                     },
+                    "x-type": "SubTypeC",
                     "x-oneof-item": "optionK",
                     "x-parser-schema-id": "<anonymous-schema-50>"
                   },
@@ -842,6 +873,7 @@
                         "x-parser-schema-id": "<anonymous-schema-54>"
                       }
                     },
+                    "x-type": "SubTypeD",
                     "x-oneof-item": "optionL",
                     "x-parser-schema-id": "<anonymous-schema-53>"
                   }
@@ -897,7 +929,8 @@
                   "x-primitive": "int32",
                   "description": "Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant."
                 }
-              }
+              },
+              "x-type": "google.type.Date"
             },
             "delay": {
               "title": "Duration",
@@ -919,7 +952,8 @@
                   "maximum": 2147483647,
                   "x-primitive": "int32"
                 }
-              }
+              },
+              "x-type": "google.protobuf.Duration"
             },
             "timestamp": {
               "title": "DateTime",
@@ -1008,6 +1042,7 @@
                           "x-parser-schema-id": "<anonymous-schema-20>"
                         }
                       },
+                      "x-type": "google.protobufNested.Duration",
                       "x-oneof-item": "utcOffset",
                       "x-parser-schema-id": "<anonymous-schema-18>"
                     },
@@ -1032,12 +1067,14 @@
                           "x-parser-schema-id": "<anonymous-schema-23>"
                         }
                       },
+                      "x-type": "TimeZone",
                       "x-oneof-item": "timeZone",
                       "x-parser-schema-id": "<anonymous-schema-21>"
                     }
                   ]
                 }
-              }
+              },
+              "x-type": "google.type.DateTime"
             },
             "offset": {
               "title": "Decimal",
@@ -1056,7 +1093,8 @@
                     "2.5"
                   ]
                 }
-              }
+              },
+              "x-type": "google.type.Decimal"
             },
             "y": {
               "title": "Int32Value",
@@ -1071,7 +1109,8 @@
                   "maximum": 2147483647,
                   "x-primitive": "int32"
                 }
-              }
+              },
+              "x-type": "google.protobuf.Int32Value"
             },
             "dur": {
               "title": "Duration",
@@ -1093,7 +1132,8 @@
                   "maximum": 2147483647,
                   "x-primitive": "int32"
                 }
-              }
+              },
+              "x-type": "Duration"
             },
             "first": {
               "oneOf": [
@@ -1116,6 +1156,7 @@
                       "x-parser-schema-id": "<anonymous-schema-34>"
                     }
                   },
+                  "x-type": "SubTypeA",
                   "x-oneof-item": "optionA",
                   "x-parser-schema-id": "<anonymous-schema-32>"
                 },
@@ -1138,6 +1179,7 @@
                       "x-parser-schema-id": "<anonymous-schema-37>"
                     }
                   },
+                  "x-type": "SubTypeB",
                   "x-oneof-item": "optionB",
                   "x-parser-schema-id": "<anonymous-schema-35>"
                 },
@@ -1160,6 +1202,7 @@
                       "x-parser-schema-id": "<anonymous-schema-40>"
                     }
                   },
+                  "x-type": "SubTypeC",
                   "x-oneof-item": "optionC",
                   "x-parser-schema-id": "<anonymous-schema-38>"
                 },
@@ -1176,6 +1219,7 @@
                       "x-parser-schema-id": "<anonymous-schema-42>"
                     }
                   },
+                  "x-type": "SubTypeD",
                   "x-oneof-item": "optionD",
                   "x-parser-schema-id": "<anonymous-schema-41>"
                 }
@@ -1202,6 +1246,7 @@
                       "x-parser-schema-id": "<anonymous-schema-46>"
                     }
                   },
+                  "x-type": "SubTypeA",
                   "x-oneof-item": "optionH",
                   "x-parser-schema-id": "<anonymous-schema-44>"
                 },
@@ -1224,6 +1269,7 @@
                       "x-parser-schema-id": "<anonymous-schema-49>"
                     }
                   },
+                  "x-type": "SubTypeB",
                   "x-oneof-item": "optionI",
                   "x-parser-schema-id": "<anonymous-schema-47>"
                 },
@@ -1246,6 +1292,7 @@
                       "x-parser-schema-id": "<anonymous-schema-52>"
                     }
                   },
+                  "x-type": "SubTypeC",
                   "x-oneof-item": "optionK",
                   "x-parser-schema-id": "<anonymous-schema-50>"
                 },
@@ -1262,6 +1309,7 @@
                       "x-parser-schema-id": "<anonymous-schema-54>"
                     }
                   },
+                  "x-type": "SubTypeD",
                   "x-oneof-item": "optionL",
                   "x-parser-schema-id": "<anonymous-schema-53>"
                 }

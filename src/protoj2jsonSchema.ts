@@ -358,6 +358,10 @@ class Proto2JsonSchema {
       } else {
         obj = Object.assign(obj, this.compileMessage(item, stack));
       }
+
+      if (field.type) {
+        obj['x-type'] = field.type;
+      }
     }
 
     this.addValidatorFromCommentAnnotations(obj, field.comment);

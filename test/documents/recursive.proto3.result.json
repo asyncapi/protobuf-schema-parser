@@ -44,10 +44,12 @@
                           "title": "A",
                           "type": "object",
                           "required": [],
-                          "properties": {}
+                          "properties": {},
+                          "x-type": "A"
                         }
                       }
-                    }
+                    },
+                    "x-type": "A"
                   }
                 }
               }
@@ -98,10 +100,12 @@
                             "title": "A",
                             "type": "object",
                             "required": [],
-                            "properties": {}
+                            "properties": {},
+                            "x-type": "A"
                           }
                         }
-                      }
+                      },
+                      "x-type": "A"
                     }
                   }
                 }
@@ -146,10 +150,12 @@
                           "title": "A",
                           "type": "object",
                           "required": [],
-                          "properties": {}
+                          "properties": {},
+                          "x-type": "A"
                         }
                       }
-                    }
+                    },
+                    "x-type": "A"
                   }
                 }
               }
@@ -196,10 +202,12 @@
                         "title": "A",
                         "type": "object",
                         "required": [],
-                        "properties": {}
+                        "properties": {},
+                        "x-type": "A"
                       }
                     }
-                  }
+                  },
+                  "x-type": "A"
                 }
               }
             }
