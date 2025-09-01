@@ -71,7 +71,8 @@
                         "maximum": 31,
                         "description": "Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant."
                       }
-                    }
+                    },
+                    "x-type": "google.type.Date"
                   },
                   "zugnummer": {
                     "type": "string",
@@ -110,7 +111,8 @@
                             "type": "integer",
                             "x-primitive": "int32"
                           }
-                        }
+                        },
+                        "x-type": "google.protobuf.Timestamp"
                       },
                       "bis": {
                         "title": "Timestamp",
@@ -128,9 +130,11 @@
                             "type": "integer",
                             "x-primitive": "int32"
                           }
-                        }
+                        },
+                        "x-type": "google.protobuf.Timestamp"
                       }
-                    }
+                    },
+                    "x-type": "PeriodMsg"
                   },
                   "dr": {
                     "title": "Duration",
@@ -149,6 +153,7 @@
                         "x-primitive": "int32"
                       }
                     },
+                    "x-type": "google.protobuf.Duration",
                     "default": {
                       "seconds": 946681200,
                       "nanos": 0
@@ -185,6 +190,7 @@
                             "x-primitive": "int32"
                           }
                         },
+                        "x-type": "google.protobuf.Int32Value",
                         "description": "ObjectId"
                       },
                       "train_run_id": {
@@ -199,6 +205,7 @@
                             "x-primitive": "int32"
                           }
                         },
+                        "x-type": "google.protobuf.Int32Value",
                         "description": "ObjectId"
                       },
                       "reihenfolge": {
@@ -221,6 +228,7 @@
                             "x-primitive": "int32"
                           }
                         },
+                        "x-type": "google.protobuf.Int32Value",
                         "description": "Integer"
                       },
                       "formationsdaten_zlr": {
@@ -239,7 +247,8 @@
                           "AFDZ_ANHAENGELAST_FEHLT": 2,
                           "AFDZ_MANUELL_ERGAENZT": 3,
                           "AFDZ_OK": 4
-                        }
+                        },
+                        "x-type": "AbschnittsFormationsDatenZlrEnum"
                       },
                       "anzahl_loks": {
                         "title": "Int32Value",
@@ -253,11 +262,14 @@
                             "x-primitive": "int32"
                           }
                         },
+                        "x-type": "google.protobuf.Int32Value",
                         "description": "Integer"
                       }
-                    }
+                    },
+                    "x-type": "CompositionMsg"
                   }
-                }
+                },
+                "x-type": "TrainRunMsg"
               },
               "timetable_events": {
                 "type": "array",
@@ -372,6 +384,7 @@
                                   "x-parser-schema-id": "<anonymous-schema-48>"
                                 }
                               },
+                              "x-type": "google.protobufNested.Duration",
                               "x-oneof-item": "utcOffset",
                               "x-parser-schema-id": "<anonymous-schema-46>"
                             },
@@ -396,12 +409,14 @@
                                   "x-parser-schema-id": "<anonymous-schema-51>"
                                 }
                               },
+                              "x-type": "TimeZone",
                               "x-oneof-item": "timeZone",
                               "x-parser-schema-id": "<anonymous-schema-49>"
                             }
                           ]
                         }
-                      }
+                      },
+                      "x-type": "google.type.DateTime"
                     },
                     "production_time": {
                       "title": "DateTime",
@@ -486,6 +501,7 @@
                                   "x-parser-schema-id": "<anonymous-schema-63>"
                                 }
                               },
+                              "x-type": "google.protobufNested.Duration",
                               "x-oneof-item": "utcOffset",
                               "x-parser-schema-id": "<anonymous-schema-61>"
                             },
@@ -510,12 +526,14 @@
                                   "x-parser-schema-id": "<anonymous-schema-66>"
                                 }
                               },
+                              "x-type": "TimeZone",
                               "x-oneof-item": "timeZone",
                               "x-parser-schema-id": "<anonymous-schema-64>"
                             }
                           ]
                         }
-                      }
+                      },
+                      "x-type": "google.type.DateTime"
                     },
                     "train_run_segment": {
                       "title": "TrainRunSegmentMsg",
@@ -550,6 +568,7 @@
                               "x-primitive": "int32"
                             }
                           },
+                          "x-type": "google.protobuf.Int32Value",
                           "description": "ObjectId"
                         },
                         "train_category": {
@@ -572,9 +591,11 @@
                             "TST_A": 2,
                             "TST_D": 3,
                             "TST_N": 4
-                          }
+                          },
+                          "x-type": "TrainSeriesTypeEnum"
                         }
-                      }
+                      },
+                      "x-type": "TrainRunSegmentMsg"
                     },
                     "connection_decision_time": {
                       "title": "Int32Value",
@@ -588,6 +609,7 @@
                           "x-primitive": "int32"
                         }
                       },
+                      "x-type": "google.protobuf.Int32Value",
                       "description": "Integer"
                     },
                     "ahead_of_schedule_strategy": {
@@ -606,7 +628,8 @@
                         "AOSS_PROHIBITED": 2,
                         "AOSS_OBSERVE_EARLIEST_TIMES": 4,
                         "AOSS_ONLY_WHEN_ROUTE_IS_SET": 5
-                      }
+                      },
+                      "x-type": "AheadOfScheduleStrategyEnum"
                     },
                     "event_link": {
                       "oneOf": [
@@ -634,6 +657,7 @@
                                   "x-parser-schema-id": "<anonymous-schema-80>"
                                 }
                               },
+                              "x-type": "google.protobuf.Int32Value",
                               "description": "ObjectId",
                               "x-parser-schema-id": "<anonymous-schema-79>"
                             },
@@ -650,6 +674,7 @@
                                   "x-parser-schema-id": "<anonymous-schema-82>"
                                 }
                               },
+                              "x-type": "google.protobuf.UInt32Value",
                               "description": "ObjectId",
                               "x-parser-schema-id": "<anonymous-schema-81>"
                             },
@@ -666,6 +691,7 @@
                                   "x-parser-schema-id": "<anonymous-schema-84>"
                                 }
                               },
+                              "x-type": "google.protobuf.UInt64Value",
                               "description": "ObjectId",
                               "x-parser-schema-id": "<anonymous-schema-83>"
                             },
@@ -684,6 +710,7 @@
                               "x-parser-schema-id": "<anonymous-schema-86>"
                             }
                           },
+                          "x-type": "StopMsg",
                           "x-oneof-item": "stop",
                           "x-parser-schema-id": "<anonymous-schema-78>"
                         },
@@ -725,6 +752,7 @@
                                   "x-parser-schema-id": "<anonymous-schema-92>"
                                 }
                               },
+                              "x-type": "google.protobuf.Int32Value",
                               "description": "ObjectId",
                               "x-parser-schema-id": "<anonymous-schema-91>"
                             },
@@ -760,15 +788,18 @@
                                 "FS_NORMAL": 3,
                                 "FS_FAHRZEIT_VERTEILEN": 4
                               },
+                              "x-type": "FahrstrategieEnum",
                               "x-parser-schema-id": "<anonymous-schema-96>"
                             }
                           },
+                          "x-type": "MovementMsg",
                           "x-oneof-item": "movement",
                           "x-parser-schema-id": "<anonymous-schema-88>"
                         }
                       ]
                     }
-                  }
+                  },
+                  "x-type": "TimetableEventMsg"
                 }
               },
               "composition": {
@@ -796,6 +827,7 @@
                         "x-primitive": "int32"
                       }
                     },
+                    "x-type": "google.protobuf.Int32Value",
                     "description": "ObjectId"
                   },
                   "train_run_id": {
@@ -810,6 +842,7 @@
                         "x-primitive": "int32"
                       }
                     },
+                    "x-type": "google.protobuf.Int32Value",
                     "description": "ObjectId"
                   },
                   "reihenfolge": {
@@ -832,6 +865,7 @@
                         "x-primitive": "int32"
                       }
                     },
+                    "x-type": "google.protobuf.Int32Value",
                     "description": "Integer"
                   },
                   "formationsdaten_zlr": {
@@ -850,7 +884,8 @@
                       "AFDZ_ANHAENGELAST_FEHLT": 2,
                       "AFDZ_MANUELL_ERGAENZT": 3,
                       "AFDZ_OK": 4
-                    }
+                    },
+                    "x-type": "AbschnittsFormationsDatenZlrEnum"
                   },
                   "anzahl_loks": {
                     "title": "Int32Value",
@@ -864,9 +899,11 @@
                         "x-primitive": "int32"
                       }
                     },
+                    "x-type": "google.protobuf.Int32Value",
                     "description": "Integer"
                   }
-                }
+                },
+                "x-type": "CompositionMsg"
               }
             }
           }
@@ -940,7 +977,8 @@
                       "maximum": 31,
                       "description": "Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant."
                     }
-                  }
+                  },
+                  "x-type": "google.type.Date"
                 },
                 "zugnummer": {
                   "type": "string",
@@ -979,7 +1017,8 @@
                           "type": "integer",
                           "x-primitive": "int32"
                         }
-                      }
+                      },
+                      "x-type": "google.protobuf.Timestamp"
                     },
                     "bis": {
                       "title": "Timestamp",
@@ -997,9 +1036,11 @@
                           "type": "integer",
                           "x-primitive": "int32"
                         }
-                      }
+                      },
+                      "x-type": "google.protobuf.Timestamp"
                     }
-                  }
+                  },
+                  "x-type": "PeriodMsg"
                 },
                 "dr": {
                   "title": "Duration",
@@ -1018,6 +1059,7 @@
                       "x-primitive": "int32"
                     }
                   },
+                  "x-type": "google.protobuf.Duration",
                   "default": {
                     "seconds": 946681200,
                     "nanos": 0
@@ -1054,6 +1096,7 @@
                           "x-primitive": "int32"
                         }
                       },
+                      "x-type": "google.protobuf.Int32Value",
                       "description": "ObjectId"
                     },
                     "train_run_id": {
@@ -1068,6 +1111,7 @@
                           "x-primitive": "int32"
                         }
                       },
+                      "x-type": "google.protobuf.Int32Value",
                       "description": "ObjectId"
                     },
                     "reihenfolge": {
@@ -1090,6 +1134,7 @@
                           "x-primitive": "int32"
                         }
                       },
+                      "x-type": "google.protobuf.Int32Value",
                       "description": "Integer"
                     },
                     "formationsdaten_zlr": {
@@ -1108,7 +1153,8 @@
                         "AFDZ_ANHAENGELAST_FEHLT": 2,
                         "AFDZ_MANUELL_ERGAENZT": 3,
                         "AFDZ_OK": 4
-                      }
+                      },
+                      "x-type": "AbschnittsFormationsDatenZlrEnum"
                     },
                     "anzahl_loks": {
                       "title": "Int32Value",
@@ -1122,11 +1168,14 @@
                           "x-primitive": "int32"
                         }
                       },
+                      "x-type": "google.protobuf.Int32Value",
                       "description": "Integer"
                     }
-                  }
+                  },
+                  "x-type": "CompositionMsg"
                 }
-              }
+              },
+              "x-type": "TrainRunMsg"
             },
             "timetable_events": {
               "type": "array",
@@ -1241,6 +1290,7 @@
                                 "x-parser-schema-id": "<anonymous-schema-48>"
                               }
                             },
+                            "x-type": "google.protobufNested.Duration",
                             "x-oneof-item": "utcOffset",
                             "x-parser-schema-id": "<anonymous-schema-46>"
                           },
@@ -1265,12 +1315,14 @@
                                 "x-parser-schema-id": "<anonymous-schema-51>"
                               }
                             },
+                            "x-type": "TimeZone",
                             "x-oneof-item": "timeZone",
                             "x-parser-schema-id": "<anonymous-schema-49>"
                           }
                         ]
                       }
-                    }
+                    },
+                    "x-type": "google.type.DateTime"
                   },
                   "production_time": {
                     "title": "DateTime",
@@ -1355,6 +1407,7 @@
                                 "x-parser-schema-id": "<anonymous-schema-63>"
                               }
                             },
+                            "x-type": "google.protobufNested.Duration",
                             "x-oneof-item": "utcOffset",
                             "x-parser-schema-id": "<anonymous-schema-61>"
                           },
@@ -1379,12 +1432,14 @@
                                 "x-parser-schema-id": "<anonymous-schema-66>"
                               }
                             },
+                            "x-type": "TimeZone",
                             "x-oneof-item": "timeZone",
                             "x-parser-schema-id": "<anonymous-schema-64>"
                           }
                         ]
                       }
-                    }
+                    },
+                    "x-type": "google.type.DateTime"
                   },
                   "train_run_segment": {
                     "title": "TrainRunSegmentMsg",
@@ -1419,6 +1474,7 @@
                             "x-primitive": "int32"
                           }
                         },
+                        "x-type": "google.protobuf.Int32Value",
                         "description": "ObjectId"
                       },
                       "train_category": {
@@ -1441,9 +1497,11 @@
                           "TST_A": 2,
                           "TST_D": 3,
                           "TST_N": 4
-                        }
+                        },
+                        "x-type": "TrainSeriesTypeEnum"
                       }
-                    }
+                    },
+                    "x-type": "TrainRunSegmentMsg"
                   },
                   "connection_decision_time": {
                     "title": "Int32Value",
@@ -1457,6 +1515,7 @@
                         "x-primitive": "int32"
                       }
                     },
+                    "x-type": "google.protobuf.Int32Value",
                     "description": "Integer"
                   },
                   "ahead_of_schedule_strategy": {
@@ -1475,7 +1534,8 @@
                       "AOSS_PROHIBITED": 2,
                       "AOSS_OBSERVE_EARLIEST_TIMES": 4,
                       "AOSS_ONLY_WHEN_ROUTE_IS_SET": 5
-                    }
+                    },
+                    "x-type": "AheadOfScheduleStrategyEnum"
                   },
                   "event_link": {
                     "oneOf": [
@@ -1503,6 +1563,7 @@
                                 "x-parser-schema-id": "<anonymous-schema-80>"
                               }
                             },
+                            "x-type": "google.protobuf.Int32Value",
                             "description": "ObjectId",
                             "x-parser-schema-id": "<anonymous-schema-79>"
                           },
@@ -1519,6 +1580,7 @@
                                 "x-parser-schema-id": "<anonymous-schema-82>"
                               }
                             },
+                            "x-type": "google.protobuf.UInt32Value",
                             "description": "ObjectId",
                             "x-parser-schema-id": "<anonymous-schema-81>"
                           },
@@ -1535,6 +1597,7 @@
                                 "x-parser-schema-id": "<anonymous-schema-84>"
                               }
                             },
+                            "x-type": "google.protobuf.UInt64Value",
                             "description": "ObjectId",
                             "x-parser-schema-id": "<anonymous-schema-83>"
                           },
@@ -1553,6 +1616,7 @@
                             "x-parser-schema-id": "<anonymous-schema-86>"
                           }
                         },
+                        "x-type": "StopMsg",
                         "x-oneof-item": "stop",
                         "x-parser-schema-id": "<anonymous-schema-78>"
                       },
@@ -1594,6 +1658,7 @@
                                 "x-parser-schema-id": "<anonymous-schema-92>"
                               }
                             },
+                            "x-type": "google.protobuf.Int32Value",
                             "description": "ObjectId",
                             "x-parser-schema-id": "<anonymous-schema-91>"
                           },
@@ -1629,15 +1694,18 @@
                               "FS_NORMAL": 3,
                               "FS_FAHRZEIT_VERTEILEN": 4
                             },
+                            "x-type": "FahrstrategieEnum",
                             "x-parser-schema-id": "<anonymous-schema-96>"
                           }
                         },
+                        "x-type": "MovementMsg",
                         "x-oneof-item": "movement",
                         "x-parser-schema-id": "<anonymous-schema-88>"
                       }
                     ]
                   }
-                }
+                },
+                "x-type": "TimetableEventMsg"
               }
             },
             "composition": {
@@ -1665,6 +1733,7 @@
                       "x-primitive": "int32"
                     }
                   },
+                  "x-type": "google.protobuf.Int32Value",
                   "description": "ObjectId"
                 },
                 "train_run_id": {
@@ -1679,6 +1748,7 @@
                       "x-primitive": "int32"
                     }
                   },
+                  "x-type": "google.protobuf.Int32Value",
                   "description": "ObjectId"
                 },
                 "reihenfolge": {
@@ -1701,6 +1771,7 @@
                       "x-primitive": "int32"
                     }
                   },
+                  "x-type": "google.protobuf.Int32Value",
                   "description": "Integer"
                 },
                 "formationsdaten_zlr": {
@@ -1719,7 +1790,8 @@
                     "AFDZ_ANHAENGELAST_FEHLT": 2,
                     "AFDZ_MANUELL_ERGAENZT": 3,
                     "AFDZ_OK": 4
-                  }
+                  },
+                  "x-type": "AbschnittsFormationsDatenZlrEnum"
                 },
                 "anzahl_loks": {
                   "title": "Int32Value",
@@ -1733,9 +1805,11 @@
                       "x-primitive": "int32"
                     }
                   },
+                  "x-type": "google.protobuf.Int32Value",
                   "description": "Integer"
                 }
-              }
+              },
+              "x-type": "CompositionMsg"
             }
           }
         }

@@ -41,7 +41,8 @@
                     "type": "string",
                     "x-primitive": "string"
                   }
-                }
+                },
+                "x-type": "Point"
               },
               "end": {
                 "title": "Point",
@@ -67,7 +68,8 @@
                     "type": "string",
                     "x-primitive": "string"
                   }
-                }
+                },
+                "x-type": "Point"
               },
               "label": {
                 "type": "string",
@@ -115,7 +117,8 @@
                   "type": "string",
                   "x-primitive": "string"
                 }
-              }
+              },
+              "x-type": "Point"
             },
             "end": {
               "title": "Point",
@@ -141,7 +144,8 @@
                   "type": "string",
                   "x-primitive": "string"
                 }
-              }
+              },
+              "x-type": "Point"
             },
             "label": {
               "type": "string",

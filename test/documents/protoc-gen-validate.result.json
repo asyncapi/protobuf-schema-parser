@@ -137,7 +137,8 @@
                     "const": false,
                     "description": "x cannot be set to true"
                   }
-                }
+                },
+                "x-type": "NumericExamples"
               },
               "s": {
                 "title": "StringExamples",
@@ -377,7 +378,8 @@
                     "pattern": "^[^\u0000-\b\n-\u001f]*$",
                     "description": "x must conform to a well known regex for HTTP header values (via RFC 7230)"
                   }
-                }
+                },
+                "x-type": "StringExamples"
               },
               "b": {
                 "title": "ByteExamples",
@@ -537,13 +539,15 @@
                     "format": "ipv6",
                     "description": "x must be a valid IPv6 address in byte format\neg: \"\\x20\\x01\\x0D\\xB8\\x85\\xA3\\x00\\x00\\x00\\x00\\x8A\\x2E\\x03\\x70\\x73\\x34\""
                   }
-                }
+                },
+                "x-type": "ByteExamples"
               },
               "o": {
                 "title": "ObjectExamples",
                 "type": "object",
                 "properties": {},
-                "description": "Dont have an idea how to represent those in JsonSchema"
+                "description": "Dont have an idea how to represent those in JsonSchema",
+                "x-type": "ObjectExamples"
               },
               "r": {
                 "title": "RepeatedExamples",
@@ -620,9 +624,11 @@
                               "minimum": -180,
                               "maximum": 180
                             }
-                          }
+                          },
+                          "x-type": "Location"
                         }
                       },
+                      "x-type": "Person",
                       "description": "x must contain between 5 and 10 Persons, inclusive"
                     },
                     "description": "x must contain between 5 and 10 Persons, inclusive",
@@ -711,9 +717,11 @@
                               "minimum": -180,
                               "maximum": 180
                             }
-                          }
+                          },
+                          "x-type": "Location"
                         }
                       },
+                      "x-type": "Person",
                       "description": "x must contain Persons but don't validate them"
                     },
                     "description": "x must contain Persons but don't validate them"
@@ -777,20 +785,24 @@
                               "minimum": -180,
                               "maximum": 180
                             }
-                          }
+                          },
+                          "x-type": "Location"
                         }
                       },
+                      "x-type": "Person",
                       "description": "x must contain Persons but don't validate them"
                     },
                     "description": "x must contain Persons but don't validate them"
                   }
-                }
+                },
+                "x-type": "RepeatedExamples"
               },
               "m": {
                 "title": "MapExamples",
                 "type": "object",
                 "properties": {},
-                "description": "Dont have an idea how to represent those in JsonSchema"
+                "description": "Dont have an idea how to represent those in JsonSchema",
+                "x-type": "MapExamples"
               },
               "g": {
                 "title": "GoogleExamples",
@@ -821,6 +833,7 @@
                         "x-primitive": "int32"
                       }
                     },
+                    "x-type": "google.protobuf.Int32Value",
                     "exclusiveMinimum": 3,
                     "description": "if it is set, x must be greater than 3"
                   },
@@ -845,6 +858,7 @@
                         "x-primitive": "int32"
                       }
                     },
+                    "x-type": "google.protobuf.Duration",
                     "description": "x cannot be unset"
                   },
                   "gd": {
@@ -868,6 +882,7 @@
                         "x-primitive": "int32"
                       }
                     },
+                    "x-type": "google.protobuf.Duration",
                     "description": "x must be less than 10s"
                   },
                   "ge": {
@@ -891,6 +906,7 @@
                         "x-primitive": "int32"
                       }
                     },
+                    "x-type": "google.protobuf.Duration",
                     "description": "x must be greater than or equal to 20ns"
                   },
                   "gj": {
@@ -914,6 +930,7 @@
                         "x-primitive": "int32"
                       }
                     },
+                    "x-type": "google.protobuf.Timestamp",
                     "description": "x cannot be unset"
                   },
                   "gl": {
@@ -937,6 +954,7 @@
                         "x-primitive": "int32"
                       }
                     },
+                    "x-type": "google.protobuf.Timestamp",
                     "description": "x must be less than the Unix Epoch"
                   },
                   "gm": {
@@ -960,6 +978,7 @@
                         "x-primitive": "int32"
                       }
                     },
+                    "x-type": "google.protobuf.Timestamp",
                     "description": "x must be greater than or equal to 2009/11/10T23:00:00Z"
                   },
                   "gp": {
@@ -983,6 +1002,7 @@
                         "x-primitive": "int32"
                       }
                     },
+                    "x-type": "google.protobuf.Timestamp",
                     "description": "x must be less than the current timestamp"
                   },
                   "gq": {
@@ -1006,9 +1026,11 @@
                         "x-primitive": "int32"
                       }
                     },
+                    "x-type": "google.protobuf.Timestamp",
                     "description": "x must be within ±1s of the current time"
                   }
-                }
+                },
+                "x-type": "GoogleExamples"
               }
             },
             "description": "Root"
@@ -1149,7 +1171,8 @@
                   "const": false,
                   "description": "x cannot be set to true"
                 }
-              }
+              },
+              "x-type": "NumericExamples"
             },
             "s": {
               "title": "StringExamples",
@@ -1389,7 +1412,8 @@
                   "pattern": "^[^\u0000-\b\n-\u001f]*$",
                   "description": "x must conform to a well known regex for HTTP header values (via RFC 7230)"
                 }
-              }
+              },
+              "x-type": "StringExamples"
             },
             "b": {
               "title": "ByteExamples",
@@ -1549,13 +1573,15 @@
                   "format": "ipv6",
                   "description": "x must be a valid IPv6 address in byte format\neg: \"\\x20\\x01\\x0D\\xB8\\x85\\xA3\\x00\\x00\\x00\\x00\\x8A\\x2E\\x03\\x70\\x73\\x34\""
                 }
-              }
+              },
+              "x-type": "ByteExamples"
             },
             "o": {
               "title": "ObjectExamples",
               "type": "object",
               "properties": {},
-              "description": "Dont have an idea how to represent those in JsonSchema"
+              "description": "Dont have an idea how to represent those in JsonSchema",
+              "x-type": "ObjectExamples"
             },
             "r": {
               "title": "RepeatedExamples",
@@ -1632,9 +1658,11 @@
                             "minimum": -180,
                             "maximum": 180
                           }
-                        }
+                        },
+                        "x-type": "Location"
                       }
                     },
+                    "x-type": "Person",
                     "description": "x must contain between 5 and 10 Persons, inclusive"
                   },
                   "description": "x must contain between 5 and 10 Persons, inclusive",
@@ -1723,9 +1751,11 @@
                             "minimum": -180,
                             "maximum": 180
                           }
-                        }
+                        },
+                        "x-type": "Location"
                       }
                     },
+                    "x-type": "Person",
                     "description": "x must contain Persons but don't validate them"
                   },
                   "description": "x must contain Persons but don't validate them"
@@ -1789,20 +1819,24 @@
                             "minimum": -180,
                             "maximum": 180
                           }
-                        }
+                        },
+                        "x-type": "Location"
                       }
                     },
+                    "x-type": "Person",
                     "description": "x must contain Persons but don't validate them"
                   },
                   "description": "x must contain Persons but don't validate them"
                 }
-              }
+              },
+              "x-type": "RepeatedExamples"
             },
             "m": {
               "title": "MapExamples",
               "type": "object",
               "properties": {},
-              "description": "Dont have an idea how to represent those in JsonSchema"
+              "description": "Dont have an idea how to represent those in JsonSchema",
+              "x-type": "MapExamples"
             },
             "g": {
               "title": "GoogleExamples",
@@ -1833,6 +1867,7 @@
                       "x-primitive": "int32"
                     }
                   },
+                  "x-type": "google.protobuf.Int32Value",
                   "exclusiveMinimum": 3,
                   "description": "if it is set, x must be greater than 3"
                 },
@@ -1857,6 +1892,7 @@
                       "x-primitive": "int32"
                     }
                   },
+                  "x-type": "google.protobuf.Duration",
                   "description": "x cannot be unset"
                 },
                 "gd": {
@@ -1880,6 +1916,7 @@
                       "x-primitive": "int32"
                     }
                   },
+                  "x-type": "google.protobuf.Duration",
                   "description": "x must be less than 10s"
                 },
                 "ge": {
@@ -1903,6 +1940,7 @@
                       "x-primitive": "int32"
                     }
                   },
+                  "x-type": "google.protobuf.Duration",
                   "description": "x must be greater than or equal to 20ns"
                 },
                 "gj": {
@@ -1926,6 +1964,7 @@
                       "x-primitive": "int32"
                     }
                   },
+                  "x-type": "google.protobuf.Timestamp",
                   "description": "x cannot be unset"
                 },
                 "gl": {
@@ -1949,6 +1988,7 @@
                       "x-primitive": "int32"
                     }
                   },
+                  "x-type": "google.protobuf.Timestamp",
                   "description": "x must be less than the Unix Epoch"
                 },
                 "gm": {
@@ -1972,6 +2012,7 @@
                       "x-primitive": "int32"
                     }
                   },
+                  "x-type": "google.protobuf.Timestamp",
                   "description": "x must be greater than or equal to 2009/11/10T23:00:00Z"
                 },
                 "gp": {
@@ -1995,6 +2036,7 @@
                       "x-primitive": "int32"
                     }
                   },
+                  "x-type": "google.protobuf.Timestamp",
                   "description": "x must be less than the current timestamp"
                 },
                 "gq": {
@@ -2018,9 +2060,11 @@
                       "x-primitive": "int32"
                     }
                   },
+                  "x-type": "google.protobuf.Timestamp",
                   "description": "x must be within ±1s of the current time"
                 }
-              }
+              },
+              "x-type": "GoogleExamples"
             }
           },
           "description": "Root"
