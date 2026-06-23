@@ -32,7 +32,7 @@ class Proto2JsonSchema {
   }
 
   private parseOptionsAnnotation(rawSchema: string) {
-    const regex = /\s*(\/\/|\*)\s*@Option\s+(?<key>\w{1,50})\s+(?<value>[^\r\n]{1,200})/g;
+    const regex = /(\/\/|\*)\s*@Option\s+(?<key>\w{1,50})\s+(?<value>\S[^\r\n]{0,199})/g;
     let m: RegExpExecArray | null;
     while ((m = regex.exec(rawSchema)) !== null) {
       // This is necessary to avoid infinite loops with zero-width matches
@@ -218,6 +218,10 @@ class Proto2JsonSchema {
     return (field.options?.proto3_optional !== true && this.isProto3());
   }
 
+  private hasRequiredAnnotation(comment: string | null): boolean {
+    return comment !== null && (/@Required\b/i).test(comment);
+  }
+
   /**
    * Compiles a protobuf message to JSON schema
    */
@@ -253,7 +257,7 @@ class Proto2JsonSchema {
         continue;
       }
 
-      if (field.required || this.isProto3Required(field)) {
+      if (field.required || this.isProto3Required(field) || this.hasRequiredAnnotation(field.comment)) {
         obj.required?.push(fieldName);
       }
 
@@ -269,14 +273,14 @@ class Proto2JsonSchema {
         }
 
         if (field.comment) {
-          const minItemsPattern = /@minItems\\s(\\d+?)/i;
-          const maxItemsPattern = /@maxItems\\s(\\d+?)/i;
+          const minItemsPattern = /@MinItems\s(\d+)/i;
+          const maxItemsPattern = /@MaxItems\s(\d+)/i;
           let m: RegExpExecArray | null;
           if ((m = minItemsPattern.exec(field.comment)) !== null) {
-            obj.minItems = parseFloat(m[1]);
+            properties[field.name].minItems = Number.parseInt(m[1], 10);
           }
           if ((m = maxItemsPattern.exec(field.comment)) !== null) {
-            obj.maxItems = parseFloat(m[1]);
+            properties[field.name].maxItems = Number.parseInt(m[1], 10);
           }
         }
 
@@ -398,7 +402,9 @@ class Proto2JsonSchema {
       .replace(new RegExp(`\\s{0,15}${COMMENT_DEFAULT}\\s{0,15}(.+)`, 'ig'), '')
       .replace(new RegExp(`\\s{0,15}${COMMENT_OPTION}\\s{0,15}(.+)`, 'ig'), '')
       .replace(new RegExp(`\\s{0,15}${COMMENT_ROOT_NODE}`, 'ig'), '')
-      .replace(new RegExp('\\s{0,15}@(Min|Max|Pattern|Minimum|Maximum|ExclusiveMinimum|ExclusiveMaximum|MultipleOf|MaxLength|MinLength|MaxItems|MinItems)\\s{0,15}[\\d.]{1,20}', 'ig'), '')
+      .replace(/\s{0,15}@Required/ig, '')
+      .replace(/\s{0,15}@Pattern\s{0,15}[^\r\n]{1,200}/ig, '')
+      .replace(/\s{0,15}@(Min|Max|Minimum|Maximum|ExclusiveMinimum|ExclusiveMaximum|MultipleOf|MaxLength|MinLength|MaxItems|MinItems)\s{0,15}[\d.]{1,20}/ig, '')
       .trim();
 
     if (comment.length < 1) {
@@ -439,16 +445,16 @@ class Proto2JsonSchema {
 
     const patternMin = /@Min\s([+-]?\d+(\.\d+)?)/i;
     const patternMax = /@Max\s([+-]?\d+(\.\d+)?)/i;
-    const patternPattern = /@Pattern\\s([^\n]+)/i;
+    const patternPattern = /@Pattern\s([^\n]+)/i;
 
     const patterns = new Map<string, RegExp>([
-      ['minimum', /@Minimum\\s([+-]?\\d+(\\.\\d+)?)/i],
-      ['maximum', /@Maximum\\s([+-]?\\d+(\\.\\d+)?)/i],
-      ['exclusiveMinimum', /@ExclusiveMinimum\\s(\\d+(\\.\\d+)?)/i],
-      ['exclusiveMaximum', /@ExclusiveMaximum\\s(\\d+(\\.\\d+)?)/i],
-      ['multipleOf', /@MultipleOf\\s(\\d+(\\.\\d+)?)/i],
-      ['maxLength', /@MultipleOf\\s(\\d+(\\.\\d+)?)/i],
-      ['minLength', /@MultipleOf\\s(\\d+(\\.\\d+)?)/i],
+      ['minimum', /@Minimum\s([+-]?\d+(\.\d+)?)/i],
+      ['maximum', /@Maximum\s([+-]?\d+(\.\d+)?)/i],
+      ['exclusiveMinimum', /@ExclusiveMinimum\s([+-]?\d+(\.\d+)?)/i],
+      ['exclusiveMaximum', /@ExclusiveMaximum\s([+-]?\d+(\.\d+)?)/i],
+      ['multipleOf', /@MultipleOf\s(\d+(\.\d+)?)/i],
+      ['maxLength', /@MaxLength\s(\d+)/i],
+      ['minLength', /@MinLength\s(\d+)/i],
     ]);
 
     let m: RegExpExecArray | null;
@@ -462,7 +468,7 @@ class Proto2JsonSchema {
     }
 
     if ((m = patternPattern.exec(comment)) !== null) {
-      obj.pattern = m[1];
+      obj.pattern = m[1].trim();
     }
 
     for (const e of patterns.entries()) {

@@ -98,6 +98,14 @@ References are NOT supported:
     - google/protobuf/*
     - google/type/*
 
+## Scalar type formats
+
+Each protobuf scalar type is mapped to a JSON schema `type` plus a `format` that preserves the
+original protobuf wire type. For example `int64` becomes `{"type": "integer", "format": "int64"}`
+and `bytes` becomes `{"type": "string", "format": "bytes"}`. The protobuf type is additionally kept
+in the non-standard `x-primitive` keyword. By default numeric types also carry `minimum`/`maximum`
+limits (see the `primitiveTypesWithLimits` option).
+
 ## Comments
 
 Each field of a message may have a comment witch will be reflected as json schema `description`.
@@ -140,6 +148,7 @@ message Point {
 | @MinItems            | json scheme [array validator](https://json-schema.org/understanding-json-schema/reference/array#length)	                             |
 | @MaxItems            | json scheme [array validator](https://json-schema.org/understanding-json-schema/reference/array#length)		                            |
 | @Default             | json schema [default value](https://opis.io/json-schema/1.x/default-value.html)	                                                     |
+| @Required            | adds the field to the json schema `required` list. Additive: a field is required if it is proto2 `required`, a non-optional proto3 field, or annotated with `@Required` |
 
 ### Per message annotation
 
