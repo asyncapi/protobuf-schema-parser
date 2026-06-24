@@ -39,12 +39,14 @@
                 "properties": {
                   "na": {
                     "type": "number",
+                    "format": "float",
                     "x-primitive": "float",
                     "const": 1.23,
                     "description": "x must equal 1.23 exactly"
                   },
                   "nb": {
                     "type": "integer",
+                    "format": "int32",
                     "minimum": -2147483648,
                     "x-primitive": "int32",
                     "exclusiveMaximum": 10,
@@ -52,6 +54,7 @@
                   },
                   "nc": {
                     "type": "integer",
+                    "format": "uint64",
                     "minimum": 20,
                     "maximum": 9007199254740991,
                     "x-primitive": "uint64",
@@ -59,6 +62,7 @@
                   },
                   "nd": {
                     "type": "number",
+                    "format": "fixed32",
                     "x-primitive": "fixed32",
                     "minimum": 30,
                     "exclusiveMaximum": 40,
@@ -66,6 +70,7 @@
                   },
                   "ne": {
                     "type": "number",
+                    "format": "double",
                     "x-primitive": "double",
                     "exclusiveMaximum": 30,
                     "minimum": 40,
@@ -73,6 +78,7 @@
                   },
                   "nf": {
                     "type": "number",
+                    "format": "double",
                     "x-primitive": "double",
                     "exclusiveMaximum": 30,
                     "minimum": 40,
@@ -80,6 +86,7 @@
                   },
                   "ng": {
                     "type": "integer",
+                    "format": "uint32",
                     "minimum": 0,
                     "maximum": 4294967295,
                     "x-primitive": "uint32",
@@ -101,6 +108,7 @@
                   },
                   "nh": {
                     "type": "number",
+                    "format": "float",
                     "x-primitive": "float",
                     "not": {
                       "oneOf": [
@@ -118,6 +126,7 @@
                   },
                   "ni": {
                     "type": "integer",
+                    "format": "uint32",
                     "minimum": 200,
                     "maximum": 4294967295,
                     "x-primitive": "uint32",
@@ -401,18 +410,21 @@
                 "properties": {
                   "ba": {
                     "type": "string",
+                    "format": "bytes",
                     "x-primitive": "bytes",
                     "const": "foo",
                     "description": "x must be set to \"foo\" (\"\\x66\\x6f\\x6f\")"
                   },
                   "bb": {
                     "type": "string",
+                    "format": "bytes",
                     "x-primitive": "bytes",
                     "const": "f09028bc",
                     "description": "x must be set to \"\\xf0\\x90\\x28\\xbc\""
                   },
                   "bc": {
                     "type": "string",
+                    "format": "bytes",
                     "x-primitive": "bytes",
                     "minLength": 3,
                     "maxLength": 3,
@@ -420,12 +432,14 @@
                   },
                   "bd": {
                     "type": "string",
+                    "format": "bytes",
                     "x-primitive": "bytes",
                     "minLength": 3,
                     "description": "x must be at least 3 bytes long"
                   },
                   "be": {
                     "type": "string",
+                    "format": "bytes",
                     "x-primitive": "bytes",
                     "minLength": 5,
                     "maxLength": 10,
@@ -433,30 +447,35 @@
                   },
                   "bf": {
                     "type": "string",
+                    "format": "bytes",
                     "x-primitive": "bytes",
                     "pattern": "^[00-7F]+$",
                     "description": "x must be a non-empty, ASCII byte sequence"
                   },
                   "bg": {
                     "type": "string",
+                    "format": "bytes",
                     "x-primitive": "bytes",
                     "pattern": "^99.*",
                     "description": "x must begin with \"\\x99\""
                   },
                   "bh": {
                     "type": "string",
+                    "format": "bytes",
                     "x-primitive": "bytes",
                     "pattern": ".*buz7a$",
                     "description": "x must end with \"buz\\x7a\""
                   },
                   "bi": {
                     "type": "string",
+                    "format": "bytes",
                     "x-primitive": "bytes",
                     "pattern": ".*baz.*",
                     "description": "x must contain \"baz\" anywhere inside it"
                   },
                   "bj": {
                     "type": "string",
+                    "format": "bytes",
                     "x-primitive": "bytes",
                     "oneOf": [
                       {
@@ -476,6 +495,7 @@
                   },
                   "bk": {
                     "type": "string",
+                    "format": "bytes",
                     "x-primitive": "bytes",
                     "not": {
                       "oneOf": [
@@ -493,6 +513,7 @@
                   },
                   "bl": {
                     "type": "string",
+                    "format": "bytes",
                     "x-primitive": "bytes",
                     "oneOf": [
                       {
@@ -511,6 +532,7 @@
                   },
                   "bm": {
                     "type": "string",
+                    "format": "bytes",
                     "x-primitive": "bytes",
                     "anyOf": [
                       {
@@ -526,14 +548,14 @@
                   },
                   "bn": {
                     "type": "string",
-                    "x-primitive": "bytes",
                     "format": "ipv4",
+                    "x-primitive": "bytes",
                     "description": "x must be a valid IPv4 address in byte format\neg: \"\\xC0\\xA8\\x00\\x01\""
                   },
                   "bo": {
                     "type": "string",
-                    "x-primitive": "bytes",
                     "format": "ipv6",
+                    "x-primitive": "bytes",
                     "description": "x must be a valid IPv6 address in byte format\neg: \"\\x20\\x01\\x0D\\xB8\\x85\\xA3\\x00\\x00\\x00\\x00\\x8A\\x2E\\x03\\x70\\x73\\x34\""
                   }
                 },
@@ -562,6 +584,7 @@
                     "type": "array",
                     "items": {
                       "type": "integer",
+                      "format": "int32",
                       "minimum": -2147483648,
                       "maximum": 2147483647,
                       "x-primitive": "int32",
@@ -584,6 +607,7 @@
                       "properties": {
                         "id": {
                           "type": "integer",
+                          "format": "uint64",
                           "maximum": 9007199254740991,
                           "x-primitive": "uint64",
                           "exclusiveMinimum": 999
@@ -609,12 +633,14 @@
                           "properties": {
                             "lat": {
                               "type": "number",
+                              "format": "double",
                               "x-primitive": "double",
                               "minimum": -90,
                               "maximum": 90
                             },
                             "lng": {
                               "type": "number",
+                              "format": "double",
                               "x-primitive": "double",
                               "minimum": -180,
                               "maximum": 180
@@ -634,6 +660,7 @@
                     "type": "array",
                     "items": {
                       "type": "number",
+                      "format": "double",
                       "x-primitive": "double",
                       "description": "x must contain exactly 7 elements"
                     },
@@ -645,6 +672,7 @@
                     "type": "array",
                     "items": {
                       "type": "integer",
+                      "format": "int64",
                       "minimum": -9007199254740991,
                       "maximum": 9007199254740991,
                       "x-primitive": "int64",
@@ -657,6 +685,7 @@
                     "type": "array",
                     "items": {
                       "type": "number",
+                      "format": "float",
                       "x-primitive": "float",
                       "description": "x must contain positive float values",
                       "exclusiveMinimum": 0
@@ -667,6 +696,7 @@
                     "type": "array",
                     "items": {
                       "type": "number",
+                      "format": "float",
                       "x-primitive": "float",
                       "description": "x must contain positive float values",
                       "exclusiveMinimum": 0
@@ -700,6 +730,7 @@
                     "properties": {
                       "value": {
                         "type": "integer",
+                        "format": "int32",
                         "minimum": -2147483648,
                         "maximum": 2147483647,
                         "x-primitive": "int32"
@@ -719,12 +750,14 @@
                     "properties": {
                       "seconds": {
                         "type": "integer",
+                        "format": "int64",
                         "minimum": -9007199254740991,
                         "maximum": 9007199254740991,
                         "x-primitive": "int64"
                       },
                       "nanos": {
                         "type": "integer",
+                        "format": "int32",
                         "minimum": -2147483648,
                         "maximum": 2147483647,
                         "x-primitive": "int32"
@@ -743,12 +776,14 @@
                     "properties": {
                       "seconds": {
                         "type": "integer",
+                        "format": "int64",
                         "minimum": -9007199254740991,
                         "maximum": 9007199254740991,
                         "x-primitive": "int64"
                       },
                       "nanos": {
                         "type": "integer",
+                        "format": "int32",
                         "minimum": -2147483648,
                         "maximum": 2147483647,
                         "x-primitive": "int32"
@@ -767,12 +802,14 @@
                     "properties": {
                       "seconds": {
                         "type": "integer",
+                        "format": "int64",
                         "minimum": -9007199254740991,
                         "maximum": 9007199254740991,
                         "x-primitive": "int64"
                       },
                       "nanos": {
                         "type": "integer",
+                        "format": "int32",
                         "minimum": -2147483648,
                         "maximum": 2147483647,
                         "x-primitive": "int32"
@@ -791,12 +828,14 @@
                     "properties": {
                       "seconds": {
                         "type": "integer",
+                        "format": "int64",
                         "minimum": -9007199254740991,
                         "maximum": 9007199254740991,
                         "x-primitive": "int64"
                       },
                       "nanos": {
                         "type": "integer",
+                        "format": "int32",
                         "minimum": -2147483648,
                         "maximum": 2147483647,
                         "x-primitive": "int32"
@@ -815,12 +854,14 @@
                     "properties": {
                       "seconds": {
                         "type": "integer",
+                        "format": "int64",
                         "minimum": -9007199254740991,
                         "maximum": 9007199254740991,
                         "x-primitive": "int64"
                       },
                       "nanos": {
                         "type": "integer",
+                        "format": "int32",
                         "minimum": -2147483648,
                         "maximum": 2147483647,
                         "x-primitive": "int32"
@@ -839,12 +880,14 @@
                     "properties": {
                       "seconds": {
                         "type": "integer",
+                        "format": "int64",
                         "minimum": -9007199254740991,
                         "maximum": 9007199254740991,
                         "x-primitive": "int64"
                       },
                       "nanos": {
                         "type": "integer",
+                        "format": "int32",
                         "minimum": -2147483648,
                         "maximum": 2147483647,
                         "x-primitive": "int32"
@@ -863,12 +906,14 @@
                     "properties": {
                       "seconds": {
                         "type": "integer",
+                        "format": "int64",
                         "minimum": -9007199254740991,
                         "maximum": 9007199254740991,
                         "x-primitive": "int64"
                       },
                       "nanos": {
                         "type": "integer",
+                        "format": "int32",
                         "minimum": -2147483648,
                         "maximum": 2147483647,
                         "x-primitive": "int32"
@@ -887,12 +932,14 @@
                     "properties": {
                       "seconds": {
                         "type": "integer",
+                        "format": "int64",
                         "minimum": -9007199254740991,
                         "maximum": 9007199254740991,
                         "x-primitive": "int64"
                       },
                       "nanos": {
                         "type": "integer",
+                        "format": "int32",
                         "minimum": -2147483648,
                         "maximum": 2147483647,
                         "x-primitive": "int32"
@@ -945,12 +992,14 @@
               "properties": {
                 "na": {
                   "type": "number",
+                  "format": "float",
                   "x-primitive": "float",
                   "const": 1.23,
                   "description": "x must equal 1.23 exactly"
                 },
                 "nb": {
                   "type": "integer",
+                  "format": "int32",
                   "minimum": -2147483648,
                   "x-primitive": "int32",
                   "exclusiveMaximum": 10,
@@ -958,6 +1007,7 @@
                 },
                 "nc": {
                   "type": "integer",
+                  "format": "uint64",
                   "minimum": 20,
                   "maximum": 9007199254740991,
                   "x-primitive": "uint64",
@@ -965,6 +1015,7 @@
                 },
                 "nd": {
                   "type": "number",
+                  "format": "fixed32",
                   "x-primitive": "fixed32",
                   "minimum": 30,
                   "exclusiveMaximum": 40,
@@ -972,6 +1023,7 @@
                 },
                 "ne": {
                   "type": "number",
+                  "format": "double",
                   "x-primitive": "double",
                   "exclusiveMaximum": 30,
                   "minimum": 40,
@@ -979,6 +1031,7 @@
                 },
                 "nf": {
                   "type": "number",
+                  "format": "double",
                   "x-primitive": "double",
                   "exclusiveMaximum": 30,
                   "minimum": 40,
@@ -986,6 +1039,7 @@
                 },
                 "ng": {
                   "type": "integer",
+                  "format": "uint32",
                   "minimum": 0,
                   "maximum": 4294967295,
                   "x-primitive": "uint32",
@@ -1007,6 +1061,7 @@
                 },
                 "nh": {
                   "type": "number",
+                  "format": "float",
                   "x-primitive": "float",
                   "not": {
                     "oneOf": [
@@ -1024,6 +1079,7 @@
                 },
                 "ni": {
                   "type": "integer",
+                  "format": "uint32",
                   "minimum": 200,
                   "maximum": 4294967295,
                   "x-primitive": "uint32",
@@ -1307,18 +1363,21 @@
               "properties": {
                 "ba": {
                   "type": "string",
+                  "format": "bytes",
                   "x-primitive": "bytes",
                   "const": "foo",
                   "description": "x must be set to \"foo\" (\"\\x66\\x6f\\x6f\")"
                 },
                 "bb": {
                   "type": "string",
+                  "format": "bytes",
                   "x-primitive": "bytes",
                   "const": "f09028bc",
                   "description": "x must be set to \"\\xf0\\x90\\x28\\xbc\""
                 },
                 "bc": {
                   "type": "string",
+                  "format": "bytes",
                   "x-primitive": "bytes",
                   "minLength": 3,
                   "maxLength": 3,
@@ -1326,12 +1385,14 @@
                 },
                 "bd": {
                   "type": "string",
+                  "format": "bytes",
                   "x-primitive": "bytes",
                   "minLength": 3,
                   "description": "x must be at least 3 bytes long"
                 },
                 "be": {
                   "type": "string",
+                  "format": "bytes",
                   "x-primitive": "bytes",
                   "minLength": 5,
                   "maxLength": 10,
@@ -1339,30 +1400,35 @@
                 },
                 "bf": {
                   "type": "string",
+                  "format": "bytes",
                   "x-primitive": "bytes",
                   "pattern": "^[00-7F]+$",
                   "description": "x must be a non-empty, ASCII byte sequence"
                 },
                 "bg": {
                   "type": "string",
+                  "format": "bytes",
                   "x-primitive": "bytes",
                   "pattern": "^99.*",
                   "description": "x must begin with \"\\x99\""
                 },
                 "bh": {
                   "type": "string",
+                  "format": "bytes",
                   "x-primitive": "bytes",
                   "pattern": ".*buz7a$",
                   "description": "x must end with \"buz\\x7a\""
                 },
                 "bi": {
                   "type": "string",
+                  "format": "bytes",
                   "x-primitive": "bytes",
                   "pattern": ".*baz.*",
                   "description": "x must contain \"baz\" anywhere inside it"
                 },
                 "bj": {
                   "type": "string",
+                  "format": "bytes",
                   "x-primitive": "bytes",
                   "oneOf": [
                     {
@@ -1382,6 +1448,7 @@
                 },
                 "bk": {
                   "type": "string",
+                  "format": "bytes",
                   "x-primitive": "bytes",
                   "not": {
                     "oneOf": [
@@ -1399,6 +1466,7 @@
                 },
                 "bl": {
                   "type": "string",
+                  "format": "bytes",
                   "x-primitive": "bytes",
                   "oneOf": [
                     {
@@ -1417,6 +1485,7 @@
                 },
                 "bm": {
                   "type": "string",
+                  "format": "bytes",
                   "x-primitive": "bytes",
                   "anyOf": [
                     {
@@ -1432,14 +1501,14 @@
                 },
                 "bn": {
                   "type": "string",
-                  "x-primitive": "bytes",
                   "format": "ipv4",
+                  "x-primitive": "bytes",
                   "description": "x must be a valid IPv4 address in byte format\neg: \"\\xC0\\xA8\\x00\\x01\""
                 },
                 "bo": {
                   "type": "string",
-                  "x-primitive": "bytes",
                   "format": "ipv6",
+                  "x-primitive": "bytes",
                   "description": "x must be a valid IPv6 address in byte format\neg: \"\\x20\\x01\\x0D\\xB8\\x85\\xA3\\x00\\x00\\x00\\x00\\x8A\\x2E\\x03\\x70\\x73\\x34\""
                 }
               },
@@ -1468,6 +1537,7 @@
                   "type": "array",
                   "items": {
                     "type": "integer",
+                    "format": "int32",
                     "minimum": -2147483648,
                     "maximum": 2147483647,
                     "x-primitive": "int32",
@@ -1490,6 +1560,7 @@
                     "properties": {
                       "id": {
                         "type": "integer",
+                        "format": "uint64",
                         "maximum": 9007199254740991,
                         "x-primitive": "uint64",
                         "exclusiveMinimum": 999
@@ -1515,12 +1586,14 @@
                         "properties": {
                           "lat": {
                             "type": "number",
+                            "format": "double",
                             "x-primitive": "double",
                             "minimum": -90,
                             "maximum": 90
                           },
                           "lng": {
                             "type": "number",
+                            "format": "double",
                             "x-primitive": "double",
                             "minimum": -180,
                             "maximum": 180
@@ -1540,6 +1613,7 @@
                   "type": "array",
                   "items": {
                     "type": "number",
+                    "format": "double",
                     "x-primitive": "double",
                     "description": "x must contain exactly 7 elements"
                   },
@@ -1551,6 +1625,7 @@
                   "type": "array",
                   "items": {
                     "type": "integer",
+                    "format": "int64",
                     "minimum": -9007199254740991,
                     "maximum": 9007199254740991,
                     "x-primitive": "int64",
@@ -1563,6 +1638,7 @@
                   "type": "array",
                   "items": {
                     "type": "number",
+                    "format": "float",
                     "x-primitive": "float",
                     "description": "x must contain positive float values",
                     "exclusiveMinimum": 0
@@ -1573,6 +1649,7 @@
                   "type": "array",
                   "items": {
                     "type": "number",
+                    "format": "float",
                     "x-primitive": "float",
                     "description": "x must contain positive float values",
                     "exclusiveMinimum": 0
@@ -1606,6 +1683,7 @@
                   "properties": {
                     "value": {
                       "type": "integer",
+                      "format": "int32",
                       "minimum": -2147483648,
                       "maximum": 2147483647,
                       "x-primitive": "int32"
@@ -1625,12 +1703,14 @@
                   "properties": {
                     "seconds": {
                       "type": "integer",
+                      "format": "int64",
                       "minimum": -9007199254740991,
                       "maximum": 9007199254740991,
                       "x-primitive": "int64"
                     },
                     "nanos": {
                       "type": "integer",
+                      "format": "int32",
                       "minimum": -2147483648,
                       "maximum": 2147483647,
                       "x-primitive": "int32"
@@ -1649,12 +1729,14 @@
                   "properties": {
                     "seconds": {
                       "type": "integer",
+                      "format": "int64",
                       "minimum": -9007199254740991,
                       "maximum": 9007199254740991,
                       "x-primitive": "int64"
                     },
                     "nanos": {
                       "type": "integer",
+                      "format": "int32",
                       "minimum": -2147483648,
                       "maximum": 2147483647,
                       "x-primitive": "int32"
@@ -1673,12 +1755,14 @@
                   "properties": {
                     "seconds": {
                       "type": "integer",
+                      "format": "int64",
                       "minimum": -9007199254740991,
                       "maximum": 9007199254740991,
                       "x-primitive": "int64"
                     },
                     "nanos": {
                       "type": "integer",
+                      "format": "int32",
                       "minimum": -2147483648,
                       "maximum": 2147483647,
                       "x-primitive": "int32"
@@ -1697,12 +1781,14 @@
                   "properties": {
                     "seconds": {
                       "type": "integer",
+                      "format": "int64",
                       "minimum": -9007199254740991,
                       "maximum": 9007199254740991,
                       "x-primitive": "int64"
                     },
                     "nanos": {
                       "type": "integer",
+                      "format": "int32",
                       "minimum": -2147483648,
                       "maximum": 2147483647,
                       "x-primitive": "int32"
@@ -1721,12 +1807,14 @@
                   "properties": {
                     "seconds": {
                       "type": "integer",
+                      "format": "int64",
                       "minimum": -9007199254740991,
                       "maximum": 9007199254740991,
                       "x-primitive": "int64"
                     },
                     "nanos": {
                       "type": "integer",
+                      "format": "int32",
                       "minimum": -2147483648,
                       "maximum": 2147483647,
                       "x-primitive": "int32"
@@ -1745,12 +1833,14 @@
                   "properties": {
                     "seconds": {
                       "type": "integer",
+                      "format": "int64",
                       "minimum": -9007199254740991,
                       "maximum": 9007199254740991,
                       "x-primitive": "int64"
                     },
                     "nanos": {
                       "type": "integer",
+                      "format": "int32",
                       "minimum": -2147483648,
                       "maximum": 2147483647,
                       "x-primitive": "int32"
@@ -1769,12 +1859,14 @@
                   "properties": {
                     "seconds": {
                       "type": "integer",
+                      "format": "int64",
                       "minimum": -9007199254740991,
                       "maximum": 9007199254740991,
                       "x-primitive": "int64"
                     },
                     "nanos": {
                       "type": "integer",
+                      "format": "int32",
                       "minimum": -2147483648,
                       "maximum": 2147483647,
                       "x-primitive": "int32"
@@ -1793,12 +1885,14 @@
                   "properties": {
                     "seconds": {
                       "type": "integer",
+                      "format": "int64",
                       "minimum": -9007199254740991,
                       "maximum": 9007199254740991,
                       "x-primitive": "int64"
                     },
                     "nanos": {
                       "type": "integer",
+                      "format": "int32",
                       "minimum": -2147483648,
                       "maximum": 2147483647,
                       "x-primitive": "int32"

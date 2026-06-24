@@ -1,0 +1,129 @@
+{
+  "asyncapi": "2.0.0",
+  "info": {
+    "title": "Example using ProtoBuff value restrictions",
+    "version": "1.0.0"
+  },
+  "channels": {
+    "mychannel": {
+      "publish": {
+        "message": {
+          "schemaFormat": "application/vnd.google.protobuf;version=3",
+          "payload": {
+            "title": "RestrictedEntity",
+            "type": "object",
+            "required": [
+              "code",
+              "quantity",
+              "ratio",
+              "tags"
+            ],
+            "properties": {
+              "code": {
+                "type": "string",
+                "x-primitive": "string",
+                "pattern": "^[A-Z]{2}\\d+$",
+                "maxLength": 10,
+                "minLength": 3,
+                "description": "Identifier code."
+              },
+              "quantity": {
+                "type": "integer",
+                "format": "int32",
+                "minimum": 1,
+                "maximum": 100,
+                "x-primitive": "int32",
+                "multipleOf": 5,
+                "description": "Quantity of items."
+              },
+              "ratio": {
+                "type": "number",
+                "format": "double",
+                "x-primitive": "double",
+                "exclusiveMinimum": 0,
+                "exclusiveMaximum": 1,
+                "description": "Ratio strictly between 0 and 1."
+              },
+              "tags": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "x-primitive": "string",
+                  "description": "Tags."
+                },
+                "description": "Tags.",
+                "minItems": 1,
+                "maxItems": 5
+              },
+              "note": {
+                "type": "string",
+                "x-primitive": "string",
+                "description": "Optional free-text note (not required)."
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "messages": {
+      "testMessage": {
+        "schemaFormat": "application/vnd.google.protobuf;version=3",
+        "payload": {
+          "title": "RestrictedEntity",
+          "type": "object",
+          "required": [
+            "code",
+            "quantity",
+            "ratio",
+            "tags"
+          ],
+          "properties": {
+            "code": {
+              "type": "string",
+              "x-primitive": "string",
+              "pattern": "^[A-Z]{2}\\d+$",
+              "maxLength": 10,
+              "minLength": 3,
+              "description": "Identifier code."
+            },
+            "quantity": {
+              "type": "integer",
+              "format": "int32",
+              "minimum": 1,
+              "maximum": 100,
+              "x-primitive": "int32",
+              "multipleOf": 5,
+              "description": "Quantity of items."
+            },
+            "ratio": {
+              "type": "number",
+              "format": "double",
+              "x-primitive": "double",
+              "exclusiveMinimum": 0,
+              "exclusiveMaximum": 1,
+              "description": "Ratio strictly between 0 and 1."
+            },
+            "tags": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "x-primitive": "string",
+                "description": "Tags."
+              },
+              "description": "Tags.",
+              "minItems": 1,
+              "maxItems": 5
+            },
+            "note": {
+              "type": "string",
+              "x-primitive": "string",
+              "description": "Optional free-text note (not required)."
+            }
+          }
+        }
+      }
+    }
+  }
+}
