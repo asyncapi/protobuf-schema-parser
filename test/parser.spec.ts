@@ -141,6 +141,20 @@ describe('parse()', function () {
     );
   });
 
+  it('should parse value restriction and required annotations', async function () {
+    const document = await parseSpec('./documents/restrictions.proto.yaml');
+
+    if (UPDATE_RESULTS) {
+      writeResults(document, './documents/restrictions.proto.result.json');
+    }
+
+    expect(
+      stripParserExtraInfos(document?.json())
+    ).toEqual(
+      readResultFile('./documents/restrictions.proto.result.json')
+    );
+  });
+
   it('multiple root messages in proto schema should fail', async function () {
     const {document, diagnostics} = await coreParser.parse(
       fs.readFileSync(path.resolve(__dirname, './documents/invalid.multiple_root.yaml'), 'utf8')

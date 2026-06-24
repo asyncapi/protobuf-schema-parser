@@ -1,0 +1,52 @@
+asyncapi: 2.0.0
+info:
+  title: Example using ProtoBuff value restrictions
+  version: '1.0.0'
+channels:
+  mychannel:
+    publish:
+      message:
+        $ref: '#/components/messages/testMessage'
+
+components:
+  messages:
+    testMessage:
+      schemaFormat: 'application/vnd.google.protobuf;version=3'
+      payload: |
+        syntax = "proto3";
+
+        message RestrictedEntity {
+            /*
+             * Identifier code.
+             * @Required
+             * @Pattern ^[A-Z]{2}\d+$
+             * @MinLength 3
+             * @MaxLength 10
+             */
+            optional string code = 1;
+
+            /*
+             * Quantity of items.
+             * @Minimum 1
+             * @Maximum 100
+             * @MultipleOf 5
+             */
+            int32 quantity = 2;
+
+            /*
+             * Ratio strictly between 0 and 1.
+             * @ExclusiveMinimum 0
+             * @ExclusiveMaximum 1
+             */
+            double ratio = 3;
+
+            /*
+             * Tags.
+             * @MinItems 1
+             * @MaxItems 5
+             */
+            repeated string tags = 4;
+
+            // Optional free-text note (not required).
+            optional string note = 5;
+        }
