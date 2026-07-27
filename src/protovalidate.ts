@@ -7,20 +7,21 @@ const OPTION_PREFIX = '(buf.validate.field)';
 type HashMap = { [k: string]: any };
 
 export function visit(obj: AsyncAPISchemaDefinition, field: Field) {
-  const parsedOption = findRootOption(field);
+  const parsedOption = findRootOption(field, OPTION_PREFIX);
 
   if (parsedOption !== null) {
     protocGenValidate(parsedOption, obj);
   }
 }
 
-function findRootOption(field: Field): null | HashMap {
-  if (field.parsedOptions && field.parsedOptions[OPTION_PREFIX]) {
-    return field.parsedOptions[OPTION_PREFIX] as any;
-  } else if (field.parsedOptions && Array.isArray(field.parsedOptions)) {
-    for (const parsedOption of field.parsedOptions) {
-      if (parsedOption[OPTION_PREFIX]) {
-        return parsedOption[OPTION_PREFIX];
+export function findRootOption(field: Field, optionPrefix: string): null | HashMap {
+  const parsedOptions = field.parsedOptions as any;
+  if (parsedOptions && parsedOptions[optionPrefix]) {
+    return parsedOptions[optionPrefix];
+  } else if (parsedOptions && Array.isArray(parsedOptions)) {
+    for (const parsedOption of parsedOptions) {
+      if (parsedOption[optionPrefix]) {
+        return parsedOption[optionPrefix];
       }
     }
   }
@@ -397,7 +398,7 @@ class ProtocGenGeneric {
 }
 
 export function isOptional(field: Field) {
-  const parsedOption = findRootOption(field);
+  const parsedOption = findRootOption(field, OPTION_PREFIX);
 
   if (parsedOption !== null) {
     for (const [dataType, options] of Object.entries(parsedOption)) {
