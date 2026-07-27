@@ -52,7 +52,7 @@
   "dependencies": {
     "@asyncapi/parser": "^3.6.0",
     "@types/protocol-buffers-schema": "^3.4.3",
-    "protobufjs": "^7.4.0"
+    "protobufjs": "^8.7.1"
   },
   "devDependencies": {
     "@jest/types": "^29.2.1",
