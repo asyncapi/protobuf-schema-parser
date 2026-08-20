@@ -1,0 +1,161 @@
+{
+  "asyncapi": "2.0.0",
+  "info": {
+    "title": "Example using the same ProtoBuff message type for several fields",
+    "version": "1.0.0"
+  },
+  "channels": {
+    "mychannel": {
+      "publish": {
+        "message": {
+          "schemaFormat": "application/vnd.google.protobuf;version=3",
+          "payload": {
+            "title": "TrainRunExecutionDifference",
+            "type": "object",
+            "required": [
+              "passed_positions"
+            ],
+            "properties": {
+              "origin": {
+                "title": "ZnvOccupancy",
+                "type": "object",
+                "properties": {
+                  "element": {
+                    "type": "string",
+                    "x-primitive": "string",
+                    "description": "Name of the Iltis element."
+                  }
+                },
+                "description": "Origin position.",
+                "x-type": "ZnvOccupancy",
+                "x-type-description": "Data type for a ZnvOccupancy"
+              },
+              "deletion_position": {
+                "title": "ZnvOccupancy",
+                "type": "object",
+                "properties": {
+                  "element": {
+                    "type": "string",
+                    "x-primitive": "string",
+                    "description": "Name of the Iltis element."
+                  }
+                },
+                "description": "Position at which the train number is deleted.",
+                "x-type": "ZnvOccupancy",
+                "x-type-description": "Data type for a ZnvOccupancy"
+              },
+              "uncommented_position": {
+                "title": "ZnvOccupancy",
+                "type": "object",
+                "properties": {
+                  "element": {
+                    "type": "string",
+                    "x-primitive": "string",
+                    "description": "Name of the Iltis element."
+                  }
+                },
+                "description": "Data type for a ZnvOccupancy",
+                "x-type": "ZnvOccupancy"
+              },
+              "passed_positions": {
+                "type": "array",
+                "items": {
+                  "title": "ZnvOccupancy",
+                  "type": "object",
+                  "properties": {
+                    "element": {
+                      "type": "string",
+                      "x-primitive": "string",
+                      "description": "Name of the Iltis element."
+                    }
+                  },
+                  "description": "All positions the train passed.",
+                  "x-type": "ZnvOccupancy",
+                  "x-type-description": "Data type for a ZnvOccupancy"
+                },
+                "description": "All positions the train passed."
+              }
+            },
+            "description": "Difference between the planned and the executed train run"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "messages": {
+      "testMessage": {
+        "schemaFormat": "application/vnd.google.protobuf;version=3",
+        "payload": {
+          "title": "TrainRunExecutionDifference",
+          "type": "object",
+          "required": [
+            "passed_positions"
+          ],
+          "properties": {
+            "origin": {
+              "title": "ZnvOccupancy",
+              "type": "object",
+              "properties": {
+                "element": {
+                  "type": "string",
+                  "x-primitive": "string",
+                  "description": "Name of the Iltis element."
+                }
+              },
+              "description": "Origin position.",
+              "x-type": "ZnvOccupancy",
+              "x-type-description": "Data type for a ZnvOccupancy"
+            },
+            "deletion_position": {
+              "title": "ZnvOccupancy",
+              "type": "object",
+              "properties": {
+                "element": {
+                  "type": "string",
+                  "x-primitive": "string",
+                  "description": "Name of the Iltis element."
+                }
+              },
+              "description": "Position at which the train number is deleted.",
+              "x-type": "ZnvOccupancy",
+              "x-type-description": "Data type for a ZnvOccupancy"
+            },
+            "uncommented_position": {
+              "title": "ZnvOccupancy",
+              "type": "object",
+              "properties": {
+                "element": {
+                  "type": "string",
+                  "x-primitive": "string",
+                  "description": "Name of the Iltis element."
+                }
+              },
+              "description": "Data type for a ZnvOccupancy",
+              "x-type": "ZnvOccupancy"
+            },
+            "passed_positions": {
+              "type": "array",
+              "items": {
+                "title": "ZnvOccupancy",
+                "type": "object",
+                "properties": {
+                  "element": {
+                    "type": "string",
+                    "x-primitive": "string",
+                    "description": "Name of the Iltis element."
+                  }
+                },
+                "description": "All positions the train passed.",
+                "x-type": "ZnvOccupancy",
+                "x-type-description": "Data type for a ZnvOccupancy"
+              },
+              "description": "All positions the train passed."
+            }
+          },
+          "description": "Difference between the planned and the executed train run"
+        }
+      }
+    }
+  }
+}

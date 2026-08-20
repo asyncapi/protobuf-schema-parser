@@ -1,0 +1,36 @@
+asyncapi: 2.0.0
+info:
+  title: Example using the same ProtoBuff message type for several fields
+  version: '1.0.0'
+channels:
+  mychannel:
+    publish:
+      message:
+        $ref: '#/components/messages/testMessage'
+
+components:
+  messages:
+    testMessage:
+      schemaFormat: 'application/vnd.google.protobuf;version=3'
+      payload: |
+        syntax = "proto3";
+
+        // Data type for a ZnvOccupancy
+        message ZnvOccupancy {
+            // Name of the Iltis element.
+            optional string element = 1;
+        }
+
+        // Difference between the planned and the executed train run
+        message TrainRunExecutionDifference {
+            // Origin position.
+            optional ZnvOccupancy origin = 1;
+
+            // Position at which the train number is deleted.
+            optional ZnvOccupancy deletion_position = 2;
+
+            optional ZnvOccupancy uncommented_position = 3;
+
+            // All positions the train passed.
+            repeated ZnvOccupancy passed_positions = 4;
+        }

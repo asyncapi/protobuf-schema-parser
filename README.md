@@ -162,7 +162,7 @@ The main mapping rules:
 | `enum` | `{ "type": "string", "enum": [<names>], "x-enum-mapping": { <name>: <number> } }` |
 | `repeated` field | `{ "type": "array", "items": <field schema> }` |
 | `oneof` with 2+ members | A property named after the `oneof` holding `{ "oneOf": [ ... ] }`; each variant carries `x-oneof-item` with the field name |
-| Field / message comment | `description` (with `@`-annotations stripped out) |
+| Field / message comment | `description` (with `@`-annotations stripped out). A field comment replaces the comment of the message it references, which moves to `x-type-description` |
 
 Field membership in the `required` list is additive: a field is marked required if it is proto2
 `required`, a non-optional proto3 field, or annotated with `@Required`.
@@ -172,6 +172,7 @@ branch, the converter stops descending to avoid an infinite loop.
 
 Non-standard (`x-`) keywords are used to preserve Protobuf information that has no direct JSON Schema
 equivalent: `x-primitive` (original scalar type), `x-type` (referenced message/enum name),
+`x-type-description` (comment of the referenced message when a field comment replaced it),
 `x-enum-mapping` (enum name to numeric value), and `x-oneof-item` (the `oneof` field a variant came
 from).
 

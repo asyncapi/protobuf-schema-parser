@@ -230,6 +230,34 @@ describe('parse()', function () {
     );
   });
 
+  it('a field comment should replace and not extend the comment of the message it references', async function () {
+    const document = await parseSpec('./documents/shared-message-type.proto.yaml');
+
+    if (UPDATE_RESULTS) {
+      writeResults(
+        document,
+        './documents/shared-message-type.proto.result.json'
+      );
+    }
+
+    expect(
+      stripParserExtraInfos(document?.json())
+    ).toEqual(
+      readResultFile('./documents/shared-message-type.proto.result.json')
+    );
+
+    const properties = document?.json().components.messages.testMessage.payload.properties;
+
+    expect(properties.origin.description).toEqual('Origin position.');
+    expect(properties.deletion_position.description).toEqual('Position at which the train number is deleted.');
+    expect(properties.uncommented_position.description).toEqual('Data type for a ZnvOccupancy');
+    expect(properties.passed_positions.description).toEqual('All positions the train passed.');
+
+    expect(properties.origin['x-type-description']).toEqual('Data type for a ZnvOccupancy');
+    expect(properties.deletion_position['x-type-description']).toEqual('Data type for a ZnvOccupancy');
+    expect(properties.passed_positions.items['x-type-description']).toEqual('Data type for a ZnvOccupancy');
+  });
+
   function filterDiagnostics(diagnostics: Diagnostic[], code: string) {
     return diagnostics.filter((d) => d.code === code);
   }
