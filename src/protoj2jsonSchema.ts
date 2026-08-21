@@ -403,10 +403,9 @@ class Proto2JsonSchema {
     const desc = this.extractDescription(field.comment);
     if (desc !== null && desc.length > 0) {
       if (obj.description) {
-        obj.description = (`${desc}\n${obj.description}`).trim();
-      } else {
-        obj.description = desc;
+        obj['x-type-description'] = obj.description;
       }
+      obj.description = desc;
     }
 
     const examples = this.extractExamples(field.comment);

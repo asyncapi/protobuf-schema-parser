@@ -96,7 +96,9 @@ walks the tree. Core rules:
   `PRIMITIVE_TYPES_MINIMAL` when `primitiveTypesWithLimits` is `false`); sets `type`, `format`,
   `x-primitive`, and numeric `minimum`/`maximum` where defined.
 - **Message-typed field** -> the referenced message compiled inline, plus `x-type` = Protobuf type
-  name.
+  name. A comment on the field replaces the inlined `description` and moves the message's own
+  comment to `x-type-description`, so consumers documenting the type itself never read a field
+  comment.
 - **Enum** -> `{ title, type: 'string', enum: [names], 'x-enum-mapping': { name: number } }`; a field
   referencing an enum also gets `x-type`.
 - **`repeated` field** -> `{ type: 'array', items: <field schema> }`. Supports `@MinItems`/`@MaxItems`
@@ -121,8 +123,9 @@ walks the tree. Core rules:
 `protobufjs`, `google/type/*` via `google-types.ts`, and the two validation `.proto` files). Any
 other `import` throws.
 
-The `x-` keywords (`x-primitive`, `x-type`, `x-enum-mapping`, `x-oneof-item`) are an intentional part
-of the output. Do not remove or rename them without treating it as a breaking change.
+The `x-` keywords (`x-primitive`, `x-type`, `x-type-description`, `x-enum-mapping`, `x-oneof-item`)
+are an intentional part of the output. Do not remove or rename them without treating it as a
+breaking change.
 
 ## 6. Testing
 
