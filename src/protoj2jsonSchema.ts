@@ -5,8 +5,8 @@ import {Path} from './pathUtils';
 import type {v3} from '@asyncapi/parser/esm/spec-types';
 import {PrimitiveTypes} from './primitive-types';
 import {AsyncAPISchemaDefinition} from '@asyncapi/parser/esm/spec-types/v3';
-import {visit as protocGenValidateVisit} from './protoc-gen-validate';
-import {isOptional as protoValidateIsOptional, visit as protoValidateVisit} from './protovalidate';
+import {isRequired as protocGenValidateIsRequired, visit as protocGenValidateVisit} from './protoc-gen-validate';
+import {isRequired as protoValidateIsRequired, visit as protoValidateVisit} from './protovalidate';
 
 const ROOT_FILENAME = 'root';
 const COMMENT_ROOT_NODE = '@RootNode';
@@ -16,7 +16,6 @@ const COMMENT_DEFAULT = '@Default';
 
 class Proto2JsonSchema {
   private root = new protobuf.Root();
-  private proto3 = false;
   private protoParseOptions = {
     keepCase: true,
     alternateCommentMode: true
@@ -81,14 +80,28 @@ class Proto2JsonSchema {
   // protobufjs >= 8 rejects the proto2-only `required` field rule inside a
   // proto3 file (protobufjs 7 tolerated it). Preserve that leniency by dropping
   // a leading `required` rule so such fields parse as regular proto3 singular
-  // fields, which this converter already treats as required. Anchored to the
-  // start of a line so it never touches option keys such as
+  // fields. They are not required, so the author is warned to use `@Required`.
+  // Anchored to the start of a line so it never touches option keys such as
   // `(buf.validate.field).required`.
   private relaxProto3Required(src: string): string {
     if (!(/^[ \t]*syntax[ \t]*=[ \t]*["']proto3["']/m).test(src)) {
       return src;
     }
-    return src.replace(/^([ \t]*)required([ \t]+)/gm, '$1$2');
+    const fieldsWithIgnoredLabel: string[] = [];
+    const relaxedSrc = src.replace(/^([ \t]*)required([ \t]+[\w.]+[ \t]+)(\w+)/gm, (_line, indent, type, fieldName) => {
+      fieldsWithIgnoredLabel.push(fieldName);
+      return `${indent}${type}${fieldName}`;
+    });
+    this.warnAboutIgnoredRequiredLabel(fieldsWithIgnoredLabel);
+    return relaxedSrc;
+  }
+
+  private warnAboutIgnoredRequiredLabel(fieldNames: string[]) {
+    if (fieldNames.length === 0) {
+      return;
+    }
+    console.warn(`"required" is not a proto3 label and is ignored on: ${fieldNames.join(', ')}. ` +
+      'Annotate these fields with @Required to mark them as required.');
   }
 
   // Bundled definition existence checking
@@ -220,27 +233,11 @@ class Proto2JsonSchema {
     throw new Error(`Found more than one root proto messages: ${allRootTypes}`);
   }
 
-  private isProto3(item: protobuf.Type) {
-    // protobufjs >= 8 no longer exposes the file syntax via root.options.syntax
-    // (dropped with Editions support). The parsed syntax/edition is kept per
-    // reflection object as the internal `_edition` property instead, and nested
-    // types inherit it from their parent, so walk up the reflection tree.
-    let node: { _edition?: string | null; parent?: unknown } | null | undefined =
-      item as unknown as { _edition?: string | null; parent?: unknown };
-    while (node) {
-      if (node._edition) {
-        return node._edition === 'proto3';
-      }
-      node = node.parent as { _edition?: string | null; parent?: unknown } | null | undefined;
-    }
-    return false;
-  }
-
-  private isProto3Required(field: protobuf.Field, item: protobuf.Type) {
-    if (protoValidateIsOptional(field)) {
-      return false;
-    }
-    return (field.options?.proto3_optional !== true && this.isProto3(item));
+  private isRequired(field: protobuf.Field): boolean {
+    return field.required ||
+      this.hasRequiredAnnotation(field.comment) ||
+      protocGenValidateIsRequired(field) ||
+      protoValidateIsRequired(field);
   }
 
   private hasRequiredAnnotation(comment: string | null): boolean {
@@ -269,6 +266,7 @@ class Proto2JsonSchema {
     const timesSeenThisClassInStack = stack.filter(x => x === item.name).length;
     if (timesSeenThisClassInStack >= 2) {
       // Detected a recursion.
+      delete obj.required;
       return obj;
     }
 
@@ -282,7 +280,7 @@ class Proto2JsonSchema {
         continue;
       }
 
-      if (field.required || this.isProto3Required(field, item) || this.hasRequiredAnnotation(field.comment)) {
+      if (this.isRequired(field)) {
         obj.required?.push(fieldName);
       }
 

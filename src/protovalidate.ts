@@ -14,6 +14,10 @@ export function visit(obj: AsyncAPISchemaDefinition, field: Field) {
   }
 }
 
+export function isRequired(field: Field): boolean {
+  return findRootOption(field, OPTION_PREFIX)?.required === true;
+}
+
 export function findRootOption(field: Field, optionPrefix: string): null | HashMap {
   const parsedOptions = field.parsedOptions as any;
   if (parsedOptions && parsedOptions[optionPrefix]) {
@@ -83,7 +87,7 @@ class ProtocGenNumeric {
         ProtocGenNumeric.greaterEqualThan(obj, value);
         break;
       case 'ignore_empty':
-        // implemented via isOptional
+        // skips the rules for an empty value, which JSON Schema cannot express
         break;
       case 'in':
         ProtocGenGeneric.inArray(obj, value as any);
@@ -228,7 +232,7 @@ class ProtocGenString {
         ProtocGenString.wellKnownRegex(obj, value);
         break;
       case 'ignore_empty':
-        // implemented via isOptional
+        // skips the rules for an empty value, which JSON Schema cannot express
         break;
       }
     }
@@ -395,32 +399,6 @@ class ProtocGenGeneric {
       })
     };
   }
-}
-
-export function isOptional(field: Field) {
-  const parsedOption = findRootOption(field, OPTION_PREFIX);
-
-  if (parsedOption !== null) {
-    for (const [dataType, options] of Object.entries(parsedOption)) {
-      if (dataType === 'repeated') {
-        if (options.items) {
-          for (const [key, val] of Object.entries(options.items)) {
-            if (key === 'ignore_empty' && val) {
-              return true;
-            }
-          }
-        }
-      } else {
-        for (const [key, val] of Object.entries(options)) {
-          if (key === 'ignore_empty' && val) {
-            return true;
-          }
-        }
-      }
-    }
-  }
-
-  return false;
 }
 
 function escapeRegExp(str: string): string {

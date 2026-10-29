@@ -164,8 +164,11 @@ The main mapping rules:
 | `oneof` with 2+ members | A property named after the `oneof` holding `{ "oneOf": [ ... ] }`; each variant carries `x-oneof-item` with the field name |
 | Field / message comment | `description` (with `@`-annotations stripped out). A field comment replaces the comment of the message it references, which moves to `x-type-description` |
 
-Field membership in the `required` list is additive: a field is marked required if it is proto2
-`required`, a non-optional proto3 field, or annotated with `@Required`.
+A field is in the `required` list if it is annotated with `@Required`, is a proto2 `required` field, or
+carries the `required` rule of a [validation framework](#supported-validation-frameworks). A proto3 field is never required by itself, `optional` or not: proto3 has no `required` label, and a
+field without explicit presence is omitted from the wire and from ProtoJSON when it holds its default
+value. A `required` label in a proto3 file is not valid proto3; the parser ignores it and logs a warning
+naming the field.
 
 Recursive messages are supported: when the same message type is encountered twice on the current
 branch, the converter stops descending to avoid an infinite loop.
@@ -226,7 +229,7 @@ message Point {
 | @MinItems | JSON Schema [array validator](https://json-schema.org/understanding-json-schema/reference/array#length) |
 | @MaxItems | JSON Schema [array validator](https://json-schema.org/understanding-json-schema/reference/array#length) |
 | @Default | JSON Schema [default value](https://json-schema.org/understanding-json-schema/reference/annotations) |
-| @Required | Adds the field to the JSON Schema `required` list. Additive: a field is required if it is proto2 `required`, a non-optional proto3 field, or annotated with `@Required`. |
+| @Required | Adds the field to the JSON Schema `required` list. In proto3, this and the `required` rule of a [validation framework](#supported-validation-frameworks) are the only ways to mark a field as required. |
 
 ### Per message annotation
 
@@ -267,6 +270,10 @@ parsing.
 - [protoc-gen-validate](https://github.com/bufbuild/protoc-gen-validate) — validation of lists is not
   100% supported.
 - [protovalidate](https://github.com/bufbuild/protovalidate)
+
+The `required` rule of either framework adds the field to the JSON Schema `required` list:
+`(buf.validate.field).required = true`, or `(validate.rules).<type>.required = true` for the types
+`message`, `duration`, `timestamp` and `any`.
 
 ## Development
 

@@ -12,18 +12,10 @@
           "payload": {
             "title": "Line",
             "type": "object",
-            "required": [
-              "start",
-              "end"
-            ],
             "properties": {
               "start": {
                 "title": "Point",
                 "type": "object",
-                "required": [
-                  "x",
-                  "y"
-                ],
                 "properties": {
                   "x": {
                     "type": "integer",
@@ -49,10 +41,6 @@
               "end": {
                 "title": "Point",
                 "type": "object",
-                "required": [
-                  "x",
-                  "y"
-                ],
                 "properties": {
                   "x": {
                     "type": "integer",
@@ -92,18 +80,10 @@
         "payload": {
           "title": "Line",
           "type": "object",
-          "required": [
-            "start",
-            "end"
-          ],
           "properties": {
             "start": {
               "title": "Point",
               "type": "object",
-              "required": [
-                "x",
-                "y"
-              ],
               "properties": {
                 "x": {
                   "type": "integer",
@@ -129,10 +109,6 @@
             "end": {
               "title": "Point",
               "type": "object",
-              "required": [
-                "x",
-                "y"
-              ],
               "properties": {
                 "x": {
                   "type": "integer",
