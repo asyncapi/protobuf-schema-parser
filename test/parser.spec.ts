@@ -68,91 +68,47 @@ describe('parse()', function () {
     return document;
   }
 
-  it('should parse proto2 data types', async function () {
-    const document = await parseSpec('./documents/simple.proto2.yaml');
+  async function parseAndCompareWithResult(
+    specFilename: string,
+    resultFilename: string
+  ): Promise<AsyncAPIDocumentInterface | undefined> {
+    const document = await parseSpec(`./documents/${specFilename}`);
 
     if (UPDATE_RESULTS) {
-      writeResults(document, './documents/simple.proto2.result.json');
+      writeResults(document, `./documents/${resultFilename}`);
     }
 
     expect(
       stripParserExtraInfos(document?.json())
     ).toEqual(
-      readResultFile('./documents/simple.proto2.result.json')
+      readResultFile(`./documents/${resultFilename}`)
     );
+
+    return document;
+  }
+
+  it('should parse proto2 data types', async function () {
+    await parseAndCompareWithResult('simple.proto2.yaml', 'simple.proto2.result.json');
   });
 
   it('should parse proto3 data types', async function () {
-    const document = await parseSpec('./documents/simple.proto3.yaml');
-
-    if (UPDATE_RESULTS) {
-      writeResults(document, './documents/simple.proto3.result.json');
-    }
-
-    expect(
-      stripParserExtraInfos(document?.json())
-    ).toEqual(
-      readResultFile('./documents/simple.proto3.result.json')
-    );
+    await parseAndCompareWithResult('simple.proto3.yaml', 'simple.proto3.result.json');
   });
 
   it('should parse proto3 data types with imports and schema with same name in different namespaces', async function () {
-    const document = await parseSpec('./documents/complex.proto3.yaml');
-
-    if (UPDATE_RESULTS) {
-      writeResults(document, './documents/complex.proto3.result.json');
-    }
-
-    expect(
-      stripParserExtraInfos(document?.json())
-    ).toEqual(
-      readResultFile('./documents/complex.proto3.result.json')
-    );
+    await parseAndCompareWithResult('complex.proto3.yaml', 'complex.proto3.result.json');
   });
 
   it('should parse proto data types including comments', async function () {
-    const document = await parseSpec('./documents/comments.proto.yaml');
-
-    if (UPDATE_RESULTS) {
-      writeResults(document, './documents/comments.proto.result.json');
-    }
-
-    expect(
-      stripParserExtraInfos(document?.json())
-    ).toEqual(
-      readResultFile('./documents/comments.proto.result.json')
-    );
+    await parseAndCompareWithResult('comments.proto.yaml', 'comments.proto.result.json');
   });
 
   it('should parse realworld train_run proto data types', async function () {
-    const document = await parseSpec('./documents/realworld.train_run.yaml');
-
-    if (UPDATE_RESULTS) {
-      writeResults(
-        document,
-        './documents/realworld.train_run.proto.result.json'
-      );
-    }
-
-    expect(
-      stripParserExtraInfos(document?.json())
-    ).toEqual(
-      readResultFile('./documents/realworld.train_run.proto.result.json')
-    );
+    await parseAndCompareWithResult('realworld.train_run.yaml', 'realworld.train_run.proto.result.json');
   });
 
   it('should parse value restriction and required annotations', async function () {
-    const document = await parseSpec('./documents/restrictions.proto.yaml');
-
-    if (UPDATE_RESULTS) {
-      writeResults(document, './documents/restrictions.proto.result.json');
-    }
-
-    expect(
-      stripParserExtraInfos(document?.json())
-    ).toEqual(
-      readResultFile('./documents/restrictions.proto.result.json')
-    );
+    await parseAndCompareWithResult('restrictions.proto.yaml', 'restrictions.proto.result.json');
   });
 
   it('multiple root messages in proto schema should fail', async function () {
@@ -180,68 +136,19 @@ describe('parse()', function () {
   });
 
   it('recursion in proto should not lead to a infinity loop', async function () {
-    const document = await parseSpec('./documents/recursive.proto3.yaml');
-
-    if (UPDATE_RESULTS) {
-      writeResults(
-        document,
-        './documents/recursive.proto3.result.json'
-      );
-    }
-
-    expect(
-      stripParserExtraInfos(document?.json())
-    ).toEqual(
-      readResultFile('./documents/recursive.proto3.result.json')
-    );
+    await parseAndCompareWithResult('recursive.proto3.yaml', 'recursive.proto3.result.json');
   });
 
   it('protoc-gen-validate should added as correct validations', async function () {
-    const document = await parseSpec('./documents/protoc-gen-validate.yaml');
-
-    if (UPDATE_RESULTS) {
-      writeResults(
-        document,
-        './documents/protoc-gen-validate.result.json'
-      );
-    }
-
-    expect(
-      stripParserExtraInfos(document?.json())
-    ).toEqual(
-      readResultFile('./documents/protoc-gen-validate.result.json')
-    );
+    await parseAndCompareWithResult('protoc-gen-validate.yaml', 'protoc-gen-validate.result.json');
   });
 
   it('protovalidate should added as correct validations', async function () {
-    const document = await parseSpec('./documents/protovalidate-simple.yaml');
-
-    if (UPDATE_RESULTS) {
-      writeResults(
-        document,
-        './documents/protovalidate-simple.result.json'
-      );
-    }
-
-    expect(
-      stripParserExtraInfos(document?.json())
-    ).toEqual(
-      readResultFile('./documents/protovalidate-simple.result.json')
-    );
+    await parseAndCompareWithResult('protovalidate-simple.yaml', 'protovalidate-simple.result.json');
   });
 
   it('a proto3 field should be required only when annotated or required by a validation rule', async function () {
-    const document = await parseSpec('./documents/required.proto3.yaml');
-
-    if (UPDATE_RESULTS) {
-      writeResults(document, './documents/required.proto3.result.json');
-    }
-
-    expect(
-      stripParserExtraInfos(document?.json())
-    ).toEqual(
-      readResultFile('./documents/required.proto3.result.json')
-    );
+    const document = await parseAndCompareWithResult('required.proto3.yaml', 'required.proto3.result.json');
 
     expect(document?.json().components.messages.testMessage.payload.required).toEqual([
       'annotated',
@@ -262,20 +169,7 @@ describe('parse()', function () {
   });
 
   it('a field comment should replace and not extend the comment of the message it references', async function () {
-    const document = await parseSpec('./documents/shared-message-type.proto.yaml');
-
-    if (UPDATE_RESULTS) {
-      writeResults(
-        document,
-        './documents/shared-message-type.proto.result.json'
-      );
-    }
-
-    expect(
-      stripParserExtraInfos(document?.json())
-    ).toEqual(
-      readResultFile('./documents/shared-message-type.proto.result.json')
-    );
+    const document = await parseAndCompareWithResult('shared-message-type.proto.yaml', 'shared-message-type.proto.result.json');
 
     const properties = document?.json().components.messages.testMessage.payload.properties;
 
