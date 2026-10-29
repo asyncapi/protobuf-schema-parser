@@ -14,6 +14,10 @@ export function visit(obj: AsyncAPISchemaDefinition, field: Field) {
   }
 }
 
+export function isRequired(field: Field): boolean {
+  return findRootOption(field, OPTION_PREFIX)?.required === true;
+}
+
 export function findRootOption(field: Field, optionPrefix: string): null | HashMap {
   const parsedOptions = field.parsedOptions as any;
   if (parsedOptions && parsedOptions[optionPrefix]) {

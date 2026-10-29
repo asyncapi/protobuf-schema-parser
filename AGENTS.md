@@ -106,8 +106,8 @@ walks the tree. Core rules:
 - **`oneof` with 2+ members** -> a property named after the `oneof` holding `{ oneOf: [...] }`; each
   variant carries `x-oneof-item` = originating field name. Single-member synthetic `oneof`s (proto3
   `optional`, names starting with `_`) are filtered out.
-- **Required membership**: `@Required` or proto2 `required`, nothing else. A proto3 field is never
-  required by itself, `optional` or not.
+- **Required membership**: `@Required`, proto2 `required`, or the validation frameworks' `required`
+  rule, nothing else. A proto3 field is never required by itself, `optional` or not.
 - **Recursion guard**: if a message type appears twice on the current stack branch, stop descending.
 - **Comments** become `description` after `@`-annotations are stripped. Field annotations
   (`@Min`/`@Max`/`@Pattern`/`@ExclusiveMinimum`/`@ExclusiveMaximum`/`@MultipleOf`/`@MinLength`/
@@ -118,7 +118,7 @@ walks the tree. Core rules:
 - **Validation frameworks**: `(validate.rules)` (protoc-gen-validate, `src/protoc-gen-validate.ts`)
   and `(buf.validate.field)` (protovalidate, `src/protovalidate.ts`) are translated to JSON Schema
   validators (`const`, `lt`/`lte`/`gt`/`gte` -> exclusive/inclusive `minimum`/`maximum`,
-  `in`/`not_in` -> `oneOf`/`not`, string length/pattern/format rules).
+  `in`/`not_in` -> `oneOf`/`not`, string length/pattern/format rules, `required` -> parent's `required`).
 
 **Imports/refs** are unsupported except the bundled well-known definitions (`google/protobuf/*` via
 `protobufjs`, `google/type/*` via `google-types.ts`, and the two validation `.proto` files). Any

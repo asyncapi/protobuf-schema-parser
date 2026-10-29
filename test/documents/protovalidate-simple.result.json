@@ -526,6 +526,9 @@
                     "items": {
                       "title": "Person",
                       "type": "object",
+                      "required": [
+                        "home"
+                      ],
                       "properties": {
                         "id": {
                           "type": "integer",
@@ -627,6 +630,10 @@
               "g": {
                 "title": "GoogleExamples",
                 "type": "object",
+                "required": [
+                  "gb",
+                  "gj"
+                ],
                 "properties": {
                   "ga": {
                     "title": "Int32Value",
@@ -1351,6 +1358,9 @@
                   "items": {
                     "title": "Person",
                     "type": "object",
+                    "required": [
+                      "home"
+                    ],
                     "properties": {
                       "id": {
                         "type": "integer",
@@ -1452,6 +1462,10 @@
             "g": {
               "title": "GoogleExamples",
               "type": "object",
+              "required": [
+                "gb",
+                "gj"
+              ],
               "properties": {
                 "ga": {
                   "title": "Int32Value",

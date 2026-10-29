@@ -230,6 +230,26 @@ describe('parse()', function () {
     );
   });
 
+  it('a proto3 field should be required only when annotated or required by a validation rule', async function () {
+    const document = await parseSpec('./documents/required.proto3.yaml');
+
+    if (UPDATE_RESULTS) {
+      writeResults(document, './documents/required.proto3.result.json');
+    }
+
+    expect(
+      stripParserExtraInfos(document?.json())
+    ).toEqual(
+      readResultFile('./documents/required.proto3.result.json')
+    );
+
+    expect(document?.json().components.messages.testMessage.payload.required).toEqual([
+      'annotated',
+      'protovalidate_required',
+      'protoc_gen_validate_required',
+    ]);
+  });
+
   it('a field comment should replace and not extend the comment of the message it references', async function () {
     const document = await parseSpec('./documents/shared-message-type.proto.yaml');
 

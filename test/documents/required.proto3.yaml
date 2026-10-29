@@ -1,0 +1,32 @@
+asyncapi: 2.0.0
+info:
+  title: Which proto3 fields end up in the required list
+  version: '1.0.0'
+channels:
+  mychannel:
+    publish:
+      message:
+        $ref: '#/components/messages/testMessage'
+
+components:
+  messages:
+    testMessage:
+      schemaFormat: 'application/vnd.google.protobuf;version=3'
+      payload: |
+        syntax = "proto3";
+
+        import "buf/validate/validate.proto";
+        import "validate/validate.proto";
+
+        message Point {
+          int32 implicit_presence = 1;
+          optional int32 explicit_presence = 2;
+          // @Required
+          optional int32 annotated = 3;
+          Location protovalidate_required = 4 [(buf.validate.field).required = true];
+          Location protoc_gen_validate_required = 5 [(validate.rules).message.required = true];
+        }
+
+        message Location {
+          double lat = 1;
+        }

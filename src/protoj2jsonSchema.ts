@@ -5,8 +5,8 @@ import {Path} from './pathUtils';
 import type {v3} from '@asyncapi/parser/esm/spec-types';
 import {PrimitiveTypes} from './primitive-types';
 import {AsyncAPISchemaDefinition} from '@asyncapi/parser/esm/spec-types/v3';
-import {visit as protocGenValidateVisit} from './protoc-gen-validate';
-import {visit as protoValidateVisit} from './protovalidate';
+import {isRequired as protocGenValidateIsRequired, visit as protocGenValidateVisit} from './protoc-gen-validate';
+import {isRequired as protoValidateIsRequired, visit as protoValidateVisit} from './protovalidate';
 
 const ROOT_FILENAME = 'root';
 const COMMENT_ROOT_NODE = '@RootNode';
@@ -219,6 +219,13 @@ class Proto2JsonSchema {
     throw new Error(`Found more than one root proto messages: ${allRootTypes}`);
   }
 
+  private isRequired(field: protobuf.Field): boolean {
+    return field.required ||
+      this.hasRequiredAnnotation(field.comment) ||
+      protocGenValidateIsRequired(field) ||
+      protoValidateIsRequired(field);
+  }
+
   private hasRequiredAnnotation(comment: string | null): boolean {
     return comment !== null && (/@Required\b/i).test(comment);
   }
@@ -258,7 +265,7 @@ class Proto2JsonSchema {
         continue;
       }
 
-      if (field.required || this.hasRequiredAnnotation(field.comment)) {
+      if (this.isRequired(field)) {
         obj.required?.push(fieldName);
       }
 
