@@ -167,7 +167,8 @@ The main mapping rules:
 A field is in the `required` list if it is annotated with `@Required`, is a proto2 `required` field, or
 carries the `required` rule of a [validation framework](#supported-validation-frameworks). A proto3 field is never required by itself, `optional` or not: proto3 has no `required` label, and a
 field without explicit presence is omitted from the wire and from ProtoJSON when it holds its default
-value.
+value. A `required` label in a proto3 file is not valid proto3; the parser ignores it and logs a warning
+naming the field.
 
 Recursive messages are supported: when the same message type is encountered twice on the current
 branch, the converter stops descending to avoid an infinite loop.

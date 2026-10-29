@@ -250,6 +250,17 @@ describe('parse()', function () {
     ]);
   });
 
+  it('a required label in a proto3 file should be ignored with a warning naming the field', async function () {
+    const warn = jest.spyOn(console, 'warn').mockImplementation(() => undefined);
+    try {
+      await parseSpec('./documents/required.proto3.yaml');
+
+      expect(warn).toHaveBeenCalledWith(expect.stringContaining('ignored on: proto2_label.'));
+    } finally {
+      warn.mockRestore();
+    }
+  });
+
   it('a field comment should replace and not extend the comment of the message it references', async function () {
     const document = await parseSpec('./documents/shared-message-type.proto.yaml');
 

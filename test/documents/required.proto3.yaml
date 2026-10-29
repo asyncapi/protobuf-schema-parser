@@ -25,6 +25,7 @@ components:
           optional int32 annotated = 3;
           Location protovalidate_required = 4 [(buf.validate.field).required = true];
           Location protoc_gen_validate_required = 5 [(validate.rules).message.required = true];
+          required int32 proto2_label = 6;
         }
 
         message Location {

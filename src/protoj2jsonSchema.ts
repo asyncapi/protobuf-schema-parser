@@ -80,14 +80,28 @@ class Proto2JsonSchema {
   // protobufjs >= 8 rejects the proto2-only `required` field rule inside a
   // proto3 file (protobufjs 7 tolerated it). Preserve that leniency by dropping
   // a leading `required` rule so such fields parse as regular proto3 singular
-  // fields; like every proto3 field they are required only with `@Required`.
+  // fields. They are not required, so the author is warned to use `@Required`.
   // Anchored to the start of a line so it never touches option keys such as
   // `(buf.validate.field).required`.
   private relaxProto3Required(src: string): string {
     if (!(/^[ \t]*syntax[ \t]*=[ \t]*["']proto3["']/m).test(src)) {
       return src;
     }
-    return src.replace(/^([ \t]*)required([ \t]+)/gm, '$1$2');
+    const fieldsWithIgnoredLabel: string[] = [];
+    const relaxedSrc = src.replace(/^([ \t]*)required([ \t]+[\w.]+[ \t]+)(\w+)/gm, (_line, indent, type, fieldName) => {
+      fieldsWithIgnoredLabel.push(fieldName);
+      return `${indent}${type}${fieldName}`;
+    });
+    this.warnAboutIgnoredRequiredLabel(fieldsWithIgnoredLabel);
+    return relaxedSrc;
+  }
+
+  private warnAboutIgnoredRequiredLabel(fieldNames: string[]) {
+    if (fieldNames.length === 0) {
+      return;
+    }
+    console.warn(`"required" is not a proto3 label and is ignored on: ${fieldNames.join(', ')}. ` +
+      'Annotate these fields with @Required to mark them as required.');
   }
 
   // Bundled definition existence checking
