@@ -12,9 +12,6 @@
           "payload": {
             "title": "TrainRunExecutionDifference",
             "type": "object",
-            "required": [
-              "passed_positions"
-            ],
             "properties": {
               "origin": {
                 "title": "ZnvOccupancy",
@@ -89,9 +86,6 @@
         "payload": {
           "title": "TrainRunExecutionDifference",
           "type": "object",
-          "required": [
-            "passed_positions"
-          ],
           "properties": {
             "origin": {
               "title": "ZnvOccupancy",

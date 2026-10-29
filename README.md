@@ -164,8 +164,10 @@ The main mapping rules:
 | `oneof` with 2+ members | A property named after the `oneof` holding `{ "oneOf": [ ... ] }`; each variant carries `x-oneof-item` with the field name |
 | Field / message comment | `description` (with `@`-annotations stripped out). A field comment replaces the comment of the message it references, which moves to `x-type-description` |
 
-Field membership in the `required` list is additive: a field is marked required if it is proto2
-`required`, a non-optional proto3 field, or annotated with `@Required`.
+A field is in the `required` list if it is annotated with `@Required` or is a proto2 `required` field.
+A proto3 field is never required by itself, `optional` or not: proto3 has no `required` label, and a
+field without explicit presence is omitted from the wire and from ProtoJSON when it holds its default
+value.
 
 Recursive messages are supported: when the same message type is encountered twice on the current
 branch, the converter stops descending to avoid an infinite loop.
@@ -226,7 +228,7 @@ message Point {
 | @MinItems | JSON Schema [array validator](https://json-schema.org/understanding-json-schema/reference/array#length) |
 | @MaxItems | JSON Schema [array validator](https://json-schema.org/understanding-json-schema/reference/array#length) |
 | @Default | JSON Schema [default value](https://json-schema.org/understanding-json-schema/reference/annotations) |
-| @Required | Adds the field to the JSON Schema `required` list. Additive: a field is required if it is proto2 `required`, a non-optional proto3 field, or annotated with `@Required`. |
+| @Required | Adds the field to the JSON Schema `required` list. In proto3 this is the only way to mark a field as required. |
 
 ### Per message annotation
 

@@ -82,9 +82,6 @@ class ProtocGenNumeric {
       case 'gte':
         ProtocGenNumeric.greaterEqualThan(obj, value);
         break;
-      case 'ignore_empty':
-        // implemented via isOptional
-        break;
       case 'in':
         ProtocGenGeneric.inArray(obj, value as any);
         break;
@@ -226,9 +223,6 @@ class ProtocGenString {
         break;
       case 'well_known_regex':
         ProtocGenString.wellKnownRegex(obj, value);
-        break;
-      case 'ignore_empty':
-        // implemented via isOptional
         break;
       }
     }
@@ -395,32 +389,6 @@ class ProtocGenGeneric {
       })
     };
   }
-}
-
-export function isOptional(field: Field) {
-  const parsedOption = findRootOption(field, OPTION_PREFIX);
-
-  if (parsedOption !== null) {
-    for (const [dataType, options] of Object.entries(parsedOption)) {
-      if (dataType === 'repeated') {
-        if (options.items) {
-          for (const [key, val] of Object.entries(options.items)) {
-            if (key === 'ignore_empty' && val) {
-              return true;
-            }
-          }
-        }
-      } else {
-        for (const [key, val] of Object.entries(options)) {
-          if (key === 'ignore_empty' && val) {
-            return true;
-          }
-        }
-      }
-    }
-  }
-
-  return false;
 }
 
 function escapeRegExp(str: string): string {

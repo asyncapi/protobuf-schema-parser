@@ -6,7 +6,7 @@ import type {v3} from '@asyncapi/parser/esm/spec-types';
 import {PrimitiveTypes} from './primitive-types';
 import {AsyncAPISchemaDefinition} from '@asyncapi/parser/esm/spec-types/v3';
 import {visit as protocGenValidateVisit} from './protoc-gen-validate';
-import {isOptional as protoValidateIsOptional, visit as protoValidateVisit} from './protovalidate';
+import {visit as protoValidateVisit} from './protovalidate';
 
 const ROOT_FILENAME = 'root';
 const COMMENT_ROOT_NODE = '@RootNode';
@@ -16,7 +16,6 @@ const COMMENT_DEFAULT = '@Default';
 
 class Proto2JsonSchema {
   private root = new protobuf.Root();
-  private proto3 = false;
   private protoParseOptions = {
     keepCase: true,
     alternateCommentMode: true
@@ -81,8 +80,8 @@ class Proto2JsonSchema {
   // protobufjs >= 8 rejects the proto2-only `required` field rule inside a
   // proto3 file (protobufjs 7 tolerated it). Preserve that leniency by dropping
   // a leading `required` rule so such fields parse as regular proto3 singular
-  // fields, which this converter already treats as required. Anchored to the
-  // start of a line so it never touches option keys such as
+  // fields; like every proto3 field they are required only with `@Required`.
+  // Anchored to the start of a line so it never touches option keys such as
   // `(buf.validate.field).required`.
   private relaxProto3Required(src: string): string {
     if (!(/^[ \t]*syntax[ \t]*=[ \t]*["']proto3["']/m).test(src)) {
@@ -220,29 +219,6 @@ class Proto2JsonSchema {
     throw new Error(`Found more than one root proto messages: ${allRootTypes}`);
   }
 
-  private isProto3(item: protobuf.Type) {
-    // protobufjs >= 8 no longer exposes the file syntax via root.options.syntax
-    // (dropped with Editions support). The parsed syntax/edition is kept per
-    // reflection object as the internal `_edition` property instead, and nested
-    // types inherit it from their parent, so walk up the reflection tree.
-    let node: { _edition?: string | null; parent?: unknown } | null | undefined =
-      item as unknown as { _edition?: string | null; parent?: unknown };
-    while (node) {
-      if (node._edition) {
-        return node._edition === 'proto3';
-      }
-      node = node.parent as { _edition?: string | null; parent?: unknown } | null | undefined;
-    }
-    return false;
-  }
-
-  private isProto3Required(field: protobuf.Field, item: protobuf.Type) {
-    if (protoValidateIsOptional(field)) {
-      return false;
-    }
-    return (field.options?.proto3_optional !== true && this.isProto3(item));
-  }
-
   private hasRequiredAnnotation(comment: string | null): boolean {
     return comment !== null && (/@Required\b/i).test(comment);
   }
@@ -282,7 +258,7 @@ class Proto2JsonSchema {
         continue;
       }
 
-      if (field.required || this.isProto3Required(field, item) || this.hasRequiredAnnotation(field.comment)) {
+      if (field.required || this.hasRequiredAnnotation(field.comment)) {
         obj.required?.push(fieldName);
       }
 
