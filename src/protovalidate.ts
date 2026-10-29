@@ -86,6 +86,9 @@ class ProtocGenNumeric {
       case 'gte':
         ProtocGenNumeric.greaterEqualThan(obj, value);
         break;
+      case 'ignore_empty':
+        // skips the rules for an empty value, which JSON Schema cannot express
+        break;
       case 'in':
         ProtocGenGeneric.inArray(obj, value as any);
         break;
@@ -227,6 +230,9 @@ class ProtocGenString {
         break;
       case 'well_known_regex':
         ProtocGenString.wellKnownRegex(obj, value);
+        break;
+      case 'ignore_empty':
+        // skips the rules for an empty value, which JSON Schema cannot express
         break;
       }
     }
