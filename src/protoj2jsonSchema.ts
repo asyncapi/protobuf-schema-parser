@@ -266,6 +266,7 @@ class Proto2JsonSchema {
     const timesSeenThisClassInStack = stack.filter(x => x === item.name).length;
     if (timesSeenThisClassInStack >= 2) {
       // Detected a recursion.
+      delete obj.required;
       return obj;
     }
 
