@@ -82,13 +82,15 @@ class Proto2JsonSchema {
   // a leading `required` rule so such fields parse as regular proto3 singular
   // fields. They are not required, so the author is warned to use `@Required`.
   // Anchored to the start of a line so it never touches option keys such as
-  // `(buf.validate.field).required`.
+  // `(buf.validate.field).required`, and matched up to the `=` of the field so
+  // it never touches prose in a block comment.
   private relaxProto3Required(src: string): string {
     if (!(/^[ \t]*syntax[ \t]*=[ \t]*["']proto3["']/m).test(src)) {
       return src;
     }
     const fieldsWithIgnoredLabel: string[] = [];
-    const relaxedSrc = src.replace(/^([ \t]*)required([ \t]+[\w.]+[ \t]+)(\w+)/gm, (_line, indent, type, fieldName) => {
+    const labelledField = /^([ \t]*)required(\s+(?:map\s*<[^>]*>|[\w.]+)\s+)(\w+)(?=\s*=)/gm;
+    const relaxedSrc = src.replace(labelledField, (_line, indent, type, fieldName) => {
       fieldsWithIgnoredLabel.push(fieldName);
       return `${indent}${type}${fieldName}`;
     });

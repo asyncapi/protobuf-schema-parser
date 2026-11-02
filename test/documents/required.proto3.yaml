@@ -18,6 +18,10 @@ components:
         import "buf/validate/validate.proto";
         import "validate/validate.proto";
 
+        /*
+        required is prose in this block comment, not a label
+        */
+
         message Point {
           int32 implicit_presence = 1;
           optional int32 explicit_presence = 2;
@@ -26,6 +30,8 @@ components:
           Location protovalidate_required = 4 [(buf.validate.field).required = true];
           Location protoc_gen_validate_required = 5 [(validate.rules).message.required = true];
           required int32 proto2_label = 6;
+          required int32
+            proto2_label_split_over_two_lines = 7;
         }
 
         message Location {

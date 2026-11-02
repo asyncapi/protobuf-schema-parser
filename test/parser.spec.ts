@@ -135,12 +135,16 @@ describe('parse()', function () {
     ]);
   });
 
-  it('a required label in a proto3 file should be ignored with a warning naming the field', async function () {
+  it.each([
+    ['required.proto3.yaml', 'proto2_label, proto2_label_split_over_two_lines'],
+    ['required-label-on-map.proto3.yaml', 'proto2_label_on_map'],
+  ])('a required label in %s should be ignored with a warning naming the field', async function (specFilename: string, fieldNames: string) {
     const warn = jest.spyOn(console, 'warn').mockImplementation(() => undefined);
     try {
-      await parseSpec('./documents/required.proto3.yaml');
+      const document = await parseSpec(`./documents/${specFilename}`);
 
-      expect(warn).toHaveBeenCalledWith(expect.stringContaining('ignored on: proto2_label.'));
+      expect(document).toBeDefined();
+      expect(warn).toHaveBeenCalledWith(expect.stringContaining(`ignored on: ${fieldNames}.`));
     } finally {
       warn.mockRestore();
     }
