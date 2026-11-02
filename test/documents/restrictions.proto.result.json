@@ -13,10 +13,7 @@
             "title": "RestrictedEntity",
             "type": "object",
             "required": [
-              "code",
-              "quantity",
-              "ratio",
-              "tags"
+              "code"
             ],
             "properties": {
               "code": {
@@ -74,10 +71,7 @@
           "title": "RestrictedEntity",
           "type": "object",
           "required": [
-            "code",
-            "quantity",
-            "ratio",
-            "tags"
+            "code"
           ],
           "properties": {
             "code": {

@@ -12,30 +12,10 @@
           "payload": {
             "title": "RootNode",
             "type": "object",
-            "required": [
-              "n",
-              "s",
-              "b",
-              "o",
-              "r",
-              "g"
-            ],
             "properties": {
               "n": {
                 "title": "NumericExamples",
                 "type": "object",
-                "required": [
-                  "na",
-                  "nb",
-                  "nc",
-                  "nd",
-                  "ne",
-                  "nf",
-                  "ng",
-                  "nh",
-                  "nk",
-                  "nl"
-                ],
                 "properties": {
                   "na": {
                     "type": "number",
@@ -150,34 +130,6 @@
               "s": {
                 "title": "StringExamples",
                 "type": "object",
-                "required": [
-                  "sa",
-                  "sb",
-                  "sc",
-                  "sd",
-                  "se",
-                  "sf",
-                  "sg",
-                  "sh",
-                  "si",
-                  "sj",
-                  "sk",
-                  "sl",
-                  "sm",
-                  "sn",
-                  "so",
-                  "sp",
-                  "sq",
-                  "sr",
-                  "ss",
-                  "ip4",
-                  "ip6",
-                  "uri",
-                  "absuri",
-                  "uuid",
-                  "httpheadname",
-                  "httpheadvalue"
-                ],
                 "properties": {
                   "sa": {
                     "type": "string",
@@ -391,22 +343,6 @@
               "b": {
                 "title": "ByteExamples",
                 "type": "object",
-                "required": [
-                  "ba",
-                  "bb",
-                  "bc",
-                  "bd",
-                  "be",
-                  "bf",
-                  "bg",
-                  "bh",
-                  "bi",
-                  "bj",
-                  "bk",
-                  "bm",
-                  "bn",
-                  "bo"
-                ],
                 "properties": {
                   "ba": {
                     "type": "string",
@@ -571,14 +507,6 @@
               "r": {
                 "title": "RepeatedExamples",
                 "type": "object",
-                "required": [
-                  "ra",
-                  "rb",
-                  "rc",
-                  "rd",
-                  "re",
-                  "rk"
-                ],
                 "properties": {
                   "ra": {
                     "type": "array",
@@ -599,9 +527,6 @@
                       "title": "Person",
                       "type": "object",
                       "required": [
-                        "id",
-                        "email",
-                        "name",
                         "home"
                       ],
                       "properties": {
@@ -626,10 +551,6 @@
                         "home": {
                           "title": "Location",
                           "type": "object",
-                          "required": [
-                            "lat",
-                            "lng"
-                          ],
                           "properties": {
                             "lat": {
                               "type": "number",
@@ -710,23 +631,13 @@
                 "title": "GoogleExamples",
                 "type": "object",
                 "required": [
-                  "ga",
                   "gb",
-                  "gd",
-                  "ge",
-                  "gj",
-                  "gl",
-                  "gm",
-                  "gp",
-                  "gq"
+                  "gj"
                 ],
                 "properties": {
                   "ga": {
                     "title": "Int32Value",
                     "type": "object",
-                    "required": [
-                      "value"
-                    ],
                     "properties": {
                       "value": {
                         "type": "integer",
@@ -743,10 +654,6 @@
                   "gb": {
                     "title": "Duration",
                     "type": "object",
-                    "required": [
-                      "seconds",
-                      "nanos"
-                    ],
                     "properties": {
                       "seconds": {
                         "type": "integer",
@@ -769,10 +676,6 @@
                   "gd": {
                     "title": "Duration",
                     "type": "object",
-                    "required": [
-                      "seconds",
-                      "nanos"
-                    ],
                     "properties": {
                       "seconds": {
                         "type": "integer",
@@ -795,10 +698,6 @@
                   "ge": {
                     "title": "Duration",
                     "type": "object",
-                    "required": [
-                      "seconds",
-                      "nanos"
-                    ],
                     "properties": {
                       "seconds": {
                         "type": "integer",
@@ -821,10 +720,6 @@
                   "gj": {
                     "title": "Timestamp",
                     "type": "object",
-                    "required": [
-                      "seconds",
-                      "nanos"
-                    ],
                     "properties": {
                       "seconds": {
                         "type": "integer",
@@ -847,10 +742,6 @@
                   "gl": {
                     "title": "Timestamp",
                     "type": "object",
-                    "required": [
-                      "seconds",
-                      "nanos"
-                    ],
                     "properties": {
                       "seconds": {
                         "type": "integer",
@@ -873,10 +764,6 @@
                   "gm": {
                     "title": "Timestamp",
                     "type": "object",
-                    "required": [
-                      "seconds",
-                      "nanos"
-                    ],
                     "properties": {
                       "seconds": {
                         "type": "integer",
@@ -899,10 +786,6 @@
                   "gp": {
                     "title": "Timestamp",
                     "type": "object",
-                    "required": [
-                      "seconds",
-                      "nanos"
-                    ],
                     "properties": {
                       "seconds": {
                         "type": "integer",
@@ -925,10 +808,6 @@
                   "gq": {
                     "title": "Timestamp",
                     "type": "object",
-                    "required": [
-                      "seconds",
-                      "nanos"
-                    ],
                     "properties": {
                       "seconds": {
                         "type": "integer",
@@ -965,30 +844,10 @@
         "payload": {
           "title": "RootNode",
           "type": "object",
-          "required": [
-            "n",
-            "s",
-            "b",
-            "o",
-            "r",
-            "g"
-          ],
           "properties": {
             "n": {
               "title": "NumericExamples",
               "type": "object",
-              "required": [
-                "na",
-                "nb",
-                "nc",
-                "nd",
-                "ne",
-                "nf",
-                "ng",
-                "nh",
-                "nk",
-                "nl"
-              ],
               "properties": {
                 "na": {
                   "type": "number",
@@ -1103,34 +962,6 @@
             "s": {
               "title": "StringExamples",
               "type": "object",
-              "required": [
-                "sa",
-                "sb",
-                "sc",
-                "sd",
-                "se",
-                "sf",
-                "sg",
-                "sh",
-                "si",
-                "sj",
-                "sk",
-                "sl",
-                "sm",
-                "sn",
-                "so",
-                "sp",
-                "sq",
-                "sr",
-                "ss",
-                "ip4",
-                "ip6",
-                "uri",
-                "absuri",
-                "uuid",
-                "httpheadname",
-                "httpheadvalue"
-              ],
               "properties": {
                 "sa": {
                   "type": "string",
@@ -1344,22 +1175,6 @@
             "b": {
               "title": "ByteExamples",
               "type": "object",
-              "required": [
-                "ba",
-                "bb",
-                "bc",
-                "bd",
-                "be",
-                "bf",
-                "bg",
-                "bh",
-                "bi",
-                "bj",
-                "bk",
-                "bm",
-                "bn",
-                "bo"
-              ],
               "properties": {
                 "ba": {
                   "type": "string",
@@ -1524,14 +1339,6 @@
             "r": {
               "title": "RepeatedExamples",
               "type": "object",
-              "required": [
-                "ra",
-                "rb",
-                "rc",
-                "rd",
-                "re",
-                "rk"
-              ],
               "properties": {
                 "ra": {
                   "type": "array",
@@ -1552,9 +1359,6 @@
                     "title": "Person",
                     "type": "object",
                     "required": [
-                      "id",
-                      "email",
-                      "name",
                       "home"
                     ],
                     "properties": {
@@ -1579,10 +1383,6 @@
                       "home": {
                         "title": "Location",
                         "type": "object",
-                        "required": [
-                          "lat",
-                          "lng"
-                        ],
                         "properties": {
                           "lat": {
                             "type": "number",
@@ -1663,23 +1463,13 @@
               "title": "GoogleExamples",
               "type": "object",
               "required": [
-                "ga",
                 "gb",
-                "gd",
-                "ge",
-                "gj",
-                "gl",
-                "gm",
-                "gp",
-                "gq"
+                "gj"
               ],
               "properties": {
                 "ga": {
                   "title": "Int32Value",
                   "type": "object",
-                  "required": [
-                    "value"
-                  ],
                   "properties": {
                     "value": {
                       "type": "integer",
@@ -1696,10 +1486,6 @@
                 "gb": {
                   "title": "Duration",
                   "type": "object",
-                  "required": [
-                    "seconds",
-                    "nanos"
-                  ],
                   "properties": {
                     "seconds": {
                       "type": "integer",
@@ -1722,10 +1508,6 @@
                 "gd": {
                   "title": "Duration",
                   "type": "object",
-                  "required": [
-                    "seconds",
-                    "nanos"
-                  ],
                   "properties": {
                     "seconds": {
                       "type": "integer",
@@ -1748,10 +1530,6 @@
                 "ge": {
                   "title": "Duration",
                   "type": "object",
-                  "required": [
-                    "seconds",
-                    "nanos"
-                  ],
                   "properties": {
                     "seconds": {
                       "type": "integer",
@@ -1774,10 +1552,6 @@
                 "gj": {
                   "title": "Timestamp",
                   "type": "object",
-                  "required": [
-                    "seconds",
-                    "nanos"
-                  ],
                   "properties": {
                     "seconds": {
                       "type": "integer",
@@ -1800,10 +1574,6 @@
                 "gl": {
                   "title": "Timestamp",
                   "type": "object",
-                  "required": [
-                    "seconds",
-                    "nanos"
-                  ],
                   "properties": {
                     "seconds": {
                       "type": "integer",
@@ -1826,10 +1596,6 @@
                 "gm": {
                   "title": "Timestamp",
                   "type": "object",
-                  "required": [
-                    "seconds",
-                    "nanos"
-                  ],
                   "properties": {
                     "seconds": {
                       "type": "integer",
@@ -1852,10 +1618,6 @@
                 "gp": {
                   "title": "Timestamp",
                   "type": "object",
-                  "required": [
-                    "seconds",
-                    "nanos"
-                  ],
                   "properties": {
                     "seconds": {
                       "type": "integer",
@@ -1878,10 +1640,6 @@
                 "gq": {
                   "title": "Timestamp",
                   "type": "object",
-                  "required": [
-                    "seconds",
-                    "nanos"
-                  ],
                   "properties": {
                     "seconds": {
                       "type": "integer",

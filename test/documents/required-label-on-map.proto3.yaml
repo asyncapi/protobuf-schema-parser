@@ -1,0 +1,20 @@
+asyncapi: 2.0.0
+info:
+  title: A required label on a proto3 map field
+  version: '1.0.0'
+channels:
+  mychannel:
+    publish:
+      message:
+        $ref: '#/components/messages/testMessage'
+
+components:
+  messages:
+    testMessage:
+      schemaFormat: 'application/vnd.google.protobuf;version=3'
+      payload: |
+        syntax = "proto3";
+
+        message Point {
+          required map<string, int32> proto2_label_on_map = 1;
+        }

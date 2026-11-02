@@ -14,23 +14,10 @@
             "schema": {
               "title": "Test",
               "type": "object",
-              "required": [
-                "date",
-                "delay",
-                "timestamp",
-                "offset",
-                "y",
-                "dur"
-              ],
               "properties": {
                 "date": {
                   "title": "Date",
                   "type": "object",
-                  "required": [
-                    "year",
-                    "month",
-                    "day"
-                  ],
                   "properties": {
                     "year": {
                       "type": "integer",
@@ -62,10 +49,6 @@
                 "delay": {
                   "title": "Duration",
                   "type": "object",
-                  "required": [
-                    "seconds",
-                    "nanos"
-                  ],
                   "properties": {
                     "seconds": {
                       "type": "integer",
@@ -87,15 +70,6 @@
                 "timestamp": {
                   "title": "DateTime",
                   "type": "object",
-                  "required": [
-                    "year",
-                    "month",
-                    "day",
-                    "hours",
-                    "minutes",
-                    "seconds",
-                    "nanos"
-                  ],
                   "properties": {
                     "year": {
                       "type": "integer",
@@ -158,10 +132,6 @@
                         {
                           "title": "Duration",
                           "type": "object",
-                          "required": [
-                            "seconds",
-                            "nanos"
-                          ],
                           "properties": {
                             "seconds": {
                               "type": "integer",
@@ -187,10 +157,6 @@
                         {
                           "title": "TimeZone",
                           "type": "object",
-                          "required": [
-                            "id",
-                            "version"
-                          ],
                           "properties": {
                             "id": {
                               "type": "string",
@@ -217,9 +183,6 @@
                 "offset": {
                   "title": "Decimal",
                   "type": "object",
-                  "required": [
-                    "value"
-                  ],
                   "properties": {
                     "value": {
                       "type": "string",
@@ -237,9 +200,6 @@
                 "y": {
                   "title": "Int32Value",
                   "type": "object",
-                  "required": [
-                    "value"
-                  ],
                   "properties": {
                     "value": {
                       "type": "integer",
@@ -254,10 +214,6 @@
                 "dur": {
                   "title": "Duration",
                   "type": "object",
-                  "required": [
-                    "from",
-                    "to"
-                  ],
                   "properties": {
                     "from": {
                       "type": "integer",
@@ -281,10 +237,6 @@
                     {
                       "title": "SubTypeA",
                       "type": "object",
-                      "required": [
-                        "element",
-                        "identification"
-                      ],
                       "properties": {
                         "element": {
                           "type": "string",
@@ -304,10 +256,6 @@
                     {
                       "title": "SubTypeB",
                       "type": "object",
-                      "required": [
-                        "sourceElement",
-                        "targetElement"
-                      ],
                       "properties": {
                         "sourceElement": {
                           "type": "string",
@@ -327,10 +275,6 @@
                     {
                       "title": "SubTypeC",
                       "type": "object",
-                      "required": [
-                        "element",
-                        "identification"
-                      ],
                       "properties": {
                         "element": {
                           "type": "string",
@@ -350,9 +294,6 @@
                     {
                       "title": "SubTypeD",
                       "type": "object",
-                      "required": [
-                        "element"
-                      ],
                       "properties": {
                         "element": {
                           "type": "string",
@@ -371,10 +312,6 @@
                     {
                       "title": "SubTypeA",
                       "type": "object",
-                      "required": [
-                        "element",
-                        "identification"
-                      ],
                       "properties": {
                         "element": {
                           "type": "string",
@@ -394,10 +331,6 @@
                     {
                       "title": "SubTypeB",
                       "type": "object",
-                      "required": [
-                        "sourceElement",
-                        "targetElement"
-                      ],
                       "properties": {
                         "sourceElement": {
                           "type": "string",
@@ -417,10 +350,6 @@
                     {
                       "title": "SubTypeC",
                       "type": "object",
-                      "required": [
-                        "element",
-                        "identification"
-                      ],
                       "properties": {
                         "element": {
                           "type": "string",
@@ -440,9 +369,6 @@
                     {
                       "title": "SubTypeD",
                       "type": "object",
-                      "required": [
-                        "element"
-                      ],
                       "properties": {
                         "element": {
                           "type": "string",
@@ -471,23 +397,10 @@
           "schema": {
             "title": "Test",
             "type": "object",
-            "required": [
-              "date",
-              "delay",
-              "timestamp",
-              "offset",
-              "y",
-              "dur"
-            ],
             "properties": {
               "date": {
                 "title": "Date",
                 "type": "object",
-                "required": [
-                  "year",
-                  "month",
-                  "day"
-                ],
                 "properties": {
                   "year": {
                     "type": "integer",
@@ -519,10 +432,6 @@
               "delay": {
                 "title": "Duration",
                 "type": "object",
-                "required": [
-                  "seconds",
-                  "nanos"
-                ],
                 "properties": {
                   "seconds": {
                     "type": "integer",
@@ -544,15 +453,6 @@
               "timestamp": {
                 "title": "DateTime",
                 "type": "object",
-                "required": [
-                  "year",
-                  "month",
-                  "day",
-                  "hours",
-                  "minutes",
-                  "seconds",
-                  "nanos"
-                ],
                 "properties": {
                   "year": {
                     "type": "integer",
@@ -615,10 +515,6 @@
                       {
                         "title": "Duration",
                         "type": "object",
-                        "required": [
-                          "seconds",
-                          "nanos"
-                        ],
                         "properties": {
                           "seconds": {
                             "type": "integer",
@@ -644,10 +540,6 @@
                       {
                         "title": "TimeZone",
                         "type": "object",
-                        "required": [
-                          "id",
-                          "version"
-                        ],
                         "properties": {
                           "id": {
                             "type": "string",
@@ -674,9 +566,6 @@
               "offset": {
                 "title": "Decimal",
                 "type": "object",
-                "required": [
-                  "value"
-                ],
                 "properties": {
                   "value": {
                     "type": "string",
@@ -694,9 +583,6 @@
               "y": {
                 "title": "Int32Value",
                 "type": "object",
-                "required": [
-                  "value"
-                ],
                 "properties": {
                   "value": {
                     "type": "integer",
@@ -711,10 +597,6 @@
               "dur": {
                 "title": "Duration",
                 "type": "object",
-                "required": [
-                  "from",
-                  "to"
-                ],
                 "properties": {
                   "from": {
                     "type": "integer",
@@ -738,10 +620,6 @@
                   {
                     "title": "SubTypeA",
                     "type": "object",
-                    "required": [
-                      "element",
-                      "identification"
-                    ],
                     "properties": {
                       "element": {
                         "type": "string",
@@ -761,10 +639,6 @@
                   {
                     "title": "SubTypeB",
                     "type": "object",
-                    "required": [
-                      "sourceElement",
-                      "targetElement"
-                    ],
                     "properties": {
                       "sourceElement": {
                         "type": "string",
@@ -784,10 +658,6 @@
                   {
                     "title": "SubTypeC",
                     "type": "object",
-                    "required": [
-                      "element",
-                      "identification"
-                    ],
                     "properties": {
                       "element": {
                         "type": "string",
@@ -807,9 +677,6 @@
                   {
                     "title": "SubTypeD",
                     "type": "object",
-                    "required": [
-                      "element"
-                    ],
                     "properties": {
                       "element": {
                         "type": "string",
@@ -828,10 +695,6 @@
                   {
                     "title": "SubTypeA",
                     "type": "object",
-                    "required": [
-                      "element",
-                      "identification"
-                    ],
                     "properties": {
                       "element": {
                         "type": "string",
@@ -851,10 +714,6 @@
                   {
                     "title": "SubTypeB",
                     "type": "object",
-                    "required": [
-                      "sourceElement",
-                      "targetElement"
-                    ],
                     "properties": {
                       "sourceElement": {
                         "type": "string",
@@ -874,10 +733,6 @@
                   {
                     "title": "SubTypeC",
                     "type": "object",
-                    "required": [
-                      "element",
-                      "identification"
-                    ],
                     "properties": {
                       "element": {
                         "type": "string",
@@ -897,9 +752,6 @@
                   {
                     "title": "SubTypeD",
                     "type": "object",
-                    "required": [
-                      "element"
-                    ],
                     "properties": {
                       "element": {
                         "type": "string",
@@ -924,23 +776,10 @@
         "schema": {
           "title": "Test",
           "type": "object",
-          "required": [
-            "date",
-            "delay",
-            "timestamp",
-            "offset",
-            "y",
-            "dur"
-          ],
           "properties": {
             "date": {
               "title": "Date",
               "type": "object",
-              "required": [
-                "year",
-                "month",
-                "day"
-              ],
               "properties": {
                 "year": {
                   "type": "integer",
@@ -972,10 +811,6 @@
             "delay": {
               "title": "Duration",
               "type": "object",
-              "required": [
-                "seconds",
-                "nanos"
-              ],
               "properties": {
                 "seconds": {
                   "type": "integer",
@@ -997,15 +832,6 @@
             "timestamp": {
               "title": "DateTime",
               "type": "object",
-              "required": [
-                "year",
-                "month",
-                "day",
-                "hours",
-                "minutes",
-                "seconds",
-                "nanos"
-              ],
               "properties": {
                 "year": {
                   "type": "integer",
@@ -1068,10 +894,6 @@
                     {
                       "title": "Duration",
                       "type": "object",
-                      "required": [
-                        "seconds",
-                        "nanos"
-                      ],
                       "properties": {
                         "seconds": {
                           "type": "integer",
@@ -1097,10 +919,6 @@
                     {
                       "title": "TimeZone",
                       "type": "object",
-                      "required": [
-                        "id",
-                        "version"
-                      ],
                       "properties": {
                         "id": {
                           "type": "string",
@@ -1127,9 +945,6 @@
             "offset": {
               "title": "Decimal",
               "type": "object",
-              "required": [
-                "value"
-              ],
               "properties": {
                 "value": {
                   "type": "string",
@@ -1147,9 +962,6 @@
             "y": {
               "title": "Int32Value",
               "type": "object",
-              "required": [
-                "value"
-              ],
               "properties": {
                 "value": {
                   "type": "integer",
@@ -1164,10 +976,6 @@
             "dur": {
               "title": "Duration",
               "type": "object",
-              "required": [
-                "from",
-                "to"
-              ],
               "properties": {
                 "from": {
                   "type": "integer",
@@ -1191,10 +999,6 @@
                 {
                   "title": "SubTypeA",
                   "type": "object",
-                  "required": [
-                    "element",
-                    "identification"
-                  ],
                   "properties": {
                     "element": {
                       "type": "string",
@@ -1214,10 +1018,6 @@
                 {
                   "title": "SubTypeB",
                   "type": "object",
-                  "required": [
-                    "sourceElement",
-                    "targetElement"
-                  ],
                   "properties": {
                     "sourceElement": {
                       "type": "string",
@@ -1237,10 +1037,6 @@
                 {
                   "title": "SubTypeC",
                   "type": "object",
-                  "required": [
-                    "element",
-                    "identification"
-                  ],
                   "properties": {
                     "element": {
                       "type": "string",
@@ -1260,9 +1056,6 @@
                 {
                   "title": "SubTypeD",
                   "type": "object",
-                  "required": [
-                    "element"
-                  ],
                   "properties": {
                     "element": {
                       "type": "string",
@@ -1281,10 +1074,6 @@
                 {
                   "title": "SubTypeA",
                   "type": "object",
-                  "required": [
-                    "element",
-                    "identification"
-                  ],
                   "properties": {
                     "element": {
                       "type": "string",
@@ -1304,10 +1093,6 @@
                 {
                   "title": "SubTypeB",
                   "type": "object",
-                  "required": [
-                    "sourceElement",
-                    "targetElement"
-                  ],
                   "properties": {
                     "sourceElement": {
                       "type": "string",
@@ -1327,10 +1112,6 @@
                 {
                   "title": "SubTypeC",
                   "type": "object",
-                  "required": [
-                    "element",
-                    "identification"
-                  ],
                   "properties": {
                     "element": {
                       "type": "string",
@@ -1350,9 +1131,6 @@
                 {
                   "title": "SubTypeD",
                   "type": "object",
-                  "required": [
-                    "element"
-                  ],
                   "properties": {
                     "element": {
                       "type": "string",
